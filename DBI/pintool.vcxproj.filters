@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\itree.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\AdvAPI32.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\Crypt32.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\Gdi32.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\IPHlpApi.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\kernel32.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\kernelbase.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\namedconsts.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\Ole32.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\OleAut32.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\shell32.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\User32.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\WinInet.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\WS2_32.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\prototypes.cpp">
+      <Filter>Source files\Prototypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sok\fpu.cpp">
+      <Filter>Source files\SoK-Evasions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sok\hooks.cpp">
+      <Filter>Source files\SoK-Evasions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sok\logging.cpp">
+      <Filter>Source files\SoK-Evasions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sok\memory.cpp">
+      <Filter>Source files\SoK-Evasions</Filter>
+    </ClCompile>
+    <ClCompile Include="src\syscalls\drsyscall.cpp">
+      <Filter>Source files\Syscalls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\syscalls\sysenums.cpp">
+      <Filter>Source files\Syscalls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\argsprinter.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exports.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\image.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\init.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ins.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\logger.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ntdll.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\syscalls.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sysprinter.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source files">
+      <UniqueIdentifier>{e351ae10-7f4b-438c-b9dd-5ac8e4202289}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files">
+      <UniqueIdentifier>{a5f1e442-61fc-4dcf-8628-560252b6df05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\SoK-Evasions">
+      <UniqueIdentifier>{3ccff153-15b8-4c9f-9596-c1f8f36cc51a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Syscalls">
+      <UniqueIdentifier>{a5bc0e56-4ee1-49c3-b16c-ab34acd1c67e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Prototypes">
+      <UniqueIdentifier>{1e2a30c8-91f8-4129-8f2f-3166a2ec5653}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Prototypes">
+      <UniqueIdentifier>{ba476c9d-9d50-4d7c-95f9-620b3bd915ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\SoK-Evasions">
+      <UniqueIdentifier>{fc1ebc8c-f8d8-41b7-a7d2-b3aad9b97697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Syscalls">
+      <UniqueIdentifier>{9b8d3b6f-70a3-4860-92a2-950813ca986e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\itree.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prototypes\prototypes.h">
+      <Filter>Header files\Prototypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\prototypes\pyrebox.h">
+      <Filter>Header files\Prototypes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sok\fpu.h">
+      <Filter>Header files\SoK-Evasions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sok\hooks.h">
+      <Filter>Header files\SoK-Evasions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sok\logging.h">
+      <Filter>Header files\SoK-Evasions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sok\memory.h">
+      <Filter>Header files\SoK-Evasions</Filter>
+    </ClInclude>
+    <ClInclude Include="src\syscalls\drsyscall.h">
+      <Filter>Header files\Syscalls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\syscalls\sysenums.h">
+      <Filter>Header files\Syscalls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\argsprinter.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\config.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\dbg.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\logger.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sysprinter.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tracer.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
