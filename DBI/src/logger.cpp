@@ -216,7 +216,12 @@ VOID TRACER_ThreadInitLogger(THREADID tid, tlsinfo* tdata) {
 	OS_MkDir(LOGPATH, 755); // dirty hack
 
 	char buf[256];
-	sprintf(buf, LOGPATH LOGNAME, tid); // sorry I know macro concatenation is ugly :-)
+	// LOGNAME will host: <Windows PID>-<Pin's TID>-<Windows TID>
+#define LOGNAME "calls-%d-%d-%d.log"
+	W::DWORD pid = W::GetCurrentProcessId();
+	W::DWORD wTid = W::GetCurrentThreadId();
+	sprintf(buf, LOGPATH LOGNAME, pid, tid, wTid); // sorry I know macro concatenation is ugly :-)
+#undef LOGNAME
 	tdata->logfile = fopen(buf, "wb");
 	if (!tdata->logfile) mycerr << "CANNOT CREATE LOGFILE" << std::endl;
 

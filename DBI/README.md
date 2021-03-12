@@ -26,6 +26,8 @@ To run an executable under SNIPER use:
 C:\Pin315\pin.exe -t sniper32.dll [options] -- <file.exe>
 ```
 
-Presently available options are those from the library of DBI mitigations that we build on.
+Presently available options are those from the library of DBI mitigations that we build on. You can enable the tracing of derived execution flows (child processes and remote threads) by adding the `-follow_execv` directive for Pin before the `-t sniper32.dll` part.
+
+Log file names in the output folder will contain the PID, a progressive thread number, and the TID of each traced execution unit.
 
 While we hope to publish a rich documentation for SNIPER before publication, you can learn about the mitigations by visiting their [project page](https://github.com/season-lab/sok-dbi-security/) and reading our ASIACCS'19 paper *"SoK: Using Dynamic Binary Instrumentation for Security (And How You May Get Caught Red Handed)"*.
