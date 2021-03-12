@@ -18,7 +18,7 @@ You should now be able to compile SNIPER. Once compilation ends, you will find a
 
 ### Quick start
 
-Make sure that folder `C:\Pin315\sniper` exists, as it will contain the log files (one per thread) for the API calls from program code.
+Make sure that folder `C:\Pin315\sniper` exists, as it will contain the log files (one per thread) for the API calls from program code. More details and configuration options (like those that we used for collecting statistics in the paper) can be found in `logger.h`.
 
 To run an executable under SNIPER use:
 
@@ -29,5 +29,3 @@ C:\Pin315\pin.exe -t sniper32.dll [options] -- <file.exe>
 Presently available options are those from the library of DBI mitigations that we build on.
 
 While we hope to publish a rich documentation for SNIPER before publication, you can learn about the mitigations by visiting their [project page](https://github.com/season-lab/sok-dbi-security/) and reading our ASIACCS'19 paper *"SoK: Using Dynamic Binary Instrumentation for Security (And How You May Get Caught Red Handed)"*.
-
-Note that we use a buffering mechanism to speed up logging efficiency. The logs presently contain also debugging information and statistics (`scztoon.txt`) that we used for validation and for the evaluation of the paper. More details and related configuration options can be found in `logger.h`.

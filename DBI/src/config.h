@@ -6,7 +6,7 @@
 // hard-wired values for knobs can be useful during testing
 #define USE_KNOBS 0
 
-#define USE_SCZTOON	1 // SCZ logging facility for statistics
+#define USE_SCZTOON	0 // SCZ logging facility for statistics (used for the paper)
 #if USE_SCZTOON
 #define SIZE_SCZTOON	5*1024*1024	// 5 MB (TODO reduce with many threads?)
 #define SIZE_SCZ		2048		// max bytes written at a time
