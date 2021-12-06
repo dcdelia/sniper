@@ -1,9 +1,10 @@
 # SNIPER
 
-This is the future home of the SNIPER system, a robust API monitor for Windows binaries.
+SNIPER is an accurate, robust, and transparent tracing solution for Windows APIs.
 
-SNIPER is presented in the research paper *Designing Robust API Monitoring Solutions*, which has been submitted to the IEEE for possible publication. An early version of the paper is available as technical report at [https://arxiv.org/abs/2005.00323](https://arxiv.org/abs/2005.00323).
+The architecture behind it and two implementation variants are described in the research paper *Designing Robust API Monitoring Solutions*, which has just been accepted for publication in the IEEE Transactions on Dependable and Secure Computing. You can find a preprint of the work [here](http://www.diag.uniroma1.it//~delia/).
 
-During the review stage we are releasing partial yet fully functional snapshots of the code for its two variants.
+As you may read in there, one implementation variant builds on DBI (dynamic binary instrumentation) with Intel Pin. It can serve as a standalone tool for in-guest monitoring of legitimate programs or malware, as well as be included in your favorite DBI-based analysis system (e.g., [BluePill](https://github.com/season-lab/bluepill)). The other variant builds on CPU virtualization extensions (Intel VT-x) for better transparency and ships as an extension of the [DRAKVUF](https://drakvuf.com/) analysis system, benefiting from its invisible breakpoints implemented on top of the Xen hypervisor via split EPT (extended page table) views.
 
-As you may read in the paper, one implementation of SNIPER builds on DBI (dynamic binary instrumentation) using Intel Pin and can serve as a standalone tool for in-guest monitoring of programs/malware or be included to your favorite DBI-based analysis system (a self-plug: [BluePill](https://github.com/season-lab/bluepill)). The other builds on CPU virtualization extensions (Intel VT-x) for better transparency and ships as a plugin for the DRAKVUF analysis system based on Xen.
+While the paper is in press, we release incremental fully functional snapshots of the code of both variants as we keep polishing it.
+
