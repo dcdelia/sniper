@@ -200,14 +200,14 @@ inline BOOL scztoonIsFull(tlsinfo* tdata) {
 }
 
 void scztoonToDisk(tlsinfo* tdata) {
-	PIN_LockClient();
+	PIN_MutexLock(&mutex);
 	if (!tdata->logfile) goto EXIT;
 	int ret = fwrite(tdata->scztoon, tdata->drops, 1, tdata->logfile);
 	if (ret != 1) {
 		mycerr << "Cannot empty scztoon to file: " << errno << std::endl;
 	}
 EXIT:
-	PIN_UnlockClient();
+	PIN_MutexUnlock(&mutex);
 	tdata->drops = 0;
 }
 #endif

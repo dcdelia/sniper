@@ -29,6 +29,7 @@ bool checkCallSiteNTDLLWin32(itreenode_t* node, ADDRINT ESP) {
 	uint8_t bytes[3] = { 0xFF, 0xFF, 0xFF }; // TODO =-1 but 0 might be fine as well
 	PIN_SafeCopy(bytes, (void*)addr, 6);
 
+	// see ntdll.cpp for epilogue of syscall stubs
 	if (!((bytes[0] == 0xC2 && bytes[2] == 0x00) || bytes[0] == 0xC3)) {
 		mycerr << "Didn't meet a retN or ret but those instead: " <<
 			std::hex << (ADDRINT)bytes[0] << " " << (ADDRINT)bytes[1] <<
@@ -55,34 +56,33 @@ bool checkCallSiteNTDLLWin32(itreenode_t* node, ADDRINT ESP) {
 
 bool checkCallSiteNTDLLWow64(itreenode_t* node, ADDRINT ESP){
 	ADDRINT addr = *(ADDRINT*)ESP;
-	// if (node->dll_name.find("windows\\syswow64\\ntdll.dll") == string::npos)
 	if (addr < ntdllImgStart || addr > ntdllImgEnd) return false;
 	
-	// black magic: add esp, 4 followed by retn [say 10h] or ret
-	// 83 C4 04
-	// C2 10 00
-	uint8_t bytes[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }; // TODO 0 might be fine too
+	// see ntdll.cpp for epilogue of syscall stubs
+	// Windows 7:	add esp, 4 ; retn [??] = 83 C4 04 ; [C2 ?? ?? || C3]
+	// other:		retn [??] = [C2 ?? ?? || C3] 
+	uint8_t bytes[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
 	PIN_SafeCopy(bytes, (void*)addr, 6);
-	if (!(bytes[0] == 0x83 && bytes[1] == 0xC4 && bytes[2] == 0x04)) {
-		mycerr << "Didn't meet an add esp, 4 but those instead: " <<
-			std::hex << (ADDRINT)bytes[0] << " " << (ADDRINT)bytes[1] <<
-			" " << (ADDRINT)bytes[2] << " for" << addr << std::endl;
-		ASSERT(false, "Check implementation for NTDLL call sites");
-		return false;
-	}
-	
-	if (!((bytes[3] == 0xC2 && bytes[5] == 0x00) || bytes[3] == 0xC3)) {
-		mycerr << "Didn't meet a retN or ret but those instead: " <<
-			std::hex << (ADDRINT)bytes[3] << " " << (ADDRINT)bytes[4] <<
-			" " << (ADDRINT)bytes[5] << " for" << addr << std::endl;
-		ASSERT(false, "Check implementation for NTDLL call sites");
-		return false;
-	}
 
-	// the RA for the caller will be at ESP+4
-	//mycerr << "OK I can handle this..." << std::endl;
-	ADDRINT ra = *((ADDRINT*)ESP + 1);
-	//mycerr << "RA should be " << std::hex << ra << std::endl;
+	ADDRINT ra;
+	if (bytes[0] == 0xC2 || bytes[0] == 0xC3) {
+		ra = *(ADDRINT*)ESP;
+	} else {
+		if (!(bytes[0] == 0x83 && bytes[1] == 0xC4 && bytes[2] == 0x04)) {
+			mycerr << "Didn't meet an add esp, 4 but those instead: " <<
+				std::hex << (ADDRINT)bytes[0] << " " << (ADDRINT)bytes[1] <<
+				" " << (ADDRINT)bytes[2] << " for" << addr << std::endl;
+			ASSERT(false, "Check implementation for WoW64 syscall returns");
+		}
+		if (!(bytes[0] == 0xC2 || bytes[0] == 0xC3)) { // TODO also byte[5] == 0 for C3?
+			mycerr << "Didn't meet a retn [??] but those instead: " <<
+				std::hex << (ADDRINT)bytes[3] << " " << (ADDRINT)bytes[4] <<
+				" " << (ADDRINT)bytes[5] << " for" << addr << std::endl;
+			ASSERT(false, "Check implementation for WoW64 syscall returns");
+		}
+		// the RA for the caller will be at ESP+4
+		ra = *((ADDRINT*)ESP + 1);
+	}
 
 	node = itree_search(intervalTree, ra);
 	if (node) {
@@ -195,6 +195,15 @@ inline VOID retrieveSyscallArgs(ADDRINT number, syscallinfo &scinfo, CONTEXT *ct
 VOID TRACER_SyscallEntry(THREADID tid, CONTEXT *ctx, SYSCALL_STANDARD std) {
 	BaseStats::sysCallsAll++;
 	LOG_TIME_ENTRY();
+	ADDRINT syscall_number = PIN_GetSyscallNumber(ctx, std);
+	if (syscall_number == 0xFFFFFFFF) {
+		mycerr << "Possible int 2d case" << std::endl;
+		tlsinfo *tls = static_cast<tlsinfo*>(PIN_GetThreadData(TRACER_tls_key, tid));
+		tls->syscall.watched = false; // possibly redundant (better safe than sorry though)
+		LOG_TIME_EXIT(BaseStats::entrySysDiscard); // well, shouldn't really count
+		return;
+	}
+
 	ADDRINT ESP = PIN_GetContextReg(ctx, REG_STACK_PTR);
 	itreenode_t* node = itree_search(intervalTree, *(ADDRINT*)ESP);
 	std::string &dllName = *(std::string*)(node->data);
@@ -222,13 +231,6 @@ VOID TRACER_SyscallEntry(THREADID tid, CONTEXT *ctx, SYSCALL_STANDARD std) {
 	syscallinfo &scinfo = tls->syscall;
 
 	// get syscall info
-	ADDRINT syscall_number = PIN_GetSyscallNumber(ctx, std);
-	if (syscall_number == 0xFFFFFFFF) {
-		mycerr << "Possible int 2d case" << std::endl;
-		scinfo.watched = false; // possibly redundant (better safe than sorry though)
-		LOG_TIME_EXIT(BaseStats::entrySysDiscard); // well, shouldn't really count
-		return;
-	}
 	mycout << "Syscall number " << std::hex << syscall_number << std::endl;
 	scinfo.ordinal = syscall_number;
 

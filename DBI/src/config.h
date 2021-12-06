@@ -1,7 +1,10 @@
 #pragma once
 #include "pin.H"
 
-#define MAXSYSCALLS		0x200	// this should be enough for Win7 (up to 419)
+#define MAXSYSCALLS		0x200	// this should be enough for Win7 and Win10
+
+// for synchronizing instrumentation insertion
+extern PIN_MUTEX mutex;
 
 // hard-wired values for knobs can be useful during testing
 #define USE_KNOBS 0

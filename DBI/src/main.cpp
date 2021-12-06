@@ -36,8 +36,11 @@
 extern CHAR* syscallIDs[MAXSYSCALLS];
 VOID EnumSyscalls();
 
-// [anti-evasion] we use TLS for now only to track state across syscall enter and exit
+// we use TLS for now only to track state across syscall enter and exit
 TLS_KEY tls_key = INVALID_TLS_KEY;
+
+// for synchronizing instrumentation instrumentation
+PIN_MUTEX mutex;
 
 #if USE_KNOBS
 BOOL _nxKnob;
@@ -193,6 +196,8 @@ int main(int argc, char *argv[]) {
 
 	// initialize some stuff
 	antiDBIEvasionConfig();
+	OS_MkDir(LOGPATH, 0777);
+	PIN_MutexInit(&mutex);
 
 	// init tracer (just TLS as of now)
 	TRACER_Init();

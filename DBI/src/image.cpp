@@ -70,7 +70,7 @@ inline void printArgumentsOnEntry(tlsinfo *tdata, libcall_info_t* prototype, ADD
 // helper method - trigger delayed instrumentation of RA
 inline void checkRAforInstrumentation(ADDRINT ra, const char* dllName) {
 	if (instrumentedRAs.count(ra) == 0) {
-		PIN_LockClient(); // TODO something lighter?
+		PIN_MutexLock(&mutex);
 		retObj robj = { ra,  NULL};
 
 		// Insert in map
@@ -78,7 +78,7 @@ inline void checkRAforInstrumentation(ADDRINT ra, const char* dllName) {
 
 		instrumentedRAs.insert(ra);
 		PIN_RemoveInstrumentationInRange(ra, ra);
-		PIN_UnlockClient();
+		PIN_MutexUnlock(&mutex);;
 	}
 }
 
@@ -285,13 +285,14 @@ VOID TRACER_LoadImage(IMG img) {
 	// interval tree
 	if ((imgNameStr.find("windows\\system32\\") != std::string::npos) ||
 		(imgNameStr.find("windows\\syswow64\\") != std::string::npos) ||
-		(imgNameStr.find("windows\\winsxs\\") != std::string::npos)) {
+		(imgNameStr.find("windows\\winsxs\\") != std::string::npos) || 
+		(imgNameStr.find("windows\\microsoft.net\\") != std::string::npos)) {
 		mycout << "Loading Windows DLL: " << imgNameStr
 				  << " at " << std::hex << imgStart
 				  << " till " << std::hex << imgEnd << std::endl;
-		PIN_LockClient();
+		PIN_MutexLock(&mutex);
 		addToIntervalTree(imgStart, imgEnd, imgNameStr);
-		PIN_UnlockClient();
+		PIN_MutexUnlock(&mutex);
 	}
 	else {
 		mycout << "> Loading " << imgNameStr
@@ -347,7 +348,7 @@ VOID TRACER_LoadImage(IMG img) {
 	std::vector<std::pair<const char*, ADDRINT>> duplicated;
 
 	// acquire lock (e.g. for RTN_FindByAddress)
-	PIN_LockClient();
+	PIN_MutexLock(&mutex);
 
 	size_t rtnNotFound = dll.entries.size(); // easier if decremented
 	const char *dllName = strrchr(IMG_Name(img).c_str(), '\\') + 1;
@@ -461,7 +462,7 @@ VOID TRACER_LoadImage(IMG img) {
 	}
 
 	// release lock
-	PIN_UnlockClient();
+	PIN_MutexUnlock(&mutex);
 
 	if (rtnNotFound) {
 		mycout << "Entries that could not be mapped to a RTN: "

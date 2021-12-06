@@ -14,6 +14,23 @@ const char* arginout[4] = {
 	"UNK"
 };
 
+// workaround for broken PIN_SafeCopy on Windows 10 - TODO try newer Pin releases
+// or switch between checking methods depending on the Windows version in use
+BOOL MyIsBadReadPtr(void* p)
+{
+	W::MEMORY_BASIC_INFORMATION mbi = { 0 };
+	if (W::VirtualQuery(p, &mbi, sizeof(mbi)))
+	{
+		W::DWORD mask = (PAGE_READONLY | PAGE_READWRITE | PAGE_WRITECOPY | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE | PAGE_EXECUTE_WRITECOPY);
+		BOOL b = !(mbi.Protect & mask);
+		// check the page is not a guard page
+		if (mbi.Protect & (PAGE_GUARD | PAGE_NOACCESS)) b = TRUE;
+
+		return b;
+	}
+	return TRUE;
+}
+
 // Attempts to print macro names
 void print_enum(libcall_arg_info_t &argInfo, tlsinfo* tdata, bool pointer, ADDRINT argValue) {
 
@@ -257,7 +274,6 @@ void print_string(ADDRINT pointer_str, bool is_wide, tlsinfo* tdata, std::string
 		type_str.append("**");
 	}
 
-
 	// If pointer-to-pointer print address and return
 	if (pointerToPointer) {
 		LOG_BISHOP(tdata, PFX, (void*)pointer_str);
@@ -272,12 +288,12 @@ void print_string(ADDRINT pointer_str, bool is_wide, tlsinfo* tdata, std::string
 	if (pointer_str == NULL)
 		LOG_BISHOP(tdata, "<null>");
 	else {
-
-		if ((PIN_SafeCopy(&deref, (void*)pointer_str, charSize) == 0)) {
+		if (MyIsBadReadPtr((void*)pointer_str)) {
+		// TODO sadly Pin 3.15 dies with both PIN_SafeCopy and W::IsBadReadPtr on low addresses :-/
+		// if (PIN_SafeCopy(&deref, (void*)pointer_str, charSize) == 0) {
 			LOG_BISHOP(tdata, "<invalid memory>");
 		}
 		else {
-
 			// Get Address at the end of page (last 12 bits)
 			ADDRINT pageEndAddress = pointer_str | 0xFFF;
 
@@ -567,6 +583,12 @@ void print_simple_value(libcall_arg_info_t &argInfo, bool leading_zeroes, tlsinf
 		// Deference large value
 		if (argInfo.size > sizeof(deref)) {
 			print_large_value(tdata, format, type_str, argInfo, pointer, leading_zeroes_def, (ADDRINT*)argValue);
+			return;
+		}
+
+		// TODO safeguard code for Windows 10 and Pin 3.15 :-/
+		if (MyIsBadReadPtr((void *)argValue)) {
+			LOG_BISHOP(tdata, " => <invalid memory>");
 			return;
 		}
 
