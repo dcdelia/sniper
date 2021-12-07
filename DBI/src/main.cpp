@@ -85,7 +85,7 @@ VOID antiDBIEvasionConfig() {
 		// obtain a TLS key
 		tls_key = PIN_CreateThreadDataKey(NULL);
 		if (tls_key == INVALID_TLS_KEY) {
-			LOG_AR("Cannot initialize TLS");
+			SOK_LOG_AR("Cannot initialize TLS");
 			PIN_ExitProcess(1);
 		}
 	}

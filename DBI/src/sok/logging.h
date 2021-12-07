@@ -4,13 +4,13 @@
 #pragma once
 #include "pin.H"
 
-#define LOGPATH "C:\\pin311\\"
-#define LOGNAME "sok-dbi.log"
-#define LOG_BUILD 1
+#define SOK_LOGPATH "C:\\pin319\\" // TODO
+#define SOK_LOGNAME "sok-dbi.log"
+#define SOK_LOG_BUILD 1
 
-#define LOG_AR(fmt, ...) \
+#define SOK_LOG_AR(fmt, ...) \
 	do { \
-		if (!LOG_BUILD) break; \
+		if (!SOK_LOG_BUILD) break; \
 		SokLogging::logMain(fmt"\n", __VA_ARGS__); \
 	} while (0)
 

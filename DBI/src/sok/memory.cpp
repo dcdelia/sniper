@@ -48,7 +48,7 @@ void MEMORY_Init() {
 		spilled[0] = PIN_ClaimToolRegister();
 		spilled[1] = PIN_ClaimToolRegister();
 		if (spilled[0] == REG_INVALID() || spilled[1] == REG_INVALID()) {
-			LOG_AR("Could not spill registers for MEMORY protection");
+			SOK_LOG_AR("Could not spill registers for MEMORY protection");
 			PIN_ExitProcess(1);
 		}
 	}
@@ -59,7 +59,7 @@ void MEMORY_Init() {
 	W::GetSystemInfo(&sysInfo);
 	UINT32 pageSize = sysInfo.dwPageSize;
 	if (pageSize != OS_PAGE_SIZE) {
-		LOG_AR("Please recompile your tool with %08x as page size!", pageSize);
+		SOK_LOG_AR("Please recompile your tool with %08x as page size!", pageSize);
 		PIN_ExitProcess(1);
 	}
 
@@ -155,7 +155,7 @@ bool MEMORY_CheckPermissionsForAreaStar(ADDRINT start, ADDRINT size, MEM_MASK ma
 		if (curMask != mask) {
 			changed = true;
 			if (lastMask != curMask) {
-				LOG_AR("OLD MASK : %08x\n NEW: %08x\n PAGE: %08x", (UINT32)curMask, (UINT32)mask, pageIdxStart);
+				SOK_LOG_AR("OLD MASK : %08x\n NEW: %08x\n PAGE: %08x", (UINT32)curMask, (UINT32)mask, pageIdxStart);
 				lastMask = curMask;
 			}
 		}
@@ -179,7 +179,7 @@ void MEMORY_UnregisterArea(ADDRINT start, size_t size) {
 	if (size == 0) pageIdxEnd = pageIdxStart;
 	do {
 		if (!pages[pageIdxStart]) {
-			LOG_AR("WARNING: permissions were not set for page %08x %08x %08x", pageIdxStart, start, size);
+			SOK_LOG_AR("WARNING: permissions were not set for page %08x %08x %08x", pageIdxStart, start, size);
 		}
 		pages[pageIdxStart] = 0;
 	} while (pageIdxStart++ != pageIdxEnd);
@@ -219,9 +219,9 @@ bool MEMORY_CheckWhitelist(ADDRINT address, ADDRINT eip) {
 			if (!ret || ret & 0x1) changed = true;
 
 			if (!ret) {
-				LOG_AR("ADDED REGION %08x %08x %08x %08x %08x", startAddr, size, (UINT32)mask, mem.Protect, mem.AllocationProtect);
+				SOK_LOG_AR("ADDED REGION %08x %08x %08x %08x %08x", startAddr, size, (UINT32)mask, mem.Protect, mem.AllocationProtect);
 			}	else if (ret & 0x1) {
-				LOG_AR("FIXED REGION %08x %08x %08x %08x %08x", startAddr, size, (UINT32)mask, mem.Protect, mem.AllocationProtect);
+				SOK_LOG_AR("FIXED REGION %08x %08x %08x %08x %08x", startAddr, size, (UINT32)mask, mem.Protect, mem.AllocationProtect);
 			}	
 		}
 	}
@@ -253,7 +253,7 @@ ADDRINT validateReadAux(ADDRINT val, ADDRINT eip, THREADID tid, CONTEXT *ctx) {
 	else if (!(mask & MEM_ACCESSIBLE)) { // region is not accessible
 		// Pin doesn't handle guarded pages correctly only when
 		// fetching code, but data read/write accesses are fine
-		LOG_AR("(IM)POSSIBLE PAGE GUARD BUG IN PIN");
+		SOK_LOG_AR("(IM)POSSIBLE PAGE GUARD BUG IN PIN");
 	} else if (!(mask & MEM_READABLE)) { // region is not readable
 		EXCEPTION_INFO exc;
 		PIN_InitWindowsExceptionInfo(&exc, 0xc0000005, val);
@@ -321,7 +321,7 @@ ADDRINT validateWriteAux(ADDRINT val, ADDRINT eip, THREADID tid, CONTEXT *ctx) {
 		PIN_InitWindowsExceptionInfo(&exc, 0xc0000005, eip);
 		PIN_RaiseException(ctx, tid, &exc);
 	} else if (!(mask & MEM_ACCESSIBLE)) {
-		LOG_AR("(IM)POSSIBLE PAGE GUARD BUG IN PIN");
+		SOK_LOG_AR("(IM)POSSIBLE PAGE GUARD BUG IN PIN");
 	}
 	else if (!(mask & MEM_WRITEABLE)) {
 		EXCEPTION_INFO exc;
@@ -633,13 +633,13 @@ void MEMORY_UnloadImage(IMG img) {
 	ADDRINT imgStart = IMG_LowAddress(img);
 	ADDRINT imgEnd = IMG_HighAddress(img);
 
-	LOG_AR("-> Unloading image [%08x;%08x]", imgStart, imgEnd);
+	SOK_LOG_AR("-> Unloading image [%08x;%08x]", imgStart, imgEnd);
 
 	if (IMG_IsMainExecutable(img)) {
-		LOG_AR(" from main executable");
+		SOK_LOG_AR(" from main executable");
 	}
 	else {
-		LOG_AR("%s", IMG_Name(img).c_str());
+		SOK_LOG_AR("%s", IMG_Name(img).c_str());
 	}
 #endif
 
@@ -650,7 +650,7 @@ void MEMORY_UnloadImage(IMG img) {
 		ADDRINT secSize = SEC_Size(section);
 		MEM_MASK rwx = getRWX(section);
 #if MEMORY_VERBOSE
-		LOG_AR("Section %s [%08x;%08x] RWX: %08x", SEC_Name(section).c_str(), secStart, secStart + secSize, (UINT32)rwx);
+		SOK_LOG_AR("Section %s [%08x;%08x] RWX: %08x", SEC_Name(section).c_str(), secStart, secStart + secSize, (UINT32)rwx);
 #endif
 		MEMORY_UnregisterArea(secStart, secSize);
 	}
@@ -671,12 +671,12 @@ void MEMORY_LoadImage(IMG img) {
 	ADDRINT imgEnd = IMG_HighAddress(img);
 
 #if MEMORY_VERBOSE
-	LOG_AR("-> Loading image [%08x;%08x]", imgStart, imgEnd);
+	SOK_LOG_AR("-> Loading image [%08x;%08x]", imgStart, imgEnd);
 	if (IMG_IsMainExecutable(img)) {
-		LOG_AR(" from main executable");
+		SOK_LOG_AR(" from main executable");
 	}
 	else {
-		LOG_AR("%s", IMG_Name(img).c_str());
+		SOK_LOG_AR("%s", IMG_Name(img).c_str());
 	}
 #endif
 
@@ -719,7 +719,7 @@ void MEMORY_LoadImage(IMG img) {
 
 		MEM_MASK rwx = getRWX(section);
 #if MEMORY_VERBOSE
-		LOG_AR("Section %s [%08x;%08x] RWX: %08x", SEC_Name(section).c_str(), secStart, secStart + secSize, (UINT32)rwx);
+		SOK_LOG_AR("Section %s [%08x;%08x] RWX: %08x", SEC_Name(section).c_str(), secStart, secStart + secSize, (UINT32)rwx);
 #endif
 		// memory hook
 		MEMORY_RegisterArea(secStart, secSize, rwx);
@@ -799,7 +799,7 @@ void MEMORY_OnThreadStart(CONTEXT *ctxt) {
 	ADDRINT size = end - base;
 	mask = MEMORY_WinToPinCast(mbi.Protect);
 	MEMORY_RegisterArea(base, size, mask);
-	LOG_AR("Thread stack %08x %08x", currentSP, end);
+	SOK_LOG_AR("Thread stack %08x %08x", currentSP, end);
 
 	// TEB needs special handling too
 	ADDRINT tebAddr = (ADDRINT)W::NtCurrentTeb();
@@ -965,10 +965,10 @@ bool MEMORY_AddMappedMemory(ADDRINT start, ADDRINT end, bool print, ADDRINT eip)
 
 				if (print) {
 					if (!ret) {
-						LOG_AR("ADDED REGION %08x %08x %08x %08x %08x", startAddr, size, (UINT32)mask, mem.Protect, mem.AllocationProtect);
+						SOK_LOG_AR("ADDED REGION %08x %08x %08x %08x %08x", startAddr, size, (UINT32)mask, mem.Protect, mem.AllocationProtect);
 					}
 					else if (ret & 0x1) {
-						LOG_AR("FIXED REGION %08x %08x %08x %08x %08x", startAddr, size, (UINT32)mask, mem.Protect, mem.AllocationProtect);
+						SOK_LOG_AR("FIXED REGION %08x %08x %08x %08x %08x", startAddr, size, (UINT32)mask, mem.Protect, mem.AllocationProtect);
 					}
 				}
 			}

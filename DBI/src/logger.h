@@ -4,7 +4,7 @@
 #include <fstream>
 #include <intrin.h>
 
-#define LOGPATH "C:\\pin315\\sniper\\"
+#define LOGPATH "C:\\pin319\\sniper\\"
 #define LOG_ENABLED		1
 #define LOG_ARG_COUNTS	1
 

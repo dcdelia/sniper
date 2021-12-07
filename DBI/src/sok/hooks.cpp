@@ -47,7 +47,7 @@ VOID HOOKS_SetTLSKey(THREADID tid) {
 	pintool_tls* tdata = (pintool_tls*)calloc(1, sizeof(pintool_tls));
 
 	if (PIN_SetThreadData(tls_key, tdata, tid) == FALSE) {
-		LOG_AR("PIN_SetThreadData failed");
+		SOK_LOG_AR("PIN_SetThreadData failed");
 		PIN_ExitProcess(1);
 	}
 
@@ -68,7 +68,7 @@ VOID HOOKS_SyscallEntry(THREADID thread_id, CONTEXT *ctx, SYSCALL_STANDARD std) 
 	ADDRINT syscall_number = PIN_GetSyscallNumber(ctx, std);
 
 	if (syscall_number == 0) {
-		LOG_AR("==> WARNING: PIN returned 0 as system call number, possible int 2e case?");
+		SOK_LOG_AR("==> WARNING: PIN returned 0 as system call number, possible int 2e case?");
 		return;
 	}
 
@@ -123,7 +123,7 @@ VOID HOOKS_SyscallExit(THREADID thread_id, CONTEXT *ctx, SYSCALL_STANDARD std) {
 
 VOID HOOKS_GenericScan_exit(syscall_t *sc, CONTEXT *ctx, SYSCALL_STANDARD std) {
 	if (MEMORY_AddMappedMemoryStar(NULL, 0x7fff0000, true)) {
-		//LOG_AR("SYSCALL %08x", sc->syscall_number);
+		//SOK_LOG_AR("SYSCALL %08x", sc->syscall_number);
 	}
 }
 
@@ -228,7 +228,7 @@ VOID HOOKS_NtUnmapViewOfSection_exit(syscall_t * sc, CONTEXT * ctx, SYSCALL_STAN
 	if (_eax != 0) return;
 
 	// memory hook
-	//LOG_AR("%08x %08x", (ADDRINT)baseAddr, storage_NtUnmapViewOfSection);
+	//SOK_LOG_AR("%08x %08x", (ADDRINT)baseAddr, storage_NtUnmapViewOfSection);
 	MEMORY_UnregisterArea((ADDRINT)baseAddr, storage_NtUnmapViewOfSection);
 }
 
@@ -244,7 +244,7 @@ VOID HOOKS_NtFreeVirtualMemory_exit(syscall_t * sc, CONTEXT * ctx, SYSCALL_STAND
 
 	// memory hook
 	if (type == MEM_RELEASE) {
-		LOG_AR("%08x %08x", (ADDRINT)*baseAddr, *size);
+		SOK_LOG_AR("%08x %08x", (ADDRINT)*baseAddr, *size);
 		MEMORY_UnregisterArea((ADDRINT)*baseAddr, *size);
 	}
 
@@ -349,7 +349,7 @@ VOID HOOKS_GenericHookDereference_exit(syscall_t *sc, CONTEXT *ctx, UINT32 argNu
 	if (_eax != 0) return;
 
 	if (pHandle != NULL) {
-		LOG_AR(" %08x", (ADDRINT)*pHandle);
+		SOK_LOG_AR(" %08x", (ADDRINT)*pHandle);
 		//return; // TODO why?
 	}
 

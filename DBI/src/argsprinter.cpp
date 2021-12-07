@@ -289,7 +289,7 @@ void print_string(ADDRINT pointer_str, bool is_wide, tlsinfo* tdata, std::string
 		LOG_BISHOP(tdata, "<null>");
 	else {
 		if (MyIsBadReadPtr((void*)pointer_str)) {
-		// TODO sadly Pin 3.15 dies with both PIN_SafeCopy and W::IsBadReadPtr on low addresses :-/
+		// TODO sadly on Win10 Pin dies with both PIN_SafeCopy and W::IsBadReadPtr on low addresses :-/
 		// if (PIN_SafeCopy(&deref, (void*)pointer_str, charSize) == 0) {
 			LOG_BISHOP(tdata, "<invalid memory>");
 		}
@@ -586,7 +586,7 @@ void print_simple_value(libcall_arg_info_t &argInfo, bool leading_zeroes, tlsinf
 			return;
 		}
 
-		// TODO safeguard code for Windows 10 and Pin 3.15 :-/
+		// TODO safeguard code for Windows 10 :-/
 		if (MyIsBadReadPtr((void *)argValue)) {
 			LOG_BISHOP(tdata, " => <invalid memory>");
 			return;
