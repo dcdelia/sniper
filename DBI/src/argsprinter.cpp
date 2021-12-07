@@ -137,7 +137,7 @@ void print_enum(libcall_arg_info_t &argInfo, tlsinfo* tdata, bool pointer, ADDRI
 	if (readValue) {
 		value = (int)deref;
 	}
-	else value = argValue;
+	else value = (int)argValue;
 
 	//Enum present -> Get corresponding struct
 	named_consts = enumMap[argInfo.arg_type_name];
@@ -300,7 +300,7 @@ void print_string(ADDRINT pointer_str, bool is_wide, tlsinfo* tdata, std::string
 			//LOG_BISHOP(tdata, "Start: %x  ", pointer_str );
 			//LOG_BISHOP(tdata, "End: %x ", pageEndAddress);
 
-			uint untilPageEnd = pageEndAddress - pointer_str + 1;
+			uint untilPageEnd = (uint)(pageEndAddress - pointer_str) + 1;
 
 			//LOG_BISHOP(tdata, "Diff: %x", untilPageEnd);
 
@@ -607,14 +607,14 @@ void print_simple_value(libcall_arg_info_t &argInfo, bool leading_zeroes, tlsinf
 
 }
 
-VOID printApiName(const char* exportName, const char* dllName, bool isKnown, tlsinfo* tdata, int stackSize, void* retAddr, ADDRINT* sp) {
+VOID printApiName(const char* exportName, const char* dllName, bool isKnown, tlsinfo* tdata, uint32_t stackSize, void* retAddr, ADDRINT* sp) {
 
 #if VERBOSE_OUTPUT
 	if (isKnown) {
-		LOG_BISHOP(tdata, "-- [Tid: %d, Sp: %p, Ra: %p , Stack Size: %d, Sup ] -- %u %s!%s\n", PIN_GetTid(), sp, retAddr, stackSize, tdata->callnumber, dllName, exportName);
+		LOG_BISHOP(tdata, "-- [Tid: %d, Sp: %p, Ra: %p , Stack Size: %u, Sup ] -- %u %s!%s\n", PIN_GetTid(), sp, retAddr, stackSize, tdata->callnumber, dllName, exportName);
 	}
 	else {
-		LOG_BISHOP(tdata, "-- [Tid: %d, Sp: %p, Ra: %p , Stack Size: %d, Unsup ] -- %s!%s\n", PIN_GetTid(), sp, retAddr, stackSize, dllName, exportName);
+		LOG_BISHOP(tdata, "-- [Tid: %d, Sp: %p, Ra: %p , Stack Size: %u, Unsup ] -- %s!%s\n", PIN_GetTid(), sp, retAddr, stackSize, dllName, exportName);
 	}
 	return;
 #endif
@@ -630,14 +630,14 @@ VOID printApiName(const char* exportName, const char* dllName, bool isKnown, tls
 
 }
 
-VOID printApiExecuted(const char* exportName, const char* dllName, bool isKnown, tlsinfo* tdata, int stackSize, ADDRINT sp, int offset) {
+VOID printApiExecuted(const char* exportName, const char* dllName, bool isKnown, tlsinfo* tdata, uint32_t stackSize, ADDRINT sp, int offset) {
 
 #if VERBOSE_OUTPUT
 	if (isKnown) {
-		LOG_BISHOP(tdata, "\t%u \texecuted with clear ret (off = %d) -- [Tid: %d, Sp: %p, Stack Size: %d, Sup ] -- %s!%s =>\n", tdata->callnumber, offset, PIN_GetTid(), sp, stackSize, dllName, exportName);
+		LOG_BISHOP(tdata, "\t%u \texecuted with clear ret (off = %d) -- [Tid: %d, Sp: %p, Stack Size: %u, Sup ] -- %s!%s =>\n", tdata->callnumber, offset, PIN_GetTid(), sp, stackSize, dllName, exportName);
 	}
 	else {
-		LOG_BISHOP(tdata, "\texecuted with clear ret (off = %d) -- [Tid: %d, Sp: %p, Stack Size: %d, Unsup ] -- %s!%s =>\n", offset, PIN_GetTid(), sp, stackSize, dllName, exportName);
+		LOG_BISHOP(tdata, "\texecuted with clear ret (off = %d) -- [Tid: %d, Sp: %p, Stack Size: %u, Unsup ] -- %s!%s =>\n", offset, PIN_GetTid(), sp, stackSize, dllName, exportName);
 	}
 	return;
 #endif

@@ -19,10 +19,25 @@ typedef struct {
 	void*	data;
 } retObj;
 
+#ifdef __LP64__
+typedef union {
+	struct {
+		ADDRINT rcx;
+		ADDRINT rdx;
+		ADDRINT r8;
+		ADDRINT r9;
+	};
+	ADDRINT regs[4];
+} outregs_t;
+#endif
+
 typedef struct {
 	ADDRINT	ra; // == *esp
 	ADDRINT	esp;
 	void* data;
+#ifdef __LP64__
+	outregs_t outRegs;
+#endif
 } callinfo;
 
 typedef std::vector<callinfo> callstack;

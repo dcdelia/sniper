@@ -21,7 +21,6 @@ supportedLibs myLibs[] = {
 	{ User32_info, User32arraySize, "user32.dll" },
 	{ OleAut32_info, OleAut32arraySize, "oleaut32.dll" },
 	{ AdvAPI32_info, AdvAPI32arraySize, "advapi32.dll" },
-	//{ ntdll_info, ntdllarraySize, "ntdll.dll"}, // disabled, did not work properly
 	{ Crypt32_info, Crypt32arraySize, "crypt32.dll" },
 	{ IPHlpApi_info, IPHlpApiarraySize, "iphlpapi.dll" },
 	{ Ole32_info, Ole32arraySize, "ole32.dll" },

@@ -20,7 +20,7 @@ std::string getCurDateAndTime() {
 VOID SokLogging::Init() {	
 	std::string path = std::string(SOK_LOGPATH);
 	mainLog = fopen(path.append(SOK_LOGNAME).c_str(), "a");
-	SOK_LOG_AR("Starting analysis...");
+	//SOK_LOG_AR("Starting analysis...");
 }
 
 VOID SokLogging::Shutdown() {

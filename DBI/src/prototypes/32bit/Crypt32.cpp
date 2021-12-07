@@ -2,7 +2,7 @@
 // of the Deviare parser from the PyREBox project. Credits:
 // https://github.com/Cisco-Talos/pyrebox/blob/master/mw_monitor2/deviare_db_parser.py
 
-#include "pyrebox.h"
+#include "../pyrebox.h"
 
 libcall_info_t Crypt32_info[] = {
 	{ "CertAddCertificateContextToStore",4,

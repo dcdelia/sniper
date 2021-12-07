@@ -5,6 +5,12 @@ namespace W {
 #include "windows.h"
 }
 
+#ifdef __LP64__ // workaround for missing typedef from DRio headers
+typedef unsigned __int64 uint64;
+typedef __int64 int64;
+#endif
+
+
 namespace DR {
 
 #define MAX_ARGS_IN_ENTRY 18 // on Windows 17 is max known

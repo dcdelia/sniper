@@ -2,7 +2,7 @@
 // of the Deviare parser from the PyREBox project. Credits:
 // https://github.com/Cisco-Talos/pyrebox/blob/master/mw_monitor2/deviare_db_parser.py
 
-#include "pyrebox.h"
+#include "../pyrebox.h"
 
 libcall_info_t IPHlpApi_info[] = {
 	{ "AddIPAddress",5,
@@ -18,105 +18,105 @@ libcall_info_t IPHlpApi_info[] = {
 	{ "CancelIPChangeNotify",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "notifyOverlapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 160, IN },
+		{0, "notifyOverlapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 256, UNK },
 	}
 	},
 	{ "CancelMibChangeNotify2",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "NotificationHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "NotificationHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "ConvertInterfaceAliasToLuid",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "InterfaceAlias", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "InterfaceLuid", NKT_DBOBJCLASS_Union | NKT_DBOBJCLASS_Pointer, "_NET_LUID_LH", 64, OUT },
 	}
 	},
 	{ "ConvertInterfaceGuidToLuid",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "InterfaceGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
 		{1, "InterfaceLuid", NKT_DBOBJCLASS_Union | NKT_DBOBJCLASS_Pointer, "_NET_LUID_LH", 64, OUT },
 	}
 	},
 	{ "ConvertInterfaceIndexToLuid",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "InterfaceIndex", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{1, "InterfaceLuid", NKT_DBOBJCLASS_Union | NKT_DBOBJCLASS_Pointer, "_NET_LUID_LH", 64, OUT },
 	}
 	},
 	{ "ConvertInterfaceLuidToAlias",3,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "InterfaceLuid", NKT_DBOBJCLASS_Union | NKT_DBOBJCLASS_Pointer, "_NET_LUID_LH", 64, IN },
 		{1, "InterfaceAlias", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
-		{2, "Length", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "Length", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "ConvertInterfaceLuidToGuid",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "InterfaceLuid", NKT_DBOBJCLASS_Union | NKT_DBOBJCLASS_Pointer, "_NET_LUID_LH", 64, IN },
 		{1, "InterfaceGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, OUT },
 	}
 	},
 	{ "ConvertInterfaceLuidToIndex",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "InterfaceLuid", NKT_DBOBJCLASS_Union | NKT_DBOBJCLASS_Pointer, "_NET_LUID_LH", 64, IN },
 		{1, "InterfaceIndex", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
 	{ "ConvertInterfaceLuidToNameA",3,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "InterfaceLuid", NKT_DBOBJCLASS_Union | NKT_DBOBJCLASS_Pointer, "_NET_LUID_LH", 64, IN },
 		{1, "InterfaceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
-		{2, "Length", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "Length", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "ConvertInterfaceLuidToNameW",3,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "InterfaceLuid", NKT_DBOBJCLASS_Union | NKT_DBOBJCLASS_Pointer, "_NET_LUID_LH", 64, IN },
 		{1, "InterfaceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
-		{2, "Length", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "Length", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "ConvertInterfaceNameToLuidA",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "InterfaceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "InterfaceLuid", NKT_DBOBJCLASS_Union | NKT_DBOBJCLASS_Pointer, "_NET_LUID_LH", 64, OUT },
 	}
 	},
 	{ "ConvertInterfaceNameToLuidW",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "InterfaceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "InterfaceLuid", NKT_DBOBJCLASS_Union | NKT_DBOBJCLASS_Pointer, "_NET_LUID_LH", 64, OUT },
 	}
 	},
 	{ "ConvertIpv4MaskToLength",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Mask", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{1, "MaskLength", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 	}
 	},
 	{ "ConvertLengthToIpv4Mask",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "MaskLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{1, "Mask", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
 	{ "CreateAnycastIpAddressEntry",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_ANYCASTIPADDRESS_ROW", 384, IN },
 	}
 	},
@@ -128,7 +128,7 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "CreateIpForwardEntry2",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPFORWARD_ROW2", 832, IN },
 	}
 	},
@@ -140,24 +140,8 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "CreateIpNetEntry2",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPNET_ROW2", 704, IN },
-	}
-	},
-	{ "CreatePersistentTcpPortReservation",3,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "StartPort", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{1, "NumberOfPorts", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{2, "Token", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, IN },
-	}
-	},
-	{ "CreatePersistentUdpPortReservation",3,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "StartPort", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{1, "NumberOfPorts", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{2, "Token", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, IN },
 	}
 	},
 	{ "CreateProxyArpEntry",3,
@@ -170,25 +154,25 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "CreateSortedAddressPairs",7,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "SourceAddressList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "sockaddr_in6", 224, IN },
 		{1, "SourceAddressCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "DestinationAddressList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "sockaddr_in6", 224, IN },
 		{3, "DestinationAddressCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "AddressSortOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "SortedAddressPairList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_sockaddr_in6_pair", 64, OUT },
+		{5, "SortedAddressPairList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_sockaddr_in6_pair", 128, OUT },
 		{6, "SortedAddressPairCount", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
 	{ "CreateUnicastIpAddressEntry",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_UNICASTIPADDRESS_ROW", 640, IN },
 	}
 	},
 	{ "DeleteAnycastIpAddressEntry",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_ANYCASTIPADDRESS_ROW", 384, IN },
 	}
 	},
@@ -206,7 +190,7 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "DeleteIpForwardEntry2",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPFORWARD_ROW2", 832, IN },
 	}
 	},
@@ -218,22 +202,8 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "DeleteIpNetEntry2",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPNET_ROW2", 704, IN },
-	}
-	},
-	{ "DeletePersistentTcpPortReservation",2,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "StartPort", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{1, "NumberOfPorts", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-	}
-	},
-	{ "DeletePersistentUdpPortReservation",2,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "StartPort", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{1, "NumberOfPorts", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 	}
 	},
 	{ "DeleteProxyArpEntry",3,
@@ -246,22 +216,22 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "DeleteUnicastIpAddressEntry",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_UNICASTIPADDRESS_ROW", 640, IN },
 	}
 	},
 	{ "DisableMediaSense",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{1, "pOverLapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 160, IN },
+		{0, "pHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, UNK },
+		{1, "pOverLapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 256, UNK },
 	}
 	},
 	{ "EnableRouter",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{1, "pOverlapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 160, IN },
+		{0, "pHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, UNK },
+		{1, "pOverlapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 256, UNK },
 	}
 	},
 	{ "FlushIpNetTable",1,
@@ -272,21 +242,21 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "FlushIpNetTable2",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Family", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 		{1, "InterfaceIndex", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
 	{ "FlushIpPathTable",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Family", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 	}
 	},
 	{ "FreeMibTable",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "Memory", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{0, "Memory", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "GetAdapterIndex",2,
@@ -307,26 +277,26 @@ libcall_info_t IPHlpApi_info[] = {
 		{0, "Family", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{1, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "Reserved", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{3, "AdapterAddresses", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_IP_ADAPTER_ADDRESSES_LH", 3008, INOUT },
+		{3, "AdapterAddresses", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_IP_ADAPTER_ADDRESSES_XP", 1472, INOUT },
 		{4, "SizePointer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 	}
 	},
 	{ "GetAdaptersInfo",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "AdapterInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_IP_ADAPTER_INFO", 5184, IN },
-		{1, "SizePointer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{0, "AdapterInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_IP_ADAPTER_INFO", 5632, UNK },
+		{1, "SizePointer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "GetAnycastIpAddressEntry",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_ANYCASTIPADDRESS_ROW", 384, INOUT },
 	}
 	},
 	{ "GetAnycastIpAddressTable",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Family", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 		{1, "Table", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MIB_ANYCASTIPADDRESS_TABLE", 448, OUT },
 	}
@@ -355,7 +325,7 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "GetBestRoute2",7,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "InterfaceLuid", NKT_DBOBJCLASS_Union | NKT_DBOBJCLASS_Pointer, "_NET_LUID_LH", 64, IN },
 		{1, "InterfaceIndex", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "SourceAddress", NKT_DBOBJCLASS_Union | NKT_DBOBJCLASS_Pointer, "_SOCKADDR_INET", 224, IN },
@@ -398,19 +368,6 @@ libcall_info_t IPHlpApi_info[] = {
 		{0, "IfIndex", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
-	{ "GetIcmpStatistics",1,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Statistics", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_ICMP", 832, IN },
-	}
-	},
-	{ "GetIcmpStatisticsEx",2,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Statistics", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_ICMP_EX_XPSP1", 16512, IN },
-		{1, "Family", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-	}
-	},
 	{ "GetIfEntry",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
@@ -419,13 +376,13 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "GetIfEntry2",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IF_ROW2", 10816, IN },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IF_ROW2", 10816, UNK },
 	}
 	},
 	{ "GetIfStackTable",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Table", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MIB_IFSTACK_TABLE", 96, OUT },
 	}
 	},
@@ -439,13 +396,13 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "GetIfTable2",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Table", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MIB_IF_TABLE2", 10880, OUT },
 	}
 	},
 	{ "GetIfTable2Ex",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Level", NKT_DBOBJCLASS_Enumeration, "_MIB_IF_TABLE_LEVEL", 32, IN },
 		{1, "Table", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MIB_IF_TABLE2", 10880, OUT },
 	}
@@ -453,13 +410,13 @@ libcall_info_t IPHlpApi_info[] = {
 	{ "GetInterfaceInfo",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pIfTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_IP_INTERFACE_INFO", 2112, IN },
-		{1, "dwOutBufLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{0, "pIfTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_IP_INTERFACE_INFO", 2112, UNK },
+		{1, "dwOutBufLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "GetInvertedIfStackTable",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Table", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MIB_INVERTEDIFSTACK_TABLE", 96, OUT },
 	}
 	},
@@ -471,17 +428,9 @@ libcall_info_t IPHlpApi_info[] = {
 		{2, "bOrder", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 	}
 	},
-	{ "GetIpErrorString",3,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "ErrorCode", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "Buffer", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
-		{2, "Size", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
-	}
-	},
 	{ "GetIpForwardEntry2",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPFORWARD_ROW2", 832, INOUT },
 	}
 	},
@@ -495,99 +444,79 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "GetIpForwardTable2",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Family", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 		{1, "Table", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MIB_IPFORWARD_TABLE2", 896, OUT },
 	}
 	},
 	{ "GetIpInterfaceEntry",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPINTERFACE_ROW", 1344, INOUT },
 	}
 	},
 	{ "GetIpInterfaceTable",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Family", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 		{1, "Table", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MIB_IPINTERFACE_TABLE", 1408, OUT },
 	}
 	},
 	{ "GetIpNetEntry2",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPNET_ROW2", 704, INOUT },
 	}
 	},
 	{ "GetIpNetTable",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "IpNetTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPNETTABLE", 224, IN },
-		{1, "SizePointer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{2, "Order", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
+		{0, "IpNetTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPNETTABLE", 224, UNK },
+		{1, "SizePointer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{2, "Order", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "GetIpNetTable2",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Family", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 		{1, "Table", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MIB_IPNET_TABLE2", 768, OUT },
 	}
 	},
 	{ "GetIpPathEntry",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPPATH_ROW", 1088, INOUT },
 	}
 	},
 	{ "GetIpPathTable",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Family", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 		{1, "Table", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MIB_IPPATH_TABLE", 1152, OUT },
 	}
 	},
-	{ "GetIpStatistics",1,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Statistics", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPSTATS_LH", 736, IN },
-	}
-	},
-	{ "GetIpStatisticsEx",2,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Statistics", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPSTATS_LH", 736, IN },
-		{1, "Family", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-	}
-	},
 	{ "GetMulticastIpAddressEntry",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_MULTICASTIPADDRESS_ROW", 384, INOUT },
 	}
 	},
 	{ "GetMulticastIpAddressTable",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Family", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 		{1, "Table", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MIB_MULTICASTIPADDRESS_TABLE", 448, OUT },
 	}
 	},
 	{ "GetNetworkInformation",5,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "NetworkGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{1, "CompartmentId", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{2, "SiteId", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{3, "NetworkName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{4, "Length", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-	}
-	},
-	{ "GetNetworkParams",2,
-	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pFixedInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "FIXED_INFO_W2KSP1", 4672, OUT },
-		{1, "pOutBufLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{0, "NetworkGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, UNK },
+		{1, "CompartmentId", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{2, "SiteId", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{3, "NetworkName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{4, "Length", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "GetNumberOfInterfaces",1,
@@ -599,11 +528,11 @@ libcall_info_t IPHlpApi_info[] = {
 	{ "GetOwnerModuleFromPidAndInfo",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "ulPid", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "pInfo", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, IN },
-		{2, "Class", NKT_DBOBJCLASS_Enumeration, "_TCPIP_OWNER_MODULE_INFO_CLASS", 32, IN },
-		{3, "pBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{4, "pdwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{0, "ulPid", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{1, "pInfo", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, UNK },
+		{2, "Class", NKT_DBOBJCLASS_Enumeration, "_TCPIP_OWNER_MODULE_INFO_CLASS", 32, UNK },
+		{3, "pBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{4, "pdwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "GetOwnerModuleFromTcp6Entry",4,
@@ -611,7 +540,7 @@ libcall_info_t IPHlpApi_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "pTcpEntry", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCP6ROW_OWNER_MODULE", 1536, IN },
 		{1, "Class", NKT_DBOBJCLASS_Enumeration, "_TCPIP_OWNER_MODULE_INFO_CLASS", 32, IN },
-		{2, "pBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{2, "pBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 		{3, "pdwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 	}
 	},
@@ -620,7 +549,7 @@ libcall_info_t IPHlpApi_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "pTcpEntry", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCPROW_OWNER_MODULE", 1280, IN },
 		{1, "Class", NKT_DBOBJCLASS_Enumeration, "_TCPIP_OWNER_MODULE_INFO_CLASS", 32, IN },
-		{2, "pBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{2, "pBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 		{3, "pdwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 	}
 	},
@@ -629,7 +558,7 @@ libcall_info_t IPHlpApi_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "pUdpEntry", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_UDP6ROW_OWNER_MODULE", 1408, IN },
 		{1, "Class", NKT_DBOBJCLASS_Enumeration, "_TCPIP_OWNER_MODULE_INFO_CLASS", 32, IN },
-		{2, "pBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{2, "pBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 		{3, "pdwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 	}
 	},
@@ -638,48 +567,40 @@ libcall_info_t IPHlpApi_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "pUdpEntry", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_UDPROW_OWNER_MODULE", 1280, IN },
 		{1, "Class", NKT_DBOBJCLASS_Enumeration, "_TCPIP_OWNER_MODULE_INFO_CLASS", 32, IN },
-		{2, "pBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{2, "pBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 		{3, "pdwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
-	}
-	},
-	{ "GetPerAdapterInfo",3,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "IfIndex", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "pPerAdapterInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_IP_PER_ADAPTER_INFO_W2KSP1", 416, OUT },
-		{2, "pOutBufLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
 	}
 	},
 	{ "GetPerTcp6ConnectionEStats",11,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCP6ROW", 416, IN },
-		{1, "EstatsType", NKT_DBOBJCLASS_Enumeration, "TCP_ESTATS_TYPE", 32, IN },
+		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCP6ROW", 416, UNK },
+		{1, "EstatsType", NKT_DBOBJCLASS_Enumeration, "TCP_ESTATS_TYPE", 32, UNK },
 		{2, "Rw", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
-		{3, "RwVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "RwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{3, "RwVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{4, "RwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{5, "Ros", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
-		{6, "RosVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{7, "RosSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{6, "RosVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{7, "RosSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{8, "Rod", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
-		{9, "RodVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{10, "RodSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{9, "RodVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{10, "RodSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "GetPerTcpConnectionEStats",11,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCPROW_LH", 160, IN },
-		{1, "EstatsType", NKT_DBOBJCLASS_Enumeration, "TCP_ESTATS_TYPE", 32, IN },
+		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCPROW_LH", 160, UNK },
+		{1, "EstatsType", NKT_DBOBJCLASS_Enumeration, "TCP_ESTATS_TYPE", 32, UNK },
 		{2, "Rw", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
-		{3, "RwVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "RwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{3, "RwVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{4, "RwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{5, "Ros", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
-		{6, "RosVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{7, "RosSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{6, "RosVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{7, "RosSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{8, "Rod", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
-		{9, "RodVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{10, "RodSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{9, "RodVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{10, "RodSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "GetRTTAndHopCount",4,
@@ -694,57 +615,20 @@ libcall_info_t IPHlpApi_info[] = {
 	{ "GetSessionCompartmentId",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "SessionId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-	}
-	},
-	{ "GetTcp6Table",3,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TcpTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCP6TABLE", 448, OUT },
-		{1, "SizePointer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
-		{2, "Order", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
-	}
-	},
-	{ "GetTcp6Table2",3,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TcpTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCP6TABLE2", 512, OUT },
-		{1, "SizePointer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
-		{2, "Order", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
-	}
-	},
-	{ "GetTcpStatistics",1,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Statistics", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCPSTATS_LH", 480, IN },
-	}
-	},
-	{ "GetTcpStatisticsEx",2,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Statistics", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCPSTATS_LH", 480, IN },
-		{1, "Family", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "SessionId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "GetTcpTable",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TcpTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCPTABLE", 192, IN },
-		{1, "SizePointer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{2, "Order", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
-	}
-	},
-	{ "GetTcpTable2",3,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TcpTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCPTABLE2", 256, OUT },
-		{1, "SizePointer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
-		{2, "Order", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
+		{0, "TcpTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCPTABLE", 192, UNK },
+		{1, "SizePointer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{2, "Order", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "GetTeredoPort",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Port", NKT_DBFUNDTYPE_UnsignedWord | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
 	}
 	},
@@ -756,36 +640,23 @@ libcall_info_t IPHlpApi_info[] = {
 		{2, "Order", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 	}
 	},
-	{ "GetUdpStatistics",1,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Stats", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_UDPSTATS", 160, IN },
-	}
-	},
-	{ "GetUdpStatisticsEx",2,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Statistics", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_UDPSTATS", 160, IN },
-		{1, "Family", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-	}
-	},
 	{ "GetUdpTable",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "UdpTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_UDPTABLE", 96, IN },
-		{1, "SizePointer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{2, "Order", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
+		{0, "UdpTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_UDPTABLE", 96, UNK },
+		{1, "SizePointer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{2, "Order", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "GetUnicastIpAddressEntry",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_UNICASTIPADDRESS_ROW", 640, INOUT },
 	}
 	},
 	{ "GetUnicastIpAddressTable",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Family", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 		{1, "Table", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MIB_UNICASTIPADDRESS_TABLE", 704, OUT },
 	}
@@ -797,44 +668,15 @@ libcall_info_t IPHlpApi_info[] = {
 		{1, "dwOutBufLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
-	{ "Icmp6CreateFile",0,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-	}
-	},
-	{ "Icmp6ParseReplies",2,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "ReplyBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "ReplySize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-	}
-	},
-	{ "Icmp6SendEcho2",12,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "IcmpHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "Event", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "ApcRoutine", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
-		{3, "ApcContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{4, "SourceAddress", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "sockaddr_in6", 224, IN },
-		{5, "DestinationAddress", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "sockaddr_in6", 224, IN },
-		{6, "RequestData", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{7, "RequestSize", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{8, "RequestOptions", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "ip_option_information", 64, IN },
-		{9, "ReplyBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, OUT },
-		{10, "ReplySize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{11, "Timeout", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-	}
-	},
 	{ "IcmpCloseHandle",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "IcmpHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "IcmpHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "IcmpCreateFile",0,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
 	}
 	},
 	{ "IcmpParseReplies",2,
@@ -847,11 +689,11 @@ libcall_info_t IPHlpApi_info[] = {
 	{ "IcmpSendEcho",8,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "IcmpHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "IcmpHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "DestinationAddress", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "RequestData", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{3, "RequestSize", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{4, "RequestOptions", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "ip_option_information", 64, IN },
+		{4, "RequestOptions", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "ip_option_information", 128, IN },
 		{5, "ReplyBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, INOUT },
 		{6, "ReplySize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{7, "Timeout", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -860,34 +702,17 @@ libcall_info_t IPHlpApi_info[] = {
 	{ "IcmpSendEcho2",11,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "IcmpHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "Event", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "IcmpHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "Event", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{2, "ApcRoutine", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
 		{3, "ApcContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{4, "DestinationAddress", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{5, "RequestData", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{6, "RequestSize", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{7, "RequestOptions", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "ip_option_information", 64, IN },
+		{7, "RequestOptions", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "ip_option_information", 128, IN },
 		{8, "ReplyBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, OUT },
 		{9, "ReplySize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{10, "Timeout", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-	}
-	},
-	{ "IcmpSendEcho2Ex",12,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "IcmpHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "Event", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "ApcRoutine", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
-		{3, "ApcContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{4, "SourceAddress", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "DestinationAddress", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{6, "RequestData", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{7, "RequestSize", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{8, "RequestOptions", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "ip_option_information", 64, IN },
-		{9, "ReplyBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, OUT },
-		{10, "ReplySize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{11, "Timeout", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
 	{ "if_indextoname",2,
@@ -906,19 +731,19 @@ libcall_info_t IPHlpApi_info[] = {
 	{ "InitializeIpForwardEntry",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPFORWARD_ROW2", 832, IN },
+		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPFORWARD_ROW2", 832, UNK },
 	}
 	},
 	{ "InitializeIpInterfaceEntry",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPINTERFACE_ROW", 1344, IN },
+		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPINTERFACE_ROW", 1344, UNK },
 	}
 	},
 	{ "InitializeUnicastIpAddressEntry",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_UNICASTIPADDRESS_ROW", 640, IN },
+		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_UNICASTIPADDRESS_ROW", 640, UNK },
 	}
 	},
 	{ "IpReleaseAddress",1,
@@ -933,115 +758,81 @@ libcall_info_t IPHlpApi_info[] = {
 		{0, "AdapterInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_IP_ADAPTER_INDEX_MAP", 2080, IN },
 	}
 	},
-	{ "LookupPersistentTcpPortReservation",3,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "StartPort", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{1, "NumberOfPorts", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{2, "Token", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, IN },
-	}
-	},
-	{ "LookupPersistentUdpPortReservation",3,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "StartPort", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{1, "NumberOfPorts", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{2, "Token", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, IN },
-	}
-	},
-	{ "NhpAllocateAndGetInterfaceInfoFromStack",5,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "ppTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "ip_interface_name_info_w2ksp1", 352, IN },
-		{1, "pdwCount", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{2, "bOrder", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
-		{3, "hHeap", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-	}
-	},
 	{ "NotifyAddrChange",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Handle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{1, "overlapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 160, IN },
+		{0, "Handle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
+		{1, "overlapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 256, IN },
 	}
 	},
 	{ "NotifyIpInterfaceChange",5,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Family", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 		{1, "Callback", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
 		{2, "CallerContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{3, "InitialNotification", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, IN },
-		{4, "NotificationHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
+		{4, "NotificationHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, INOUT },
 	}
 	},
 	{ "NotifyRouteChange",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Handle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{1, "overlapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 160, IN },
+		{0, "Handle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
+		{1, "overlapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 256, IN },
 	}
 	},
 	{ "NotifyRouteChange2",5,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "AddressFamily", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "AddressFamily", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, UNK },
 		{1, "Callback", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
 		{2, "CallerContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{3, "InitialNotification", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, IN },
-		{4, "NotificationHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
+		{4, "NotificationHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, INOUT },
 	}
 	},
 	{ "NotifyStableUnicastIpAddressTable",5,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Family", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 		{1, "Table", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MIB_UNICASTIPADDRESS_TABLE", 704, INOUT },
 		{2, "CallerCallback", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
 		{3, "CallerContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{4, "NotificationHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
+		{4, "NotificationHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, INOUT },
 	}
 	},
 	{ "NotifyTeredoPortChange",4,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Callback", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
 		{1, "CallerContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{2, "InitialNotification", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, IN },
-		{3, "NotificationHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
+		{3, "NotificationHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, INOUT },
 	}
 	},
 	{ "NotifyUnicastIpAddressChange",5,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Family", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 		{1, "Callback", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
 		{2, "CallerContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{3, "InitialNotification", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, IN },
-		{4, "NotificationHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
+		{4, "NotificationHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, INOUT },
 	}
 	},
 	{ "ResolveIpNetEntry2",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPNET_ROW2", 704, INOUT },
 		{1, "SourceAddress", NKT_DBOBJCLASS_Union | NKT_DBOBJCLASS_Pointer, "_SOCKADDR_INET", 224, IN },
-	}
-	},
-	{ "ResolveNeighbor",3,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "NetworkAddress", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "sockaddr", 128, IN },
-		{1, "PhysicalAddress", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, OUT },
-		{2, "PhysicalAddressLength", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 	}
 	},
 	{ "RestoreMediaSense",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pOverlapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 160, IN },
-		{1, "lpdwEnableCount", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{0, "pOverlapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 256, UNK },
+		{1, "lpdwEnableCount", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "SendARP",4,
@@ -1055,8 +846,8 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "SetCurrentThreadCompartmentId",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "CompartmentId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "CompartmentId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "SetIfEntry",1,
@@ -1073,13 +864,13 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "SetIpForwardEntry2",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Route", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPFORWARD_ROW2", 832, IN },
 	}
 	},
 	{ "SetIpInterfaceEntry",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPINTERFACE_ROW", 1344, INOUT },
 	}
 	},
@@ -1091,21 +882,8 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "SetIpNetEntry2",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPNET_ROW2", 704, INOUT },
-	}
-	},
-	{ "SetIpStatistics",1,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pIpStats", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPSTATS_LH", 736, IN },
-	}
-	},
-	{ "SetIpStatisticsEx",2,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Statistics", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_IPSTATS_LH", 736, IN },
-		{1, "Family", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
 	{ "SetIpTTL",1,
@@ -1116,39 +894,39 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "SetNetworkInformation",3,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "NetworkGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{1, "CompartmentId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "NetworkName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "NetworkGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, UNK },
+		{1, "CompartmentId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{2, "NetworkName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 	}
 	},
 	{ "SetPerTcp6ConnectionEStats",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCP6ROW", 416, IN },
-		{1, "EstatsType", NKT_DBOBJCLASS_Enumeration, "TCP_ESTATS_TYPE", 32, IN },
-		{2, "Rw", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{3, "RwVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "RwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "Offset", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCP6ROW", 416, UNK },
+		{1, "EstatsType", NKT_DBOBJCLASS_Enumeration, "TCP_ESTATS_TYPE", 32, UNK },
+		{2, "Rw", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
+		{3, "RwVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{4, "RwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{5, "Offset", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "SetPerTcpConnectionEStats",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCPROW_LH", 160, IN },
-		{1, "EstatsType", NKT_DBOBJCLASS_Enumeration, "TCP_ESTATS_TYPE", 32, IN },
-		{2, "Rw", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{3, "RwVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "RwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "Offset", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_TCPROW_LH", 160, UNK },
+		{1, "EstatsType", NKT_DBOBJCLASS_Enumeration, "TCP_ESTATS_TYPE", 32, UNK },
+		{2, "Rw", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
+		{3, "RwVersion", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{4, "RwSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{5, "Offset", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "SetSessionCompartmentId",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "SessionId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "CompartmentId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "SessionId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{1, "CompartmentId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "SetTcpEntry",1,
@@ -1159,16 +937,18 @@ libcall_info_t IPHlpApi_info[] = {
 	},
 	{ "SetUnicastIpAddressEntry",1,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "Row", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_MIB_UNICASTIPADDRESS_ROW", 640, IN },
 	}
 	},
 	{ "UnenableRouter",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pOverlapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 160, IN },
+		{0, "pOverlapped", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OVERLAPPED", 256, UNK },
 		{1, "lpdwEnableCount", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
 };
+
+
 unsigned IPHlpApiarraySize = (sizeof(IPHlpApi_info) / sizeof(IPHlpApi_info[0]));

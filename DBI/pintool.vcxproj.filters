@@ -5,43 +5,7 @@
     <ClCompile Include="src\itree.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="src\prototypes\AdvAPI32.cpp">
-      <Filter>Source files\Prototypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prototypes\Crypt32.cpp">
-      <Filter>Source files\Prototypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prototypes\Gdi32.cpp">
-      <Filter>Source files\Prototypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prototypes\IPHlpApi.cpp">
-      <Filter>Source files\Prototypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prototypes\kernel32.cpp">
-      <Filter>Source files\Prototypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prototypes\kernelbase.cpp">
-      <Filter>Source files\Prototypes</Filter>
-    </ClCompile>
     <ClCompile Include="src\prototypes\namedconsts.cpp">
-      <Filter>Source files\Prototypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prototypes\Ole32.cpp">
-      <Filter>Source files\Prototypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prototypes\OleAut32.cpp">
-      <Filter>Source files\Prototypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prototypes\shell32.cpp">
-      <Filter>Source files\Prototypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prototypes\User32.cpp">
-      <Filter>Source files\Prototypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prototypes\WinInet.cpp">
-      <Filter>Source files\Prototypes</Filter>
-    </ClCompile>
-    <ClCompile Include="src\prototypes\WS2_32.cpp">
       <Filter>Source files\Prototypes</Filter>
     </ClCompile>
     <ClCompile Include="src\prototypes\prototypes.cpp">
@@ -92,6 +56,78 @@
     <ClCompile Include="src\sysprinter.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="src\prototypes\32bit\AdvAPI32.cpp">
+      <Filter>Source files\Prototypes\32 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\32bit\Crypt32.cpp">
+      <Filter>Source files\Prototypes\32 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\32bit\Gdi32.cpp">
+      <Filter>Source files\Prototypes\32 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\32bit\IPHlpApi.cpp">
+      <Filter>Source files\Prototypes\32 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\32bit\kernel32.cpp">
+      <Filter>Source files\Prototypes\32 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\32bit\kernelbase.cpp">
+      <Filter>Source files\Prototypes\32 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\32bit\Ole32.cpp">
+      <Filter>Source files\Prototypes\32 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\32bit\OleAut32.cpp">
+      <Filter>Source files\Prototypes\32 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\32bit\shell32.cpp">
+      <Filter>Source files\Prototypes\32 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\32bit\User32.cpp">
+      <Filter>Source files\Prototypes\32 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\32bit\WinInet.cpp">
+      <Filter>Source files\Prototypes\32 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\32bit\WS2_32.cpp">
+      <Filter>Source files\Prototypes\32 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\64bit\AdvAPI32.cpp">
+      <Filter>Source files\Prototypes\64 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\64bit\Crypt32.cpp">
+      <Filter>Source files\Prototypes\64 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\64bit\Gdi32.cpp">
+      <Filter>Source files\Prototypes\64 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\64bit\IPHlpApi.cpp">
+      <Filter>Source files\Prototypes\64 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\64bit\kernel32.cpp">
+      <Filter>Source files\Prototypes\64 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\64bit\kernelbase.cpp">
+      <Filter>Source files\Prototypes\64 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\64bit\Ole32.cpp">
+      <Filter>Source files\Prototypes\64 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\64bit\OleAut32.cpp">
+      <Filter>Source files\Prototypes\64 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\64bit\shell32.cpp">
+      <Filter>Source files\Prototypes\64 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\64bit\User32.cpp">
+      <Filter>Source files\Prototypes\64 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\64bit\WinInet.cpp">
+      <Filter>Source files\Prototypes\64 bit</Filter>
+    </ClCompile>
+    <ClCompile Include="src\prototypes\64bit\WS2_32.cpp">
+      <Filter>Source files\Prototypes\64 bit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source files">
@@ -117,6 +153,12 @@
     </Filter>
     <Filter Include="Header files\Syscalls">
       <UniqueIdentifier>{9b8d3b6f-70a3-4860-92a2-950813ca986e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Prototypes\32 bit">
+      <UniqueIdentifier>{28dc375d-ab5b-4522-8835-820895376b44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source files\Prototypes\64 bit">
+      <UniqueIdentifier>{8b707a1c-1fa1-4065-b255-6bead0226bc3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

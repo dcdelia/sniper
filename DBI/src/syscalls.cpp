@@ -18,6 +18,14 @@ DR::syscall_info_t* syscallIDtoInfo[MAXSYSCALLS] = { 0 };
 
 static ADDRINT ntdllImgStart, ntdllImgEnd;
 
+
+#ifdef __LP64__  /* code for handling return stubs from 64-bit syscalls */
+
+// TODO see if we need a handler for int 2e since we are fine with sysenter
+// seems a special case https://reverseengineering.stackexchange.com/a/19337
+
+#else /* code for handling return stubs from 32-bit syscalls */
+
 static W::BOOL isWow64;
 
 bool checkCallSiteNTDLLWin32(itreenode_t* node, ADDRINT ESP) {
@@ -33,7 +41,7 @@ bool checkCallSiteNTDLLWin32(itreenode_t* node, ADDRINT ESP) {
 	if (!((bytes[0] == 0xC2 && bytes[2] == 0x00) || bytes[0] == 0xC3)) {
 		mycerr << "Didn't meet a retN or ret but those instead: " <<
 			std::hex << (ADDRINT)bytes[0] << " " << (ADDRINT)bytes[1] <<
-			" " << (ADDRINT)bytes[2] << " for" << addr << std::endl;
+			" " << (ADDRINT)bytes[2] << " for " << addr << std::endl;
 		ASSERT(false, "Check implementation for NTDLL call sites");
 		return false;
 	}
@@ -71,14 +79,16 @@ bool checkCallSiteNTDLLWow64(itreenode_t* node, ADDRINT ESP){
 		if (!(bytes[0] == 0x83 && bytes[1] == 0xC4 && bytes[2] == 0x04)) {
 			mycerr << "Didn't meet an add esp, 4 but those instead: " <<
 				std::hex << (ADDRINT)bytes[0] << " " << (ADDRINT)bytes[1] <<
-				" " << (ADDRINT)bytes[2] << " for" << addr << std::endl;
+				" " << (ADDRINT)bytes[2] << " for " << addr << std::endl;
 			ASSERT(false, "Check implementation for WoW64 syscall returns");
+			return false;
 		}
 		if (!(bytes[0] == 0xC2 || bytes[0] == 0xC3)) { // TODO also byte[5] == 0 for C3?
 			mycerr << "Didn't meet a retn [??] but those instead: " <<
 				std::hex << (ADDRINT)bytes[3] << " " << (ADDRINT)bytes[4] <<
-				" " << (ADDRINT)bytes[5] << " for" << addr << std::endl;
+				" " << (ADDRINT)bytes[5] << " for " << addr << std::endl;
 			ASSERT(false, "Check implementation for WoW64 syscall returns");
+			return false;
 		}
 		// the RA for the caller will be at ESP+4
 		ra = *((ADDRINT*)ESP + 1);
@@ -95,6 +105,9 @@ bool checkCallSiteNTDLLWow64(itreenode_t* node, ADDRINT ESP){
 	
 	return true;
 }
+
+#endif /* end of code for syscall return stubs */
+
 
 inline VOID retrieveSyscallArgs(ADDRINT number, syscallinfo &scinfo, CONTEXT *ctx, SYSCALL_STANDARD std, tlsinfo *tdata) {
 #if 1
@@ -144,7 +157,7 @@ inline VOID retrieveSyscallArgs(ADDRINT number, syscallinfo &scinfo, CONTEXT *ct
 	if (TEST(SYSINFO_SECONDARY_TABLE, info->flags)) {
 		mycout << "PROCESSING OF SECONDARY TABLE NEEDED" << std::endl;
 
-		uint code;
+		int code;
 		int arr_size;
 
 		if (info->arg_count < 1) {
@@ -158,10 +171,10 @@ inline VOID retrieveSyscallArgs(ADDRINT number, syscallinfo &scinfo, CONTEXT *ct
 		* other table).
 		*/
 
-		code = PIN_GetSyscallArgument(ctx, std, info->arg[0].param);
+		code = (int)PIN_GetSyscallArgument(ctx, std, info->arg[0].param);
 		arr_size = (info->num).secondary;
 
-		if (code >= arr_size) { // TODO check what to do for cast warning
+		if (code >= arr_size) {
 			mycerr << "Code for secondary table out of bounds" << std::endl;
 			scinfo.watched = false;
 			return;
@@ -172,9 +185,9 @@ inline VOID retrieveSyscallArgs(ADDRINT number, syscallinfo &scinfo, CONTEXT *ct
 	}
 
 	scinfo.sysinfo = info;
-	size_t numArgs = info->arg_count, last = -1;
+	uint32_t numArgs = info->arg_count, last = -1;
 	// i is the ordinal idx, j iterates over the array
-	for (size_t i = 0, j = 0; i < numArgs; ) {
+	for (uint32_t i = 0, j = 0; i < numArgs; ) {
 		DR::sysinfo_arg_t* arg = &info->arg[j];
 		if (arg->param == last) {
 			j++;
@@ -206,9 +219,18 @@ VOID TRACER_SyscallEntry(THREADID tid, CONTEXT *ctx, SYSCALL_STANDARD std) {
 
 	ADDRINT ESP = PIN_GetContextReg(ctx, REG_STACK_PTR);
 	itreenode_t* node = itree_search(intervalTree, *(ADDRINT*)ESP);
-	std::string &dllName = *(std::string*)(node->data);
 	if (node) {
+		std::string &dllName = *(std::string*)(node->data);
 		//mycout << "Leaving out syscall since caller is in " << node->dll_name << " at " << *(ADDRINT*)ESP << std::endl;
+		#ifdef __LP64__
+		// easy on 64-bit (TODO check with int 2e)
+		uint16_t instr = *(uint16_t*)PIN_GetContextReg(ctx, REG_INST_PTR);
+		ASSERT(instr != 0x2ecd, "Unsupported int 2e case for syscall"); // TODO see if stackwalk needed
+		BaseStats::sitesForIntSysCalls[dllName]++;
+		LOG_TIME_EXIT(BaseStats::entrySysDiscard);
+		return;
+		#else
+		// tricky as on 32-bit we have to do some stack walking
 		if (isWow64) {
 			if (!checkCallSiteNTDLLWow64(node, ESP)) {
 				BaseStats::sitesForIntSysCalls[dllName]++;
@@ -223,7 +245,7 @@ VOID TRACER_SyscallEntry(THREADID tid, CONTEXT *ctx, SYSCALL_STANDARD std) {
 				return;
 			}
 		}
-		
+		#endif
 	}
 
 	// fetch TLS
@@ -261,7 +283,7 @@ VOID TRACER_SyscallExit(THREADID tid, CONTEXT *ctx, SYSCALL_STANDARD std) {
 	DR::syscall_info_t* info = (DR::syscall_info_t*)scinfo.sysinfo;
 
 	//--Check error number to determine whether system call has succeeded or not
-	int errnumber = PIN_GetSyscallErrno(ctx, std);
+	ADDRINT errnumber = PIN_GetSyscallErrno(ctx, std);
 	if (!errnumber) {
 		LOG_BISHOP(tls, "\t%u \tsucceeded -- ntdll!%s =>\n", tls->callnumber, info->name);
 	}
@@ -309,7 +331,9 @@ typedef NTSYSAPI W::PIMAGE_NT_HEADERS NTAPI _RtlImageNtHeader(
 );
 
 VOID TRACER_SyscallInit() {
+#ifndef __LP64__
 	W::IsWow64Process(W::GetCurrentProcess(), &isWow64); // TODO use different code
+#endif
 
 	W::HMODULE image = W::GetModuleHandle("ntdll");
 

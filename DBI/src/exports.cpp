@@ -18,8 +18,13 @@ namespace W {
 #define GetImgDirEntrySize( pNTHdr, IDE ) \
 	(pNTHdr->OptionalHeader.DataDirectory[IDE].Size)
 
+#ifdef __LP64__
+W::PIMAGE_SECTION_HEADER peGetEnclosingSectionHeader(W::DWORD rva, W::PIMAGE_NT_HEADERS64 pNTHeader);
+W::LPVOID peGetPtrFromRVA(W::DWORD rva, W::PIMAGE_NT_HEADERS64 pNTHeader, W::PBYTE imageBase);
+#else
 W::PIMAGE_SECTION_HEADER peGetEnclosingSectionHeader(W::DWORD rva, W::PIMAGE_NT_HEADERS32 pNTHeader);
 W::LPVOID peGetPtrFromRVA(W::DWORD rva, W::PIMAGE_NT_HEADERS32 pNTHeader, W::PBYTE imageBase);
+#endif
 
 // TODO update with code from DeadShot project
 VOID parseExportTable(const char* dllPath, ADDRINT baseAddress, dllEntryList &entries) {
@@ -31,13 +36,13 @@ VOID parseExportTable(const char* dllPath, ADDRINT baseAddress, dllEntryList &en
 	W::PIMAGE_DOS_HEADER dosHeader = (W::PIMAGE_DOS_HEADER)pImageBase;
 
 	// get pointers to 32 and 64 bit versions of the header.
+#ifdef __LP64__
+	W::PIMAGE_NT_HEADERS64 pNTHeader = MakePtr(W::PIMAGE_NT_HEADERS64, dosHeader, dosHeader->e_lfanew);
+#else
 	W::PIMAGE_NT_HEADERS32 pNTHeader = MakePtr(W::PIMAGE_NT_HEADERS32, dosHeader, dosHeader->e_lfanew);
-	//W::PIMAGE_NT_HEADERS64 pNTHeader64 = (W::PIMAGE_NT_HEADERS64)pNTHeader;
+	ASSERT(pNTHeader->OptionalHeader.Magic != IMAGE_NT_OPTIONAL_HDR64_MAGIC, "64-bit header unsupported");
+#endif
 
-	if (pNTHeader->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR64_MAGIC) {
-		mycerr << "64-BIT HEADER UNSUPPORTED YET" << std::endl;
-		return;
-	}
 
 	W::PIMAGE_EXPORT_DIRECTORY pExportDir;
 	W::PIMAGE_SECTION_HEADER header;
@@ -105,7 +110,7 @@ VOID parseExportTable(const char* dllPath, ADDRINT baseAddress, dllEntryList &en
 	W::CloseHandle(hSrcFile);
 }
 
-// macros adapted from WinNT.h for W namespace
+// macros adapted from WinNT.h for W namespace (will auto-select 32/64-bit IMAGE_NT_HEADERS)
 #define MYFIELD_OFFSET(type, field)    ((W::LONG)(W::LONG_PTR)&(((type *)0)->field))
 #define MYIMAGE_FIRST_SECTION( ntheader ) ((W::PIMAGE_SECTION_HEADER)        \
     ((W::ULONG_PTR)(ntheader) +                                            \
@@ -113,7 +118,11 @@ VOID parseExportTable(const char* dllPath, ADDRINT baseAddress, dllEntryList &en
      ((ntheader))->FileHeader.SizeOfOptionalHeader   \
     ))
 
+#ifdef __LP64__
+W::PIMAGE_SECTION_HEADER peGetEnclosingSectionHeader(W::DWORD rva, W::PIMAGE_NT_HEADERS64 pNTHeader) {
+#else
 W::PIMAGE_SECTION_HEADER peGetEnclosingSectionHeader(W::DWORD rva, W::PIMAGE_NT_HEADERS32 pNTHeader) {
+#endif
 	W::PIMAGE_SECTION_HEADER section = MYIMAGE_FIRST_SECTION(pNTHeader);
 	unsigned i;
 
@@ -130,7 +139,11 @@ W::PIMAGE_SECTION_HEADER peGetEnclosingSectionHeader(W::DWORD rva, W::PIMAGE_NT_
 	return 0;
 }
 
+#ifdef __LP64__
+W::LPVOID peGetPtrFromRVA(W::DWORD rva, W::PIMAGE_NT_HEADERS64 pNTHeader, W::PBYTE imageBase) {
+#else
 W::LPVOID peGetPtrFromRVA(W::DWORD rva, W::PIMAGE_NT_HEADERS32 pNTHeader, W::PBYTE imageBase) {
+#endif
 	W::PIMAGE_SECTION_HEADER pSectionHdr;
 	INT delta;
 

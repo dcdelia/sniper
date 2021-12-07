@@ -131,12 +131,12 @@ bool itree_verify(itreenode_t *tree) {
 }
 
 
-void itree_print(itreenode_t *node, ADDRINT lvl) {
+void itree_print(itreenode_t *node, uint32_t lvl) {
 	if (!node)
 		return;
 
-	fprintf(stderr, "Level: %u , Range: [0x%0x, 0x%0x]\n",
-		lvl, node->start_addr, node->end_addr);
+	fprintf(stderr, "Level: %u , Range: [%p, %p]\n",
+		lvl, (void*)node->start_addr, (void*)node->end_addr);
 	itree_print(node->left, lvl + 1);
 	itree_print(node->right, lvl + 1);
 

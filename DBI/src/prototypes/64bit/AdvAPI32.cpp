@@ -2,7 +2,7 @@
 // of the Deviare parser from the PyREBox project. Credits:
 // https://github.com/Cisco-Talos/pyrebox/blob/master/mw_monitor2/deviare_db_parser.py
 
-#include "pyrebox.h"
+#include "../pyrebox.h"
 
 libcall_info_t AdvAPI32_info[] = {
 	{ "AbortSystemShutdownA",1,
@@ -21,7 +21,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "pSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "ClientToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{1, "ClientToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{2, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
 		{4, "PrivilegeSet", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PRIVILEGE_SET", 160, OUT },
@@ -67,9 +67,9 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "pSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{1, "PrincipalSelfSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{3, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 64, INOUT },
+		{4, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 128, INOUT },
 		{5, "ObjectTypeListLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{6, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, OUT },
 		{7, "PrivilegeSet", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PRIVILEGE_SET", 160, OUT },
@@ -85,12 +85,12 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "HandleId", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{2, "ObjectTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{3, "ObjectName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{4, "SecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{4, "SecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 		{5, "PrincipalSelfSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{6, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{7, "AuditType", NKT_DBOBJCLASS_Enumeration, "_AUDIT_EVENT_TYPE", 32, IN },
 		{8, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{9, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 64, INOUT },
+		{9, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 128, INOUT },
 		{10, "ObjectTypeListLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{11, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
 		{12, "ObjectCreation", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
@@ -106,12 +106,12 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "HandleId", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{2, "ObjectTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{3, "ObjectName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{4, "SecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{4, "SecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 		{5, "PrincipalSelfSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{6, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{7, "AuditType", NKT_DBOBJCLASS_Enumeration, "_AUDIT_EVENT_TYPE", 32, IN },
 		{8, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{9, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 64, INOUT },
+		{9, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 128, INOUT },
 		{10, "ObjectTypeListLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{11, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
 		{12, "ObjectCreation", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
@@ -125,9 +125,9 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "pSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{1, "PrincipalSelfSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{3, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 64, INOUT },
+		{4, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 128, INOUT },
 		{5, "ObjectTypeListLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{6, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, OUT },
 		{7, "PrivilegeSet", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PRIVILEGE_SET", 160, OUT },
@@ -143,12 +143,12 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "HandleId", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{2, "ObjectTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{3, "ObjectName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{4, "SecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{4, "SecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 		{5, "PrincipalSelfSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{6, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{7, "AuditType", NKT_DBOBJCLASS_Enumeration, "_AUDIT_EVENT_TYPE", 32, IN },
 		{8, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{9, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 64, INOUT },
+		{9, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 128, INOUT },
 		{10, "ObjectTypeListLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{11, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
 		{12, "ObjectCreation", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
@@ -162,15 +162,15 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "SubsystemName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "HandleId", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{3, "ObjectTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{4, "ObjectName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{5, "SecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{5, "SecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 		{6, "PrincipalSelfSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{7, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{8, "AuditType", NKT_DBOBJCLASS_Enumeration, "_AUDIT_EVENT_TYPE", 32, IN },
 		{9, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{10, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 64, INOUT },
+		{10, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 128, INOUT },
 		{11, "ObjectTypeListLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{12, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
 		{13, "ObjectCreation", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
@@ -184,19 +184,19 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "SubsystemName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "HandleId", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{3, "ObjectTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{4, "ObjectName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{5, "SecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{5, "SecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 		{6, "PrincipalSelfSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{7, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{8, "AuditType", NKT_DBOBJCLASS_Enumeration, "_AUDIT_EVENT_TYPE", 32, IN },
 		{9, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{10, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 64, INOUT },
+		{10, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 128, INOUT },
 		{11, "ObjectTypeListLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{12, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
 		{13, "ObjectCreation", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
-		{14, "GrantedAccessList", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{14, "GrantedAccessList", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{15, "AccessStatusList", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{16, "pfGenerateOnClose", NKT_DBFUNDTYPE_SignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
@@ -208,16 +208,16 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "HandleId", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{2, "ObjectTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{3, "ObjectName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{4, "SecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{4, "SecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 		{5, "PrincipalSelfSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{6, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{7, "AuditType", NKT_DBOBJCLASS_Enumeration, "_AUDIT_EVENT_TYPE", 32, IN },
 		{8, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{9, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 64, INOUT },
+		{9, "ObjectTypeList", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_TYPE_LIST", 128, INOUT },
 		{10, "ObjectTypeListLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{11, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
 		{12, "ObjectCreation", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
-		{13, "GrantedAccessList", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{13, "GrantedAccessList", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{14, "AccessStatusList", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{15, "pfGenerateOnClose", NKT_DBFUNDTYPE_SignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
@@ -354,28 +354,21 @@ libcall_info_t AdvAPI32_info[] = {
 		{4, "pLabelSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 	}
 	},
-	{ "AddUsersToEncryptedFile",2,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "lpFileName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "pEncryptionCertificates", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENCRYPTION_CERTIFICATE_LIST", 64, IN },
-	}
-	},
 	{ "AdjustTokenGroups",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "ResetToDefault", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
-		{2, "NewState", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TOKEN_GROUPS", 96, IN },
+		{2, "NewState", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TOKEN_GROUPS", 192, IN },
 		{3, "BufferLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "PreviousState", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TOKEN_GROUPS", 96, OUT },
+		{4, "PreviousState", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TOKEN_GROUPS", 192, OUT },
 		{5, "ReturnLength", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
 	{ "AdjustTokenPrivileges",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "DisableAllPrivileges", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 		{2, "NewState", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TOKEN_PRIVILEGES", 128, IN },
 		{3, "BufferLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -388,14 +381,14 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "pIdentifierAuthority", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SID_IDENTIFIER_AUTHORITY", 48, IN },
 		{1, "nSubAuthorityCount", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, IN },
-		{2, "nSubAuthority0", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "nSubAuthority1", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "nSubAuthority2", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "nSubAuthority3", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{6, "nSubAuthority4", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{7, "nSubAuthority5", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{8, "nSubAuthority6", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{9, "nSubAuthority7", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "nSubAuthority0", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{3, "nSubAuthority1", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{4, "nSubAuthority2", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{5, "nSubAuthority3", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{6, "nSubAuthority4", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{7, "nSubAuthority5", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{8, "nSubAuthority6", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{9, "nSubAuthority7", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{10, "pSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, OUT },
 	}
 	},
@@ -424,16 +417,16 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
 		{0, "pSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{1, "pSubCategoryGuids", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{2, "dwPolicyCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "dwPolicyCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{3, "ppAuditPolicy", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_AUDIT_POLICY_INFORMATION", 288, OUT },
 	}
 	},
 	{ "AuditComputeEffectivePolicyByToken",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
-		{0, "hTokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hTokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "pSubCategoryGuids", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{2, "dwPolicyCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "dwPolicyCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{3, "ppAuditPolicy", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_AUDIT_POLICY_INFORMATION", 288, OUT },
 	}
 	},
@@ -441,13 +434,13 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
 		{0, "ppAuditCategoriesArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_GUID", 128, OUT },
-		{1, "pdwCountReturned", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{1, "pdwCountReturned", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "AuditEnumeratePerUserPolicy",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
-		{0, "ppAuditSidArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_POLICY_AUDIT_SID_ARRAY", 64, OUT },
+		{0, "ppAuditSidArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_POLICY_AUDIT_SID_ARRAY", 128, OUT },
 	}
 	},
 	{ "AuditEnumerateSubCategories",4,
@@ -456,13 +449,13 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "pAuditCategoryGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
 		{1, "bRetrieveAllSubCategories", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, IN },
 		{2, "ppAuditSubCategoriesArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_GUID", 128, OUT },
-		{3, "pdwCountReturned", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{3, "pdwCountReturned", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "AuditFree",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "Buffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{0, "Buffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "AuditLookupCategoryGuidFromCategoryId",2,
@@ -510,15 +503,15 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "AuditQueryGlobalSaclA",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
-		{0, "ObjectTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{1, "Acl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_ACL", 64, IN },
+		{0, "ObjectTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
+		{1, "Acl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_ACL", 64, UNK },
 	}
 	},
 	{ "AuditQueryGlobalSaclW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
-		{0, "ObjectTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "Acl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_ACL", 64, IN },
+		{0, "ObjectTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{1, "Acl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_ACL", 64, UNK },
 	}
 	},
 	{ "AuditQueryPerUserPolicy",4,
@@ -526,7 +519,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
 		{0, "pSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{1, "pSubCategoryGuids", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{2, "dwPolicyCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "dwPolicyCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{3, "ppAuditPolicy", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_AUDIT_POLICY_INFORMATION", 288, OUT },
 	}
 	},
@@ -541,22 +534,22 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
 		{0, "pSubCategoryGuids", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{1, "dwPolicyCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{1, "dwPolicyCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{2, "ppAuditPolicy", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_AUDIT_POLICY_INFORMATION", 288, OUT },
 	}
 	},
 	{ "AuditSetGlobalSaclA",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
-		{0, "ObjectTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{1, "Acl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
+		{0, "ObjectTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
+		{1, "Acl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, UNK },
 	}
 	},
 	{ "AuditSetGlobalSaclW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
-		{0, "ObjectTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "Acl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
+		{0, "ObjectTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{1, "Acl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, UNK },
 	}
 	},
 	{ "AuditSetPerUserPolicy",3,
@@ -564,7 +557,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
 		{0, "pSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{1, "pAuditPolicy", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_AUDIT_POLICY_INFORMATION", 288, IN },
-		{2, "dwPolicyCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "dwPolicyCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "AuditSetSecurity",2,
@@ -578,27 +571,27 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
 		{0, "pAuditPolicy", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_AUDIT_POLICY_INFORMATION", 288, IN },
-		{1, "dwPolicyCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{1, "dwPolicyCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "BackupEventLogA",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpBackupFileName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 	}
 	},
 	{ "BackupEventLogW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpBackupFileName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 	}
 	},
 	{ "BuildExplicitAccessWithNameA",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pExplicitAccess", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_A", 256, INOUT },
+		{0, "pExplicitAccess", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_A", 384, INOUT },
 		{1, "pTrusteeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "AccessPermissions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "AccessMode", NKT_DBOBJCLASS_Enumeration, "_ACCESS_MODE", 32, IN },
@@ -608,7 +601,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "BuildExplicitAccessWithNameW",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pExplicitAccess", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_W", 256, INOUT },
+		{0, "pExplicitAccess", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_W", 384, INOUT },
 		{1, "pTrusteeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "AccessPermissions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "AccessMode", NKT_DBOBJCLASS_Enumeration, "_ACCESS_MODE", 32, IN },
@@ -618,48 +611,48 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "BuildImpersonateExplicitAccessWithNameA",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pExplicitAccess", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_A", 256, IN },
-		{1, "pTrusteeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
-		{3, "AccessPermissions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "AccessMode", NKT_DBOBJCLASS_Enumeration, "_ACCESS_MODE", 32, IN },
-		{5, "Inheritance", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "pExplicitAccess", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_A", 384, UNK },
+		{1, "pTrusteeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
+		{2, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, UNK },
+		{3, "AccessPermissions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{4, "AccessMode", NKT_DBOBJCLASS_Enumeration, "_ACCESS_MODE", 32, UNK },
+		{5, "Inheritance", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "BuildImpersonateExplicitAccessWithNameW",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pExplicitAccess", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_W", 256, IN },
-		{1, "pTrusteeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
-		{3, "AccessPermissions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "AccessMode", NKT_DBOBJCLASS_Enumeration, "_ACCESS_MODE", 32, IN },
-		{5, "Inheritance", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "pExplicitAccess", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_W", 384, UNK },
+		{1, "pTrusteeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{2, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, UNK },
+		{3, "AccessPermissions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{4, "AccessMode", NKT_DBOBJCLASS_Enumeration, "_ACCESS_MODE", 32, UNK },
+		{5, "Inheritance", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "BuildImpersonateTrusteeA",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
-		{1, "pImpersonateTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, UNK },
+		{1, "pImpersonateTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, UNK },
 	}
 	},
 	{ "BuildImpersonateTrusteeW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
-		{1, "pImpersonateTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, UNK },
+		{1, "pImpersonateTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, UNK },
 	}
 	},
 	{ "BuildSecurityDescriptorA",9,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pOwner", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
-		{1, "pGroup", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
+		{0, "pOwner", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, IN },
+		{1, "pGroup", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, IN },
 		{2, "cCountOfAccessEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "pListOfAccessEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_A", 256, IN },
+		{3, "pListOfAccessEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_A", 384, IN },
 		{4, "cCountOfAuditEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "pListOfAuditEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_A", 256, IN },
+		{5, "pListOfAuditEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_A", 384, IN },
 		{6, "pOldSD", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{7, "pSizeNewSD", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
 		{8, "pNewSD", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, IN },
@@ -668,12 +661,12 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "BuildSecurityDescriptorW",9,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pOwner", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
-		{1, "pGroup", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
+		{0, "pOwner", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, IN },
+		{1, "pGroup", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, IN },
 		{2, "cCountOfAccessEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "pListOfAccessEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_W", 256, IN },
+		{3, "pListOfAccessEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_W", 384, IN },
 		{4, "cCountOfAuditEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "pListOfAuditEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_W", 256, IN },
+		{5, "pListOfAuditEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_W", 384, IN },
 		{6, "pOldSD", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{7, "pSizeNewSD", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
 		{8, "pNewSD", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, IN },
@@ -682,77 +675,77 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "BuildTrusteeWithNameA",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
-		{1, "pName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, UNK },
+		{1, "pName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 	}
 	},
 	{ "BuildTrusteeWithNameW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
-		{1, "pName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, UNK },
+		{1, "pName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 	}
 	},
 	{ "BuildTrusteeWithObjectsAndNameA",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
-		{1, "pObjName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECTS_AND_NAME_A", 160, IN },
-		{2, "ObjectType", NKT_DBOBJCLASS_Enumeration, "_SE_OBJECT_TYPE", 32, IN },
-		{3, "ObjectTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{4, "InheritedObjectTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{5, "Name", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, UNK },
+		{1, "pObjName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECTS_AND_NAME_A", 256, UNK },
+		{2, "ObjectType", NKT_DBOBJCLASS_Enumeration, "_SE_OBJECT_TYPE", 32, UNK },
+		{3, "ObjectTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
+		{4, "InheritedObjectTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
+		{5, "Name", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 	}
 	},
 	{ "BuildTrusteeWithObjectsAndNameW",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
-		{1, "pObjName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECTS_AND_NAME_W", 160, IN },
-		{2, "ObjectType", NKT_DBOBJCLASS_Enumeration, "_SE_OBJECT_TYPE", 32, IN },
-		{3, "ObjectTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{4, "InheritedObjectTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{5, "Name", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, UNK },
+		{1, "pObjName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECTS_AND_NAME_W", 256, UNK },
+		{2, "ObjectType", NKT_DBOBJCLASS_Enumeration, "_SE_OBJECT_TYPE", 32, UNK },
+		{3, "ObjectTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{4, "InheritedObjectTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{5, "Name", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 	}
 	},
 	{ "BuildTrusteeWithObjectsAndSidA",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
-		{1, "pObjSid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECTS_AND_SID", 320, IN },
-		{2, "pObjectGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{3, "pInheritedObjectGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{4, "pSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, UNK },
+		{1, "pObjSid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECTS_AND_SID", 384, UNK },
+		{2, "pObjectGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, UNK },
+		{3, "pInheritedObjectGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, UNK },
+		{4, "pSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "BuildTrusteeWithObjectsAndSidW",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
-		{1, "pObjSid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECTS_AND_SID", 320, IN },
-		{2, "pObjectGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{3, "pInheritedObjectGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{4, "pSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, UNK },
+		{1, "pObjSid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECTS_AND_SID", 384, UNK },
+		{2, "pObjectGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, UNK },
+		{3, "pInheritedObjectGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, UNK },
+		{4, "pSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "BuildTrusteeWithSidA",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, INOUT },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, INOUT },
 		{1, "pSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 	}
 	},
 	{ "BuildTrusteeWithSidW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, INOUT },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, INOUT },
 		{1, "pSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 	}
 	},
 	{ "ChangeServiceConfig2A",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwInfoLevel", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpInfo", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 	}
@@ -760,7 +753,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "ChangeServiceConfig2W",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwInfoLevel", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpInfo", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 	}
@@ -768,7 +761,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "ChangeServiceConfigA",11,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwServiceType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "dwStartType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "dwErrorControl", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -784,7 +777,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "ChangeServiceConfigW",11,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwServiceType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "dwStartType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "dwErrorControl", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -800,7 +793,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CheckTokenMembership",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "SidToCheck", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{2, "IsMember", NKT_DBFUNDTYPE_SignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
@@ -808,39 +801,39 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "ClearEventLogA",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpBackupFileName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 	}
 	},
 	{ "ClearEventLogW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpBackupFileName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 	}
 	},
 	{ "CloseEncryptedFileRaw",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pvContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{0, "pvContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "CloseEventLog",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, INOUT },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, INOUT },
 	}
 	},
 	{ "CloseServiceHandle",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hSCObject", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hSCObject", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "CloseThreadWaitChainSession",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "WctHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{0, "WctHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "CloseTrace",1,
@@ -852,42 +845,24 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CommandLineFromMsiDescriptor",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Descriptor", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "CommandLine", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "CommandLineLength", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{0, "Descriptor", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{1, "CommandLine", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{2, "CommandLineLength", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "ControlService",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwControl", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpServiceStatus", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SERVICE_STATUS", 224, OUT },
-	}
-	},
-	{ "ControlServiceExA",4,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "dwControl", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "dwInfoLevel", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "pControlParams", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, INOUT },
-	}
-	},
-	{ "ControlServiceExW",4,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "dwControl", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "dwInfoLevel", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "pControlParams", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, INOUT },
 	}
 	},
 	{ "ControlTraceA",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
-		{1, "InstanceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "InstanceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 		{2, "Properties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_PROPERTIES", 960, INOUT },
 		{3, "ControlCode", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
@@ -895,8 +870,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "ControlTraceW",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
-		{1, "InstanceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "InstanceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{2, "Properties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_PROPERTIES", 960, INOUT },
 		{3, "ControlCode", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
@@ -993,7 +968,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "CreatorDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{2, "NewDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, OUT },
 		{3, "IsDirectoryObject", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
-		{4, "Token", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{4, "Token", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{5, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
 	}
 	},
@@ -1006,7 +981,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{3, "ObjectType", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
 		{4, "IsContainerObject", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 		{5, "AutoInheritFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{6, "Token", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{6, "Token", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{7, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
 	}
 	},
@@ -1020,40 +995,40 @@ libcall_info_t AdvAPI32_info[] = {
 		{4, "GuidCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{5, "IsContainerObject", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 		{6, "AutoInheritFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{7, "Token", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{7, "Token", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{8, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
 	}
 	},
 	{ "CreateProcessAsUserA",11,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpApplicationName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "lpCommandLine", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, INOUT },
-		{3, "lpProcessAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
-		{4, "lpThreadAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
+		{3, "lpProcessAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 192, IN },
+		{4, "lpThreadAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 192, IN },
 		{5, "bInheritHandles", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 		{6, "dwCreationFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{7, "lpEnvironment", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{8, "lpCurrentDirectory", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{9, "lpStartupInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_STARTUPINFOA", 544, IN },
-		{10, "lpProcessInformation", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PROCESS_INFORMATION", 128, OUT },
+		{9, "lpStartupInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_STARTUPINFOA", 832, IN },
+		{10, "lpProcessInformation", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PROCESS_INFORMATION", 192, OUT },
 	}
 	},
 	{ "CreateProcessAsUserW",11,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpApplicationName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "lpCommandLine", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, INOUT },
-		{3, "lpProcessAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
-		{4, "lpThreadAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
+		{3, "lpProcessAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 192, IN },
+		{4, "lpThreadAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 192, IN },
 		{5, "bInheritHandles", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 		{6, "dwCreationFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{7, "lpEnvironment", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{8, "lpCurrentDirectory", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{9, "lpStartupInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_STARTUPINFOW", 544, IN },
-		{10, "lpProcessInformation", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PROCESS_INFORMATION", 128, OUT },
+		{9, "lpStartupInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_STARTUPINFOW", 832, IN },
+		{10, "lpProcessInformation", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PROCESS_INFORMATION", 192, OUT },
 	}
 	},
 	{ "CreateProcessWithLogonW",11,
@@ -1068,42 +1043,42 @@ libcall_info_t AdvAPI32_info[] = {
 		{6, "dwCreationFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{7, "lpEnvironment", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{8, "lpCurrentDirectory", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{9, "lpStartupInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_STARTUPINFOW", 544, IN },
-		{10, "lpProcessInformation", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PROCESS_INFORMATION", 128, IN },
+		{9, "lpStartupInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_STARTUPINFOW", 832, IN },
+		{10, "lpProcessInformation", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PROCESS_INFORMATION", 192, UNK },
 	}
 	},
 	{ "CreateProcessWithTokenW",9,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwLogonFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpApplicationName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{3, "lpCommandLine", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, INOUT },
 		{4, "dwCreationFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{5, "lpEnvironment", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{6, "lpCurrentDirectory", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{7, "lpStartupInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_STARTUPINFOW", 544, IN },
-		{8, "lpProcessInformation", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PROCESS_INFORMATION", 128, IN },
+		{7, "lpStartupInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_STARTUPINFOW", 832, IN },
+		{8, "lpProcessInformation", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PROCESS_INFORMATION", 192, UNK },
 	}
 	},
 	{ "CreateRestrictedToken",9,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "ExistingTokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "ExistingTokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "DisableSidCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "SidsToDisable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SID_AND_ATTRIBUTES", 64, IN },
+		{3, "SidsToDisable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SID_AND_ATTRIBUTES", 128, IN },
 		{4, "DeletePrivilegeCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{5, "PrivilegesToDelete", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_LUID_AND_ATTRIBUTES", 96, IN },
 		{6, "RestrictedSidCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{7, "SidsToRestrict", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SID_AND_ATTRIBUTES", 64, IN },
-		{8, "NewTokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{7, "SidsToRestrict", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SID_AND_ATTRIBUTES", 128, IN },
+		{8, "NewTokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "CreateServiceA",13,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpServiceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "lpDisplayName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{3, "dwDesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -1120,8 +1095,8 @@ libcall_info_t AdvAPI32_info[] = {
 	},
 	{ "CreateServiceW",13,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpServiceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "lpDisplayName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{3, "dwDesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -1139,8 +1114,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CreateTraceInstanceId",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "RegHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "InstInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "EVENT_INSTANCE_INFO", 64, IN },
+		{0, "RegHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "InstInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "EVENT_INSTANCE_INFO", 128, UNK },
 	}
 	},
 	{ "CreateWellKnownSid",4,
@@ -1174,7 +1149,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "Filter", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "Count", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer, "_CREDENTIALA", 416, IN },
+		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer, "_CREDENTIALA", 640, UNK },
 	}
 	},
 	{ "CredEnumerateW",4,
@@ -1183,7 +1158,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "Filter", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "Count", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer, "_CREDENTIALW", 416, IN },
+		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer, "_CREDENTIALW", 640, UNK },
 	}
 	},
 	{ "CredFindBestCredentialA",4,
@@ -1192,7 +1167,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "TargetName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "Type", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_CREDENTIALA", 416, OUT },
+		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_CREDENTIALA", 640, OUT },
 	}
 	},
 	{ "CredFindBestCredentialW",4,
@@ -1201,7 +1176,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "TargetName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "Type", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_CREDENTIALW", 416, OUT },
+		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_CREDENTIALW", 640, OUT },
 	}
 	},
 	{ "CredFree",1,
@@ -1222,7 +1197,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "TargetName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "TargetInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_CREDENTIAL_TARGET_INFORMATIONA", 320, OUT },
+		{2, "TargetInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_CREDENTIAL_TARGET_INFORMATIONA", 576, OUT },
 	}
 	},
 	{ "CredGetTargetInfoW",3,
@@ -1230,7 +1205,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "TargetName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "TargetInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_CREDENTIAL_TARGET_INFORMATIONW", 320, OUT },
+		{2, "TargetInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_CREDENTIAL_TARGET_INFORMATIONW", 576, OUT },
 	}
 	},
 	{ "CredIsMarshaledCredentialA",1,
@@ -1303,25 +1278,25 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "TargetName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "Type", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_CREDENTIALA", 416, OUT },
+		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_CREDENTIALA", 640, OUT },
 	}
 	},
 	{ "CredReadDomainCredentialsA",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "TargetInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIAL_TARGET_INFORMATIONA", 320, IN },
+		{0, "TargetInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIAL_TARGET_INFORMATIONA", 576, IN },
 		{1, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "Count", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer, "_CREDENTIALA", 416, IN },
+		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer, "_CREDENTIALA", 640, UNK },
 	}
 	},
 	{ "CredReadDomainCredentialsW",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "TargetInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIAL_TARGET_INFORMATIONW", 320, IN },
+		{0, "TargetInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIAL_TARGET_INFORMATIONW", 576, IN },
 		{1, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "Count", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer, "_CREDENTIALW", 416, IN },
+		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer | NKT_DBOBJCLASS_Pointer, "_CREDENTIALW", 640, UNK },
 	}
 	},
 	{ "CredReadW",4,
@@ -1330,7 +1305,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "TargetName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "Type", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_CREDENTIALW", 416, OUT },
+		{3, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_CREDENTIALW", 640, OUT },
 	}
 	},
 	{ "CredRenameA",4,
@@ -1372,7 +1347,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "fAsSelf", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 		{1, "pszProtectedCredentials", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "cchProtectedCredentials", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "cchProtectedCredentials", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{3, "pszCredentials", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{4, "pcchMaxChars", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 	}
@@ -1382,7 +1357,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "fAsSelf", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 		{1, "pszProtectedCredentials", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "cchProtectedCredentials", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "cchProtectedCredentials", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{3, "pszCredentials", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
 		{4, "pcchMaxChars", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 	}
@@ -1390,39 +1365,39 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CredWriteA",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIALA", 416, IN },
+		{0, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIALA", 640, IN },
 		{1, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
 	{ "CredWriteDomainCredentialsA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "TargetInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIAL_TARGET_INFORMATIONA", 320, IN },
-		{1, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIALA", 416, IN },
+		{0, "TargetInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIAL_TARGET_INFORMATIONA", 576, IN },
+		{1, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIALA", 640, IN },
 		{2, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
 	{ "CredWriteDomainCredentialsW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "TargetInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIAL_TARGET_INFORMATIONW", 320, IN },
-		{1, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIALW", 416, IN },
+		{0, "TargetInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIAL_TARGET_INFORMATIONW", 576, IN },
+		{1, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIALW", 640, IN },
 		{2, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
 	{ "CredWriteW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIALW", 416, IN },
+		{0, "Credential", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_CREDENTIALW", 640, IN },
 		{1, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
 	{ "CryptAcquireContextA",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "phProv", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{1, "szContainer", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "szProvider", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{0, "phProv", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
+		{1, "szContainer", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
+		{2, "szProvider", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 		{3, "dwProvType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
@@ -1430,9 +1405,9 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptAcquireContextW",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "phProv", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{1, "szContainer", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "szProvider", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{0, "phProv", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
+		{1, "szContainer", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{2, "szProvider", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{3, "dwProvType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
@@ -1440,7 +1415,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptContextAddRef",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hProv", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hProv", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "pdwReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
 		{2, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
@@ -1448,18 +1423,18 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptCreateHash",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hProv", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hProv", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "Algid", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "phHash", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{4, "phHash", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "CryptDecrypt",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "hHash", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "hHash", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{2, "Final", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "pbData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, INOUT },
@@ -1469,48 +1444,48 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptDeriveKey",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hProv", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hProv", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "Algid", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "hBaseData", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "hBaseData", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "phKey", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
+		{4, "phKey", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, INOUT },
 	}
 	},
 	{ "CryptDestroyHash",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hHash", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hHash", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "CryptDestroyKey",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "CryptDuplicateHash",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hHash", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hHash", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "pdwReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
 		{2, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "phHash", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{3, "phHash", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "CryptDuplicateKey",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "pdwReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
 		{2, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "phKey", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{3, "phKey", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "CryptEncrypt",7,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "hHash", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "hHash", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{2, "Final", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "pbData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, INOUT },
@@ -1525,7 +1500,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "pdwReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
 		{2, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "pdwProvType", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{4, "szProvName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{4, "szProvName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 		{5, "pcbProvName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 	}
 	},
@@ -1536,7 +1511,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "pdwReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
 		{2, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "pdwProvType", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{4, "szProvName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{4, "szProvName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{5, "pcbProvName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 	}
 	},
@@ -1547,7 +1522,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "pdwReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
 		{2, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "pdwProvType", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{4, "szTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{4, "szTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 		{5, "pcbTypeName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 	}
 	},
@@ -1558,15 +1533,15 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "pdwReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
 		{2, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "pdwProvType", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{4, "szTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{4, "szTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{5, "pcbTypeName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 	}
 	},
 	{ "CryptExportKey",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "hExpKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "hExpKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{2, "dwBlobType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "pbData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
@@ -1576,16 +1551,16 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptGenKey",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hProv", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hProv", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "Algid", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "phKey", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{3, "phKey", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "CryptGenRandom",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hProv", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hProv", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwLen", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "pbBuffer", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, INOUT },
 	}
@@ -1613,7 +1588,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptGetHashParam",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hHash", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hHash", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwParam", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "pbData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{3, "pdwDataLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -1623,7 +1598,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptGetKeyParam",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwParam", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "pbData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{3, "pdwDataLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -1633,7 +1608,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptGetProvParam",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hProv", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hProv", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwParam", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "pbData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{3, "pdwDataLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -1643,15 +1618,15 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptGetUserKey",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hProv", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hProv", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwKeySpec", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "phUserKey", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{2, "phUserKey", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "CryptHashData",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hHash", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hHash", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "pbData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "dwDataLen", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -1660,33 +1635,33 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptHashSessionKey",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hHash", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hHash", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{2, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
 	{ "CryptImportKey",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hProv", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hProv", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "pbData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "dwDataLen", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "hPubKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{3, "hPubKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{4, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "phKey", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{5, "phKey", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "CryptReleaseContext",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hProv", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hProv", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
 	{ "CryptSetHashParam",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hHash", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hHash", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwParam", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "pbData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -1695,7 +1670,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptSetKeyParam",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwParam", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "pbData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -1736,7 +1711,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptSetProvParam",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hProv", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hProv", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwParam", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "pbData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -1745,9 +1720,9 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptSignHashA",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hHash", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hHash", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwKeySpec", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "szDescription", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{2, "szDescription", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "pbSignature", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{5, "pdwSigLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -1756,9 +1731,9 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptSignHashW",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hHash", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hHash", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwKeySpec", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "szDescription", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{2, "szDescription", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "pbSignature", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{5, "pdwSigLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -1767,22 +1742,22 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "CryptVerifySignatureA",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hHash", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hHash", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "pbSignature", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "dwSigLen", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "hPubKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "szDescription", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{3, "hPubKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{4, "szDescription", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 		{5, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
 	{ "CryptVerifySignatureW",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hHash", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hHash", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "pbSignature", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "dwSigLen", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "hPubKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "szDescription", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{3, "hPubKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{4, "szDescription", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{5, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
@@ -1790,14 +1765,14 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "lpFileName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{1, "dwReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{1, "dwReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "DecryptFileW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "lpFileName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "dwReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{1, "dwReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "DeleteAce",2,
@@ -1810,13 +1785,13 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "DeleteService",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "DeregisterEventSource",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, INOUT },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, INOUT },
 	}
 	},
 	{ "DestroyPrivateObjectSecurity",1,
@@ -1825,33 +1800,23 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "ObjectDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, INOUT },
 	}
 	},
-	{ "DuplicateEncryptionInfoFile",5,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "SrcFileName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "DstFileName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "dwCreationDistribution", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "dwAttributes", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
-	}
-	},
 	{ "DuplicateToken",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "ExistingTokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "ExistingTokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "ImpersonationLevel", NKT_DBOBJCLASS_Enumeration, "_SECURITY_IMPERSONATION_LEVEL", 32, IN },
-		{2, "DuplicateTokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{2, "DuplicateTokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "DuplicateTokenEx",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hExistingToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hExistingToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwDesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "lpTokenAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
+		{2, "lpTokenAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 192, IN },
 		{3, "ImpersonationLevel", NKT_DBOBJCLASS_Enumeration, "_SECURITY_IMPERSONATION_LEVEL", 32, IN },
 		{4, "TokenType", NKT_DBOBJCLASS_Enumeration, "_TOKEN_TYPE", 32, IN },
-		{5, "phNewToken", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{5, "phNewToken", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "EnableTrace",5,
@@ -1861,7 +1826,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "EnableFlag", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "EnableLevel", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "ControlGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{4, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{4, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 	}
 	},
 	{ "EnableTraceEx",9,
@@ -1888,7 +1853,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{4, "MatchAnyKeyword", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{5, "MatchAllKeyword", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{6, "Timeout", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{7, "EnableParameters", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENABLE_TRACE_PARAMETERS", 256, IN },
+		{7, "EnableParameters", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENABLE_TRACE_PARAMETERS", 384, IN },
 	}
 	},
 	{ "EncryptFileA",1,
@@ -1903,19 +1868,12 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "lpFileName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 	}
 	},
-	{ "EncryptionDisable",2,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "DirPath", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "Disable", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
-	}
-	},
 	{ "EnumDependentServicesA",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwServiceState", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "lpServices", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENUM_SERVICE_STATUSA", 288, OUT },
+		{2, "lpServices", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENUM_SERVICE_STATUSA", 384, OUT },
 		{3, "cbBufSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "pcbBytesNeeded", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{5, "lpServicesReturned", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
@@ -1924,9 +1882,9 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "EnumDependentServicesW",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwServiceState", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "lpServices", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENUM_SERVICE_STATUSW", 288, OUT },
+		{2, "lpServices", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENUM_SERVICE_STATUSW", 384, OUT },
 		{3, "cbBufSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "pcbBytesNeeded", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{5, "lpServicesReturned", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
@@ -1954,10 +1912,10 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "EnumServicesStatusA",8,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwServiceType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "dwServiceState", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "lpServices", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENUM_SERVICE_STATUSA", 288, OUT },
+		{3, "lpServices", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENUM_SERVICE_STATUSA", 384, OUT },
 		{4, "cbBufSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{5, "pcbBytesNeeded", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{6, "lpServicesReturned", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
@@ -1967,7 +1925,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "EnumServicesStatusExA",10,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "InfoLevel", NKT_DBOBJCLASS_Enumeration, "_SC_ENUM_TYPE", 32, IN },
 		{2, "dwServiceType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "dwServiceState", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -1982,7 +1940,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "EnumServicesStatusExW",10,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "InfoLevel", NKT_DBOBJCLASS_Enumeration, "_SC_ENUM_TYPE", 32, IN },
 		{2, "dwServiceType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "dwServiceState", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -1997,10 +1955,10 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "EnumServicesStatusW",8,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwServiceType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "dwServiceState", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "lpServices", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENUM_SERVICE_STATUSW", 288, OUT },
+		{3, "lpServices", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENUM_SERVICE_STATUSW", 384, OUT },
 		{4, "cbBufSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{5, "pcbBytesNeeded", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{6, "lpServicesReturned", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
@@ -2156,35 +2114,23 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "FlushTraceA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
-		{1, "InstanceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "InstanceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 		{2, "Properties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_PROPERTIES", 960, INOUT },
 	}
 	},
 	{ "FlushTraceW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
-		{1, "InstanceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "InstanceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{2, "Properties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_PROPERTIES", 960, INOUT },
-	}
-	},
-	{ "FreeEncryptedFileMetadata",1,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pbMetadata", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-	}
-	},
-	{ "FreeEncryptionCertificateHashList",1,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "pUsers", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENCRYPTION_CERTIFICATE_HASH_LIST", 64, IN },
 	}
 	},
 	{ "FreeInheritedFromArray",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pInheritArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_INHERITED_FROMW", 64, IN },
+		{0, "pInheritArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_INHERITED_FROMW", 128, IN },
 		{1, "AceCnt", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
 		{2, "pfnArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_FN_OBJECT_MGR_FUNCTIONS", 32, IN },
 	}
@@ -2216,7 +2162,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "pacl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
-		{1, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
+		{1, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, IN },
 		{2, "pSuccessfulAuditedRights", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{3, "pFailedAuditRights", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
@@ -2225,7 +2171,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "pacl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
-		{1, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
+		{1, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, IN },
 		{2, "pSuccessfulAuditedRights", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{3, "pFailedAuditRights", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
@@ -2246,7 +2192,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "pacl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
-		{1, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
+		{1, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, IN },
 		{2, "pAccessRights", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
@@ -2254,22 +2200,14 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "pacl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
-		{1, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
+		{1, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, IN },
 		{2, "pAccessRights", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-	}
-	},
-	{ "GetEncryptedFileMetadata",3,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "lpFileName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "pcbMetadata", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{2, "ppbMetadata", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_PointerPointer, 0, 1, IN },
 	}
 	},
 	{ "GetEventLogInformation",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwInfoLevel", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, OUT },
 		{3, "cbBufSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -2281,7 +2219,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "pacl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
 		{1, "pcCountOfExplicitEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{2, "pListOfExplicitEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EXPLICIT_ACCESS_A", 256, OUT },
+		{2, "pListOfExplicitEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EXPLICIT_ACCESS_A", 384, OUT },
 	}
 	},
 	{ "GetExplicitEntriesFromAclW",3,
@@ -2289,7 +2227,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "pacl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
 		{1, "pcCountOfExplicitEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{2, "pListOfExplicitEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EXPLICIT_ACCESS_W", 256, OUT },
+		{2, "pListOfExplicitEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EXPLICIT_ACCESS_W", 384, OUT },
 	}
 	},
 	{ "GetFileSecurityA",5,
@@ -2324,7 +2262,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{6, "pAcl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
 		{7, "pfnArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_FN_OBJECT_MGR_FUNCTIONS", 32, IN },
 		{8, "pGenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
-		{9, "pInheritArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_INHERITED_FROMA", 64, OUT },
+		{9, "pInheritArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_INHERITED_FROMA", 128, OUT },
 	}
 	},
 	{ "GetInheritanceSourceW",10,
@@ -2339,13 +2277,13 @@ libcall_info_t AdvAPI32_info[] = {
 		{6, "pAcl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
 		{7, "pfnArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_FN_OBJECT_MGR_FUNCTIONS", 32, IN },
 		{8, "pGenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
-		{9, "pInheritArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_INHERITED_FROMW", 64, OUT },
+		{9, "pInheritArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_INHERITED_FROMW", 128, OUT },
 	}
 	},
 	{ "GetKernelObjectSecurity",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "Handle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "Handle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "RequestedInformation", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "pSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, OUT },
 		{3, "nLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -2361,9 +2299,9 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "GetLocalManagedApplicationData",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "ProductCode", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "DisplayName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_PointerPointer, 0, 2, IN },
-		{2, "SupportUrl", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_PointerPointer, 0, 2, IN },
+		{0, "ProductCode", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{1, "DisplayName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_PointerPointer, 0, 2, UNK },
+		{2, "SupportUrl", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_PointerPointer, 0, 2, UNK },
 	}
 	},
 	{ "GetLocalManagedApplications",3,
@@ -2371,14 +2309,14 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "bUserApps", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 		{1, "pdwApps", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{2, "prgLocalApps", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LOCALMANAGEDAPPLICATION", 128, OUT },
+		{2, "prgLocalApps", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LOCALMANAGEDAPPLICATION", 256, OUT },
 	}
 	},
 	{ "GetManagedApplicationCategories",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "dwReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{1, "pAppCategory", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_APPCATEGORYINFOLIST", 64, OUT },
+		{1, "pAppCategory", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_APPCATEGORYINFOLIST", 128, OUT },
 	}
 	},
 	{ "GetManagedApplications",5,
@@ -2388,31 +2326,31 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "dwQueryFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "dwInfoLevel", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "pdwApps", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{4, "prgManagedApps", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MANAGEDAPPLICATION", 704, OUT },
+		{4, "prgManagedApps", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_MANAGEDAPPLICATION", 1024, OUT },
 	}
 	},
 	{ "GetMultipleTrusteeA",1,
 	{ 
-		{-1, "Return value", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
+		{-1, "Return value", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, OUT },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, UNK },
 	}
 	},
 	{ "GetMultipleTrusteeOperationA",1,
 	{ 
 		{-1, "Return value", NKT_DBOBJCLASS_Enumeration, "_MULTIPLE_TRUSTEE_OPERATION", 32, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, UNK },
 	}
 	},
 	{ "GetMultipleTrusteeOperationW",1,
 	{ 
 		{-1, "Return value", NKT_DBOBJCLASS_Enumeration, "_MULTIPLE_TRUSTEE_OPERATION", 32, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, UNK },
 	}
 	},
 	{ "GetMultipleTrusteeW",1,
 	{ 
-		{-1, "Return value", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
+		{-1, "Return value", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, OUT },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, UNK },
 	}
 	},
 	{ "GetNamedSecurityInfoA",8,
@@ -2444,14 +2382,14 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "GetNumberOfEventLogRecords",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "NumberOfRecords", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
 	{ "GetOldestEventLogRecord",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "OldestRecord", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
@@ -2523,7 +2461,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "GetSecurityInfo",8,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "handle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "handle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "ObjectType", NKT_DBOBJCLASS_Enumeration, "_SE_OBJECT_TYPE", 32, IN },
 		{2, "SecurityInfo", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "ppsidOwner", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, OUT },
@@ -2536,7 +2474,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "GetServiceDisplayNameA",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpServiceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "lpDisplayName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{3, "lpcchBuffer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -2545,7 +2483,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "GetServiceDisplayNameW",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpServiceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "lpDisplayName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
 		{3, "lpcchBuffer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -2554,7 +2492,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "GetServiceKeyNameA",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpDisplayName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "lpServiceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{3, "lpcchBuffer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -2563,7 +2501,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "GetServiceKeyNameW",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpDisplayName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "lpServiceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
 		{3, "lpcchBuffer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -2598,7 +2536,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "WctHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "Context", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{1, "Context", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{2, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "ThreadId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "NodeCount", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -2609,7 +2547,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "GetTokenInformation",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "TokenInformationClass", NKT_DBOBJCLASS_Enumeration, "_TOKEN_INFORMATION_CLASS", 32, IN },
 		{2, "TokenInformation", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, OUT },
 		{3, "TokenInformationLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -2619,13 +2557,13 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "GetTraceEnableFlags",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 	}
 	},
 	{ "GetTraceEnableLevel",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 	}
 	},
 	{ "GetTraceLoggerHandle",1,
@@ -2637,77 +2575,77 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "GetTrusteeFormA",1,
 	{ 
 		{-1, "Return value", NKT_DBOBJCLASS_Enumeration, "_TRUSTEE_FORM", 32, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, IN },
 	}
 	},
 	{ "GetTrusteeFormW",1,
 	{ 
 		{-1, "Return value", NKT_DBOBJCLASS_Enumeration, "_TRUSTEE_FORM", 32, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, IN },
 	}
 	},
 	{ "GetTrusteeNameA",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, IN },
 	}
 	},
 	{ "GetTrusteeNameW",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, IN },
 	}
 	},
 	{ "GetTrusteeTypeA",1,
 	{ 
 		{-1, "Return value", NKT_DBOBJCLASS_Enumeration, "_TRUSTEE_TYPE", 32, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 160, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_A", 256, IN },
 	}
 	},
 	{ "GetTrusteeTypeW",1,
 	{ 
 		{-1, "Return value", NKT_DBOBJCLASS_Enumeration, "_TRUSTEE_TYPE", 32, OUT },
-		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 160, IN },
+		{0, "pTrustee", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTEE_W", 256, IN },
 	}
 	},
 	{ "GetUserNameA",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "lpBuffer", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{1, "pcbBuffer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{0, "lpBuffer", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
+		{1, "pcbBuffer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "GetUserNameW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "lpBuffer", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "pcbBuffer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{0, "lpBuffer", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{1, "pcbBuffer", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "GetWindowsAccountDomainSid",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "pSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "pDomainSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{2, "cbDomainSid", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{1, "pDomainSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{2, "cbDomainSid", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "ImpersonateAnonymousToken",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "ThreadHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "ThreadHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "ImpersonateLoggedOnUser",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "ImpersonateNamedPipeClient",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hNamedPipe", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hNamedPipe", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "ImpersonateSelf",1,
@@ -2804,7 +2742,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "InstallApplication",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pInstallInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_INSTALLDATA", 192, IN },
+		{0, "pInstallInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_INSTALLDATA", 256, IN },
 	}
 	},
 	{ "IsTextUnicode",3,
@@ -2818,13 +2756,13 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "IsTokenRestricted",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "IsTokenUntrusted",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 	}
 	},
 	{ "IsValidAcl",1,
@@ -2855,7 +2793,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "LockServiceDatabase",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "LogonUserA",6,
@@ -2866,7 +2804,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{2, "lpszPassword", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{3, "dwLogonType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "dwLogonProvider", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "phToken", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{5, "phToken", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "LogonUserExA",10,
@@ -2877,11 +2815,11 @@ libcall_info_t AdvAPI32_info[] = {
 		{2, "lpszPassword", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{3, "dwLogonType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "dwLogonProvider", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "phToken", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{5, "phToken", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 		{6, "ppLogonSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, OUT },
 		{7, "ppProfileBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, OUT },
 		{8, "pdwProfileLength", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{9, "pQuotaLimits", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_QUOTA_LIMITS", 256, OUT },
+		{9, "pQuotaLimits", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_QUOTA_LIMITS", 384, OUT },
 	}
 	},
 	{ "LogonUserExW",10,
@@ -2892,11 +2830,11 @@ libcall_info_t AdvAPI32_info[] = {
 		{2, "lpszPassword", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{3, "dwLogonType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "dwLogonProvider", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "phToken", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{5, "phToken", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 		{6, "ppLogonSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, OUT },
 		{7, "ppProfileBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, OUT },
 		{8, "pdwProfileLength", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{9, "pQuotaLimits", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_QUOTA_LIMITS", 256, OUT },
+		{9, "pQuotaLimits", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_QUOTA_LIMITS", 384, OUT },
 	}
 	},
 	{ "LogonUserW",6,
@@ -2907,7 +2845,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{2, "lpszPassword", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{3, "dwLogonType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "dwLogonProvider", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "phToken", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{5, "phToken", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "LookupAccountNameA",7,
@@ -2938,10 +2876,10 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "lpSystemName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{1, "Sid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{2, "Name", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{1, "Sid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{2, "Name", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 		{3, "cchName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
-		{4, "ReferencedDomainName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{4, "ReferencedDomainName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 		{5, "cchReferencedDomainName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 		{6, "peUse", NKT_DBOBJCLASS_Enumeration | NKT_DBOBJCLASS_Pointer, "_SID_NAME_USE", 32, OUT },
 	}
@@ -2950,10 +2888,10 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "lpSystemName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "Sid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{2, "Name", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{1, "Sid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{2, "Name", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{3, "cchName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
-		{4, "ReferencedDomainName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{4, "ReferencedDomainName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{5, "cchReferencedDomainName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 		{6, "peUse", NKT_DBOBJCLASS_Enumeration | NKT_DBOBJCLASS_Pointer, "_SID_NAME_USE", 32, OUT },
 	}
@@ -3015,24 +2953,24 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "LookupSecurityDescriptorPartsA",7,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "ppOwner", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_TRUSTEE_A", 160, IN },
-		{1, "ppGroup", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_TRUSTEE_A", 160, IN },
-		{2, "pcCountOfAccessEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{3, "ppListOfAccessEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EXPLICIT_ACCESS_A", 256, IN },
-		{4, "pcCountOfAuditEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{5, "ppListOfAuditEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EXPLICIT_ACCESS_A", 256, IN },
+		{0, "ppOwner", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_TRUSTEE_A", 256, UNK },
+		{1, "ppGroup", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_TRUSTEE_A", 256, UNK },
+		{2, "pcCountOfAccessEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{3, "ppListOfAccessEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EXPLICIT_ACCESS_A", 384, UNK },
+		{4, "pcCountOfAuditEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{5, "ppListOfAuditEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EXPLICIT_ACCESS_A", 384, UNK },
 		{6, "pSD", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 	}
 	},
 	{ "LookupSecurityDescriptorPartsW",7,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "ppOwner", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_TRUSTEE_W", 160, IN },
-		{1, "ppGroup", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_TRUSTEE_W", 160, IN },
-		{2, "pcCountOfAccessEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{3, "ppListOfAccessEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EXPLICIT_ACCESS_W", 256, IN },
-		{4, "pcCountOfAuditEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{5, "ppListOfAuditEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EXPLICIT_ACCESS_W", 256, IN },
+		{0, "ppOwner", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_TRUSTEE_W", 256, UNK },
+		{1, "ppGroup", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_TRUSTEE_W", 256, UNK },
+		{2, "pcCountOfAccessEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{3, "ppListOfAccessEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EXPLICIT_ACCESS_W", 384, UNK },
+		{4, "pcCountOfAuditEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{5, "ppListOfAuditEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EXPLICIT_ACCESS_W", 384, UNK },
 		{6, "pSD", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 	}
 	},
@@ -3041,7 +2979,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{1, "AccountSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{2, "UserRights", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
+		{2, "UserRights", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, IN },
 		{3, "CountOfRights", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
@@ -3055,8 +2993,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "TrustedDomainInformation", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTED_DOMAIN_INFORMATION_EX", 256, IN },
-		{2, "AuthenticationInformation", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTED_DOMAIN_AUTH_INFORMATION", 192, IN },
+		{1, "TrustedDomainInformation", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTED_DOMAIN_INFORMATION_EX", 448, IN },
+		{2, "AuthenticationInformation", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRUSTED_DOMAIN_AUTH_INFORMATION", 384, IN },
 		{3, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "TrustedDomainHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, OUT },
 	}
@@ -3073,7 +3011,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{1, "AccountSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{2, "UserRights", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_UNICODE_STRING", 64, OUT },
+		{2, "UserRights", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_UNICODE_STRING", 128, OUT },
 		{3, "CountOfRights", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
@@ -3081,8 +3019,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "UserRight", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
-		{2, "Buffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, IN },
+		{1, "UserRight", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, UNK },
+		{2, "Buffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, UNK },
 		{3, "CountReturned", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
@@ -3102,7 +3040,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{1, "EnumerationContext", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
 		{2, "Buffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, OUT },
-		{3, "PreferedMaximumLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{3, "PreferedMaximumLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{4, "CountReturned", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
@@ -3117,8 +3055,8 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{1, "Count", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "Names", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
-		{3, "ReferencedDomains", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_REFERENCED_DOMAIN_LIST", 64, OUT },
+		{2, "Names", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, IN },
+		{3, "ReferencedDomains", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_REFERENCED_DOMAIN_LIST", 128, OUT },
 		{4, "Sids", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_TRANSLATED_SID", 96, OUT },
 	}
 	},
@@ -3128,9 +3066,9 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{1, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "Count", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Names", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
-		{4, "ReferencedDomains", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_REFERENCED_DOMAIN_LIST", 64, OUT },
-		{5, "Sids", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_TRANSLATED_SID2", 128, OUT },
+		{3, "Names", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, IN },
+		{4, "ReferencedDomains", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_REFERENCED_DOMAIN_LIST", 128, OUT },
+		{5, "Sids", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_TRANSLATED_SID2", 192, OUT },
 	}
 	},
 	{ "LsaLookupSids",5,
@@ -3139,8 +3077,8 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{1, "Count", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "Sids", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, IN },
-		{3, "ReferencedDomains", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_REFERENCED_DOMAIN_LIST", 64, OUT },
-		{4, "Names", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_TRANSLATED_NAME", 128, OUT },
+		{3, "ReferencedDomains", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_REFERENCED_DOMAIN_LIST", 128, OUT },
+		{4, "Names", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_TRANSLATED_NAME", 256, OUT },
 	}
 	},
 	{ "LsaNtStatusToWinError",1,
@@ -3152,8 +3090,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "LsaOpenPolicy",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "SystemName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
-		{1, "ObjectAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_ATTRIBUTES", 192, IN },
+		{0, "SystemName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, IN },
+		{1, "ObjectAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_OBJECT_ATTRIBUTES", 384, IN },
 		{2, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, INOUT },
 	}
@@ -3162,7 +3100,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "TrustedDomainName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
+		{1, "TrustedDomainName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, IN },
 		{2, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "TrustedDomainHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, OUT },
 	}
@@ -3179,8 +3117,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "TrustedDomainName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
-		{2, "ForestTrustInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_FOREST_TRUST_INFORMATION", 64, OUT },
+		{1, "TrustedDomainName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, IN },
+		{2, "ForestTrustInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_FOREST_TRUST_INFORMATION", 128, OUT },
 	}
 	},
 	{ "LsaQueryInformationPolicy",3,
@@ -3204,7 +3142,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "TrustedDomainName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
+		{1, "TrustedDomainName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, IN },
 		{2, "InformationClass", NKT_DBOBJCLASS_Enumeration, "_TRUSTED_INFORMATION_CLASS", 32, IN },
 		{3, "Buffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, OUT },
 	}
@@ -3215,7 +3153,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{1, "AccountSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{2, "AllRights", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, IN },
-		{3, "UserRights", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
+		{3, "UserRights", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, IN },
 		{4, "CountOfRights", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
@@ -3223,8 +3161,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "KeyName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
-		{2, "PrivateData", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_UNICODE_STRING", 64, OUT },
+		{1, "KeyName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, IN },
+		{2, "PrivateData", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_UNICODE_STRING", 128, OUT },
 	}
 	},
 	{ "LsaSetDomainInformationPolicy",3,
@@ -3239,10 +3177,10 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "TrustedDomainName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
-		{2, "ForestTrustInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_LSA_FOREST_TRUST_INFORMATION", 64, IN },
+		{1, "TrustedDomainName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, IN },
+		{2, "ForestTrustInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_LSA_FOREST_TRUST_INFORMATION", 128, IN },
 		{3, "CheckOnly", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, IN },
-		{4, "CollisionInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_FOREST_TRUST_COLLISION_INFORMATION", 64, OUT },
+		{4, "CollisionInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_LSA_FOREST_TRUST_COLLISION_INFORMATION", 128, OUT },
 	}
 	},
 	{ "LsaSetInformationPolicy",3,
@@ -3257,7 +3195,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "TrustedDomainName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
+		{1, "TrustedDomainName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, IN },
 		{2, "InformationClass", NKT_DBOBJCLASS_Enumeration, "_TRUSTED_INFORMATION_CLASS", 32, IN },
 		{3, "Buffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 	}
@@ -3275,16 +3213,16 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "PolicyHandle", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "KeyName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
-		{2, "PrivateData", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 64, IN },
+		{1, "KeyName", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, IN },
+		{2, "PrivateData", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_UNICODE_STRING", 128, IN },
 	}
 	},
 	{ "MakeAbsoluteSD",11,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "pSelfRelativeSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "pAbsoluteSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{2, "lpdwAbsoluteSecurityDescriptorSize", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{0, "pSelfRelativeSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{1, "pAbsoluteSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{2, "lpdwAbsoluteSecurityDescriptorSize", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{3, "pDacl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, OUT },
 		{4, "lpdwDaclSize", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 		{5, "pSacl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, OUT },
@@ -3298,8 +3236,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "MakeSelfRelativeSD",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "pAbsoluteSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "pSelfRelativeSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{0, "pAbsoluteSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{1, "pSelfRelativeSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 		{2, "lpdwBufferLength", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
 	}
 	},
@@ -3343,24 +3281,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "NotifyChangeEventLog",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "hEvent", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-	}
-	},
-	{ "NotifyServiceStatusChangeA",3,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "dwNotifyMask", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "pNotifyBuffer", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SERVICE_NOTIFY_2A", 480, IN },
-	}
-	},
-	{ "NotifyServiceStatusChangeW",3,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "dwNotifyMask", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "pNotifyBuffer", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SERVICE_NOTIFY_2W", 480, IN },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "hEvent", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "ObjectCloseAuditAlarmA",3,
@@ -3403,7 +3325,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{2, "ObjectTypeName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{3, "ObjectName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{4, "pSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{5, "ClientToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{5, "ClientToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{6, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{7, "GrantedAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{8, "Privileges", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PRIVILEGE_SET", 160, IN },
@@ -3420,7 +3342,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{2, "ObjectTypeName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{3, "ObjectName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{4, "pSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{5, "ClientToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{5, "ClientToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{6, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{7, "GrantedAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{8, "Privileges", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PRIVILEGE_SET", 160, IN },
@@ -3434,7 +3356,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "SubsystemName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "HandleId", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{3, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "Privileges", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PRIVILEGE_SET", 160, IN },
 		{5, "AccessGranted", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
@@ -3445,7 +3367,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "SubsystemName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "HandleId", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{3, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "Privileges", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PRIVILEGE_SET", 160, IN },
 		{5, "AccessGranted", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
@@ -3453,14 +3375,14 @@ libcall_info_t AdvAPI32_info[] = {
 	},
 	{ "OpenBackupEventLogA",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
 		{0, "lpUNCServerName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "lpFileName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 	}
 	},
 	{ "OpenBackupEventLogW",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
 		{0, "lpUNCServerName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "lpFileName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 	}
@@ -3483,14 +3405,14 @@ libcall_info_t AdvAPI32_info[] = {
 	},
 	{ "OpenEventLogA",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
 		{0, "lpUNCServerName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "lpSourceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 	}
 	},
 	{ "OpenEventLogW",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
 		{0, "lpUNCServerName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "lpSourceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 	}
@@ -3498,14 +3420,14 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "OpenProcessToken",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "ProcessHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "ProcessHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "TokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{2, "TokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "OpenSCManagerA",3,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
 		{0, "lpMachineName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "lpDatabaseName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "dwDesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -3513,7 +3435,7 @@ libcall_info_t AdvAPI32_info[] = {
 	},
 	{ "OpenSCManagerW",3,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
 		{0, "lpMachineName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "lpDatabaseName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "dwDesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -3521,16 +3443,16 @@ libcall_info_t AdvAPI32_info[] = {
 	},
 	{ "OpenServiceA",3,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpServiceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "dwDesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
 	{ "OpenServiceW",3,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpServiceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "dwDesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
@@ -3538,10 +3460,10 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "OpenThreadToken",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "ThreadHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "ThreadHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "OpenAsSelf", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
-		{3, "TokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{3, "TokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "OpenThreadWaitChainSession",2,
@@ -3554,109 +3476,187 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "OpenTraceA",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
-		{0, "Logfile", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_LOGFILEA", 3328, INOUT },
+		{0, "Logfile", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_LOGFILEA", 3584, INOUT },
 	}
 	},
 	{ "OpenTraceW",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
-		{0, "Logfile", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_LOGFILEW", 3328, INOUT },
+		{0, "Logfile", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_LOGFILEW", 3584, INOUT },
+	}
+	},
+	{ "PerfAddCounters",3,
+	{ 
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "hQuery", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "pCounters", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTER_IDENTIFIER", 320, UNK },
+		{2, "cbCounters", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+	}
+	},
+	{ "PerfCloseQueryHandle",1,
+	{ 
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "hQuery", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 	}
 	},
 	{ "PerfCreateInstance",4,
 	{ 
 		{-1, "Return value", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, OUT },
-		{0, "ProviderHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "ProviderHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 		{1, "CounterSetGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{2, "Name", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{3, "Id", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "Name", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{3, "Id", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "PerfDecrementULongCounterValue",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Provider", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, IN },
+		{0, "Provider", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, UNK },
 		{2, "CounterId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{3, "Value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "PerfDecrementULongLongCounterValue",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Provider", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, IN },
+		{0, "Provider", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, UNK },
 		{2, "CounterId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{3, "Value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+	}
+	},
+	{ "PerfDeleteCounters",3,
+	{ 
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "hQuery", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "pCounters", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTER_IDENTIFIER", 320, UNK },
+		{2, "cbCounters", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "PerfDeleteInstance",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Provider", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "Provider", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 		{1, "InstanceBlock", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, IN },
+	}
+	},
+	{ "PerfEnumerateCounterSet",4,
+	{ 
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "szMachine", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{1, "pCounterSetIds", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, UNK },
+		{2, "cCounterSetIds", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{3, "pcCounterSetIdsActual", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+	}
+	},
+	{ "PerfEnumerateCounterSetInstances",5,
+	{ 
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "szMachine", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{1, "pCounterSetId", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, UNK },
+		{2, "pInstances", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_INSTANCE_HEADER", 64, UNK },
+		{3, "cbInstances", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{4, "pcbInstancesActual", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "PerfIncrementULongCounterValue",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Provider", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, IN },
+		{0, "Provider", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, UNK },
 		{2, "CounterId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{3, "Value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "PerfIncrementULongLongCounterValue",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Provider", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, IN },
+		{0, "Provider", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, UNK },
 		{2, "CounterId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{3, "Value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+	}
+	},
+	{ "PerfOpenQueryHandle",2,
+	{ 
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "szMachine", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{1, "phQuery", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, UNK },
+	}
+	},
+	{ "PerfQueryCounterData",4,
+	{ 
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "hQuery", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "pCounterBlock", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_DATA_HEADER", 384, UNK },
+		{2, "cbCounterBlock", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{3, "pcbCounterBlockActual", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+	}
+	},
+	{ "PerfQueryCounterInfo",4,
+	{ 
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "hQuery", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "pCounters", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTER_IDENTIFIER", 320, UNK },
+		{2, "cbCounters", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{3, "pcbCountersActual", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+	}
+	},
+	{ "PerfQueryCounterSetRegistrationInfo",7,
+	{ 
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{0, "szMachine", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{1, "pCounterSetId", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, UNK },
+		{2, "requestCode", NKT_DBOBJCLASS_Enumeration, "_PerfRegInfoType", 32, UNK },
+		{3, "requestLangId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{4, "pbRegInfo", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
+		{5, "cbRegInfo", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{6, "pcbRegInfoActual", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "PerfQueryInstance",4,
 	{ 
 		{-1, "Return value", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, OUT },
-		{0, "ProviderHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "ProviderHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 		{1, "CounterSetGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{2, "Name", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{3, "Id", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "Name", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{3, "Id", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "PerfSetCounterRefValue",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Provider", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, IN },
+		{0, "Provider", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, UNK },
 		{2, "CounterId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Address", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{3, "Address", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "PerfSetCounterSetInfo",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "ProviderHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "Template", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INFO", 320, IN },
-		{2, "TemplateSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "ProviderHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "Template", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INFO", 320, UNK },
+		{2, "TemplateSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "PerfSetULongCounterValue",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Provider", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, IN },
+		{0, "Provider", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, UNK },
 		{2, "CounterId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{3, "Value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "PerfSetULongLongCounterValue",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "Provider", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, IN },
+		{0, "Provider", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "Instance", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PERF_COUNTERSET_INSTANCE", 256, UNK },
 		{2, "CounterId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{3, "Value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 	}
 	},
 	{ "PerfStartProvider",3,
@@ -3664,27 +3664,27 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "ProviderGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
 		{1, "ControlCallback", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
-		{2, "phProvider", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{2, "phProvider", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "PerfStartProviderEx",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "ProviderGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
-		{1, "ProviderContext", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PROVIDER_CONTEXT", 192, IN },
-		{2, "Provider", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{1, "ProviderContext", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PROVIDER_CONTEXT", 320, IN },
+		{2, "Provider", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, UNK },
 	}
 	},
 	{ "PerfStopProvider",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "ProviderHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "ProviderHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 	}
 	},
 	{ "PrivilegeCheck",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "ClientToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "ClientToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "RequiredPrivileges", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PRIVILEGE_SET", 160, INOUT },
 		{2, "pfResult", NKT_DBFUNDTYPE_SignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
@@ -3694,7 +3694,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "SubsystemName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "ServiceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{3, "Privileges", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PRIVILEGE_SET", 160, IN },
 		{4, "AccessGranted", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 	}
@@ -3704,7 +3704,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "SubsystemName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "ServiceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "ClientToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{3, "Privileges", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_PRIVILEGE_SET", 160, IN },
 		{4, "AccessGranted", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 	}
@@ -3723,7 +3723,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "PropertyArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EVENT_TRACE_PROPERTIES", 960, OUT },
 		{1, "PropertyArrayCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "LoggerCount", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{2, "LoggerCount", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "QueryAllTracesW",3,
@@ -3731,27 +3731,20 @@ libcall_info_t AdvAPI32_info[] = {
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "PropertyArray", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_EVENT_TRACE_PROPERTIES", 960, OUT },
 		{1, "PropertyArrayCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "LoggerCount", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-	}
-	},
-	{ "QueryRecoveryAgentsOnEncryptedFile",2,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "lpFileName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "pRecoveryAgents", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_ENCRYPTION_CERTIFICATE_HASH_LIST", 64, OUT },
+		{2, "LoggerCount", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "QuerySecurityAccessMask",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "SecurityInformation", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{0, "SecurityInformation", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{1, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "QueryServiceConfig2A",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwInfoLevel", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpBuffer", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{3, "cbBufSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -3761,7 +3754,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "QueryServiceConfig2W",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwInfoLevel", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpBuffer", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{3, "cbBufSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -3771,8 +3764,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "QueryServiceConfigA",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "lpServiceConfig", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_QUERY_SERVICE_CONFIGA", 288, OUT },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "lpServiceConfig", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_QUERY_SERVICE_CONFIGA", 512, OUT },
 		{2, "cbBufSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "pcbBytesNeeded", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
@@ -3780,8 +3773,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "QueryServiceConfigW",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "lpServiceConfig", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_QUERY_SERVICE_CONFIGW", 288, OUT },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "lpServiceConfig", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_QUERY_SERVICE_CONFIGW", 512, OUT },
 		{2, "cbBufSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "pcbBytesNeeded", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
@@ -3789,8 +3782,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "QueryServiceLockStatusA",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "lpLockStatus", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_QUERY_SERVICE_LOCK_STATUSA", 96, OUT },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "lpLockStatus", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_QUERY_SERVICE_LOCK_STATUSA", 192, OUT },
 		{2, "cbBufSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "pcbBytesNeeded", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
@@ -3798,8 +3791,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "QueryServiceLockStatusW",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "lpLockStatus", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_QUERY_SERVICE_LOCK_STATUSW", 96, OUT },
+		{0, "hSCManager", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "lpLockStatus", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_QUERY_SERVICE_LOCK_STATUSW", 192, OUT },
 		{2, "cbBufSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "pcbBytesNeeded", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
@@ -3807,7 +3800,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "QueryServiceObjectSecurity",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwSecurityInformation", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, OUT },
 		{3, "cbBufSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -3817,14 +3810,14 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "QueryServiceStatus",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpServiceStatus", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SERVICE_STATUS", 224, OUT },
 	}
 	},
 	{ "QueryServiceStatusEx",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "InfoLevel", NKT_DBOBJCLASS_Enumeration, "_SC_STATUS_TYPE", 32, IN },
 		{2, "lpBuffer", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{3, "cbBufSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -3834,24 +3827,17 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "QueryTraceA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
-		{1, "InstanceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "InstanceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 		{2, "Properties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_PROPERTIES", 960, INOUT },
 	}
 	},
 	{ "QueryTraceW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
-		{1, "InstanceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "InstanceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{2, "Properties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_PROPERTIES", 960, INOUT },
-	}
-	},
-	{ "QueryUsersOnEncryptedFile",2,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "lpFileName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "pUsers", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_ENCRYPTION_CERTIFICATE_HASH_LIST", 64, OUT },
 	}
 	},
 	{ "ReadEncryptedFileRaw",3,
@@ -3865,7 +3851,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "ReadEventLogA",7,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwReadFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "dwRecordOffset", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "lpBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, OUT },
@@ -3877,7 +3863,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "ReadEventLogW",7,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwReadFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "dwRecordOffset", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "lpBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, OUT },
@@ -3889,186 +3875,186 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegCloseKey",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "RegConnectRegistryA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "lpMachineName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{1, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{1, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{2, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "RegConnectRegistryExA",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "lpMachineName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{1, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{0, "lpMachineName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
+		{1, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{2, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{3, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, UNK },
 	}
 	},
 	{ "RegConnectRegistryExW",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "lpMachineName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{0, "lpMachineName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{1, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{2, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{3, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, UNK },
 	}
 	},
 	{ "RegConnectRegistryW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "lpMachineName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{1, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{2, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "RegCopyTreeA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKeySrc", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKeySrc", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "hKeyDest", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "hKeyDest", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "RegCopyTreeW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKeySrc", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKeySrc", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "hKeyDest", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "hKeyDest", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "RegCreateKeyA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{2, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "RegCreateKeyExA",9,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{3, "lpClass", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{4, "dwOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{5, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{6, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
-		{7, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{6, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 192, IN },
+		{7, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 		{8, "lpdwDisposition", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
 	{ "RegCreateKeyExW",9,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{3, "lpClass", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{4, "dwOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{5, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{6, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
-		{7, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{6, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 192, IN },
+		{7, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 		{8, "lpdwDisposition", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
 	{ "RegCreateKeyTransactedA",11,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{3, "lpClass", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{4, "dwOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{5, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{6, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
-		{7, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{6, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 192, IN },
+		{7, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 		{8, "lpdwDisposition", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{9, "hTransaction", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{10, "pExtendedParemeter", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{9, "hTransaction", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{10, "pExtendedParemeter", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "RegCreateKeyTransactedW",11,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{3, "lpClass", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{4, "dwOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{5, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{6, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
-		{7, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{6, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 192, IN },
+		{7, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 		{8, "lpdwDisposition", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{9, "hTransaction", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{10, "pExtendedParemeter", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{9, "hTransaction", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{10, "pExtendedParemeter", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "RegCreateKeyW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{2, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "RegDeleteKeyA",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 	}
 	},
 	{ "RegDeleteKeyExA",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{3, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "RegDeleteKeyExW",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{3, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "RegDeleteKeyTransactedA",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "hTransaction", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "pExtendedParameter", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{3, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{4, "hTransaction", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{5, "pExtendedParameter", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "RegDeleteKeyTransactedW",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "hTransaction", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "pExtendedParameter", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{3, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{4, "hTransaction", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{5, "pExtendedParameter", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "RegDeleteKeyValueA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "lpValueName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 	}
@@ -4076,7 +4062,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegDeleteKeyValueW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "lpValueName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 	}
@@ -4084,35 +4070,35 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegDeleteKeyW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 	}
 	},
 	{ "RegDeleteTreeA",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 	}
 	},
 	{ "RegDeleteTreeW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 	}
 	},
 	{ "RegDeleteValueA",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpValueName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 	}
 	},
 	{ "RegDeleteValueW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpValueName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 	}
 	},
@@ -4129,19 +4115,19 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegDisableReflectionKey",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hBase", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hBase", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "RegEnableReflectionKey",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hBase", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hBase", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "RegEnumKeyA",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwIndex", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{3, "cchName", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -4150,33 +4136,33 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegEnumKeyExA",8,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwIndex", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
-		{3, "lpcchName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{4, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{3, "lpcchName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{4, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{5, "lpClass", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, INOUT },
-		{6, "lpcchClass", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{6, "lpcchClass", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{7, "lpftLastWriteTime", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_FILETIME", 64, OUT },
 	}
 	},
 	{ "RegEnumKeyExW",8,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwIndex", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
-		{3, "lpcchName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{4, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{3, "lpcchName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{4, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{5, "lpClass", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, INOUT },
-		{6, "lpcchClass", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{6, "lpcchClass", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{7, "lpftLastWriteTime", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_FILETIME", 64, OUT },
 	}
 	},
 	{ "RegEnumKeyW",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwIndex", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
 		{3, "cchName", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -4185,11 +4171,11 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegEnumValueA",8,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwIndex", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpValueName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{3, "lpcchValueName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
-		{4, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{4, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{5, "lpType", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{6, "lpData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{7, "lpcbData", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -4198,11 +4184,11 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegEnumValueW",8,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwIndex", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpValueName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
 		{3, "lpcchValueName", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
-		{4, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{4, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{5, "lpType", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{6, "lpData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{7, "lpcbData", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -4211,13 +4197,13 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegFlushKey",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "RegGetKeySecurity",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "SecurityInformation", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "pSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, OUT },
 		{3, "lpcbSecurityDescriptor", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -4226,7 +4212,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegGetValueA",7,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hkey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hkey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "lpValue", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -4238,7 +4224,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegGetValueW",7,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hkey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hkey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "lpValue", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -4249,28 +4235,28 @@ libcall_info_t AdvAPI32_info[] = {
 	},
 	{ "RegisterEventSourceA",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
 		{0, "lpUNCServerName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "lpSourceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 	}
 	},
 	{ "RegisterEventSourceW",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
 		{0, "lpUNCServerName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "lpSourceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 	}
 	},
 	{ "RegisterServiceCtrlHandlerA",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
 		{0, "lpServiceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "lpHandlerProc", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
 	}
 	},
 	{ "RegisterServiceCtrlHandlerExA",3,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
 		{0, "lpServiceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{1, "lpHandlerProc", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
 		{2, "lpContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
@@ -4278,7 +4264,7 @@ libcall_info_t AdvAPI32_info[] = {
 	},
 	{ "RegisterServiceCtrlHandlerExW",3,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
 		{0, "lpServiceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "lpHandlerProc", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
 		{2, "lpContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
@@ -4286,7 +4272,7 @@ libcall_info_t AdvAPI32_info[] = {
 	},
 	{ "RegisterServiceCtrlHandlerW",2,
 	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
+		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, OUT },
 		{0, "lpServiceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{1, "lpHandlerProc", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
 	}
@@ -4298,7 +4284,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "RequestContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{2, "ControlGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
 		{3, "GuidCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "TraceGuidReg", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRACE_GUID_REGISTRATION", 64, INOUT },
+		{4, "TraceGuidReg", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRACE_GUID_REGISTRATION", 128, INOUT },
 		{5, "MofImagePath", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{6, "MofResourceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{7, "RegistrationHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
@@ -4311,7 +4297,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "RequestContext", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{2, "ControlGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
 		{3, "GuidCount", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "TraceGuidReg", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRACE_GUID_REGISTRATION", 64, INOUT },
+		{4, "TraceGuidReg", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_TRACE_GUID_REGISTRATION", 128, INOUT },
 		{5, "MofImagePath", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{6, "MofResourceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{7, "RegistrationHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
@@ -4320,34 +4306,34 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegisterWaitChainCOMCallback",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "CallStateCallback", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
-		{1, "ActivationStateCallback", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
+		{0, "CallStateCallback", NKT_DBOBJCLASS_Typedef, 0, 0, UNK },
+		{1, "ActivationStateCallback", NKT_DBOBJCLASS_Typedef, 0, 0, UNK },
 	}
 	},
 	{ "RegLoadAppKeyA",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "lpFile", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{1, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{1, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 		{2, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "dwOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{4, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "RegLoadAppKeyW",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "lpFile", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{1, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 		{2, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "dwOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{4, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "RegLoadKeyA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "lpFile", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 	}
@@ -4355,7 +4341,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegLoadKeyW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "lpFile", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 	}
@@ -4363,7 +4349,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegLoadMUIStringA",7,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "pszValue", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "pszOutBuf", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{3, "cbOutBuf", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -4375,7 +4361,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegLoadMUIStringW",7,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "pszValue", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "pszOutBuf", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
 		{3, "cbOutBuf", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -4387,10 +4373,10 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegNotifyChangeKeyValue",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "bWatchSubtree", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 		{2, "dwNotifyFilter", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "hEvent", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{3, "hEvent", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{4, "fAsynchronous", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 	}
 	},
@@ -4398,98 +4384,98 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{1, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "RegOpenKeyA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{2, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "RegOpenKeyExA",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "ulOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "ulOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{3, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{4, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "RegOpenKeyExW",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "ulOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "ulOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{3, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{4, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "RegOpenKeyTransactedA",7,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "ulOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{5, "hTransaction", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{6, "pExtendedParemeter", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{4, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
+		{5, "hTransaction", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{6, "pExtendedParemeter", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "RegOpenKeyTransactedW",7,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "ulOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{5, "hTransaction", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{6, "pExtendedParemeter", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{4, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
+		{5, "hTransaction", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{6, "pExtendedParemeter", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "RegOpenKeyW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{2, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "RegOpenUserClassesRoot",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "dwOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "dwOptions", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{2, "samDesired", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "phkResult", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{3, "phkResult", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 	}
 	},
 	{ "RegOverridePredefKey",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "hNewHKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "hNewHKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "RegQueryInfoKeyA",12,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpClass", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
-		{2, "lpcchClass", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{3, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{2, "lpcchClass", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{3, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{4, "lpcSubKeys", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{5, "lpcbMaxSubKeyLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{6, "lpcbMaxClassLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{5, "lpcbMaxSubKeyLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{6, "lpcbMaxClassLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{7, "lpcValues", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{8, "lpcbMaxValueNameLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{9, "lpcbMaxValueLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{8, "lpcbMaxValueNameLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{9, "lpcbMaxValueLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{10, "lpcbSecurityDescriptor", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{11, "lpftLastWriteTime", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_FILETIME", 64, OUT },
 	}
@@ -4497,16 +4483,16 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegQueryInfoKeyW",12,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpClass", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
-		{2, "lpcchClass", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{3, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{2, "lpcchClass", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{3, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{4, "lpcSubKeys", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{5, "lpcbMaxSubKeyLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{6, "lpcbMaxClassLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{5, "lpcbMaxSubKeyLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{6, "lpcbMaxClassLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{7, "lpcValues", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{8, "lpcbMaxValueNameLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{9, "lpcbMaxValueLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{8, "lpcbMaxValueNameLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
+		{9, "lpcbMaxValueLen", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{10, "lpcbSecurityDescriptor", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{11, "lpftLastWriteTime", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_FILETIME", 64, OUT },
 	}
@@ -4514,8 +4500,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegQueryMultipleValuesA",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "val_list", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "value_entA", 128, OUT },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "val_list", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "value_entA", 256, OUT },
 		{2, "num_vals", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "lpValueBuf", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{4, "ldwTotsize", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -4524,8 +4510,8 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegQueryMultipleValuesW",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "val_list", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "value_entW", 128, OUT },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "val_list", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "value_entW", 256, OUT },
 		{2, "num_vals", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "lpValueBuf", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, OUT },
 		{4, "ldwTotsize", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -4534,25 +4520,25 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegQueryReflectionKey",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hBase", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hBase", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "bIsReflectionDisabled", NKT_DBFUNDTYPE_SignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 	}
 	},
 	{ "RegQueryValueA",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "lpData", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{3, "lpcbData", NKT_DBFUNDTYPE_SignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{2, "lpData", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
+		{3, "lpcbData", NKT_DBFUNDTYPE_SignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "RegQueryValueExA",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpValueName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{2, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{3, "lpType", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{4, "lpData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{5, "lpcbData", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -4561,9 +4547,9 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegQueryValueExW",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpValueName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{2, "lpReserved", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 		{3, "lpType", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
 		{4, "lpData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, OUT },
 		{5, "lpcbData", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
@@ -4572,24 +4558,24 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegQueryValueW",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "lpData", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{3, "lpcbData", NKT_DBFUNDTYPE_SignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{2, "lpData", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{3, "lpcbData", NKT_DBFUNDTYPE_SignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "RegRenameKey",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "lpSubKeyName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "lpNewKeyName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "lpSubKeyName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
+		{2, "lpNewKeyName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 	}
 	},
 	{ "RegReplaceKeyA",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "lpNewFile", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{3, "lpOldFile", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
@@ -4598,7 +4584,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegReplaceKeyW",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "lpNewFile", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{3, "lpOldFile", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
@@ -4607,7 +4593,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegRestoreKeyA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpFile", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
@@ -4615,7 +4601,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegRestoreKeyW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpFile", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
@@ -4623,41 +4609,41 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegSaveKeyA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpFile", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
+		{2, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 192, IN },
 	}
 	},
 	{ "RegSaveKeyExA",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpFile", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
+		{2, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 192, IN },
 		{3, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
 	{ "RegSaveKeyExW",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpFile", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
+		{2, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 192, IN },
 		{3, "Flags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 	}
 	},
 	{ "RegSaveKeyW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpFile", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 96, IN },
+		{2, "lpSecurityAttributes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SECURITY_ATTRIBUTES", 192, IN },
 	}
 	},
 	{ "RegSetKeySecurity",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "SecurityInformation", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "pSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 	}
@@ -4665,7 +4651,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegSetKeyValueA",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "lpValueName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{3, "dwType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -4676,7 +4662,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegSetKeyValueW",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "lpValueName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{3, "dwType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -4687,7 +4673,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegSetValueA",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{2, "dwType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "lpData", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
@@ -4697,9 +4683,9 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegSetValueExA",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpValueName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{3, "dwType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "lpData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{5, "cbData", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -4708,9 +4694,9 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegSetValueExW",6,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpValueName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{2, "Reserved", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 		{3, "dwType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "lpData", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 		{5, "cbData", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -4719,7 +4705,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegSetValueW",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 		{2, "dwType", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "lpData", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
@@ -4729,14 +4715,14 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "RegUnLoadKeyA",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
 	}
 	},
 	{ "RegUnLoadKeyW",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hKey", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hKey", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpSubKey", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
 	}
 	},
@@ -4746,39 +4732,32 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "pGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
 	}
 	},
-	{ "RemoveUsersFromEncryptedFile",2,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "lpFileName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "pHashes", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENCRYPTION_CERTIFICATE_HASH_LIST", 64, IN },
-	}
-	},
 	{ "ReportEventA",9,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "wType", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{2, "wCategory", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{3, "dwEventID", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "lpUserSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{5, "wNumStrings", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{6, "dwDataSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{7, "lpStrings", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_PointerPointer, 0, 1, IN },
-		{8, "lpRawData", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "wType", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, UNK },
+		{2, "wCategory", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, UNK },
+		{3, "dwEventID", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{4, "lpUserSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{5, "wNumStrings", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, UNK },
+		{6, "dwDataSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{7, "lpStrings", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_PointerPointer, 0, 1, UNK },
+		{8, "lpRawData", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "ReportEventW",9,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "wType", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{2, "wCategory", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{3, "dwEventID", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{4, "lpUserSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{5, "wNumStrings", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
-		{6, "dwDataSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{7, "lpStrings", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_PointerPointer, 0, 2, IN },
-		{8, "lpRawData", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{0, "hEventLog", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "wType", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, UNK },
+		{2, "wCategory", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, UNK },
+		{3, "dwEventID", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{4, "lpUserSid", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{5, "wNumStrings", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, UNK },
+		{6, "dwDataSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{7, "lpStrings", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_PointerPointer, 0, 2, UNK },
+		{8, "lpRawData", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "RevertToSelf",0,
@@ -4789,15 +4768,15 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "SaferCloseLevel",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hLevelHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hLevelHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "SaferComputeTokenFromLevel",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "LevelHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "InAccessToken", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "OutAccessToken", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
+		{0, "LevelHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{1, "InAccessToken", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{2, "OutAccessToken", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
 		{3, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "lpReserved", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, INOUT },
 	}
@@ -4808,14 +4787,14 @@ libcall_info_t AdvAPI32_info[] = {
 		{0, "dwScopeId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{1, "dwLevelId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "OpenFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "pLevelHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{4, "lpReserved", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{3, "pLevelHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
+		{4, "lpReserved", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "SaferGetLevelInformation",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "LevelHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "LevelHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwInfoType", NKT_DBOBJCLASS_Enumeration, "_SAFER_OBJECT_INFO_CLASS", 32, IN },
 		{2, "lpQueryBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, OUT },
 		{3, "dwInBufferSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -4830,50 +4809,50 @@ libcall_info_t AdvAPI32_info[] = {
 		{2, "InfoBufferSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "InfoBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, INOUT },
 		{4, "InfoBufferRetSize", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, INOUT },
-		{5, "lpReserved", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{5, "lpReserved", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "SaferIdentifyLevel",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
 		{0, "dwNumProperties", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "pCodeProperties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SAFER_CODE_PROPERTIES_V2", 1152, IN },
-		{2, "pLevelHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, OUT },
-		{3, "lpReserved", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{1, "pCodeProperties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SAFER_CODE_PROPERTIES_V2", 1408, IN },
+		{2, "pLevelHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, OUT },
+		{3, "lpReserved", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "SaferiIsExecutableFileType",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "szFullPathname", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{0, "szFullPathname", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{1, "bFromShellExecute", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, IN },
 	}
 	},
 	{ "SaferRecordEventLogEntry",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hLevel", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hLevel", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "szTargetPath", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{2, "lpReserved", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{2, "lpReserved", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "SaferSetLevelInformation",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "LevelHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "dwInfoType", NKT_DBOBJCLASS_Enumeration, "_SAFER_OBJECT_INFO_CLASS", 32, IN },
-		{2, "lpQueryBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{3, "dwInBufferSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "LevelHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "dwInfoType", NKT_DBOBJCLASS_Enumeration, "_SAFER_OBJECT_INFO_CLASS", 32, UNK },
+		{2, "lpQueryBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{3, "dwInBufferSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "SaferSetPolicyInformation",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "dwScopeId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "SaferPolicyInfoClass", NKT_DBOBJCLASS_Enumeration, "_SAFER_POLICY_INFO_CLASS", 32, IN },
-		{2, "InfoBufferSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "InfoBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{4, "lpReserved", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
+		{0, "dwScopeId", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{1, "SaferPolicyInfoClass", NKT_DBOBJCLASS_Enumeration, "_SAFER_POLICY_INFO_CLASS", 32, UNK },
+		{2, "InfoBufferSize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{3, "InfoBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{4, "lpReserved", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
 	}
 	},
 	{ "SetAclInformation",4,
@@ -4885,22 +4864,11 @@ libcall_info_t AdvAPI32_info[] = {
 		{3, "dwAclInformationClass", NKT_DBOBJCLASS_Enumeration, "_ACL_INFORMATION_CLASS", 32, IN },
 	}
 	},
-	{ "SetEncryptedFileMetadata",6,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "lpFileName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "pbOldMetadata", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{2, "pbNewMetadata", NKT_DBFUNDTYPE_UnsignedByte | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{3, "pOwnerHash", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENCRYPTION_CERTIFICATE_HASH", 128, IN },
-		{4, "dwOperation", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{5, "pCertificatesAdded", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENCRYPTION_CERTIFICATE_HASH_LIST", 64, IN },
-	}
-	},
 	{ "SetEntriesInAclA",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "cCountOfExplicitEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "pListOfExplicitEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_A", 256, IN },
+		{1, "pListOfExplicitEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_A", 384, IN },
 		{2, "OldAcl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
 		{3, "NewAcl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_ACL", 64, OUT },
 	}
@@ -4909,7 +4877,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
 		{0, "cCountOfExplicitEntries", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "pListOfExplicitEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_W", 256, IN },
+		{1, "pListOfExplicitEntries", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EXPLICIT_ACCESS_W", 384, IN },
 		{2, "OldAcl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
 		{3, "NewAcl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_PointerPointer, "_ACL", 64, OUT },
 	}
@@ -4933,7 +4901,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "SetKernelObjectSecurity",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "Handle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "Handle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "SecurityInformation", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "SecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 	}
@@ -4969,7 +4937,7 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "ModificationDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{2, "ObjectsSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, INOUT },
 		{3, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
-		{4, "Token", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{4, "Token", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "SetPrivateObjectSecurityEx",6,
@@ -4980,14 +4948,14 @@ libcall_info_t AdvAPI32_info[] = {
 		{2, "ObjectsSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_PointerPointer, 0, 0, INOUT },
 		{3, "AutoInheritFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{4, "GenericMapping", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GENERIC_MAPPING", 128, IN },
-		{5, "Token", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{5, "Token", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "SetSecurityAccessMask",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_Void, 0, 0, OUT },
-		{0, "SecurityInformation", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{1, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
+		{0, "SecurityInformation", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{1, "DesiredAccess", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, UNK },
 	}
 	},
 	{ "SetSecurityDescriptorControl",3,
@@ -5042,7 +5010,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "SetSecurityInfo",7,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "handle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "handle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "ObjectType", NKT_DBOBJCLASS_Enumeration, "_SE_OBJECT_TYPE", 32, IN },
 		{2, "SecurityInfo", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{3, "psidOwner", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
@@ -5054,7 +5022,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "SetServiceBits",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hServiceStatus", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hServiceStatus", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwServiceBits", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "bSetBitsOn", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
 		{3, "bUpdateImmediately", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, IN },
@@ -5063,7 +5031,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "SetServiceObjectSecurity",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwSecurityInformation", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpSecurityDescriptor", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 	}
@@ -5071,21 +5039,21 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "SetServiceStatus",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hServiceStatus", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hServiceStatus", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "lpServiceStatus", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SERVICE_STATUS", 224, IN },
 	}
 	},
 	{ "SetThreadToken",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "Thread", NKT_DBFUNDTYPE_UnsignedDoubleWord | NKT_DBOBJCLASS_Pointer, 0, 4, IN },
-		{1, "Token", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "Thread", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, IN },
+		{1, "Token", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 	}
 	},
 	{ "SetTokenInformation",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "TokenHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "TokenInformationClass", NKT_DBOBJCLASS_Enumeration, "_TOKEN_INFORMATION_CLASS", 32, IN },
 		{2, "TokenInformation", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 		{3, "TokenInformationLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
@@ -5098,25 +5066,10 @@ libcall_info_t AdvAPI32_info[] = {
 		{1, "EventCallback", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
 	}
 	},
-	{ "SetUserFileEncryptionKey",1,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pEncryptionCertificate", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENCRYPTION_CERTIFICATE", 96, IN },
-	}
-	},
-	{ "SetUserFileEncryptionKeyEx",4,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pEncryptionCertificate", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ENCRYPTION_CERTIFICATE", 96, IN },
-		{1, "dwCapabilities", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "dwFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "pvReserved", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-	}
-	},
 	{ "StartServiceA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwNumServiceArgs", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpServiceArgVectors", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_PointerPointer, 0, 1, IN },
 	}
@@ -5124,19 +5077,19 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "StartServiceCtrlDispatcherA",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "lpServiceStartTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SERVICE_TABLE_ENTRYA", 64, IN },
+		{0, "lpServiceStartTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SERVICE_TABLE_ENTRYA", 128, UNK },
 	}
 	},
 	{ "StartServiceCtrlDispatcherW",1,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "lpServiceStartTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SERVICE_TABLE_ENTRYW", 64, IN },
+		{0, "lpServiceStartTable", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_SERVICE_TABLE_ENTRYW", 128, UNK },
 	}
 	},
 	{ "StartServiceW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "hService", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "hService", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
 		{1, "dwNumServiceArgs", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "lpServiceArgVectors", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_PointerPointer, 0, 2, IN },
 	}
@@ -5144,78 +5097,78 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "StartTraceA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, IN },
-		{1, "InstanceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, UNK },
+		{1, "InstanceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 		{2, "Properties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_PROPERTIES", 960, INOUT },
 	}
 	},
 	{ "StartTraceW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, IN },
-		{1, "InstanceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord | NKT_DBOBJCLASS_Pointer, 0, 8, UNK },
+		{1, "InstanceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{2, "Properties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_PROPERTIES", 960, INOUT },
 	}
 	},
 	{ "StopTraceA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
-		{1, "InstanceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "InstanceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 		{2, "Properties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_PROPERTIES", 960, OUT },
 	}
 	},
 	{ "StopTraceW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
-		{1, "InstanceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "InstanceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{2, "Properties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_PROPERTIES", 960, OUT },
 	}
 	},
 	{ "SystemFunction036",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedByte, 0, 1, OUT },
-		{0, "RandomBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "RandomBufferLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "RandomBuffer", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{1, "RandomBufferLength", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "SystemFunction040",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "Memory", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "MemorySize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "OptionFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "Memory", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{1, "MemorySize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{2, "OptionFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "SystemFunction041",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_SignedDoubleWord, 0, 4, OUT },
-		{0, "Memory", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{1, "MemorySize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{2, "OptionFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
+		{0, "Memory", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, UNK },
+		{1, "MemorySize", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
+		{2, "OptionFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, UNK },
 	}
 	},
 	{ "TraceEvent",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 		{1, "EventTrace", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_HEADER", 384, IN },
 	}
 	},
 	{ "TraceEventInstance",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 		{1, "EventTrace", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_INSTANCE_HEADER", 448, IN },
-		{2, "InstInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "EVENT_INSTANCE_INFO", 64, IN },
-		{3, "ParentInstInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "EVENT_INSTANCE_INFO", 64, IN },
+		{2, "InstInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "EVENT_INSTANCE_INFO", 128, UNK },
+		{3, "ParentInstInfo", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "EVENT_INSTANCE_INFO", 128, UNK },
 	}
 	},
 	{ "TraceMessage",4,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "LoggerHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{0, "LoggerHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 		{1, "MessageFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "MessageGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
 		{3, "MessageNumber", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
@@ -5224,7 +5177,7 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "TraceMessageVa",5,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "LoggerHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
+		{0, "LoggerHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
 		{1, "MessageFlags", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
 		{2, "MessageGuid", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_GUID", 128, IN },
 		{3, "MessageNumber", NKT_DBFUNDTYPE_UnsignedWord, 0, 2, IN },
@@ -5272,38 +5225,6 @@ libcall_info_t AdvAPI32_info[] = {
 		{10, "Args", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
 	}
 	},
-	{ "TreeSetNamedSecurityInfoA",11,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pObjectName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
-		{1, "ObjectType", NKT_DBOBJCLASS_Enumeration, "_SE_OBJECT_TYPE", 32, IN },
-		{2, "SecurityInfo", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "pOwner", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{4, "pGroup", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{5, "pDacl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
-		{6, "pSacl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
-		{7, "dwAction", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{8, "fnProgress", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
-		{9, "ProgressInvokeSetting", NKT_DBOBJCLASS_Enumeration, "_PROGRESS_INVOKE_SETTING", 32, IN },
-		{10, "Args", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-	}
-	},
-	{ "TreeSetNamedSecurityInfoW",11,
-	{ 
-		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "pObjectName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
-		{1, "ObjectType", NKT_DBOBJCLASS_Enumeration, "_SE_OBJECT_TYPE", 32, IN },
-		{2, "SecurityInfo", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{3, "pOwner", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{4, "pGroup", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-		{5, "pDacl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
-		{6, "pSacl", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_ACL", 64, IN },
-		{7, "dwAction", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, IN },
-		{8, "fnProgress", NKT_DBOBJCLASS_Typedef, 0, 0, IN },
-		{9, "ProgressInvokeSetting", NKT_DBOBJCLASS_Enumeration, "_PROGRESS_INVOKE_SETTING", 32, IN },
-		{10, "Args", NKT_DBFUNDTYPE_Void | NKT_DBOBJCLASS_Pointer, 0, 0, IN },
-	}
-	},
 	{ "UninstallApplication",2,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
@@ -5326,16 +5247,16 @@ libcall_info_t AdvAPI32_info[] = {
 	{ "UpdateTraceA",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
-		{1, "InstanceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "InstanceName", NKT_DBFUNDTYPE_AnsiChar | NKT_DBOBJCLASS_Pointer, 0, 1, UNK },
 		{2, "Properties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_PROPERTIES", 960, INOUT },
 	}
 	},
 	{ "UpdateTraceW",3,
 	{ 
 		{-1, "Return value", NKT_DBFUNDTYPE_UnsignedDoubleWord, 0, 4, OUT },
-		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, IN },
-		{1, "InstanceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, IN },
+		{0, "TraceHandle", NKT_DBFUNDTYPE_UnsignedQuadWord, 0, 8, UNK },
+		{1, "InstanceName", NKT_DBFUNDTYPE_WideChar | NKT_DBOBJCLASS_Pointer, 0, 2, UNK },
 		{2, "Properties", NKT_DBOBJCLASS_Struct | NKT_DBOBJCLASS_Pointer, "_EVENT_TRACE_PROPERTIES", 960, INOUT },
 	}
 	},
@@ -5348,4 +5269,5 @@ libcall_info_t AdvAPI32_info[] = {
 	}
 	},
 };
+
 unsigned AdvAPI32arraySize = (sizeof(AdvAPI32_info) / sizeof(AdvAPI32_info[0]));

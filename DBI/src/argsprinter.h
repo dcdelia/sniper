@@ -30,8 +30,8 @@
 #define CHAR_SIZE sizeof(char)
 #define WCHAR_SIZE sizeof(wchar_t)
 
-VOID printApiName(const char* exportName, const char* dllName, bool isKnown, tlsinfo* tdata, int stackSize, void* retAddr, ADDRINT* sp);
-VOID printApiExecuted(const char* exportName, const char* dllName, bool isKnown, tlsinfo* tdata, int stackSize, ADDRINT sp, int offset);
+VOID printApiName(const char* exportName, const char* dllName, bool isKnown, tlsinfo* tdata, uint32_t stackSize, void* retAddr, ADDRINT* sp);
+VOID printApiExecuted(const char* exportName, const char* dllName, bool isKnown, tlsinfo* tdata, uint32_t stackSize, ADDRINT sp, int offset);
 VOID printArg(tlsinfo* tdata, libcall_arg_info_t &argInfo, ADDRINT argValue, ADDRINT* sp);
 VOID printLongRet(tlsinfo* tdata, libcall_arg_info_t &argInfo, ADDRINT EAX, ADDRINT EDX);
 VOID printDoubleRet(tlsinfo* tdata, libcall_arg_info_t &argInfo);

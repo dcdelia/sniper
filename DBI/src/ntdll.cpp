@@ -37,6 +37,17 @@ VOID EnumSyscalls() {
 		// AddressOfFunctions points to an array of RVAs of the functions/symbols in the module
 		unsigned char *addr = image + address_of_functions[address_of_name_ordinals[i]];
 		if (!memcmp(name, "Zw", 2) || !memcmp(name, "Nt", 2)) {
+			#ifdef __LP64__
+			// 64-bit Windows is standard among releases
+			// mov r10, rcx ; mov eax, sycall_number ; syscall; ret
+			// 4C 8B D1 ; B8 ?? ?? ?? ?? ; 0F 05 ; C3
+			if (addr[0] == 0x4C && addr[3] == 0xB8) {
+				UINT16 syscall_number = *(UINT16*)(addr + 4); // could read UINT32 as well
+				if (!syscallIDs[syscall_number] || (!memcmp(name, "Nt", 2) && !memcmp(name, "Zw", 2))) {
+					syscallIDs[syscall_number] = strdup(name);
+				}
+			}
+			#else
 			// does the signature match one of these cases? https://gist.github.com/wbenny/b08ef73b35782a1f57069dff2327ee4d
 			// 1:   > WoW64 on Windows XP and Windows 7
 			//      mov eax, syscall_number ; mov ecx, imm32 ; lea edx, [esp+04h] ; call fs:[C0h]
@@ -70,7 +81,7 @@ VOID EnumSyscalls() {
 					syscallIDs[syscall_number] = strdup(name);
 				}
 			}
+			#endif
 		}
 	}
-
 }

@@ -27,10 +27,12 @@
 #include "logger.h"
 
 // DBI anti-evasion + hooks
+#ifndef __LP64__ // not available yet for x64
 #include "sok/memory.h"
 #include "sok/hooks.h"
 #include "sok/fpu.h"
 #include "sok/logging.h"
+#endif
 
 // ntdll.cpp: map between ordinal and syscall name
 extern CHAR* syscallIDs[MAXSYSCALLS];
@@ -50,6 +52,7 @@ BOOL _leakKnob;
 #endif
 
 // check USE_KNOB in config.h to see if they are enabled
+#ifndef __LP64__ // not available yet for x64
 KNOB <BOOL> KnobNX(KNOB_MODE_WRITEONCE, "pintool",
 	"nx", "false", "enable NX protection");
 
@@ -61,6 +64,7 @@ KNOB <BOOL> KnobRW(KNOB_MODE_WRITEONCE, "pintool",
 
 KNOB <BOOL> KnobLeak(KNOB_MODE_WRITEONCE, "pintool",
 	"leak", "false", "enable FPU context protection");
+#endif
 
 
 INT32 Usage() {
@@ -71,8 +75,10 @@ INT32 Usage() {
 	return -1;
 }
 
+#ifndef __LP64__ // not available yet for x64
 VOID antiDBIEvasionConfig() {
 	SokLogging::Init();
+
 
 #if USE_KNOBS
 	_leakKnob = KnobLeak.Value();
@@ -90,20 +96,25 @@ VOID antiDBIEvasionConfig() {
 		}
 	}
 }
+#endif
 
 VOID FiniCallback(INT32 code, VOID *v) {
 	// base statistics
 	BaseStats::printStats();
 
+#ifndef __LP64__ // not available yet for x64
 	SokLogging::Shutdown();
+#endif
 }
 
 VOID OnThreadStart(THREADID tid, CONTEXT *ctxt, INT32, VOID *) {
 	// DBI anti-evasion library
+#ifndef __LP64__ // not available yet for x64
 	if (_rwKnob || _nxKnob) {
 		HOOKS_SetTLSKey(tid);
 		MEMORY_OnThreadStart(ctxt);
 	}
+#endif
 
 	// logging
 	TRACER_InitializeTLS(tid);
@@ -116,10 +127,12 @@ VOID OnThreadFini(THREADID tid, const CONTEXT *ctxt, INT32, VOID *) {
 
 VOID Instruction(INS ins, VOID *v) {
 	// DBI anti-evasion library
+#ifndef __LP64__ // not available yet for x64
 	if (_rwKnob || _nxKnob)
 		MEMORY_InstrumentINS(ins);
 	if (_leakKnob)
 		FPU_InstrumentINS(ins);
+#endif
 
 	// API tracing
 	TRACER_Instruction(ins);
@@ -127,9 +140,11 @@ VOID Instruction(INS ins, VOID *v) {
 
 VOID Image(IMG img, VOID* v) {
 	// DBI anti-evasion library
+#ifndef __LP64__ // not available yet for x64
 	if (_rwKnob || _nxKnob) {
 		MEMORY_LoadImage(img);
 	}
+#endif
 
 	// API tracing
 	TRACER_LoadImage(img);
@@ -137,9 +152,11 @@ VOID Image(IMG img, VOID* v) {
 
 VOID ImageUnload(IMG img, VOID* v) {
 	// DBI anti-evasion library
+#ifndef __LP64__ // not available yet for x64
 	if (_rwKnob || _nxKnob) {
 		MEMORY_UnloadImage(img);
 	}
+#endif
 
 	// API tracing
 	TRACER_UnloadImage(img);
@@ -147,18 +164,22 @@ VOID ImageUnload(IMG img, VOID* v) {
 
 VOID SyscallEntry(THREADID thread_id, CONTEXT *ctx, SYSCALL_STANDARD std, void *v) {
 	// anti-evasion
+#ifndef __LP64__ // not available yet for x64
 	if (_rwKnob || _nxKnob) {
 		HOOKS_SyscallEntry(thread_id, ctx, std);
 	}
+#endif
 
 	// API tracing
 	TRACER_SyscallEntry(thread_id, ctx, std);
 }
 
 VOID SyscallExit(THREADID thread_id, CONTEXT *ctx, SYSCALL_STANDARD std, void *v) {
+#ifndef __LP64__ // not available yet for x64
 	if (_rwKnob || _nxKnob) {
 		HOOKS_SyscallExit(thread_id, ctx, std);
 	}
+#endif
 
 	// API tracing
 	TRACER_SyscallExit(thread_id, ctx, std);
@@ -195,7 +216,9 @@ int main(int argc, char *argv[]) {
 	}
 
 	// initialize some stuff
+#ifndef __LP64__ // not available yet for x64
 	antiDBIEvasionConfig();
+#endif
 	OS_MkDir(LOGPATH, 0777);
 	PIN_MutexInit(&mutex);
 
@@ -203,12 +226,14 @@ int main(int argc, char *argv[]) {
 	TRACER_Init();
 
 	// anti-evasion stuff
+#ifndef __LP64__
 	if (_rwKnob || _nxKnob) {
 		MEMORY_Init();
 	}
 	if (_leakKnob) {
 		FPU_Init();
 	}
+#endif
 
 	// syscall instrumentation
 	EnumSyscalls(); // parse ntdll for ordinals
@@ -217,7 +242,9 @@ int main(int argc, char *argv[]) {
 	PIN_AddSyscallExitFunction(SyscallExit, NULL);
 
 	// anti-evasion syscall hooks
+#ifndef __LP64__
 	HOOKS_Init();
+#endif
 
 	// INS instrumentation
 	INS_AddInstrumentFunction(Instruction, NULL);

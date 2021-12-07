@@ -15,16 +15,16 @@ namespace W { // MEH I will have to fix the Enum eventually
 std::vector<retObj> pendingRets;
 std::map < ADDRINT, const char* > retToDll;
 
-inline VOID printArgsOnExit(libcall_info_t* prototype, tlsinfo *tdata, ADDRINT EAX, ADDRINT EDX, ADDRINT* esp_entry) {
+inline VOID printArgsOnExit(libcall_info_t* prototype, tlsinfo *tdata, ADDRINT EAX, ADDRINT EDX, callinfo &cinfo) {
 	//logFun(tdata, "Return value: %p\n", EAX);
-	
+	ADDRINT* esp_entry = (ADDRINT*)cinfo.esp;
 	libcall_arg_info_t &retInfo = prototype->lib_args[0];
 
-	// Print retval if LONGLONG case
+	// Print retval if LONGLONG case // TODO64
 	if (retInfo.arg_type == NKT_DBFUNDTYPE_SignedQuadWord || retInfo.arg_type == NKT_DBFUNDTYPE_UnsignedQuadWord) {
 		printLongRet(tdata, prototype->lib_args[0], EAX, EDX);
 	}
-	// Print retval for DOUBLE case
+	// Print retval for DOUBLE case // TODO64
 	else if (retInfo.arg_type == NKT_DBFUNDTYPE_Double || retInfo.arg_type == NKT_DBFUNDTYPE_LongDouble) {
 		printDoubleRet(tdata, prototype->lib_args[0]);
 	}
@@ -38,30 +38,47 @@ inline VOID printArgsOnExit(libcall_info_t* prototype, tlsinfo *tdata, ADDRINT E
 		for (idx; idx <= numArgs; ++idx) {
 			libcall_arg_info_t &argInfo = prototype->lib_args[idx];
 			// inspect INOUT, OUT, UNK (aka skip IN)
-			if (argInfo.in_out_flag == IN) continue;
-
-			printArg(tdata, argInfo, esp_entry[sp], esp_entry + sp);
-			if (argInfo.arg_type == NKT_DBFUNDTYPE_SignedQuadWord || argInfo.arg_type == NKT_DBFUNDTYPE_UnsignedQuadWord) {
-				++sp;
+#ifdef __LP64__
+			if (idx <= 4) {
+				if (argInfo.in_out_flag != IN) {
+					// inspect saved copy
+					ADDRINT reg = cinfo.outRegs.regs[idx - 1];
+					printArg(tdata, argInfo, reg, NULL); // hopefully NULL will never be used as ESP (cases: long long or double on 32-bit)
+				}
+				continue;
 			}
+#endif
+			if (argInfo.in_out_flag == IN) {
+				++sp;
+				continue;
+			}
+			printArg(tdata, argInfo, esp_entry[sp], esp_entry + sp);
 			++sp;
-
+		#ifndef __LP64__
+			if (argInfo.arg_type == NKT_DBFUNDTYPE_SignedQuadWord || argInfo.arg_type == NKT_DBFUNDTYPE_UnsignedQuadWord) {
+				++sp; // TODO64 double-check this part
+			}
+		#endif
 			//logFun(tdata, "[%d] %s = %p\n", idx, argInfo.arg_name, esp_entry[idx]);
 		}
 	}
 }
 
-inline VOID printOnExit(ADDRINT ESP, ADDRINT EAX, ADDRINT EDX, tlsinfo *tdata, callinfo &cinfo, size_t stackEntries, const char* dllName) {
+inline VOID printOnExit(ADDRINT ESP, ADDRINT EAX, ADDRINT EDX, tlsinfo *tdata, callinfo &cinfo, uint32_t stackEntries, const char* dllName) {
 	exportEntry *expEntry = (exportEntry*)cinfo.data;
 	libcall_info_t* prototype = expEntry->prototype;
+#ifdef __LP64__
+	int offset = (int)(ESP - cinfo.esp) - 8;
+#else
 	int offset = ESP - cinfo.esp - 4;
+#endif
 	if (prototype) {
 		const char* fun = prototype->func_name;
 
 		printApiExecuted(fun, dllName, true, tdata, stackEntries, ESP, offset);
 
 		//logFun(tdata, "(%d) Clean return with ret [%d] to ESP %p for %s\n", stackEntries, offset, ESP, fun);
-		printArgsOnExit(prototype, tdata, EAX, EDX, (ADDRINT*)cinfo.esp);
+		printArgsOnExit(prototype, tdata, EAX, EDX, cinfo);
 	}
 	else {
 		const char* fun = expEntry->name;
@@ -89,8 +106,8 @@ VOID exitCallback(THREADID tid, ADDRINT ESP, ADDRINT EIP, ADDRINT EAX, ADDRINT E
 	tlsinfo *tdata = static_cast<tlsinfo*>(PIN_GetThreadData(TRACER_tls_key, tid));
 	callstack &cstack = tdata->cstack;
 
-	size_t entries = cstack.size();
-	size_t origEntries = entries;
+	uint32_t entries = (uint32_t)cstack.size();
+	uint32_t origEntries = entries;
 	if (entries == 0) {
 		// TODO do we need this? I think I wouldn't be instrumenting the RA otherwise
 		//if (bintree_search(intervalTree, *((ADDRINT*)ESP)+1)) { // debug mode only?
@@ -217,9 +234,9 @@ VOID TRACER_Instruction(INS ins) {
 				IARG_REG_VALUE,
 				REG_INST_PTR,
 				IARG_REG_VALUE,
-				REG_EAX,
+				REG_GAX,
 				IARG_REG_VALUE,
-				REG_EDX,
+				REG_GDX,
 				IARG_ADDRINT, 
 				dllName, // TODO check whether we need this
 				IARG_END);

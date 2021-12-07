@@ -23,8 +23,7 @@ namespace W { // MEH I will have to fix the Enum eventually
 //char* supportedDLLs[] = { "msvcrt.dll" };
 
 // list a supported DLL name here to enable instrumentation
-char* supportedDLLs[] = { "advapi32.dll", "crypt32.dll", "gdi32.dll", "iphlpapi.dll", "kernel32.dll", "kernelbase.dll", "ole32.dll", "oleaut32.dll", "shell32.dll", "user32.dll", "wininet.dll", "ws2_32.dll"
-};
+char* supportedDLLs[] = { "advapi32.dll", "crypt32.dll", "gdi32.dll", "iphlpapi.dll", "kernel32.dll", "kernelbase.dll", "ole32.dll", "oleaut32.dll", "shell32.dll", "user32.dll", "wininet.dll", "ws2_32.dll"};
 
 itreenode_t* intervalTree;
 
@@ -35,8 +34,13 @@ std::vector<monitoredDLL> monitoredDLLs;
 std::set<ADDRINT> instrumentedRAs;
 std::set<ADDRINT> alreadyInstrumented;
 
+#ifdef __LP64__
+inline void printArgumentsOnEntry(tlsinfo *tdata, libcall_info_t* prototype, ADDRINT* esp_entry,
+								  CONTEXT* pContext, callinfo* cinfo) {
+#else
 inline void printArgumentsOnEntry(tlsinfo *tdata, libcall_info_t* prototype, ADDRINT* esp_entry) {
-	size_t numArgs = prototype->argnum;
+#endif
+	uint32_t numArgs = prototype->argnum;
 #if LOG_ARG_COUNTS
 	BaseStats::prototypes[prototype]++; // no initialization, trust Pin STL library :)
 	if (numArgs > 0)
@@ -45,24 +49,58 @@ inline void printArgumentsOnEntry(tlsinfo *tdata, libcall_info_t* prototype, ADD
 #endif
 	if (numArgs) {
 		// index 0 is return type
-		size_t idx = 1;
-		size_t sp = 1;
+		uint32_t idx = 1;
+		uint32_t sp = 1;
 		for (idx = 1; idx <= numArgs; ++idx) {
 			libcall_arg_info_t &argInfo = prototype->lib_args[idx];
 			#if LOG_ARG_COUNTS
 			if (argInfo.in_out_flag == OUT || argInfo.in_out_flag == INOUT)
 				BaseStats::argOutApiCalls++;
 			#endif
-			// inspect IN, INOUT, UNK (aka skip OUT)
-			if (argInfo.in_out_flag == OUT) continue;
-			//logFun(tdata, "[%d] %s = %p\n", idx, argInfo.arg_name, esp_entry[idx]);
-			printArg(tdata, argInfo, esp_entry[sp], esp_entry + sp);
-			if (argInfo.arg_type == NKT_DBFUNDTYPE_SignedQuadWord || argInfo.arg_type == NKT_DBFUNDTYPE_UnsignedQuadWord ||
-				argInfo.arg_type == NKT_DBFUNDTYPE_Double || argInfo.arg_type == NKT_DBFUNDTYPE_LongDouble) {
+#ifdef __LP64__
+			bool shallPrint = !(argInfo.in_out_flag == OUT);
+			bool mayNeedStore = !(argInfo.in_out_flag == IN);
+			// first four arguments will be in registers, the rest on stack
+			// TODO64: XMM0L, XMM1L, XMM2L and XMM3L for floating-point arguments
+			//         while 16 byte-wide stuff gets passed by reference
+			if (idx == 1) {
+				ADDRINT reg = PIN_GetContextReg(pContext, REG_GCX);
+				if (shallPrint) printArg(tdata, argInfo, reg, esp_entry + sp);
+				if (mayNeedStore) cinfo->outRegs.rcx = reg;
+			}
+			else if (idx == 2) {
+				ADDRINT reg = PIN_GetContextReg(pContext, REG_GDX);
+				if (shallPrint) printArg(tdata, argInfo, reg, esp_entry + sp);
+				if (mayNeedStore) cinfo->outRegs.rdx = reg;
+			}
+			else if (idx == 3) {
+				ADDRINT reg = PIN_GetContextReg(pContext, REG_R8);
+				if (shallPrint) printArg(tdata, argInfo, reg, esp_entry + sp);
+				if (mayNeedStore) cinfo->outRegs.r8 = reg;
+			}
+			else if (idx == 4) {
+				ADDRINT reg = PIN_GetContextReg(pContext, REG_R9);
+				if (shallPrint) printArg(tdata, argInfo, reg, esp_entry + sp);
+				if (mayNeedStore) cinfo->outRegs.r9 = reg;
+			}
+			else {
+				if (shallPrint) printArg(tdata, argInfo, esp_entry[sp], esp_entry + sp);
 				++sp;
 			}
-
+#else
+			// inspect IN, INOUT, UNK (aka skip OUT)
+			if (argInfo.in_out_flag == OUT) {
+				++sp;
+				continue;
+			}
+			//logFun(tdata, "[%d] %s = %p\n", idx, argInfo.arg_name, esp_entry[idx]);
+			printArg(tdata, argInfo, esp_entry[sp], esp_entry + sp);
 			++sp;
+			if (argInfo.arg_type == NKT_DBFUNDTYPE_SignedQuadWord || argInfo.arg_type == NKT_DBFUNDTYPE_UnsignedQuadWord ||
+				argInfo.arg_type == NKT_DBFUNDTYPE_Double || argInfo.arg_type == NKT_DBFUNDTYPE_LongDouble) {
+				++sp; // two slots taken
+			}
+#endif
 		}
 	}
 }
@@ -119,7 +157,11 @@ VOID entryCallback(THREADID tid, ADDRINT* ESP, void* data, ADDRINT EIP) {
 #else
 VOID entryCallback(THREADID tid, ADDRINT* ESP, void* data) {
 #endif */
+#ifdef __LP64__
+VOID entryCallback(THREADID tid, ADDRINT *ESP, void* data, ADDRINT EIP, const char* dllName, CONTEXT *pContext) {
+#else
 VOID entryCallback(THREADID tid, ADDRINT* ESP, void* data, ADDRINT EIP, const char* dllName) {
+#endif
 	BaseStats::apiCallsAll++;
 	LOG_TIME_ENTRY();
 	itreenode_t* node = itree_search(intervalTree, *ESP);
@@ -166,12 +208,20 @@ VOID entryCallback(THREADID tid, ADDRINT* ESP, void* data, ADDRINT EIP, const ch
 
 	// update call stack
 	++callCnt;
+#ifdef __LP64__
+	callinfo cinfo = { *ESP, (ADDRINT)ESP, data, {0} };
+#else
 	callinfo cinfo = { *ESP, (ADDRINT)ESP, data };
+#endif
+
 #if TRACE_PREDECESSOR
 	logFun(tdata, "last-EIP was %p\n", tdata->lastEIP);
 	logFun(tdata, "EIP: %p\n", EIP);
 #endif
+
+#ifndef __LP64__ // deferred for 64-bit case as we should save OUT args
 	updateStackOnEntry(cstack, cinfo, tdata);
+#endif
 
 
 	// GIORDANO preferisce che venga fatto in questo modo o ci mena
@@ -183,14 +233,23 @@ VOID entryCallback(THREADID tid, ADDRINT* ESP, void* data, ADDRINT EIP, const ch
 
 		const char* fun = prototype->func_name;
 		//LOG_BISHOP(tdata, "(%d) Function call to %s!%s with RA %p and ESP %p\n", cstack.size(), dllName, fun, (void*)*ESP, ESP);
-		printApiName(fun, dllName, true, tdata, cstack.size(), (void*)*ESP, ESP);
+		printApiName(fun, dllName, true, tdata, (uint32_t)cstack.size(), (void*)*ESP, ESP);
+		#ifdef __LP64__
+		// saves also register values for output arguments
+		printArgumentsOnEntry(tdata, prototype, ESP, pContext, &cinfo);
+		updateStackOnEntry(cstack, cinfo, tdata);
+		#else
 		printArgumentsOnEntry(tdata, prototype, ESP);
+		#endif
 	} else {
 		const char* fun = entry->name;
 		//LOG_BISHOP(tdata, "(%d) Unsupported call to %s!%s with RA %p and ESP %p\n", cstack.size(), dllName, fun, (void*)*ESP, ESP);
-		printApiName(fun, dllName, false, tdata, cstack.size(), (void*)*ESP, ESP);
+		printApiName(fun, dllName, false, tdata, (uint32_t)cstack.size(), (void*)*ESP, ESP);
 		#if LOG_ARG_COUNTS
 		//BaseStats::sptch++;
+		#endif
+		#ifdef __LP64__
+		updateStackOnEntry(cstack, cinfo, tdata);
 		#endif
 	}
 	LOG_TIME_EXIT(BaseStats::entryApi);
@@ -352,6 +411,7 @@ VOID TRACER_LoadImage(IMG img) {
 
 	size_t rtnNotFound = dll.entries.size(); // easier if decremented
 	const char *dllName = strrchr(IMG_Name(img).c_str(), '\\') + 1;
+
 	BaseStats::sitesForTailApiCalls.insert(std::pair<const char*, UINT32>(theDllPath, 0));
 	BaseStats::sitesForIntApiCalls.insert(std::pair<std::string, UINT32>(imgNameStr, 0));
 	BaseStats::sitesForIntSysCalls.insert(std::pair<std::string, UINT32>(imgNameStr, 0));
@@ -427,20 +487,53 @@ VOID TRACER_LoadImage(IMG img) {
 			IARG_END);*/
 
 		// insert instrumentation
+#ifdef __LP64__ // otherwise too much stuff to pass as argument
+		REGSET regsIn;
+		REGSET_Clear(regsIn);
+		REGSET_Insert(regsIn, REG_GCX);
+		REGSET_Insert(regsIn, REG_GDX);
+		REGSET_Insert(regsIn, REG_R8);
+		REGSET_Insert(regsIn, REG_R9);
+		REGSET regsOut;
+		REGSET_Clear(regsOut);
+#endif
+
 #if TRACE_ENTRY_INS
+	#ifdef __LP64__
+		INS_InsertCall(head, IPOINT_BEFORE,
+			callback,
+			IARG_THREAD_ID,
+			IARG_REG_VALUE, REG_STACK_PTR,
+			IARG_PTR, e, // TODO eventually use union or drop calls without prototype?
+			IARG_REG_VALUE,
+			REG_INST_PTR, // TODO discard when we won't need logging unless TRACE_PREDECESSOR
+			IARG_ADDRINT, dllName,
+			IARG_PARTIAL_CONTEXT, &regsIn, &regsOut,
+			IARG_END);
+	#else
 		INS_InsertCall(head, IPOINT_BEFORE,
 			callback,
 			IARG_THREAD_ID,
 			IARG_REG_VALUE,
 			REG_STACK_PTR,
-			IARG_PTR,
-			e, // TODO eventually use union or drop calls without prototype?
+			IARG_PTR, e, // TODO eventually use union or drop calls without prototype?
 			IARG_REG_VALUE,
-			REG_EIP, // TODO discard when we won't need logging unless TRACE_PREDECESSOR
-			IARG_ADDRINT,
-			dllName,
+			REG_INST_PTR, // TODO discard when we won't need logging unless TRACE_PREDECESSOR
+			IARG_ADDRINT, dllName,
 			IARG_END);
-#else	
+	#endif
+#else
+	#ifdef __LP64__
+		RTN_InsertCall(rtn, IPOINT_BEFORE, (AFUNPTR)entryCallback,
+			IARG_THREAD_ID,
+			IARG_REG_VALUE, REG_STACK_PTR,
+			IARG_PTR, e, // TODO eventually use union or drop calls without prototype?
+			IARG_REG_VALUE,
+			REG_INST_PTR, // TODO discard when we won't need logging unless TRACE_PREDECESSOR
+			IARG_ADDRINT, dllName,
+			IARG_PARTIAL_CONTEXT, &regsIn, &regsOut,
+			IARG_END);
+	#else
 		RTN_InsertCall(rtn, IPOINT_BEFORE, (AFUNPTR)entryCallback,
 			IARG_THREAD_ID,
 			IARG_REG_VALUE,
@@ -448,10 +541,11 @@ VOID TRACER_LoadImage(IMG img) {
 			IARG_PTR,
 			e, // TODO eventually use union or drop calls without prototype?
 			IARG_REG_VALUE,
-			REG_EIP, // TODO discard when we won't need logging unless TRACE_PREDECESSOR
+			REG_INST_PTR, // TODO discard when we won't need logging unless TRACE_PREDECESSOR
 			IARG_ADDRINT,
 			dllName,
 			IARG_END);
+		#endif
 #endif
 		RTN_Close(rtn);
 
