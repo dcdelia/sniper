@@ -1,33 +1,32 @@
+## SNIPER - DBI Variant
+
 ### Compilation
 
-This variant of SNIPER builds on [Intel Pin](https://software.intel.com/en-us/articles/pin-a-dynamic-binary-instrumentation-tool) (v3.15 recommended) and requires Visual Studio 2015 or higher for its compilation.
+The DBI variant of SNIPER builds on [Intel Pin](https://software.intel.com/en-us/articles/pin-a-dynamic-binary-instrumentation-tool) and requires Visual Studio 2015 or higher for its compilation (default for the project: VS2017). We extensively tested it on Windows 7 SP1 and Windows 10 build 1803.
 
-Pin has some dependencies that require manual inclusion in the project. We created a `Locals.props` file that simplifies the project configuration. Its defaults are Pin being installed in `C:\Pin315` and the SDK 8.1 headers being in use: 
+We recommend using Pin version 3.19, as Windows 7 is no longer supported starting with the 3.20 release. Pin has some include dependencies: we provide a `Locals.props` property file to ease project configuration. Its defaults are Pin being installed in `C:\Pin319` and the SDK 10.0.17763.0 headers being in use: 
 
 ```
   <PropertyGroup Label="UserMacros">
-    <PinFolder>C:\Pin311</PinFolder>
-    <WinHPath>C:/Program Files (x86)/Windows Kits/8.1/Include/um</WinHPath>
+    <PinFolder>C:\Pin319</PinFolder>
+    <WinHPath>C:/Program Files (x86)/Windows Kits/10/Include/10.0.17763.0/um</WinHPath>
   </PropertyGroup>
 ```
 
-For instance, if you wish to use the SDK 10.0.17763.0 headers, after modifying the Project settings in Visual Studio
-you should also change the value of the `WinHPath` property to `C:/Program Files/Windows Kits/10/Include/10.0.17763.0/um`. Similary, modify the property value if your SDK 8.1 headers are installed in `C:/Program Files/` instead of `C:/Program Files (x86)/`. The purpose of this field is to assist Pin when it includes the absolute path of `Windows.h` from its CRT headers.
+For instance, if you wish to use the SDK 8.1 headers, update the Project settings in Visual Studio and then change the value of the `WinHPath` property to `C:/Program Files (x86)/Windows Kits/8.1/Include/um`. Similary, edit this property value if are running on a 32-bit install of Windows since your headers will be in `C:/Program Files/`. The purpose of this step is to enable Pin to include the absolute path of `Windows.h` from its CRT headers.
 
-You should now be able to compile SNIPER. Once compilation ends, you will find a `sniper32.dll` library in the Pin directory. If you encounter a missing `msvc_compat.h` error, make sure that `$(PinFolder)\extras\crt\include` is a valid path.
+You should now be able to compile SNIPER. Eventually, you will find a `sniper32.dll` (or `sniper64.dll` if you are building the 64-bit tracer) library in the Pin directory. If you encounter a missing `msvc_compat.h` error, make sure that `$(PinFolder)\extras\crt\include` is a valid path.
 
 ### Quick start
 
-Make sure that folder `C:\Pin315\sniper` exists, as it will contain the log files (one per thread) for the API calls from program code. More details and configuration options (like those that we used for collecting statistics in the paper) can be found in `logger.h`.
+The folder `C:\Pin319\sniper` will contain log files (one per thread) for the API calls from program code. Log file names in the output folder will contain the PID, a progressive internal thread number, and the TID of each traced execution unit. More details and configuration options, such as some that we used for collecting several statistics in the paper, can be found in `logger.h`.
 
 To run an executable under SNIPER use:
 
 ```
-C:\Pin315\pin.exe -t sniper32.dll [options] -- <file.exe>
+C:\Pin319\pin.exe -t sniper32.dll [options] -- <file.exe>
 ```
 
-Presently available options are those from the library of DBI mitigations that we build on. You can enable the tracing of derived execution flows (child processes and remote threads) by adding the `-follow_execv` directive for Pin before the `-t sniper32.dll` part.
+Currently available options are those from the library of [DBI mitigations](https://github.com/season-lab/sok-dbi-security/) that we build on (*available in the 32-bit build only*). You can enable the tracing of derived execution flows (child processes and remote threads) by adding the `-follow_execv` directive for Pin before the `-t sniper32.dll` part.
 
-Log file names in the output folder will contain the PID, a progressive thread number, and the TID of each traced execution unit.
-
-While we hope to publish a rich documentation for SNIPER before publication, you can learn about the mitigations by visiting their [project page](https://github.com/season-lab/sok-dbi-security/) and reading our ASIACCS'19 paper *"SoK: Using Dynamic Binary Instrumentation for Security (And How You May Get Caught Red Handed)"*.
+*TODO: provide instructions on how to generate and add prototypes for more DLL modules*
