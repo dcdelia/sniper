@@ -1,0 +1,3323 @@
+{
+	"exports":[
+    {
+        "ordinal": 218, 
+        "rva": 65295, 
+        "name": "_PfAddFiltersToInterface@24", 
+        "alias": [
+            {
+                "name": "_PfCreateInterface@24", 
+                "ordinal:": 222
+            }
+        ], 
+        "range": 6, 
+        "end_addresses": {
+            "rets": [
+                65298
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 219, 
+        "rva": 65328, 
+        "name": "_PfAddGlobalFilterToInterface@8", 
+        "alias": [
+            {
+                "name": "_PfRebindFilters@8", 
+                "ordinal:": 227
+            }, 
+            {
+                "name": "_PfRemoveGlobalFilterFromInterface@8", 
+                "ordinal:": 230
+            }
+        ], 
+        "range": 6, 
+        "end_addresses": {
+            "rets": [
+                65331
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 221, 
+        "rva": 65350, 
+        "name": "_PfBindInterfaceToIndex@16", 
+        "alias": [
+            {
+                "name": "_PfGetInterfaceStatistics@16", 
+                "ordinal:": 225
+            }
+        ], 
+        "range": 6, 
+        "end_addresses": {
+            "rets": [
+                65353
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 220, 
+        "rva": 65306, 
+        "name": "_PfBindInterfaceToIPAddress@12", 
+        "alias": [
+            {
+                "name": "_PfRemoveFilterHandles@12", 
+                "ordinal:": 228
+            }
+        ], 
+        "range": 6, 
+        "end_addresses": {
+            "rets": [
+                65309
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 223, 
+        "rva": 65317, 
+        "name": "_PfDeleteInterface@4", 
+        "alias": [
+            {
+                "name": "_PfMakeLog@4", 
+                "ordinal:": 226
+            }, 
+            {
+                "name": "_PfUnBindInterface@4", 
+                "ordinal:": 233
+            }
+        ], 
+        "range": 6, 
+        "end_addresses": {
+            "rets": [
+                65320
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 224, 
+        "rva": 65361, 
+        "name": "_PfDeleteLog@0", 
+        "alias": [], 
+        "range": 4, 
+        "end_addresses": {
+            "rets": [
+                65364
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 229, 
+        "rva": 65370, 
+        "name": "_PfRemoveFiltersFromInterface@20", 
+        "alias": [
+            {
+                "name": "_PfTestPacket@20", 
+                "ordinal:": 232
+            }
+        ], 
+        "range": 6, 
+        "end_addresses": {
+            "rets": [
+                65373
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 231, 
+        "rva": 65339, 
+        "name": "_PfSetLogBuffer@28", 
+        "alias": [], 
+        "range": 6, 
+        "end_addresses": {
+            "rets": [
+                65342
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 1, 
+        "rva": 62756, 
+        "name": "AddIPAddress", 
+        "alias": [], 
+        "range": 138, 
+        "end_addresses": {
+            "rets": [
+                62891
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 2, 
+        "rva": 55806, 
+        "name": "AllocateAndGetInterfaceInfoFromStack", 
+        "alias": [
+            {
+                "name": "NhpAllocateAndGetInterfaceInfoFromStack", 
+                "ordinal:": 209
+            }
+        ], 
+        "range": 385, 
+        "end_addresses": {
+            "rets": [
+                56188
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 3, 
+        "rva": 58228, 
+        "name": "AllocateAndGetIpAddrTableFromStack", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                58258
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 9, 
+        "rva": 60805, 
+        "name": "CancelIPChangeNotify", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                60824
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 10, 
+        "rva": 39463, 
+        "name": "CancelMibChangeNotify2", 
+        "alias": [], 
+        "range": 103, 
+        "end_addresses": {
+            "rets": [
+                39563
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 11, 
+        "rva": 21523, 
+        "name": "ConvertGuidToStringA", 
+        "alias": [], 
+        "range": 104, 
+        "end_addresses": {
+            "rets": [
+                21619
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 12, 
+        "rva": 14028, 
+        "name": "ConvertGuidToStringW", 
+        "alias": [], 
+        "range": 104, 
+        "end_addresses": {
+            "rets": [
+                14124
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 13, 
+        "rva": 83379, 
+        "name": "ConvertInterfaceAliasToLuid", 
+        "alias": [], 
+        "range": 315, 
+        "end_addresses": {
+            "rets": [
+                83691
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 14, 
+        "rva": 16228, 
+        "name": "ConvertInterfaceGuidToLuid", 
+        "alias": [], 
+        "range": 203, 
+        "end_addresses": {
+            "rets": [
+                16378
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 15, 
+        "rva": 14491, 
+        "name": "ConvertInterfaceIndexToLuid", 
+        "alias": [], 
+        "range": 61, 
+        "end_addresses": {
+            "rets": [
+                14549
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 16, 
+        "rva": 39130, 
+        "name": "ConvertInterfaceLuidToAlias", 
+        "alias": [], 
+        "range": 169, 
+        "end_addresses": {
+            "rets": [
+                39291
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 17, 
+        "rva": 32395, 
+        "name": "ConvertInterfaceLuidToGuid", 
+        "alias": [], 
+        "range": 85, 
+        "end_addresses": {
+            "rets": [
+                32472
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 18, 
+        "rva": 16107, 
+        "name": "ConvertInterfaceLuidToIndex", 
+        "alias": [], 
+        "range": 81, 
+        "end_addresses": {
+            "rets": [
+                16185
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 19, 
+        "rva": 83987, 
+        "name": "ConvertInterfaceLuidToNameA", 
+        "alias": [], 
+        "range": 111, 
+        "end_addresses": {
+            "rets": [
+                84095
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 20, 
+        "rva": 20909, 
+        "name": "ConvertInterfaceLuidToNameW", 
+        "alias": [], 
+        "range": 137, 
+        "end_addresses": {
+            "rets": [
+                21038
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 21, 
+        "rva": 83863, 
+        "name": "ConvertInterfaceNameToLuidA", 
+        "alias": [], 
+        "range": 119, 
+        "end_addresses": {
+            "rets": [
+                83979
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 22, 
+        "rva": 20406, 
+        "name": "ConvertInterfaceNameToLuidW", 
+        "alias": [], 
+        "range": 282, 
+        "end_addresses": {
+            "rets": [
+                20678
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 23, 
+        "rva": 83055, 
+        "name": "ConvertInterfacePhysicalAddressToLuid", 
+        "alias": [], 
+        "range": 259, 
+        "end_addresses": {
+            "rets": [
+                83311
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 24, 
+        "rva": 82953, 
+        "name": "ConvertIpv4MaskToLength", 
+        "alias": [], 
+        "range": 44, 
+        "end_addresses": {
+            "rets": [
+                82985
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 25, 
+        "rva": 31680, 
+        "name": "ConvertLengthToIpv4Mask", 
+        "alias": [], 
+        "range": 42, 
+        "end_addresses": {
+            "rets": [
+                31708
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 26, 
+        "rva": 55512, 
+        "name": "ConvertRemoteInterfaceAliasToLuid", 
+        "alias": [], 
+        "range": 289, 
+        "end_addresses": {
+            "rets": [
+                55798
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 27, 
+        "rva": 54748, 
+        "name": "ConvertRemoteInterfaceGuidToLuid", 
+        "alias": [], 
+        "range": 219, 
+        "end_addresses": {
+            "rets": [
+                54964
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 28, 
+        "rva": 54583, 
+        "name": "ConvertRemoteInterfaceIndexToLuid", 
+        "alias": [], 
+        "range": 65, 
+        "end_addresses": {
+            "rets": [
+                54645
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 29, 
+        "rva": 56363, 
+        "name": "ConvertRemoteInterfaceLuidToAlias", 
+        "alias": [], 
+        "range": 196, 
+        "end_addresses": {
+            "rets": [
+                56556
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 30, 
+        "rva": 54653, 
+        "name": "ConvertRemoteInterfaceLuidToGuid", 
+        "alias": [], 
+        "range": 90, 
+        "end_addresses": {
+            "rets": [
+                54740
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 31, 
+        "rva": 54498, 
+        "name": "ConvertRemoteInterfaceLuidToIndex", 
+        "alias": [], 
+        "range": 80, 
+        "end_addresses": {
+            "rets": [
+                54575
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 32, 
+        "rva": 56256, 
+        "name": "ConvertStringToGuidA", 
+        "alias": [], 
+        "range": 93, 
+        "end_addresses": {
+            "rets": [
+                56346
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 33, 
+        "rva": 16477, 
+        "name": "ConvertStringToGuidW", 
+        "alias": [], 
+        "range": 60, 
+        "end_addresses": {
+            "rets": [
+                16529
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 34, 
+        "rva": 83699, 
+        "name": "ConvertStringToInterfacePhysicalAddress", 
+        "alias": [], 
+        "range": 159, 
+        "end_addresses": {
+            "rets": [
+                83771
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 4, 
+        "rva": 75956, 
+        "name": "CPNatfwtCreateProviderInstance", 
+        "alias": [], 
+        "range": 11, 
+        "end_addresses": {
+            "rets": [
+                78445
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 5, 
+        "rva": 76001, 
+        "name": "CPNatfwtDeregisterProviderInstance", 
+        "alias": [], 
+        "range": 31, 
+        "end_addresses": {
+            "rets": [
+                76029
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 6, 
+        "rva": 75972, 
+        "name": "CPNatfwtDestroyProviderInstance", 
+        "alias": [], 
+        "range": 8, 
+        "end_addresses": {
+            "rets": [
+                76124
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 7, 
+        "rva": 76037, 
+        "name": "CPNatfwtIndicateReceivedBuffers", 
+        "alias": [], 
+        "range": 11, 
+        "end_addresses": {
+            "rets": [
+                82263
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 8, 
+        "rva": 75985, 
+        "name": "CPNatfwtRegisterProviderInstance", 
+        "alias": [], 
+        "range": 11, 
+        "end_addresses": {
+            "rets": [
+                80137
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 35, 
+        "rva": 85793, 
+        "name": "CreateAnycastIpAddressEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                85809
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 37, 
+        "rva": 62292, 
+        "name": "CreateIpForwardEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                62308
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 36, 
+        "rva": 88685, 
+        "name": "CreateIpForwardEntry2", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                88701
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 39, 
+        "rva": 59837, 
+        "name": "CreateIpNetEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                59853
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 38, 
+        "rva": 90083, 
+        "name": "CreateIpNetEntry2", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                90099
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 40, 
+        "rva": 66932, 
+        "name": "CreatePersistentTcpPortReservation", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                66961
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 41, 
+        "rva": 66969, 
+        "name": "CreatePersistentUdpPortReservation", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                66998
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 42, 
+        "rva": 60186, 
+        "name": "CreateProxyArpEntry", 
+        "alias": [], 
+        "range": 25, 
+        "end_addresses": {
+            "rets": [
+                60208
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 43, 
+        "rva": 90131, 
+        "name": "CreateSortedAddressPairs", 
+        "alias": [], 
+        "range": 515, 
+        "end_addresses": {
+            "rets": [
+                90643
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 44, 
+        "rva": 85606, 
+        "name": "CreateUnicastIpAddressEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                85622
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 45, 
+        "rva": 85817, 
+        "name": "DeleteAnycastIpAddressEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                85833
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 46, 
+        "rva": 60832, 
+        "name": "DeleteIPAddress", 
+        "alias": [], 
+        "range": 128, 
+        "end_addresses": {
+            "rets": [
+                60957
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 48, 
+        "rva": 59479, 
+        "name": "DeleteIpForwardEntry", 
+        "alias": [], 
+        "range": 127, 
+        "end_addresses": {
+            "rets": [
+                59603
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 47, 
+        "rva": 88709, 
+        "name": "DeleteIpForwardEntry2", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                88725
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 50, 
+        "rva": 59885, 
+        "name": "DeleteIpNetEntry", 
+        "alias": [], 
+        "range": 104, 
+        "end_addresses": {
+            "rets": [
+                59986
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 49, 
+        "rva": 90107, 
+        "name": "DeleteIpNetEntry2", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                90123
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 51, 
+        "rva": 67006, 
+        "name": "DeletePersistentTcpPortReservation", 
+        "alias": [], 
+        "range": 31, 
+        "end_addresses": {
+            "rets": [
+                67034
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 52, 
+        "rva": 67042, 
+        "name": "DeletePersistentUdpPortReservation", 
+        "alias": [], 
+        "range": 31, 
+        "end_addresses": {
+            "rets": [
+                67070
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 53, 
+        "rva": 60216, 
+        "name": "DeleteProxyArpEntry", 
+        "alias": [], 
+        "range": 25, 
+        "end_addresses": {
+            "rets": [
+                60238
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 54, 
+        "rva": 85630, 
+        "name": "DeleteUnicastIpAddressEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                85646
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 55, 
+        "rva": 61376, 
+        "name": "DisableMediaSense", 
+        "alias": [
+            {
+                "name": "RestoreMediaSense", 
+                "ordinal:": 236
+            }
+        ], 
+        "range": 5, 
+        "end_addresses": {
+            "rets": [
+                61378
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 258, 
+        "rva": 65682, 
+        "name": "do_echo_rep", 
+        "alias": [], 
+        "range": 355, 
+        "end_addresses": {
+            "rets": [
+                65957
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 259, 
+        "rva": 66194, 
+        "name": "do_echo_req", 
+        "alias": [], 
+        "range": 203, 
+        "end_addresses": {
+            "rets": [
+                66394
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 56, 
+        "rva": 61233, 
+        "name": "EnableRouter", 
+        "alias": [], 
+        "range": 59, 
+        "end_addresses": {
+            "rets": [
+                61289
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 58, 
+        "rva": 59994, 
+        "name": "FlushIpNetTable", 
+        "alias": [], 
+        "range": 71, 
+        "end_addresses": {
+            "rets": [
+                60062
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 57, 
+        "rva": 89715, 
+        "name": "FlushIpNetTable2", 
+        "alias": [], 
+        "range": 138, 
+        "end_addresses": {
+            "rets": [
+                89850
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 59, 
+        "rva": 91812, 
+        "name": "FlushIpPathTable", 
+        "alias": [], 
+        "range": 140, 
+        "end_addresses": {
+            "rets": [
+                91949
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 60, 
+        "rva": 15643, 
+        "name": "FreeMibTable", 
+        "alias": [], 
+        "range": 31, 
+        "end_addresses": {
+            "rets": [
+                15671
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 61, 
+        "rva": 16558, 
+        "name": "GetAdapterIndex", 
+        "alias": [], 
+        "range": 115, 
+        "end_addresses": {
+            "rets": [
+                16665
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 62, 
+        "rva": 55155, 
+        "name": "GetAdapterOrderMap", 
+        "alias": [], 
+        "range": 221, 
+        "end_addresses": {
+            "rets": [
+                55375
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 63, 
+        "rva": 27213, 
+        "name": "GetAdaptersAddresses", 
+        "alias": [], 
+        "range": 702, 
+        "end_addresses": {
+            "rets": [
+                27912
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 64, 
+        "rva": 37475, 
+        "name": "GetAdaptersInfo", 
+        "alias": [], 
+        "range": 246, 
+        "end_addresses": {
+            "rets": [
+                37718
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 65, 
+        "rva": 85841, 
+        "name": "GetAnycastIpAddressEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                85857
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 66, 
+        "rva": 85865, 
+        "name": "GetAnycastIpAddressTable", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                85884
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 67, 
+        "rva": 15472, 
+        "name": "GetBestInterface", 
+        "alias": [], 
+        "range": 88, 
+        "end_addresses": {
+            "rets": [
+                15557
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 68, 
+        "rva": 16193, 
+        "name": "GetBestInterfaceEx", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                16212
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 70, 
+        "rva": 60462, 
+        "name": "GetBestRoute", 
+        "alias": [], 
+        "range": 270, 
+        "end_addresses": {
+            "rets": [
+                60729
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 69, 
+        "rva": 42834, 
+        "name": "GetBestRoute2", 
+        "alias": [], 
+        "range": 475, 
+        "end_addresses": {
+            "rets": [
+                43306
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 71, 
+        "rva": 13505, 
+        "name": "GetCurrentThreadCompartmentId", 
+        "alias": [], 
+        "range": 47, 
+        "end_addresses": {
+            "rets": [
+                13551, 
+                49782
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 72, 
+        "rva": 72330, 
+        "name": "GetExtendedTcpTable", 
+        "alias": [], 
+        "range": 194, 
+        "end_addresses": {
+            "rets": [
+                72521
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 73, 
+        "rva": 75803, 
+        "name": "GetExtendedUdpTable", 
+        "alias": [], 
+        "range": 148, 
+        "end_addresses": {
+            "rets": [
+                75948
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 74, 
+        "rva": 55381, 
+        "name": "GetFriendlyIfIndex", 
+        "alias": [], 
+        "range": 17, 
+        "end_addresses": {
+            "rets": [
+                55395
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 75, 
+        "rva": 59405, 
+        "name": "GetIcmpStatistics", 
+        "alias": [], 
+        "range": 69, 
+        "end_addresses": {
+            "rets": [
+                59471
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 76, 
+        "rva": 59173, 
+        "name": "GetIcmpStatisticsEx", 
+        "alias": [], 
+        "range": 131, 
+        "end_addresses": {
+            "rets": [
+                59301
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 78, 
+        "rva": 15305, 
+        "name": "GetIfEntry", 
+        "alias": [], 
+        "range": 162, 
+        "end_addresses": {
+            "rets": [
+                15464
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 77, 
+        "rva": 18859, 
+        "name": "GetIfEntry2", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                18875
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 79, 
+        "rva": 94218, 
+        "name": "GetIfStackTable", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                94234
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 82, 
+        "rva": 44692, 
+        "name": "GetIfTable", 
+        "alias": [], 
+        "range": 334, 
+        "end_addresses": {
+            "rets": [
+                45005
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 80, 
+        "rva": 17679, 
+        "name": "GetIfTable2", 
+        "alias": [], 
+        "range": 21, 
+        "end_addresses": {
+            "rets": [
+                17697
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 81, 
+        "rva": 92575, 
+        "name": "GetIfTable2Ex", 
+        "alias": [], 
+        "range": 43, 
+        "end_addresses": {
+            "rets": [
+                92615
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 83, 
+        "rva": 56564, 
+        "name": "GetInterfaceInfo", 
+        "alias": [], 
+        "range": 414, 
+        "end_addresses": {
+            "rets": [
+                56975
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 84, 
+        "rva": 94242, 
+        "name": "GetInvertedIfStackTable", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                94258
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 85, 
+        "rva": 39856, 
+        "name": "GetIpAddrTable", 
+        "alias": [], 
+        "range": 383, 
+        "end_addresses": {
+            "rets": [
+                40236
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 86, 
+        "rva": 54356, 
+        "name": "GetIpErrorString", 
+        "alias": [], 
+        "range": 137, 
+        "end_addresses": {
+            "rets": [
+                54490
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 87, 
+        "rva": 88637, 
+        "name": "GetIpForwardEntry2", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                88653
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 89, 
+        "rva": 61433, 
+        "name": "GetIpForwardTable", 
+        "alias": [], 
+        "range": 655, 
+        "end_addresses": {
+            "rets": [
+                62085
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 88, 
+        "rva": 19774, 
+        "name": "GetIpForwardTable2", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                19793
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 90, 
+        "rva": 31727, 
+        "name": "GetIpInterfaceEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                31743
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 91, 
+        "rva": 93917, 
+        "name": "GetIpInterfaceTable", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                93936
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 92, 
+        "rva": 19960, 
+        "name": "GetIpNetEntry2", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                19976
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 94, 
+        "rva": 58666, 
+        "name": "GetIpNetTable", 
+        "alias": [], 
+        "range": 390, 
+        "end_addresses": {
+            "rets": [
+                59053
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 93, 
+        "rva": 90032, 
+        "name": "GetIpNetTable2", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                90051
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 95, 
+        "rva": 91405, 
+        "name": "GetIpPathEntry", 
+        "alias": [], 
+        "range": 402, 
+        "end_addresses": {
+            "rets": [
+                91804
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 96, 
+        "rva": 90891, 
+        "name": "GetIpPathTable", 
+        "alias": [], 
+        "range": 491, 
+        "end_addresses": {
+            "rets": [
+                91379
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 97, 
+        "rva": 35670, 
+        "name": "GetIpStatistics", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                35686
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 98, 
+        "rva": 35694, 
+        "name": "GetIpStatisticsEx", 
+        "alias": [], 
+        "range": 463, 
+        "end_addresses": {
+            "rets": [
+                36154
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 99, 
+        "rva": 85949, 
+        "name": "GetMulticastIpAddressEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                85965
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 100, 
+        "rva": 85973, 
+        "name": "GetMulticastIpAddressTable", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                85992
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 101, 
+        "rva": 92008, 
+        "name": "GetNetworkInformation", 
+        "alias": [], 
+        "range": 167, 
+        "end_addresses": {
+            "rets": [
+                92172
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 102, 
+        "rva": 35096, 
+        "name": "GetNetworkParams", 
+        "alias": [], 
+        "range": 154, 
+        "end_addresses": {
+            "rets": [
+                35236
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 103, 
+        "rva": 54972, 
+        "name": "GetNumberOfInterfaces", 
+        "alias": [], 
+        "range": 73, 
+        "end_addresses": {
+            "rets": [
+                55042
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 104, 
+        "rva": 52941, 
+        "name": "GetOwnerModuleFromPidAndInfo", 
+        "alias": [], 
+        "range": 649, 
+        "end_addresses": {
+            "rets": [
+                53332
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 105, 
+        "rva": 72273, 
+        "name": "GetOwnerModuleFromTcp6Entry", 
+        "alias": [], 
+        "range": 52, 
+        "end_addresses": {
+            "rets": [
+                72322
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 106, 
+        "rva": 72216, 
+        "name": "GetOwnerModuleFromTcpEntry", 
+        "alias": [], 
+        "range": 52, 
+        "end_addresses": {
+            "rets": [
+                72265
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 107, 
+        "rva": 74766, 
+        "name": "GetOwnerModuleFromUdp6Entry", 
+        "alias": [], 
+        "range": 52, 
+        "end_addresses": {
+            "rets": [
+                74815
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 108, 
+        "rva": 74709, 
+        "name": "GetOwnerModuleFromUdpEntry", 
+        "alias": [], 
+        "range": 52, 
+        "end_addresses": {
+            "rets": [
+                74758
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 109, 
+        "rva": 54200, 
+        "name": "GetPerAdapterInfo", 
+        "alias": [], 
+        "range": 151, 
+        "end_addresses": {
+            "rets": [
+                54348
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 110, 
+        "rva": 72934, 
+        "name": "GetPerTcp6ConnectionEStats", 
+        "alias": [], 
+        "range": 384, 
+        "end_addresses": {
+            "rets": [
+                73315
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 111, 
+        "rva": 71541, 
+        "name": "GetPerTcp6ConnectionStats", 
+        "alias": [], 
+        "range": 117, 
+        "end_addresses": {
+            "rets": [
+                71655
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 112, 
+        "rva": 72565, 
+        "name": "GetPerTcpConnectionEStats", 
+        "alias": [], 
+        "range": 364, 
+        "end_addresses": {
+            "rets": [
+                72926
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 113, 
+        "rva": 71350, 
+        "name": "GetPerTcpConnectionStats", 
+        "alias": [], 
+        "range": 93, 
+        "end_addresses": {
+            "rets": [
+                71440
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 114, 
+        "rva": 66402, 
+        "name": "GetRTTAndHopCount", 
+        "alias": [], 
+        "range": 376, 
+        "end_addresses": {
+            "rets": [
+                66775
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 115, 
+        "rva": 13711, 
+        "name": "GetSessionCompartmentId", 
+        "alias": [], 
+        "range": 52, 
+        "end_addresses": {
+            "rets": [
+                13755
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 117, 
+        "rva": 69301, 
+        "name": "GetTcp6Table", 
+        "alias": [], 
+        "range": 342, 
+        "end_addresses": {
+            "rets": [
+                69640
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 116, 
+        "rva": 68326, 
+        "name": "GetTcp6Table2", 
+        "alias": [], 
+        "range": 405, 
+        "end_addresses": {
+            "rets": [
+                68728
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 118, 
+        "rva": 72090, 
+        "name": "GetTcpStatistics", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                72106
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 119, 
+        "rva": 67360, 
+        "name": "GetTcpStatisticsEx", 
+        "alias": [], 
+        "range": 183, 
+        "end_addresses": {
+            "rets": [
+                67540
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 121, 
+        "rva": 68190, 
+        "name": "GetTcpTable", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                68216
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 120, 
+        "rva": 68224, 
+        "name": "GetTcpTable2", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                68250
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 122, 
+        "rva": 94485, 
+        "name": "GetTeredoPort", 
+        "alias": [], 
+        "range": 89, 
+        "end_addresses": {
+            "rets": [
+                94571
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 123, 
+        "rva": 74823, 
+        "name": "GetUdp6Table", 
+        "alias": [], 
+        "range": 285, 
+        "end_addresses": {
+            "rets": [
+                75105
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 124, 
+        "rva": 74603, 
+        "name": "GetUdpStatistics", 
+        "alias": [], 
+        "range": 101, 
+        "end_addresses": {
+            "rets": [
+                74701
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 125, 
+        "rva": 74481, 
+        "name": "GetUdpStatisticsEx", 
+        "alias": [], 
+        "range": 117, 
+        "end_addresses": {
+            "rets": [
+                74595
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 126, 
+        "rva": 73961, 
+        "name": "GetUdpTable", 
+        "alias": [], 
+        "range": 27, 
+        "end_addresses": {
+            "rets": [
+                73985
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 128, 
+        "rva": 38787, 
+        "name": "GetUnicastIpAddressEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                38803
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 129, 
+        "rva": 41124, 
+        "name": "GetUnicastIpAddressTable", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                41143
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 127, 
+        "rva": 60246, 
+        "name": "GetUniDirectionalAdapterInfo", 
+        "alias": [], 
+        "range": 211, 
+        "end_addresses": {
+            "rets": [
+                60454
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 130, 
+        "rva": 44221, 
+        "name": "Icmp6CreateFile", 
+        "alias": [], 
+        "range": 164, 
+        "end_addresses": {
+            "rets": [
+                44384
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 131, 
+        "rva": 44173, 
+        "name": "Icmp6ParseReplies", 
+        "alias": [], 
+        "range": 43, 
+        "end_addresses": {
+            "rets": [
+                44206
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 132, 
+        "rva": 43607, 
+        "name": "Icmp6SendEcho2", 
+        "alias": [], 
+        "range": 561, 
+        "end_addresses": {
+            "rets": [
+                44149
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 133, 
+        "rva": 33306, 
+        "name": "IcmpCloseHandle", 
+        "alias": [], 
+        "range": 210, 
+        "end_addresses": {
+            "rets": [
+                33513
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 134, 
+        "rva": 34406, 
+        "name": "IcmpCreateFile", 
+        "alias": [], 
+        "range": 160, 
+        "end_addresses": {
+            "rets": [
+                34565
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 135, 
+        "rva": 34344, 
+        "name": "IcmpParseReplies", 
+        "alias": [], 
+        "range": 57, 
+        "end_addresses": {
+            "rets": [
+                34385
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 138, 
+        "rva": 34571, 
+        "name": "IcmpSendEcho", 
+        "alias": [], 
+        "range": 43, 
+        "end_addresses": {
+            "rets": [
+                34611
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 136, 
+        "rva": 34619, 
+        "name": "IcmpSendEcho2", 
+        "alias": [], 
+        "range": 49, 
+        "end_addresses": {
+            "rets": [
+                34665
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 137, 
+        "rva": 33852, 
+        "name": "IcmpSendEcho2Ex", 
+        "alias": [], 
+        "range": 487, 
+        "end_addresses": {
+            "rets": [
+                34316
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 260, 
+        "rva": 84166, 
+        "name": "if_indextoname", 
+        "alias": [], 
+        "range": 57, 
+        "end_addresses": {
+            "rets": [
+                84220
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 261, 
+        "rva": 84103, 
+        "name": "if_nametoindex", 
+        "alias": [], 
+        "range": 58, 
+        "end_addresses": {
+            "rets": [
+                84158
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 139, 
+        "rva": 41151, 
+        "name": "InitializeIpForwardEntry", 
+        "alias": [], 
+        "range": 62, 
+        "end_addresses": {
+            "rets": [
+                41210
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 140, 
+        "rva": 93968, 
+        "name": "InitializeIpInterfaceEntry", 
+        "alias": [], 
+        "range": 62, 
+        "end_addresses": {
+            "rets": [
+                94027
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 141, 
+        "rva": 87085, 
+        "name": "InitializeUnicastIpAddressEntry", 
+        "alias": [], 
+        "range": 52, 
+        "end_addresses": {
+            "rets": [
+                87134
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 142, 
+        "rva": 92436, 
+        "name": "InternalCleanupPersistentStore", 
+        "alias": [], 
+        "range": 107, 
+        "end_addresses": {
+            "rets": [
+                92540
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 143, 
+        "rva": 85678, 
+        "name": "InternalCreateAnycastIpAddressEntry", 
+        "alias": [], 
+        "range": 24, 
+        "end_addresses": {
+            "rets": [
+                85699
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 145, 
+        "rva": 58124, 
+        "name": "InternalCreateIpForwardEntry", 
+        "alias": [], 
+        "range": 21, 
+        "end_addresses": {
+            "rets": [
+                58142
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 144, 
+        "rva": 88377, 
+        "name": "InternalCreateIpForwardEntry2", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                88407
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 147, 
+        "rva": 58046, 
+        "name": "InternalCreateIpNetEntry", 
+        "alias": [], 
+        "range": 21, 
+        "end_addresses": {
+            "rets": [
+                58064
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 146, 
+        "rva": 89639, 
+        "name": "InternalCreateIpNetEntry2", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                89669
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 148, 
+        "rva": 85519, 
+        "name": "InternalCreateUnicastIpAddressEntry", 
+        "alias": [], 
+        "range": 24, 
+        "end_addresses": {
+            "rets": [
+                85540
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 149, 
+        "rva": 85707, 
+        "name": "InternalDeleteAnycastIpAddressEntry", 
+        "alias": [], 
+        "range": 24, 
+        "end_addresses": {
+            "rets": [
+                85728
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 151, 
+        "rva": 58150, 
+        "name": "InternalDeleteIpForwardEntry", 
+        "alias": [], 
+        "range": 21, 
+        "end_addresses": {
+            "rets": [
+                58168
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 150, 
+        "rva": 88415, 
+        "name": "InternalDeleteIpForwardEntry2", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                88445
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 153, 
+        "rva": 58072, 
+        "name": "InternalDeleteIpNetEntry", 
+        "alias": [], 
+        "range": 21, 
+        "end_addresses": {
+            "rets": [
+                58090
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 152, 
+        "rva": 89677, 
+        "name": "InternalDeleteIpNetEntry2", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                89707
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 154, 
+        "rva": 85548, 
+        "name": "InternalDeleteUnicastIpAddressEntry", 
+        "alias": [], 
+        "range": 24, 
+        "end_addresses": {
+            "rets": [
+                85569
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 155, 
+        "rva": 87142, 
+        "name": "InternalFindInterfaceByAddress", 
+        "alias": [], 
+        "range": 138, 
+        "end_addresses": {
+            "rets": [
+                87277
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 156, 
+        "rva": 85736, 
+        "name": "InternalGetAnycastIpAddressEntry", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                85755
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 157, 
+        "rva": 85763, 
+        "name": "InternalGetAnycastIpAddressTable", 
+        "alias": [], 
+        "range": 25, 
+        "end_addresses": {
+            "rets": [
+                85785
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 158, 
+        "rva": 19213, 
+        "name": "InternalGetForwardIpTable2", 
+        "alias": [], 
+        "range": 556, 
+        "end_addresses": {
+            "rets": [
+                19754
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 159, 
+        "rva": 18883, 
+        "name": "InternalGetIfEntry2", 
+        "alias": [], 
+        "range": 193, 
+        "end_addresses": {
+            "rets": [
+                19073
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 161, 
+        "rva": 57313, 
+        "name": "InternalGetIfTable", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                57345
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 160, 
+        "rva": 92548, 
+        "name": "InternalGetIfTable2", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                92567
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 162, 
+        "rva": 57353, 
+        "name": "InternalGetIpAddrTable", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                57382
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 163, 
+        "rva": 40724, 
+        "name": "InternalGetIpForwardEntry2", 
+        "alias": [], 
+        "range": 217, 
+        "end_addresses": {
+            "rets": [
+                40938
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 164, 
+        "rva": 57427, 
+        "name": "InternalGetIpForwardTable", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                57456
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 165, 
+        "rva": 31751, 
+        "name": "InternalGetIpInterfaceEntry", 
+        "alias": [], 
+        "range": 239, 
+        "end_addresses": {
+            "rets": [
+                31987
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 166, 
+        "rva": 92623, 
+        "name": "InternalGetIpInterfaceTable", 
+        "alias": [], 
+        "range": 526, 
+        "end_addresses": {
+            "rets": [
+                93146
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 167, 
+        "rva": 19984, 
+        "name": "InternalGetIpNetEntry2", 
+        "alias": [], 
+        "range": 373, 
+        "end_addresses": {
+            "rets": [
+                20340
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 169, 
+        "rva": 57390, 
+        "name": "InternalGetIpNetTable", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                57419
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 168, 
+        "rva": 88733, 
+        "name": "InternalGetIpNetTable2", 
+        "alias": [], 
+        "range": 503, 
+        "end_addresses": {
+            "rets": [
+                89233
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 170, 
+        "rva": 85892, 
+        "name": "InternalGetMulticastIpAddressEntry", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                85911
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 171, 
+        "rva": 85919, 
+        "name": "InternalGetMulticastIpAddressTable", 
+        "alias": [], 
+        "range": 25, 
+        "end_addresses": {
+            "rets": [
+                85941
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 172, 
+        "rva": 57652, 
+        "name": "InternalGetTcp6Table2", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                57681
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 173, 
+        "rva": 57726, 
+        "name": "InternalGetTcp6TableWithOwnerModule", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                57758
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 174, 
+        "rva": 57689, 
+        "name": "InternalGetTcp6TableWithOwnerPid", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                57718
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 176, 
+        "rva": 57464, 
+        "name": "InternalGetTcpTable", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                57493
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 175, 
+        "rva": 57501, 
+        "name": "InternalGetTcpTable2", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                57530
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 177, 
+        "rva": 57615, 
+        "name": "InternalGetTcpTableEx", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                57644
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 178, 
+        "rva": 57575, 
+        "name": "InternalGetTcpTableWithOwnerModule", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                57607
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 179, 
+        "rva": 57538, 
+        "name": "InternalGetTcpTableWithOwnerPid", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                57567
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 180, 
+        "rva": 29498, 
+        "name": "InternalGetTunnelPhysicalAdapter", 
+        "alias": [], 
+        "range": 99, 
+        "end_addresses": {
+            "rets": [
+                29594
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 181, 
+        "rva": 57954, 
+        "name": "InternalGetUdp6TableWithOwnerModule", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                57986
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 182, 
+        "rva": 57917, 
+        "name": "InternalGetUdp6TableWithOwnerPid", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                57946
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 183, 
+        "rva": 57766, 
+        "name": "InternalGetUdpTable", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                57795
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 184, 
+        "rva": 57803, 
+        "name": "InternalGetUdpTableEx", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                57832
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 185, 
+        "rva": 57877, 
+        "name": "InternalGetUdpTableWithOwnerModule", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                57909
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 186, 
+        "rva": 57840, 
+        "name": "InternalGetUdpTableWithOwnerPid", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                57869
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 187, 
+        "rva": 38811, 
+        "name": "InternalGetUnicastIpAddressEntry", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                38830
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 188, 
+        "rva": 40244, 
+        "name": "InternalGetUnicastIpAddressTable", 
+        "alias": [], 
+        "range": 25, 
+        "end_addresses": {
+            "rets": [
+                40266
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 189, 
+        "rva": 57994, 
+        "name": "InternalSetIfEntry", 
+        "alias": [], 
+        "range": 21, 
+        "end_addresses": {
+            "rets": [
+                58012
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 191, 
+        "rva": 58176, 
+        "name": "InternalSetIpForwardEntry", 
+        "alias": [], 
+        "range": 21, 
+        "end_addresses": {
+            "rets": [
+                58194
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 190, 
+        "rva": 88339, 
+        "name": "InternalSetIpForwardEntry2", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                88369
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 192, 
+        "rva": 93154, 
+        "name": "InternalSetIpInterfaceEntry", 
+        "alias": [], 
+        "range": 758, 
+        "end_addresses": {
+            "rets": [
+                93909
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 194, 
+        "rva": 58098, 
+        "name": "InternalSetIpNetEntry", 
+        "alias": [], 
+        "range": 21, 
+        "end_addresses": {
+            "rets": [
+                58116
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 193, 
+        "rva": 89601, 
+        "name": "InternalSetIpNetEntry2", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                89631
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 195, 
+        "rva": 58020, 
+        "name": "InternalSetIpStats", 
+        "alias": [], 
+        "range": 21, 
+        "end_addresses": {
+            "rets": [
+                58038
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 196, 
+        "rva": 58202, 
+        "name": "InternalSetTcpEntry", 
+        "alias": [], 
+        "range": 21, 
+        "end_addresses": {
+            "rets": [
+                58220
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 197, 
+        "rva": 94597, 
+        "name": "InternalSetTeredoPort", 
+        "alias": [], 
+        "range": 42, 
+        "end_addresses": {
+            "rets": [
+                94636
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 198, 
+        "rva": 85577, 
+        "name": "InternalSetUnicastIpAddressEntry", 
+        "alias": [], 
+        "range": 24, 
+        "end_addresses": {
+            "rets": [
+                85598
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 199, 
+        "rva": 60965, 
+        "name": "IpReleaseAddress", 
+        "alias": [], 
+        "range": 99, 
+        "end_addresses": {
+            "rets": [
+                61035, 
+                61061
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 200, 
+        "rva": 61097, 
+        "name": "IpRenewAddress", 
+        "alias": [], 
+        "range": 99, 
+        "end_addresses": {
+            "rets": [
+                61167, 
+                61193
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 201, 
+        "rva": 67078, 
+        "name": "LookupPersistentTcpPortReservation", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                67107
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 202, 
+        "rva": 67115, 
+        "name": "LookupPersistentUdpPortReservation", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                67144
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 205, 
+        "rva": 55468, 
+        "name": "NhGetGuidFromInterfaceName", 
+        "alias": [], 
+        "range": 39, 
+        "end_addresses": {
+            "rets": [
+                55504
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 206, 
+        "rva": 56983, 
+        "name": "NhGetInterfaceDescriptionFromGuid", 
+        "alias": [], 
+        "range": 186, 
+        "end_addresses": {
+            "rets": [
+                57166
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 207, 
+        "rva": 55403, 
+        "name": "NhGetInterfaceNameFromDeviceGuid", 
+        "alias": [
+            {
+                "name": "NhGetInterfaceNameFromGuid", 
+                "ordinal:": 208
+            }
+        ], 
+        "range": 60, 
+        "end_addresses": {
+            "rets": [
+                55460
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 210, 
+        "rva": 60737, 
+        "name": "NotifyAddrChange", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                60763
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 211, 
+        "rva": 40946, 
+        "name": "NotifyIpInterfaceChange", 
+        "alias": [], 
+        "range": 147, 
+        "end_addresses": {
+            "rets": [
+                41090
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 213, 
+        "rva": 60771, 
+        "name": "NotifyRouteChange", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                60797
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 212, 
+        "rva": 41361, 
+        "name": "NotifyRouteChange2", 
+        "alias": [], 
+        "range": 156, 
+        "end_addresses": {
+            "rets": [
+                41514
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 214, 
+        "rva": 87049, 
+        "name": "NotifyStableUnicastIpAddressTable", 
+        "alias": [], 
+        "range": 31, 
+        "end_addresses": {
+            "rets": [
+                87077
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 215, 
+        "rva": 94313, 
+        "name": "NotifyTeredoPortChange", 
+        "alias": [], 
+        "range": 149, 
+        "end_addresses": {
+            "rets": [
+                94459
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 216, 
+        "rva": 32703, 
+        "name": "NotifyUnicastIpAddressChange", 
+        "alias": [], 
+        "range": 31, 
+        "end_addresses": {
+            "rets": [
+                32731
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 203, 
+        "rva": 63125, 
+        "name": "NTPTimeToNTFileTime", 
+        "alias": [], 
+        "range": 203, 
+        "end_addresses": {
+            "rets": [
+                63325
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 204, 
+        "rva": 62923, 
+        "name": "NTTimeToNTPTime", 
+        "alias": [], 
+        "range": 183, 
+        "end_addresses": {
+            "rets": [
+                63103
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 217, 
+        "rva": 63771, 
+        "name": "ParseNetworkString", 
+        "alias": [], 
+        "range": 1519, 
+        "end_addresses": {
+            "rets": [
+                65287
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 262, 
+        "rva": 66783, 
+        "name": "register_icmp", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                66804
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 234, 
+        "rva": 39571, 
+        "name": "ResolveIpNetEntry2", 
+        "alias": [], 
+        "range": 280, 
+        "end_addresses": {
+            "rets": [
+                39848
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 235, 
+        "rva": 60070, 
+        "name": "ResolveNeighbor", 
+        "alias": [], 
+        "range": 6, 
+        "end_addresses": {
+            "rets": [
+                60073
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 237, 
+        "rva": 62550, 
+        "name": "SendARP", 
+        "alias": [], 
+        "range": 201, 
+        "end_addresses": {
+            "rets": [
+                62748
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 238, 
+        "rva": 58311, 
+        "name": "SetAdapterIpAddress", 
+        "alias": [], 
+        "range": 266, 
+        "end_addresses": {
+            "rets": [
+                58574
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 239, 
+        "rva": 31492, 
+        "name": "SetCurrentThreadCompartmentId", 
+        "alias": [], 
+        "range": 40, 
+        "end_addresses": {
+            "rets": [
+                31529
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 240, 
+        "rva": 55050, 
+        "name": "SetIfEntry", 
+        "alias": [], 
+        "range": 78, 
+        "end_addresses": {
+            "rets": [
+                55125
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 242, 
+        "rva": 62316, 
+        "name": "SetIpForwardEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                62332
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 241, 
+        "rva": 88661, 
+        "name": "SetIpForwardEntry2", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                88677
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 243, 
+        "rva": 93944, 
+        "name": "SetIpInterfaceEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                93960
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 245, 
+        "rva": 59861, 
+        "name": "SetIpNetEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                59877
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 244, 
+        "rva": 90059, 
+        "name": "SetIpNetEntry2", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                90075
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 246, 
+        "rva": 62899, 
+        "name": "SetIpStatistics", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                62915
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 247, 
+        "rva": 62340, 
+        "name": "SetIpStatisticsEx", 
+        "alias": [], 
+        "range": 139, 
+        "end_addresses": {
+            "rets": [
+                62476
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 248, 
+        "rva": 62484, 
+        "name": "SetIpTTL", 
+        "alias": [], 
+        "range": 61, 
+        "end_addresses": {
+            "rets": [
+                62542
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 249, 
+        "rva": 92180, 
+        "name": "SetNetworkInformation", 
+        "alias": [], 
+        "range": 199, 
+        "end_addresses": {
+            "rets": [
+                92376
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 250, 
+        "rva": 71920, 
+        "name": "SetPerTcp6ConnectionEStats", 
+        "alias": [], 
+        "range": 165, 
+        "end_addresses": {
+            "rets": [
+                72082
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 251, 
+        "rva": 71663, 
+        "name": "SetPerTcp6ConnectionStats", 
+        "alias": [], 
+        "range": 112, 
+        "end_addresses": {
+            "rets": [
+                71772
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 252, 
+        "rva": 71780, 
+        "name": "SetPerTcpConnectionEStats", 
+        "alias": [], 
+        "range": 135, 
+        "end_addresses": {
+            "rets": [
+                71912
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 253, 
+        "rva": 71448, 
+        "name": "SetPerTcpConnectionStats", 
+        "alias": [], 
+        "range": 88, 
+        "end_addresses": {
+            "rets": [
+                71533
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 254, 
+        "rva": 91957, 
+        "name": "SetSessionCompartmentId", 
+        "alias": [], 
+        "range": 46, 
+        "end_addresses": {
+            "rets": [
+                92000
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 255, 
+        "rva": 72114, 
+        "name": "SetTcpEntry", 
+        "alias": [], 
+        "range": 97, 
+        "end_addresses": {
+            "rets": [
+                72208
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 256, 
+        "rva": 85654, 
+        "name": "SetUnicastIpAddressEntry", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                85670
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 257, 
+        "rva": 61297, 
+        "name": "UnenableRouter", 
+        "alias": [], 
+        "range": 74, 
+        "end_addresses": {
+            "rets": [
+                61368
+            ], 
+            "jmps_to_imps": []
+        }
+    }
+]
+}

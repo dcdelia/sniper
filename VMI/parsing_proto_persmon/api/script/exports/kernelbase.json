@@ -1,0 +1,7423 @@
+{
+	"exports":[
+    {
+        "ordinal": 5, 
+        "rva": 39671, 
+        "name": "AccessCheck", 
+        "alias": [], 
+        "range": 66, 
+        "end_addresses": {
+            "rets": [
+                39734
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 6, 
+        "rva": 146175, 
+        "name": "AccessCheckAndAuditAlarmW", 
+        "alias": [], 
+        "range": 130, 
+        "end_addresses": {
+            "rets": [
+                146302
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 7, 
+        "rva": 60610, 
+        "name": "AccessCheckByType", 
+        "alias": [], 
+        "range": 75, 
+        "end_addresses": {
+            "rets": [
+                60682
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 8, 
+        "rva": 220534, 
+        "name": "AccessCheckByTypeAndAuditAlarmW", 
+        "alias": [], 
+        "range": 166, 
+        "end_addresses": {
+            "rets": [
+                220697
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 9, 
+        "rva": 220424, 
+        "name": "AccessCheckByTypeResultList", 
+        "alias": [], 
+        "range": 105, 
+        "end_addresses": {
+            "rets": [
+                220526
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 10, 
+        "rva": 220883, 
+        "name": "AccessCheckByTypeResultListAndAuditAlarmByHandleW", 
+        "alias": [], 
+        "range": 176, 
+        "end_addresses": {
+            "rets": [
+                221056
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 11, 
+        "rva": 220705, 
+        "name": "AccessCheckByTypeResultListAndAuditAlarmW", 
+        "alias": [], 
+        "range": 173, 
+        "end_addresses": {
+            "rets": [
+                220875
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 14, 
+        "rva": 60179, 
+        "name": "AddAccessAllowedAce", 
+        "alias": [], 
+        "range": 38, 
+        "end_addresses": {
+            "rets": [
+                60214
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 15, 
+        "rva": 44820, 
+        "name": "AddAccessAllowedAceEx", 
+        "alias": [], 
+        "range": 41, 
+        "end_addresses": {
+            "rets": [
+                44858
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 16, 
+        "rva": 221425, 
+        "name": "AddAccessAllowedObjectAce", 
+        "alias": [], 
+        "range": 73, 
+        "end_addresses": {
+            "rets": [
+                221495
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 17, 
+        "rva": 131210, 
+        "name": "AddAccessDeniedAce", 
+        "alias": [], 
+        "range": 38, 
+        "end_addresses": {
+            "rets": [
+                131245
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 18, 
+        "rva": 221275, 
+        "name": "AddAccessDeniedAceEx", 
+        "alias": [], 
+        "range": 67, 
+        "end_addresses": {
+            "rets": [
+                221339
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 19, 
+        "rva": 221503, 
+        "name": "AddAccessDeniedObjectAce", 
+        "alias": [], 
+        "range": 73, 
+        "end_addresses": {
+            "rets": [
+                221573
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 20, 
+        "rva": 60903, 
+        "name": "AddAce", 
+        "alias": [], 
+        "range": 41, 
+        "end_addresses": {
+            "rets": [
+                60941
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 21, 
+        "rva": 117380, 
+        "name": "AddAuditAccessAce", 
+        "alias": [], 
+        "range": 44, 
+        "end_addresses": {
+            "rets": [
+                117421
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 22, 
+        "rva": 221347, 
+        "name": "AddAuditAccessAceEx", 
+        "alias": [], 
+        "range": 73, 
+        "end_addresses": {
+            "rets": [
+                221417
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 23, 
+        "rva": 221581, 
+        "name": "AddAuditAccessObjectAce", 
+        "alias": [], 
+        "range": 79, 
+        "end_addresses": {
+            "rets": [
+                221657
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 24, 
+        "rva": 62838, 
+        "name": "AddMandatoryAce", 
+        "alias": [], 
+        "range": 43, 
+        "end_addresses": {
+            "rets": [
+                62878
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 25, 
+        "rva": 146704, 
+        "name": "AdjustTokenGroups", 
+        "alias": [], 
+        "range": 50, 
+        "end_addresses": {
+            "rets": [
+                146751
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 26, 
+        "rva": 40030, 
+        "name": "AdjustTokenPrivileges", 
+        "alias": [], 
+        "range": 50, 
+        "end_addresses": {
+            "rets": [
+                40077
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 27, 
+        "rva": 43713, 
+        "name": "AllocateAndInitializeSid", 
+        "alias": [], 
+        "range": 59, 
+        "end_addresses": {
+            "rets": [
+                43769
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 28, 
+        "rva": 56414, 
+        "name": "AllocateLocallyUniqueId", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                56440
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 29, 
+        "rva": 147388, 
+        "name": "AreAllAccessesGranted", 
+        "alias": [], 
+        "range": 24, 
+        "end_addresses": {
+            "rets": [
+                147409
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 30, 
+        "rva": 221197, 
+        "name": "AreAnyAccessesGranted", 
+        "alias": [], 
+        "range": 24, 
+        "end_addresses": {
+            "rets": [
+                221218
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 31, 
+        "rva": 162466, 
+        "name": "AreFileApisANSI", 
+        "alias": [], 
+        "range": 20, 
+        "end_addresses": {
+            "rets": [
+                162485
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 32, 
+        "rva": 54190, 
+        "name": "BaseDllFreeResourceId", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                54209
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 33, 
+        "rva": 54217, 
+        "name": "BaseDllMapResourceIdW", 
+        "alias": [], 
+        "range": 51, 
+        "end_addresses": {
+            "rets": [
+                54265
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 34, 
+        "rva": 47661, 
+        "name": "BaseGetProcessDllPath", 
+        "alias": [], 
+        "range": 50, 
+        "end_addresses": {
+            "rets": [
+                47708
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 35, 
+        "rva": 61306, 
+        "name": "BaseGetProcessExePath", 
+        "alias": [], 
+        "range": 48, 
+        "end_addresses": {
+            "rets": [
+                61351
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 36, 
+        "rva": 207741, 
+        "name": "BaseInvalidateDllSearchPathCache", 
+        "alias": [], 
+        "range": 16, 
+        "end_addresses": {
+            "rets": [
+                207756
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 37, 
+        "rva": 207762, 
+        "name": "BaseInvalidateProcessSearchPathCache", 
+        "alias": [], 
+        "range": 16, 
+        "end_addresses": {
+            "rets": [
+                207777
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 38, 
+        "rva": 47200, 
+        "name": "BaseReleaseProcessDllPath", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                47229
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 39, 
+        "rva": 61359, 
+        "name": "BaseReleaseProcessExePath", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                61388
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 40, 
+        "rva": 207089, 
+        "name": "Beep", 
+        "alias": [], 
+        "range": 188, 
+        "end_addresses": {
+            "rets": [
+                207252
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 41, 
+        "rva": 263770, 
+        "name": "BemCopyReference", 
+        "alias": [], 
+        "range": 45, 
+        "end_addresses": {
+            "rets": [
+                263812
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 42, 
+        "rva": 120200, 
+        "name": "BemCreateContractFrom", 
+        "alias": [], 
+        "range": 45, 
+        "end_addresses": {
+            "rets": [
+                120242
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 43, 
+        "rva": 120068, 
+        "name": "BemCreateReference", 
+        "alias": [], 
+        "range": 47, 
+        "end_addresses": {
+            "rets": [
+                120112
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 44, 
+        "rva": 263820, 
+        "name": "BemFreeContract", 
+        "alias": [], 
+        "range": 25, 
+        "end_addresses": {
+            "rets": [
+                263842
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 45, 
+        "rva": 263740, 
+        "name": "BemFreeReference", 
+        "alias": [], 
+        "range": 25, 
+        "end_addresses": {
+            "rets": [
+                263762
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 46, 
+        "rva": 263557, 
+        "name": "CallbackMayRunLong", 
+        "alias": [], 
+        "range": 36, 
+        "end_addresses": {
+            "rets": [
+                263590
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 47, 
+        "rva": 80725, 
+        "name": "CancelIoEx", 
+        "alias": [], 
+        "range": 65, 
+        "end_addresses": {
+            "rets": [
+                80766
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 49, 
+        "rva": 46824, 
+        "name": "CancelWaitableTimer", 
+        "alias": [], 
+        "range": 31, 
+        "end_addresses": {
+            "rets": [
+                46852
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 50, 
+        "rva": 145025, 
+        "name": "ChangeTimerQueueTimer", 
+        "alias": [], 
+        "range": 57, 
+        "end_addresses": {
+            "rets": [
+                145065
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 51, 
+        "rva": 225319, 
+        "name": "CheckGroupPolicyEnabled", 
+        "alias": [], 
+        "range": 318, 
+        "end_addresses": {
+            "rets": [
+                225634
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 52, 
+        "rva": 43943, 
+        "name": "CheckTokenMembership", 
+        "alias": [], 
+        "range": 448, 
+        "end_addresses": {
+            "rets": [
+                44388
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 53, 
+        "rva": 27417, 
+        "name": "CloseHandle", 
+        "alias": [], 
+        "range": 41, 
+        "end_addresses": {
+            "rets": [
+                27455
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 61, 
+        "rva": 58420, 
+        "name": "CompareFileTime", 
+        "alias": [], 
+        "range": 59, 
+        "end_addresses": {
+            "rets": [
+                58466
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 62, 
+        "rva": 33841, 
+        "name": "CompareStringA", 
+        "alias": [], 
+        "range": 318, 
+        "end_addresses": {
+            "rets": [
+                34156
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 63, 
+        "rva": 28702, 
+        "name": "CompareStringEx", 
+        "alias": [], 
+        "range": 80, 
+        "end_addresses": {
+            "rets": [
+                28779
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 64, 
+        "rva": 39934, 
+        "name": "CompareStringOrdinal", 
+        "alias": [], 
+        "range": 91, 
+        "end_addresses": {
+            "rets": [
+                40022
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 65, 
+        "rva": 28787, 
+        "name": "CompareStringW", 
+        "alias": [], 
+        "range": 53, 
+        "end_addresses": {
+            "rets": [
+                28837
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 66, 
+        "rva": 145835, 
+        "name": "ConnectNamedPipe", 
+        "alias": [], 
+        "range": 125, 
+        "end_addresses": {
+            "rets": [
+                145957
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 67, 
+        "rva": 139341, 
+        "name": "ConvertDefaultLocale", 
+        "alias": [], 
+        "range": 31, 
+        "end_addresses": {
+            "rets": [
+                139364
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 68, 
+        "rva": 221713, 
+        "name": "ConvertToAutoInheritPrivateObjectSecurity", 
+        "alias": [], 
+        "range": 50, 
+        "end_addresses": {
+            "rets": [
+                221760
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 69, 
+        "rva": 39535, 
+        "name": "CopySid", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                39567
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 70, 
+        "rva": 162650, 
+        "name": "CreateDirectoryA", 
+        "alias": [], 
+        "range": 54, 
+        "end_addresses": {
+            "rets": [
+                162701
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 71, 
+        "rva": 62002, 
+        "name": "CreateDirectoryW", 
+        "alias": [], 
+        "range": 231, 
+        "end_addresses": {
+            "rets": [
+                62230
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 72, 
+        "rva": 30990, 
+        "name": "CreateEventA", 
+        "alias": [], 
+        "range": 46, 
+        "end_addresses": {
+            "rets": [
+                31030
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 73, 
+        "rva": 30927, 
+        "name": "CreateEventExA", 
+        "alias": [], 
+        "range": 58, 
+        "end_addresses": {
+            "rets": [
+                30982
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 74, 
+        "rva": 30746, 
+        "name": "CreateEventExW", 
+        "alias": [], 
+        "range": 127, 
+        "end_addresses": {
+            "rets": [
+                30870
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 75, 
+        "rva": 30878, 
+        "name": "CreateEventW", 
+        "alias": [], 
+        "range": 44, 
+        "end_addresses": {
+            "rets": [
+                30919
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 76, 
+        "rva": 220345, 
+        "name": "CreateFileA", 
+        "alias": [], 
+        "range": 74, 
+        "end_addresses": {
+            "rets": [
+                220416
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 77, 
+        "rva": 40085, 
+        "name": "CreateFileMappingNumaW", 
+        "alias": [], 
+        "range": 197, 
+        "end_addresses": {
+            "rets": [
+                40279
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 78, 
+        "rva": 56634, 
+        "name": "CreateFileMappingW", 
+        "alias": [], 
+        "range": 269, 
+        "end_addresses": {
+            "rets": [
+                56839
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 79, 
+        "rva": 43088, 
+        "name": "CreateFileW", 
+        "alias": [], 
+        "range": 620, 
+        "end_addresses": {
+            "rets": [
+                43670
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 80, 
+        "rva": 141142, 
+        "name": "CreateIoCompletionPort", 
+        "alias": [], 
+        "range": 72, 
+        "end_addresses": {
+            "rets": [
+                141211
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 81, 
+        "rva": 50004, 
+        "name": "CreateMutexA", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                50034
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 82, 
+        "rva": 50042, 
+        "name": "CreateMutexExA", 
+        "alias": [], 
+        "range": 81, 
+        "end_addresses": {
+            "rets": [
+                50111
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 83, 
+        "rva": 44396, 
+        "name": "CreateMutexExW", 
+        "alias": [], 
+        "range": 140, 
+        "end_addresses": {
+            "rets": [
+                44521
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 84, 
+        "rva": 44541, 
+        "name": "CreateMutexW", 
+        "alias": [], 
+        "range": 37, 
+        "end_addresses": {
+            "rets": [
+                44575
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 85, 
+        "rva": 120519, 
+        "name": "CreateNamedPipeW", 
+        "alias": [], 
+        "range": 444, 
+        "end_addresses": {
+            "rets": [
+                120960
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 86, 
+        "rva": 143590, 
+        "name": "CreatePipe", 
+        "alias": [], 
+        "range": 253, 
+        "end_addresses": {
+            "rets": [
+                143840
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 87, 
+        "rva": 161161, 
+        "name": "CreatePrivateObjectSecurity", 
+        "alias": [], 
+        "range": 44, 
+        "end_addresses": {
+            "rets": [
+                161202
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 88, 
+        "rva": 80670, 
+        "name": "CreatePrivateObjectSecurityEx", 
+        "alias": [], 
+        "range": 50, 
+        "end_addresses": {
+            "rets": [
+                80717
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 89, 
+        "rva": 221768, 
+        "name": "CreatePrivateObjectSecurityWithMultipleInheritance", 
+        "alias": [], 
+        "range": 59, 
+        "end_addresses": {
+            "rets": [
+                221824
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 90, 
+        "rva": 211136, 
+        "name": "CreateRemoteThread", 
+        "alias": [], 
+        "range": 37, 
+        "end_addresses": {
+            "rets": [
+                211170
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 91, 
+        "rva": 48692, 
+        "name": "CreateRemoteThreadEx", 
+        "alias": [], 
+        "range": 615, 
+        "end_addresses": {
+            "rets": [
+                49304
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 92, 
+        "rva": 93086, 
+        "name": "CreateRestrictedToken", 
+        "alias": [], 
+        "range": 228, 
+        "end_addresses": {
+            "rets": [
+                93311
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 93, 
+        "rva": 62360, 
+        "name": "CreateSemaphoreExW", 
+        "alias": [], 
+        "range": 110, 
+        "end_addresses": {
+            "rets": [
+                62467
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 94, 
+        "rva": 211095, 
+        "name": "CreateThread", 
+        "alias": [], 
+        "range": 36, 
+        "end_addresses": {
+            "rets": [
+                211128
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 95, 
+        "rva": 81069, 
+        "name": "CreateThreadpool", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                81099
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 96, 
+        "rva": 125176, 
+        "name": "CreateThreadpoolCleanupGroup", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                125204, 
+                205932
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 97, 
+        "rva": 127728, 
+        "name": "CreateThreadpoolIo", 
+        "alias": [], 
+        "range": 222, 
+        "end_addresses": {
+            "rets": [
+                127947
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 98, 
+        "rva": 71937, 
+        "name": "CreateThreadpoolTimer", 
+        "alias": [], 
+        "range": 45, 
+        "end_addresses": {
+            "rets": [
+                71979
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 99, 
+        "rva": 125210, 
+        "name": "CreateThreadpoolWait", 
+        "alias": [], 
+        "range": 39, 
+        "end_addresses": {
+            "rets": [
+                125246
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 100, 
+        "rva": 105425, 
+        "name": "CreateThreadpoolWork", 
+        "alias": [], 
+        "range": 39, 
+        "end_addresses": {
+            "rets": [
+                105461
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 101, 
+        "rva": 131176, 
+        "name": "CreateTimerQueue", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                131204, 
+                168921
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 102, 
+        "rva": 40605, 
+        "name": "CreateTimerQueueTimer", 
+        "alias": [], 
+        "range": 62, 
+        "end_addresses": {
+            "rets": [
+                40664
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 103, 
+        "rva": 146582, 
+        "name": "CreateWaitableTimerExW", 
+        "alias": [], 
+        "range": 117, 
+        "end_addresses": {
+            "rets": [
+                146696
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 104, 
+        "rva": 67741, 
+        "name": "CreateWellKnownSid", 
+        "alias": [], 
+        "range": 275, 
+        "end_addresses": {
+            "rets": [
+                68013
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 105, 
+        "rva": 210969, 
+        "name": "DebugBreak", 
+        "alias": [], 
+        "range": 4, 
+        "end_addresses": {
+            "rets": [
+                210972
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 108, 
+        "rva": 157131, 
+        "name": "DefineDosDeviceW", 
+        "alias": [], 
+        "range": 471, 
+        "end_addresses": {
+            "rets": [
+                157579
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 109, 
+        "rva": 140081, 
+        "name": "DeleteAce", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                140110
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 111, 
+        "rva": 51361, 
+        "name": "DeleteFileA", 
+        "alias": [], 
+        "range": 51, 
+        "end_addresses": {
+            "rets": [
+                51409
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 112, 
+        "rva": 68021, 
+        "name": "DeleteFileW", 
+        "alias": [], 
+        "range": 279, 
+        "end_addresses": {
+            "rets": [
+                68297
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 113, 
+        "rva": 43080, 
+        "name": "DeleteProcThreadAttributeList", 
+        "alias": [], 
+        "range": 3, 
+        "end_addresses": {
+            "rets": [
+                43080
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 114, 
+        "rva": 121355, 
+        "name": "DeleteTimerQueueEx", 
+        "alias": [], 
+        "range": 52, 
+        "end_addresses": {
+            "rets": [
+                121404
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 115, 
+        "rva": 40672, 
+        "name": "DeleteTimerQueueTimer", 
+        "alias": [], 
+        "range": 63, 
+        "end_addresses": {
+            "rets": [
+                40723
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 116, 
+        "rva": 214639, 
+        "name": "DeleteVolumeMountPointW", 
+        "alias": [], 
+        "range": 787, 
+        "end_addresses": {
+            "rets": [
+                215423
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 117, 
+        "rva": 80636, 
+        "name": "DestroyPrivateObjectSecurity", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                80662
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 118, 
+        "rva": 38831, 
+        "name": "DeviceIoControl", 
+        "alias": [], 
+        "range": 283, 
+        "end_addresses": {
+            "rets": [
+                38999, 
+                170559
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 119, 
+        "rva": 36260, 
+        "name": "DisableThreadLibraryCalls", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                36290
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 121, 
+        "rva": 145632, 
+        "name": "DisconnectNamedPipe", 
+        "alias": [], 
+        "range": 130, 
+        "end_addresses": {
+            "rets": [
+                145759
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 122, 
+        "rva": 29497, 
+        "name": "DuplicateHandle", 
+        "alias": [], 
+        "range": 83, 
+        "end_addresses": {
+            "rets": [
+                29577
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 123, 
+        "rva": 43909, 
+        "name": "DuplicateToken", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                43935
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 124, 
+        "rva": 43794, 
+        "name": "DuplicateTokenEx", 
+        "alias": [], 
+        "range": 110, 
+        "end_addresses": {
+            "rets": [
+                43901
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 128, 
+        "rva": 155278, 
+        "name": "EnumCalendarInfoExEx", 
+        "alias": [], 
+        "range": 53, 
+        "end_addresses": {
+            "rets": [
+                155328
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 129, 
+        "rva": 235296, 
+        "name": "EnumCalendarInfoExW", 
+        "alias": [], 
+        "range": 43, 
+        "end_addresses": {
+            "rets": [
+                235336
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 130, 
+        "rva": 235248, 
+        "name": "EnumCalendarInfoW", 
+        "alias": [], 
+        "range": 43, 
+        "end_addresses": {
+            "rets": [
+                235288
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 131, 
+        "rva": 156709, 
+        "name": "EnumDateFormatsExEx", 
+        "alias": [], 
+        "range": 40, 
+        "end_addresses": {
+            "rets": [
+                156746
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 132, 
+        "rva": 235344, 
+        "name": "EnumDateFormatsExW", 
+        "alias": [], 
+        "range": 40, 
+        "end_addresses": {
+            "rets": [
+                235381
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 133, 
+        "rva": 153956, 
+        "name": "EnumDateFormatsW", 
+        "alias": [], 
+        "range": 40, 
+        "end_addresses": {
+            "rets": [
+                153993
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 134, 
+        "rva": 235105, 
+        "name": "EnumLanguageGroupLocalesW", 
+        "alias": [], 
+        "range": 28, 
+        "end_addresses": {
+            "rets": [
+                235130
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 135, 
+        "rva": 235221, 
+        "name": "EnumSystemCodePagesW", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                235240
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 136, 
+        "rva": 118305, 
+        "name": "EnumSystemLanguageGroupsW", 
+        "alias": [], 
+        "range": 25, 
+        "end_addresses": {
+            "rets": [
+                118327
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 137, 
+        "rva": 153130, 
+        "name": "EnumSystemLocalesA", 
+        "alias": [], 
+        "range": 26, 
+        "end_addresses": {
+            "rets": [
+                153153
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 138, 
+        "rva": 235170, 
+        "name": "EnumSystemLocalesEx", 
+        "alias": [], 
+        "range": 46, 
+        "end_addresses": {
+            "rets": [
+                235213
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 139, 
+        "rva": 235138, 
+        "name": "EnumSystemLocalesW", 
+        "alias": [], 
+        "range": 27, 
+        "end_addresses": {
+            "rets": [
+                235162
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 140, 
+        "rva": 156666, 
+        "name": "EnumTimeFormatsEx", 
+        "alias": [], 
+        "range": 38, 
+        "end_addresses": {
+            "rets": [
+                156701
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 141, 
+        "rva": 153913, 
+        "name": "EnumTimeFormatsW", 
+        "alias": [], 
+        "range": 38, 
+        "end_addresses": {
+            "rets": [
+                153948
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 142, 
+        "rva": 102803, 
+        "name": "EnumUILanguagesW", 
+        "alias": [], 
+        "range": 25, 
+        "end_addresses": {
+            "rets": [
+                102825
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 143, 
+        "rva": 119193, 
+        "name": "EqualDomainSid", 
+        "alias": [], 
+        "range": 263, 
+        "end_addresses": {
+            "rets": [
+                119453
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 144, 
+        "rva": 130192, 
+        "name": "EqualPrefixSid", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                130221
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 145, 
+        "rva": 39575, 
+        "name": "EqualSid", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                39604
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 146, 
+        "rva": 209910, 
+        "name": "ExitProcess", 
+        "alias": [], 
+        "range": 2, 
+        "end_addresses": {
+            "rets": [], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 148, 
+        "rva": 85035, 
+        "name": "ExpandEnvironmentStringsA", 
+        "alias": [], 
+        "range": 500, 
+        "end_addresses": {
+            "rets": [
+                85379
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 149, 
+        "rva": 45814, 
+        "name": "ExpandEnvironmentStringsW", 
+        "alias": [], 
+        "range": 94, 
+        "end_addresses": {
+            "rets": [
+                45893
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 150, 
+        "rva": 210077, 
+        "name": "FatalAppExitA", 
+        "alias": [], 
+        "range": 86, 
+        "end_addresses": {
+            "rets": [
+                210160
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 151, 
+        "rva": 209946, 
+        "name": "FatalAppExitW", 
+        "alias": [], 
+        "range": 85, 
+        "end_addresses": {
+            "rets": [
+                210028
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 152, 
+        "rva": 38669, 
+        "name": "FileTimeToLocalFileTime", 
+        "alias": [], 
+        "range": 64, 
+        "end_addresses": {
+            "rets": [
+                38730
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 153, 
+        "rva": 38547, 
+        "name": "FileTimeToSystemTime", 
+        "alias": [], 
+        "range": 117, 
+        "end_addresses": {
+            "rets": [
+                38661
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 154, 
+        "rva": 58667, 
+        "name": "FindClose", 
+        "alias": [], 
+        "range": 138, 
+        "end_addresses": {
+            "rets": [
+                58802, 
+                183299
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 155, 
+        "rva": 64024, 
+        "name": "FindCloseChangeNotification", 
+        "alias": [], 
+        "range": 11, 
+        "end_addresses": {
+            "rets": [
+                27455
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 156, 
+        "rva": 217889, 
+        "name": "FindFirstChangeNotificationA", 
+        "alias": [], 
+        "range": 62, 
+        "end_addresses": {
+            "rets": [
+                217948
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 157, 
+        "rva": 110296, 
+        "name": "FindFirstChangeNotificationW", 
+        "alias": [], 
+        "range": 207, 
+        "end_addresses": {
+            "rets": [
+                110500
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 158, 
+        "rva": 143848, 
+        "name": "FindFirstFileA", 
+        "alias": [], 
+        "range": 299, 
+        "end_addresses": {
+            "rets": [
+                144144
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 159, 
+        "rva": 217956, 
+        "name": "FindFirstFileExA", 
+        "alias": [], 
+        "range": 325, 
+        "end_addresses": {
+            "rets": [
+                218278
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 160, 
+        "rva": 40957, 
+        "name": "FindFirstFileExW", 
+        "alias": [], 
+        "range": 915, 
+        "end_addresses": {
+            "rets": [
+                41869
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 161, 
+        "rva": 41877, 
+        "name": "FindFirstFileW", 
+        "alias": [], 
+        "range": 26, 
+        "end_addresses": {
+            "rets": [
+                41900
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 162, 
+        "rva": 221665, 
+        "name": "FindFirstFreeAce", 
+        "alias": [], 
+        "range": 43, 
+        "end_addresses": {
+            "rets": [
+                221705
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 163, 
+        "rva": 212091, 
+        "name": "FindFirstVolumeW", 
+        "alias": [], 
+        "range": 321, 
+        "end_addresses": {
+            "rets": [
+                212409
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 166, 
+        "rva": 93871, 
+        "name": "FindNextChangeNotification", 
+        "alias": [], 
+        "range": 54, 
+        "end_addresses": {
+            "rets": [
+                93922
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 167, 
+        "rva": 144152, 
+        "name": "FindNextFileA", 
+        "alias": [], 
+        "range": 68, 
+        "end_addresses": {
+            "rets": [
+                144217
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 168, 
+        "rva": 128951, 
+        "name": "FindNextFileW", 
+        "alias": [], 
+        "range": 282, 
+        "end_addresses": {
+            "rets": [
+                129230
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 169, 
+        "rva": 211440, 
+        "name": "FindNextVolumeW", 
+        "alias": [], 
+        "range": 646, 
+        "end_addresses": {
+            "rets": [
+                212083
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 164, 
+        "rva": 160518, 
+        "name": "FindNLSString", 
+        "alias": [], 
+        "range": 56, 
+        "end_addresses": {
+            "rets": [
+                160571
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 165, 
+        "rva": 160579, 
+        "name": "FindNLSStringEx", 
+        "alias": [], 
+        "range": 83, 
+        "end_addresses": {
+            "rets": [
+                160659
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 170, 
+        "rva": 54317, 
+        "name": "FindResourceExW", 
+        "alias": [], 
+        "range": 151, 
+        "end_addresses": {
+            "rets": [
+                54465
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 171, 
+        "rva": 225974, 
+        "name": "FindStringOrdinal", 
+        "alias": [], 
+        "range": 1209, 
+        "end_addresses": {
+            "rets": [
+                227180
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 172, 
+        "rva": 212417, 
+        "name": "FindVolumeClose", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                212449
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 173, 
+        "rva": 51016, 
+        "name": "FlsAlloc", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                51046
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 174, 
+        "rva": 49842, 
+        "name": "FlsFree", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                49868
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 175, 
+        "rva": 26775, 
+        "name": "FlsGetValue", 
+        "alias": [], 
+        "range": 52, 
+        "end_addresses": {
+            "rets": [
+                26824
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 176, 
+        "rva": 31892, 
+        "name": "FlsSetValue", 
+        "alias": [], 
+        "range": 64, 
+        "end_addresses": {
+            "rets": [
+                31953
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 177, 
+        "rva": 63675, 
+        "name": "FlushFileBuffers", 
+        "alias": [], 
+        "range": 63, 
+        "end_addresses": {
+            "rets": [
+                63735
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 179, 
+        "rva": 63743, 
+        "name": "FlushViewOfFile", 
+        "alias": [], 
+        "range": 55, 
+        "end_addresses": {
+            "rets": [
+                63795
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 180, 
+        "rva": 158289, 
+        "name": "FoldStringW", 
+        "alias": [], 
+        "range": 188, 
+        "end_addresses": {
+            "rets": [
+                158451
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 181, 
+        "rva": 125975, 
+        "name": "FormatMessageA", 
+        "alias": [], 
+        "range": 310, 
+        "end_addresses": {
+            "rets": [
+                126282
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 182, 
+        "rva": 63419, 
+        "name": "FormatMessageW", 
+        "alias": [], 
+        "range": 37, 
+        "end_addresses": {
+            "rets": [
+                63453
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 183, 
+        "rva": 50761, 
+        "name": "FreeEnvironmentStringsA", 
+        "alias": [
+            {
+                "name": "FreeEnvironmentStringsW", 
+                "ordinal:": 184
+            }
+        ], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                50793
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 185, 
+        "rva": 34874, 
+        "name": "FreeLibrary", 
+        "alias": [], 
+        "range": 132, 
+        "end_addresses": {
+            "rets": [
+                34994
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 186, 
+        "rva": 30224, 
+        "name": "FreeLibraryAndExitThread", 
+        "alias": [], 
+        "range": 54, 
+        "end_addresses": {
+            "rets": [], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 188, 
+        "rva": 35272, 
+        "name": "FreeResource", 
+        "alias": [], 
+        "range": 5, 
+        "end_addresses": {
+            "rets": [
+                35274
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 189, 
+        "rva": 43777, 
+        "name": "FreeSid", 
+        "alias": [], 
+        "range": 12, 
+        "end_addresses": {
+            "rets": [], 
+            "jmps_to_imps": [
+                {
+                    "import": "RtlFreeSid", 
+                    "imp_addr": 4872, 
+                    "jmp_addr": 43783, 
+                    "dll": "ntdll"
+                }
+            ]
+        }
+    }, 
+    {
+        "ordinal": 191, 
+        "rva": 35345, 
+        "name": "GetAce", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                35377
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 192, 
+        "rva": 60820, 
+        "name": "GetAclInformation", 
+        "alias": [], 
+        "range": 38, 
+        "end_addresses": {
+            "rets": [
+                60855
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 190, 
+        "rva": 35582, 
+        "name": "GetACP", 
+        "alias": [], 
+        "range": 6, 
+        "end_addresses": {
+            "rets": [
+                35587
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 196, 
+        "rva": 37007, 
+        "name": "GetCalendar", 
+        "alias": [], 
+        "range": 57, 
+        "end_addresses": {
+            "rets": [
+                37057
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 197, 
+        "rva": 156413, 
+        "name": "GetCalendarInfoEx", 
+        "alias": [], 
+        "range": 76, 
+        "end_addresses": {
+            "rets": [
+                156474
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 198, 
+        "rva": 152443, 
+        "name": "GetCalendarInfoW", 
+        "alias": [], 
+        "range": 76, 
+        "end_addresses": {
+            "rets": [
+                152499
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 199, 
+        "rva": 50750, 
+        "name": "GetCommandLineA", 
+        "alias": [], 
+        "range": 6, 
+        "end_addresses": {
+            "rets": [
+                50755
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 200, 
+        "rva": 55894, 
+        "name": "GetCommandLineW", 
+        "alias": [], 
+        "range": 6, 
+        "end_addresses": {
+            "rets": [
+                55899
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 201, 
+        "rva": 217454, 
+        "name": "GetComputerNameExA", 
+        "alias": [], 
+        "range": 283, 
+        "end_addresses": {
+            "rets": [
+                217734
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 202, 
+        "rva": 64070, 
+        "name": "GetComputerNameExW", 
+        "alias": [], 
+        "range": 1093, 
+        "end_addresses": {
+            "rets": [
+                64473
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 193, 
+        "rva": 161707, 
+        "name": "GetCPFileNameFromRegistry", 
+        "alias": [], 
+        "range": 194, 
+        "end_addresses": {
+            "rets": [
+                161898
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 1, 
+        "rva": 35385, 
+        "name": "GetCPHashNode", 
+        "alias": [], 
+        "range": 82, 
+        "end_addresses": {
+            "rets": [
+                35466
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 194, 
+        "rva": 50510, 
+        "name": "GetCPInfo", 
+        "alias": [], 
+        "range": 128, 
+        "end_addresses": {
+            "rets": [
+                50635
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 195, 
+        "rva": 109691, 
+        "name": "GetCPInfoExW", 
+        "alias": [], 
+        "range": 172, 
+        "end_addresses": {
+            "rets": [
+                109853
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 203, 
+        "rva": 254989, 
+        "name": "GetCurrencyFormatEx", 
+        "alias": [], 
+        "range": 82, 
+        "end_addresses": {
+            "rets": [
+                255068
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 204, 
+        "rva": 254901, 
+        "name": "GetCurrencyFormatW", 
+        "alias": [], 
+        "range": 83, 
+        "end_addresses": {
+            "rets": [
+                254981
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 205, 
+        "rva": 129783, 
+        "name": "GetCurrentDirectoryA", 
+        "alias": [], 
+        "range": 264, 
+        "end_addresses": {
+            "rets": [
+                130044
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 206, 
+        "rva": 81273, 
+        "name": "GetCurrentDirectoryW", 
+        "alias": [], 
+        "range": 26, 
+        "end_addresses": {
+            "rets": [
+                81296
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 207, 
+        "rva": 26757, 
+        "name": "GetCurrentProcess", 
+        "alias": [], 
+        "range": 4, 
+        "end_addresses": {
+            "rets": [
+                26760
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 208, 
+        "rva": 26832, 
+        "name": "GetCurrentProcessId", 
+        "alias": [], 
+        "range": 10, 
+        "end_addresses": {
+            "rets": [
+                26841
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 209, 
+        "rva": 26766, 
+        "name": "GetCurrentThread", 
+        "alias": [], 
+        "range": 4, 
+        "end_addresses": {
+            "rets": [
+                26769
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 210, 
+        "rva": 26489, 
+        "name": "GetCurrentThreadId", 
+        "alias": [], 
+        "range": 10, 
+        "end_addresses": {
+            "rets": [
+                26498
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 211, 
+        "rva": 162194, 
+        "name": "GetDiskFreeSpaceA", 
+        "alias": [], 
+        "range": 73, 
+        "end_addresses": {
+            "rets": [
+                162264
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 212, 
+        "rva": 165190, 
+        "name": "GetDiskFreeSpaceExA", 
+        "alias": [], 
+        "range": 70, 
+        "end_addresses": {
+            "rets": [
+                165257
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 213, 
+        "rva": 131253, 
+        "name": "GetDiskFreeSpaceExW", 
+        "alias": [], 
+        "range": 284, 
+        "end_addresses": {
+            "rets": [
+                131534
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 214, 
+        "rva": 108982, 
+        "name": "GetDiskFreeSpaceW", 
+        "alias": [], 
+        "range": 321, 
+        "end_addresses": {
+            "rets": [
+                109300
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 215, 
+        "rva": 141493, 
+        "name": "GetDriveTypeA", 
+        "alias": [], 
+        "range": 72, 
+        "end_addresses": {
+            "rets": [
+                141558
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 216, 
+        "rva": 55408, 
+        "name": "GetDriveTypeW", 
+        "alias": [], 
+        "range": 245, 
+        "end_addresses": {
+            "rets": [
+                55650
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 217, 
+        "rva": 125625, 
+        "name": "GetDynamicTimeZoneInformation", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                125641
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 218, 
+        "rva": 144225, 
+        "name": "GetEnvironmentStrings", 
+        "alias": [
+            {
+                "name": "GetEnvironmentStringsA", 
+                "ordinal:": 219
+            }
+        ], 
+        "range": 176, 
+        "end_addresses": {
+            "rets": [
+                144400
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 220, 
+        "rva": 50801, 
+        "name": "GetEnvironmentStringsW", 
+        "alias": [], 
+        "range": 127, 
+        "end_addresses": {
+            "rets": [
+                50927
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 221, 
+        "rva": 31961, 
+        "name": "GetEnvironmentVariableA", 
+        "alias": [], 
+        "range": 258, 
+        "end_addresses": {
+            "rets": [
+                32216
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 222, 
+        "rva": 58305, 
+        "name": "GetEnvironmentVariableW", 
+        "alias": [], 
+        "range": 110, 
+        "end_addresses": {
+            "rets": [
+                58394
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 223, 
+        "rva": 229274, 
+        "name": "GetEraNameCountedString", 
+        "alias": [], 
+        "range": 188, 
+        "end_addresses": {
+            "rets": [
+                229459
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 224, 
+        "rva": 31107, 
+        "name": "GetErrorMode", 
+        "alias": [], 
+        "range": 48, 
+        "end_addresses": {
+            "rets": [
+                31154, 
+                55963, 
+                166578
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 225, 
+        "rva": 57667, 
+        "name": "GetExitCodeProcess", 
+        "alias": [], 
+        "range": 50, 
+        "end_addresses": {
+            "rets": [
+                57714
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 226, 
+        "rva": 62577, 
+        "name": "GetExitCodeThread", 
+        "alias": [], 
+        "range": 50, 
+        "end_addresses": {
+            "rets": [
+                62624
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 227, 
+        "rva": 228246, 
+        "name": "GetFallbackDisplayName", 
+        "alias": [], 
+        "range": 54, 
+        "end_addresses": {
+            "rets": [
+                228297
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 228, 
+        "rva": 57722, 
+        "name": "GetFileAttributesA", 
+        "alias": [], 
+        "range": 55, 
+        "end_addresses": {
+            "rets": [
+                57774
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 229, 
+        "rva": 149264, 
+        "name": "GetFileAttributesExA", 
+        "alias": [], 
+        "range": 57, 
+        "end_addresses": {
+            "rets": [
+                149318
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 230, 
+        "rva": 61773, 
+        "name": "GetFileAttributesExW", 
+        "alias": [], 
+        "range": 224, 
+        "end_addresses": {
+            "rets": [
+                61933
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 231, 
+        "rva": 58108, 
+        "name": "GetFileAttributesW", 
+        "alias": [], 
+        "range": 192, 
+        "end_addresses": {
+            "rets": [
+                58223
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 232, 
+        "rva": 45528, 
+        "name": "GetFileInformationByHandle", 
+        "alias": [], 
+        "range": 281, 
+        "end_addresses": {
+            "rets": [
+                45795
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 233, 
+        "rva": 255224, 
+        "name": "GetFileMUIInfo", 
+        "alias": [], 
+        "range": 1212, 
+        "end_addresses": {
+            "rets": [
+                256433
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 234, 
+        "rva": 148662, 
+        "name": "GetFileMUIPath", 
+        "alias": [], 
+        "range": 65, 
+        "end_addresses": {
+            "rets": [
+                148706
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 235, 
+        "rva": 110508, 
+        "name": "GetFileSecurityW", 
+        "alias": [], 
+        "range": 230, 
+        "end_addresses": {
+            "rets": [
+                110735
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 236, 
+        "rva": 56971, 
+        "name": "GetFileSize", 
+        "alias": [], 
+        "range": 60, 
+        "end_addresses": {
+            "rets": [
+                57015
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 237, 
+        "rva": 56908, 
+        "name": "GetFileSizeEx", 
+        "alias": [], 
+        "range": 58, 
+        "end_addresses": {
+            "rets": [
+                56963
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 238, 
+        "rva": 140118, 
+        "name": "GetFileTime", 
+        "alias": [], 
+        "range": 119, 
+        "end_addresses": {
+            "rets": [
+                140208
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 239, 
+        "rva": 57529, 
+        "name": "GetFileType", 
+        "alias": [], 
+        "range": 133, 
+        "end_addresses": {
+            "rets": [
+                57659
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 240, 
+        "rva": 209176, 
+        "name": "GetFinalPathNameByHandleA", 
+        "alias": [], 
+        "range": 283, 
+        "end_addresses": {
+            "rets": [
+                209374
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 241, 
+        "rva": 103859, 
+        "name": "GetFinalPathNameByHandleW", 
+        "alias": [], 
+        "range": 829, 
+        "end_addresses": {
+            "rets": [
+                104685
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 242, 
+        "rva": 51417, 
+        "name": "GetFullPathNameA", 
+        "alias": [], 
+        "range": 321, 
+        "end_addresses": {
+            "rets": [
+                51735
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 243, 
+        "rva": 58484, 
+        "name": "GetFullPathNameW", 
+        "alias": [], 
+        "range": 47, 
+        "end_addresses": {
+            "rets": [
+                58528
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 244, 
+        "rva": 132397, 
+        "name": "GetHandleInformation", 
+        "alias": [], 
+        "range": 93, 
+        "end_addresses": {
+            "rets": [
+                132487
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 245, 
+        "rva": 51123, 
+        "name": "GetKernelObjectSecurity", 
+        "alias": [], 
+        "range": 47, 
+        "end_addresses": {
+            "rets": [
+                51162
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 246, 
+        "rva": 26630, 
+        "name": "GetLastError", 
+        "alias": [], 
+        "range": 10, 
+        "end_addresses": {
+            "rets": [
+                26639
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 247, 
+        "rva": 30612, 
+        "name": "GetLengthSid", 
+        "alias": [], 
+        "range": 20, 
+        "end_addresses": {
+            "rets": [], 
+            "jmps_to_imps": [
+                {
+                    "import": "RtlLengthSid", 
+                    "imp_addr": 4892, 
+                    "jmp_addr": 30626, 
+                    "dll": "ntdll"
+                }
+            ]
+        }
+    }, 
+    {
+        "ordinal": 249, 
+        "rva": 84597, 
+        "name": "GetLocaleInfoA", 
+        "alias": [], 
+        "range": 255, 
+        "end_addresses": {
+            "rets": [
+                84825
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 250, 
+        "rva": 69719, 
+        "name": "GetLocaleInfoEx", 
+        "alias": [], 
+        "range": 38, 
+        "end_addresses": {
+            "rets": [
+                69754
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 251, 
+        "rva": 133243, 
+        "name": "GetLocaleInfoHelper", 
+        "alias": [], 
+        "range": 1825, 
+        "end_addresses": {
+            "rets": [
+                133652
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 252, 
+        "rva": 136919, 
+        "name": "GetLocaleInfoW", 
+        "alias": [], 
+        "range": 63, 
+        "end_addresses": {
+            "rets": [
+                136979
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 248, 
+        "rva": 37430, 
+        "name": "GetLocalTime", 
+        "alias": [], 
+        "range": 159, 
+        "end_addresses": {
+            "rets": [
+                37586
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 254, 
+        "rva": 116563, 
+        "name": "GetLogicalDrives", 
+        "alias": [], 
+        "range": 49, 
+        "end_addresses": {
+            "rets": [
+                116611, 
+                179616
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 253, 
+        "rva": 116617, 
+        "name": "GetLogicalDriveStringsW", 
+        "alias": [], 
+        "range": 212, 
+        "end_addresses": {
+            "rets": [
+                116754
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 255, 
+        "rva": 116834, 
+        "name": "GetLogicalProcessorInformation", 
+        "alias": [], 
+        "range": 79, 
+        "end_addresses": {
+            "rets": [
+                116905
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 256, 
+        "rva": 128817, 
+        "name": "GetLogicalProcessorInformationEx", 
+        "alias": [], 
+        "range": 67, 
+        "end_addresses": {
+            "rets": [
+                128876
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 257, 
+        "rva": 219817, 
+        "name": "GetLongPathNameA", 
+        "alias": [], 
+        "range": 494, 
+        "end_addresses": {
+            "rets": [
+                220211
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 258, 
+        "rva": 105843, 
+        "name": "GetLongPathNameW", 
+        "alias": [], 
+        "range": 903, 
+        "end_addresses": {
+            "rets": [
+                106743
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 259, 
+        "rva": 31699, 
+        "name": "GetModuleFileNameA", 
+        "alias": [], 
+        "range": 188, 
+        "end_addresses": {
+            "rets": [
+                31884
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 260, 
+        "rva": 31378, 
+        "name": "GetModuleFileNameW", 
+        "alias": [], 
+        "range": 223, 
+        "end_addresses": {
+            "rets": [
+                31598
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 261, 
+        "rva": 34808, 
+        "name": "GetModuleHandleA", 
+        "alias": [], 
+        "range": 61, 
+        "end_addresses": {
+            "rets": [
+                34866
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 262, 
+        "rva": 140242, 
+        "name": "GetModuleHandleExA", 
+        "alias": [], 
+        "range": 88, 
+        "end_addresses": {
+            "rets": [
+                140327
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 263, 
+        "rva": 46484, 
+        "name": "GetModuleHandleExW", 
+        "alias": [], 
+        "range": 57, 
+        "end_addresses": {
+            "rets": [
+                46538
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 264, 
+        "rva": 34587, 
+        "name": "GetModuleHandleW", 
+        "alias": [], 
+        "range": 42, 
+        "end_addresses": {
+            "rets": [
+                34626
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 2, 
+        "rva": 53190, 
+        "name": "GetNamedLocaleHashNode", 
+        "alias": [], 
+        "range": 53, 
+        "end_addresses": {
+            "rets": [
+                53242
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 267, 
+        "rva": 146060, 
+        "name": "GetNamedPipeAttribute", 
+        "alias": [], 
+        "range": 110, 
+        "end_addresses": {
+            "rets": [
+                146150
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 268, 
+        "rva": 145965, 
+        "name": "GetNamedPipeClientComputerNameW", 
+        "alias": [], 
+        "range": 70, 
+        "end_addresses": {
+            "rets": [
+                146032
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 265, 
+        "rva": 261805, 
+        "name": "GetNLSVersion", 
+        "alias": [], 
+        "range": 53, 
+        "end_addresses": {
+            "rets": [
+                261855
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 266, 
+        "rva": 261863, 
+        "name": "GetNLSVersionEx", 
+        "alias": [], 
+        "range": 52, 
+        "end_addresses": {
+            "rets": [
+                261912
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 269, 
+        "rva": 108118, 
+        "name": "GetNumberFormatEx", 
+        "alias": [], 
+        "range": 82, 
+        "end_addresses": {
+            "rets": [
+                108185
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 270, 
+        "rva": 150948, 
+        "name": "GetNumberFormatW", 
+        "alias": [], 
+        "range": 83, 
+        "end_addresses": {
+            "rets": [
+                151016
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 271, 
+        "rva": 55905, 
+        "name": "GetOEMCP", 
+        "alias": [], 
+        "range": 6, 
+        "end_addresses": {
+            "rets": [
+                55910
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 272, 
+        "rva": 39322, 
+        "name": "GetOverlappedResult", 
+        "alias": [], 
+        "range": 107, 
+        "end_addresses": {
+            "rets": [
+                39426
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 273, 
+        "rva": 154462, 
+        "name": "GetPriorityClass", 
+        "alias": [], 
+        "range": 80, 
+        "end_addresses": {
+            "rets": [
+                154525
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 274, 
+        "rva": 221939, 
+        "name": "GetPrivateObjectSecurity", 
+        "alias": [], 
+        "range": 47, 
+        "end_addresses": {
+            "rets": [
+                221983
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 275, 
+        "rva": 27689, 
+        "name": "GetProcAddress", 
+        "alias": [], 
+        "range": 99, 
+        "end_addresses": {
+            "rets": [
+                27785
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 276, 
+        "rva": 26679, 
+        "name": "GetProcessHeap", 
+        "alias": [], 
+        "range": 13, 
+        "end_addresses": {
+            "rets": [
+                26691
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 277, 
+        "rva": 149936, 
+        "name": "GetProcessHeaps", 
+        "alias": [], 
+        "range": 12, 
+        "end_addresses": {
+            "rets": [], 
+            "jmps_to_imps": [
+                {
+                    "import": "RtlGetProcessHeaps", 
+                    "imp_addr": 5060, 
+                    "jmp_addr": 149942, 
+                    "dll": "ntdll"
+                }
+            ]
+        }
+    }, 
+    {
+        "ordinal": 278, 
+        "rva": 39742, 
+        "name": "GetProcessId", 
+        "alias": [], 
+        "range": 42, 
+        "end_addresses": {
+            "rets": [
+                39781
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 279, 
+        "rva": 149607, 
+        "name": "GetProcessIdOfThread", 
+        "alias": [], 
+        "range": 42, 
+        "end_addresses": {
+            "rets": [
+                149646
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 280, 
+        "rva": 256449, 
+        "name": "GetProcessPreferredUILanguages", 
+        "alias": [], 
+        "range": 52, 
+        "end_addresses": {
+            "rets": [
+                256498
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 281, 
+        "rva": 62672, 
+        "name": "GetProcessTimes", 
+        "alias": [], 
+        "range": 98, 
+        "end_addresses": {
+            "rets": [
+                62767
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 282, 
+        "rva": 38233, 
+        "name": "GetProcessVersion", 
+        "alias": [], 
+        "range": 69, 
+        "end_addresses": {
+            "rets": [
+                38299
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 283, 
+        "rva": 229217, 
+        "name": "GetPtrCalData", 
+        "alias": [], 
+        "range": 52, 
+        "end_addresses": {
+            "rets": [
+                229266
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 284, 
+        "rva": 155490, 
+        "name": "GetPtrCalDataArray", 
+        "alias": [], 
+        "range": 37, 
+        "end_addresses": {
+            "rets": [
+                155524
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 285, 
+        "rva": 132638, 
+        "name": "GetQueuedCompletionStatus", 
+        "alias": [], 
+        "range": 123, 
+        "end_addresses": {
+            "rets": [
+                132723
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 286, 
+        "rva": 206811, 
+        "name": "GetQueuedCompletionStatusEx", 
+        "alias": [], 
+        "range": 245, 
+        "end_addresses": {
+            "rets": [
+                207031
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 287, 
+        "rva": 60746, 
+        "name": "GetSecurityDescriptorControl", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                60778
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 288, 
+        "rva": 39789, 
+        "name": "GetSecurityDescriptorDacl", 
+        "alias": [], 
+        "range": 58, 
+        "end_addresses": {
+            "rets": [
+                39844
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 289, 
+        "rva": 61220, 
+        "name": "GetSecurityDescriptorGroup", 
+        "alias": [], 
+        "range": 45, 
+        "end_addresses": {
+            "rets": [
+                61262
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 290, 
+        "rva": 39877, 
+        "name": "GetSecurityDescriptorLength", 
+        "alias": [], 
+        "range": 12, 
+        "end_addresses": {
+            "rets": [], 
+            "jmps_to_imps": [
+                {
+                    "import": "RtlLengthSecurityDescriptor", 
+                    "imp_addr": 5360, 
+                    "jmp_addr": 39883, 
+                    "dll": "ntdll"
+                }
+            ]
+        }
+    }, 
+    {
+        "ordinal": 291, 
+        "rva": 61170, 
+        "name": "GetSecurityDescriptorOwner", 
+        "alias": [], 
+        "range": 45, 
+        "end_addresses": {
+            "rets": [
+                61212
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 292, 
+        "rva": 222034, 
+        "name": "GetSecurityDescriptorRMControl", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                222063
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 293, 
+        "rva": 51258, 
+        "name": "GetSecurityDescriptorSacl", 
+        "alias": [], 
+        "range": 58, 
+        "end_addresses": {
+            "rets": [
+                51313
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 294, 
+        "rva": 218713, 
+        "name": "GetShortPathNameW", 
+        "alias": [], 
+        "range": 983, 
+        "end_addresses": {
+            "rets": [
+                219693
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 295, 
+        "rva": 60552, 
+        "name": "GetSidIdentifierAuthority", 
+        "alias": [], 
+        "range": 20, 
+        "end_addresses": {
+            "rets": [], 
+            "jmps_to_imps": [
+                {
+                    "import": "RtlIdentifierAuthoritySid", 
+                    "imp_addr": 5264, 
+                    "jmp_addr": 60566, 
+                    "dll": "ntdll"
+                }
+            ]
+        }
+    }, 
+    {
+        "ordinal": 296, 
+        "rva": 39646, 
+        "name": "GetSidLengthRequired", 
+        "alias": [], 
+        "range": 20, 
+        "end_addresses": {
+            "rets": [
+                39663
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 297, 
+        "rva": 39852, 
+        "name": "GetSidSubAuthority", 
+        "alias": [], 
+        "range": 20, 
+        "end_addresses": {
+            "rets": [], 
+            "jmps_to_imps": [
+                {
+                    "import": "RtlSubAuthoritySid", 
+                    "imp_addr": 5268, 
+                    "jmp_addr": 39866, 
+                    "dll": "ntdll"
+                }
+            ]
+        }
+    }, 
+    {
+        "ordinal": 298, 
+        "rva": 30199, 
+        "name": "GetSidSubAuthorityCount", 
+        "alias": [], 
+        "range": 20, 
+        "end_addresses": {
+            "rets": [], 
+            "jmps_to_imps": [
+                {
+                    "import": "RtlSubAuthorityCountSid", 
+                    "imp_addr": 5272, 
+                    "jmp_addr": 30213, 
+                    "dll": "ntdll"
+                }
+            ]
+        }
+    }, 
+    {
+        "ordinal": 299, 
+        "rva": 74534, 
+        "name": "GetStartupInfoW", 
+        "alias": [], 
+        "range": 140, 
+        "end_addresses": {
+            "rets": [
+                74671
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 300, 
+        "rva": 50933, 
+        "name": "GetStdHandle", 
+        "alias": [], 
+        "range": 78, 
+        "end_addresses": {
+            "rets": [
+                51008
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 301, 
+        "rva": 109479, 
+        "name": "GetStringTableEntry", 
+        "alias": [], 
+        "range": 207, 
+        "end_addresses": {
+            "rets": [
+                109677
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 302, 
+        "rva": 122295, 
+        "name": "GetStringTypeA", 
+        "alias": [], 
+        "range": 160, 
+        "end_addresses": {
+            "rets": [
+                122452
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 303, 
+        "rva": 60050, 
+        "name": "GetStringTypeExW", 
+        "alias": [], 
+        "range": 45, 
+        "end_addresses": {
+            "rets": [
+                60092
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 304, 
+        "rva": 48009, 
+        "name": "GetStringTypeW", 
+        "alias": [], 
+        "range": 123, 
+        "end_addresses": {
+            "rets": [
+                48129
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 306, 
+        "rva": 62526, 
+        "name": "GetSystemDefaultLangID", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                62547
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 305, 
+        "rva": 46661, 
+        "name": "GetSystemDefaultLCID", 
+        "alias": [], 
+        "range": 21, 
+        "end_addresses": {
+            "rets": [
+                46681
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 307, 
+        "rva": 121998, 
+        "name": "GetSystemDefaultLocaleName", 
+        "alias": [], 
+        "range": 94, 
+        "end_addresses": {
+            "rets": [
+                122089
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 308, 
+        "rva": 128309, 
+        "name": "GetSystemDefaultUILanguage", 
+        "alias": [], 
+        "range": 39, 
+        "end_addresses": {
+            "rets": [
+                128325, 
+                202540
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 309, 
+        "rva": 93768, 
+        "name": "GetSystemDirectoryA", 
+        "alias": [], 
+        "range": 98, 
+        "end_addresses": {
+            "rets": [
+                93859
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 310, 
+        "rva": 60100, 
+        "name": "GetSystemDirectoryW", 
+        "alias": [], 
+        "range": 74, 
+        "end_addresses": {
+            "rets": [
+                60171
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 311, 
+        "rva": 38307, 
+        "name": "GetSystemInfo", 
+        "alias": [], 
+        "range": 68, 
+        "end_addresses": {
+            "rets": [
+                38372
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 312, 
+        "rva": 92098, 
+        "name": "GetSystemPreferredUILanguages", 
+        "alias": [], 
+        "range": 53, 
+        "end_addresses": {
+            "rets": [
+                92148
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 313, 
+        "rva": 57866, 
+        "name": "GetSystemTime", 
+        "alias": [], 
+        "range": 123, 
+        "end_addresses": {
+            "rets": [
+                57982
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 314, 
+        "rva": 128748, 
+        "name": "GetSystemTimeAdjustment", 
+        "alias": [], 
+        "range": 64, 
+        "end_addresses": {
+            "rets": [
+                128809
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 315, 
+        "rva": 30565, 
+        "name": "GetSystemTimeAsFileTime", 
+        "alias": [], 
+        "range": 42, 
+        "end_addresses": {
+            "rets": [
+                30600
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 316, 
+        "rva": 161040, 
+        "name": "GetSystemWindowsDirectoryA", 
+        "alias": [], 
+        "range": 116, 
+        "end_addresses": {
+            "rets": [
+                161149
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 317, 
+        "rva": 59907, 
+        "name": "GetSystemWindowsDirectoryW", 
+        "alias": [], 
+        "range": 106, 
+        "end_addresses": {
+            "rets": [
+                60010
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 318, 
+        "rva": 110795, 
+        "name": "GetTempFileNameW", 
+        "alias": [], 
+        "range": 480, 
+        "end_addresses": {
+            "rets": [
+                111272
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 319, 
+        "rva": 138855, 
+        "name": "GetThreadId", 
+        "alias": [], 
+        "range": 42, 
+        "end_addresses": {
+            "rets": [
+                138894
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 320, 
+        "rva": 35737, 
+        "name": "GetThreadLocale", 
+        "alias": [], 
+        "range": 13, 
+        "end_addresses": {
+            "rets": [
+                35749
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 321, 
+        "rva": 61059, 
+        "name": "GetThreadPreferredUILanguages", 
+        "alias": [], 
+        "range": 38, 
+        "end_addresses": {
+            "rets": [
+                61094
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 322, 
+        "rva": 46192, 
+        "name": "GetThreadPriority", 
+        "alias": [], 
+        "range": 60, 
+        "end_addresses": {
+            "rets": [
+                46249
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 323, 
+        "rva": 211037, 
+        "name": "GetThreadPriorityBoost", 
+        "alias": [], 
+        "range": 53, 
+        "end_addresses": {
+            "rets": [
+                211087
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 324, 
+        "rva": 49509, 
+        "name": "GetThreadUILanguage", 
+        "alias": [], 
+        "range": 219, 
+        "end_addresses": {
+            "rets": [
+                49717
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 326, 
+        "rva": 26432, 
+        "name": "GetTickCount", 
+        "alias": [], 
+        "range": 52, 
+        "end_addresses": {
+            "rets": [
+                26479
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 325, 
+        "rva": 40523, 
+        "name": "GetTickCount64", 
+        "alias": [], 
+        "range": 77, 
+        "end_addresses": {
+            "rets": [
+                40595
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 327, 
+        "rva": 126772, 
+        "name": "GetTimeZoneInformation", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                126788
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 328, 
+        "rva": 150853, 
+        "name": "GetTimeZoneInformationForYear", 
+        "alias": [], 
+        "range": 25, 
+        "end_addresses": {
+            "rets": [
+                150875
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 329, 
+        "rva": 29585, 
+        "name": "GetTokenInformation", 
+        "alias": [], 
+        "range": 41, 
+        "end_addresses": {
+            "rets": [
+                29623
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 330, 
+        "rva": 154384, 
+        "name": "GetUILanguageInfo", 
+        "alias": [], 
+        "range": 73, 
+        "end_addresses": {
+            "rets": [
+                154454
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 332, 
+        "rva": 147128, 
+        "name": "GetUserDefaultLangID", 
+        "alias": [], 
+        "range": 5, 
+        "end_addresses": {
+            "rets": [], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 331, 
+        "rva": 35538, 
+        "name": "GetUserDefaultLCID", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                35559
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 333, 
+        "rva": 230177, 
+        "name": "GetUserDefaultLocaleName", 
+        "alias": [], 
+        "range": 102, 
+        "end_addresses": {
+            "rets": [
+                230276
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 334, 
+        "rva": 36442, 
+        "name": "GetUserDefaultUILanguage", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                36473, 
+                202564
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 335, 
+        "rva": 137662, 
+        "name": "GetUserInfo", 
+        "alias": [], 
+        "range": 170, 
+        "end_addresses": {
+            "rets": [
+                137807
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 336, 
+        "rva": 137169, 
+        "name": "GetUserInfoWord", 
+        "alias": [], 
+        "range": 79, 
+        "end_addresses": {
+            "rets": [
+                137245
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 337, 
+        "rva": 148956, 
+        "name": "GetUserPreferredUILanguages", 
+        "alias": [], 
+        "range": 53, 
+        "end_addresses": {
+            "rets": [
+                149006
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 338, 
+        "rva": 60222, 
+        "name": "GetVersion", 
+        "alias": [], 
+        "range": 49, 
+        "end_addresses": {
+            "rets": [
+                60270
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 339, 
+        "rva": 50270, 
+        "name": "GetVersionExA", 
+        "alias": [], 
+        "range": 235, 
+        "end_addresses": {
+            "rets": [
+                50502
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 340, 
+        "rva": 35612, 
+        "name": "GetVersionExW", 
+        "alias": [], 
+        "range": 72, 
+        "end_addresses": {
+            "rets": [
+                35665
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 341, 
+        "rva": 80042, 
+        "name": "GetVolumeInformationByHandleW", 
+        "alias": [], 
+        "range": 298, 
+        "end_addresses": {
+            "rets": [
+                80337
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 342, 
+        "rva": 79712, 
+        "name": "GetVolumeInformationW", 
+        "alias": [], 
+        "range": 261, 
+        "end_addresses": {
+            "rets": [
+                79970
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 343, 
+        "rva": 217171, 
+        "name": "GetVolumePathNameW", 
+        "alias": [], 
+        "range": 25, 
+        "end_addresses": {
+            "rets": [
+                217193
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 344, 
+        "rva": 119461, 
+        "name": "GetWindowsAccountDomainSid", 
+        "alias": [], 
+        "range": 101, 
+        "end_addresses": {
+            "rets": [
+                119559
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 345, 
+        "rva": 161013, 
+        "name": "GetWindowsDirectoryA", 
+        "alias": [], 
+        "range": 27, 
+        "end_addresses": {
+            "rets": [
+                180446
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 346, 
+        "rva": 60018, 
+        "name": "GetWindowsDirectoryW", 
+        "alias": [], 
+        "range": 27, 
+        "end_addresses": {
+            "rets": [
+                180466
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 347, 
+        "rva": 55006, 
+        "name": "GlobalAlloc", 
+        "alias": [], 
+        "range": 167, 
+        "end_addresses": {
+            "rets": [
+                55122
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 348, 
+        "rva": 30283, 
+        "name": "GlobalFree", 
+        "alias": [
+            {
+                "name": "LocalFree", 
+                "ordinal:": 428
+            }
+        ], 
+        "range": 68, 
+        "end_addresses": {
+            "rets": [
+                30348
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 349, 
+        "rva": 65744, 
+        "name": "GlobalMemoryStatusEx", 
+        "alias": [], 
+        "range": 445, 
+        "end_addresses": {
+            "rets": [
+                66186
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 351, 
+        "rva": 125778, 
+        "name": "HeapCompact", 
+        "alias": [], 
+        "range": 12, 
+        "end_addresses": {
+            "rets": [], 
+            "jmps_to_imps": [
+                {
+                    "import": "RtlCompactHeap", 
+                    "imp_addr": 5064, 
+                    "jmp_addr": 125784, 
+                    "dll": "ntdll"
+                }
+            ]
+        }
+    }, 
+    {
+        "ordinal": 352, 
+        "rva": 50643, 
+        "name": "HeapCreate", 
+        "alias": [], 
+        "range": 102, 
+        "end_addresses": {
+            "rets": [
+                50742
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 353, 
+        "rva": 36364, 
+        "name": "HeapDestroy", 
+        "alias": [], 
+        "range": 27, 
+        "end_addresses": {
+            "rets": [
+                36388
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 355, 
+        "rva": 117429, 
+        "name": "HeapLock", 
+        "alias": [], 
+        "range": 21, 
+        "end_addresses": {
+            "rets": [
+                117447
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 356, 
+        "rva": 211388, 
+        "name": "HeapQueryInformation", 
+        "alias": [], 
+        "range": 47, 
+        "end_addresses": {
+            "rets": [
+                211432
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 358, 
+        "rva": 55977, 
+        "name": "HeapSetInformation", 
+        "alias": [], 
+        "range": 38, 
+        "end_addresses": {
+            "rets": [
+                56012
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 360, 
+        "rva": 211259, 
+        "name": "HeapSummary", 
+        "alias": [], 
+        "range": 124, 
+        "end_addresses": {
+            "rets": [
+                211380
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 361, 
+        "rva": 117455, 
+        "name": "HeapUnlock", 
+        "alias": [], 
+        "range": 21, 
+        "end_addresses": {
+            "rets": [
+                117473
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 362, 
+        "rva": 139523, 
+        "name": "HeapValidate", 
+        "alias": [], 
+        "range": 27, 
+        "end_addresses": {
+            "rets": [
+                139547
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 363, 
+        "rva": 117481, 
+        "name": "HeapWalk", 
+        "alias": [], 
+        "range": 139, 
+        "end_addresses": {
+            "rets": [
+                117617
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 364, 
+        "rva": 85540, 
+        "name": "ImpersonateAnonymousToken", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                85566
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 365, 
+        "rva": 144729, 
+        "name": "ImpersonateLoggedOnUser", 
+        "alias": [], 
+        "range": 180, 
+        "end_addresses": {
+            "rets": [
+                144820
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 366, 
+        "rva": 145779, 
+        "name": "ImpersonateNamedPipeClient", 
+        "alias": [], 
+        "range": 51, 
+        "end_addresses": {
+            "rets": [
+                145827
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 367, 
+        "rva": 146759, 
+        "name": "ImpersonateSelf", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                146785
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 368, 
+        "rva": 39156, 
+        "name": "InitializeAcl", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                39188
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 370, 
+        "rva": 29291, 
+        "name": "InitializeCriticalSectionAndSpinCount", 
+        "alias": [], 
+        "range": 24, 
+        "end_addresses": {
+            "rets": [
+                29312
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 371, 
+        "rva": 55916, 
+        "name": "InitializeCriticalSectionEx", 
+        "alias": [], 
+        "range": 43, 
+        "end_addresses": {
+            "rets": [
+                55956
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 372, 
+        "rva": 81761, 
+        "name": "InitializeProcThreadAttributeList", 
+        "alias": [], 
+        "range": 86, 
+        "end_addresses": {
+            "rets": [
+                81844
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 375, 
+        "rva": 39119, 
+        "name": "InitializeSecurityDescriptor", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                39148
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 376, 
+        "rva": 39894, 
+        "name": "InitializeSid", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                39926
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 378, 
+        "rva": 26912, 
+        "name": "InterlockedCompareExchange", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                26928
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 379, 
+        "rva": 26878, 
+        "name": "InterlockedDecrement", 
+        "alias": [], 
+        "range": 17, 
+        "end_addresses": {
+            "rets": [
+                26892
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 380, 
+        "rva": 27458, 
+        "name": "InterlockedExchange", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                27474
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 381, 
+        "rva": 27488, 
+        "name": "InterlockedExchangeAdd", 
+        "alias": [], 
+        "range": 15, 
+        "end_addresses": {
+            "rets": [
+                27500
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 383, 
+        "rva": 26895, 
+        "name": "InterlockedIncrement", 
+        "alias": [], 
+        "range": 17, 
+        "end_addresses": {
+            "rets": [
+                26909
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 386, 
+        "rva": 154547, 
+        "name": "Internal_EnumCalendarInfo", 
+        "alias": [], 
+        "range": 537, 
+        "end_addresses": {
+            "rets": [
+                155081
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 387, 
+        "rva": 156162, 
+        "name": "Internal_EnumDateFormats", 
+        "alias": [], 
+        "range": 115, 
+        "end_addresses": {
+            "rets": [
+                156242
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 388, 
+        "rva": 233816, 
+        "name": "Internal_EnumLanguageGroupLocales", 
+        "alias": [], 
+        "range": 715, 
+        "end_addresses": {
+            "rets": [
+                234528
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 389, 
+        "rva": 234536, 
+        "name": "Internal_EnumSystemCodePages", 
+        "alias": [], 
+        "range": 538, 
+        "end_addresses": {
+            "rets": [
+                235071
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 390, 
+        "rva": 118363, 
+        "name": "Internal_EnumSystemLanguageGroups", 
+        "alias": [], 
+        "range": 627, 
+        "end_addresses": {
+            "rets": [
+                118973
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 391, 
+        "rva": 153351, 
+        "name": "Internal_EnumSystemLocales", 
+        "alias": [], 
+        "range": 490, 
+        "end_addresses": {
+            "rets": [
+                153721
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 392, 
+        "rva": 155571, 
+        "name": "Internal_EnumTimeFormats", 
+        "alias": [], 
+        "range": 110, 
+        "end_addresses": {
+            "rets": [
+                155671
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 393, 
+        "rva": 102833, 
+        "name": "Internal_EnumUILanguages", 
+        "alias": [], 
+        "range": 852, 
+        "end_addresses": {
+            "rets": [
+                103682
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 4, 
+        "rva": 28240, 
+        "name": "InternalLcidToName", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                28274, 
+                186963
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 394, 
+        "rva": 151209, 
+        "name": "InvalidateTzSpecificCache", 
+        "alias": [], 
+        "range": 53, 
+        "end_addresses": {
+            "rets": [
+                151261
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 395, 
+        "rva": 35689, 
+        "name": "IsDBCSLeadByte", 
+        "alias": [], 
+        "range": 43, 
+        "end_addresses": {
+            "rets": [
+                35729
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 396, 
+        "rva": 149326, 
+        "name": "IsDBCSLeadByteEx", 
+        "alias": [], 
+        "range": 61, 
+        "end_addresses": {
+            "rets": [
+                149384
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 397, 
+        "rva": 138798, 
+        "name": "IsDebuggerPresent", 
+        "alias": [], 
+        "range": 14, 
+        "end_addresses": {
+            "rets": [
+                138811
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 398, 
+        "rva": 92156, 
+        "name": "IsNLSDefinedString", 
+        "alias": [], 
+        "range": 66, 
+        "end_addresses": {
+            "rets": [
+                92219
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 399, 
+        "rva": 55837, 
+        "name": "IsProcessInJob", 
+        "alias": [], 
+        "range": 52, 
+        "end_addresses": {
+            "rets": [
+                55886
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 401, 
+        "rva": 144914, 
+        "name": "IsTokenRestricted", 
+        "alias": [], 
+        "range": 106, 
+        "end_addresses": {
+            "rets": [
+                145017
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 402, 
+        "rva": 69685, 
+        "name": "IsValidAcl", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                69711
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 403, 
+        "rva": 68574, 
+        "name": "IsValidCodePage", 
+        "alias": [], 
+        "range": 63, 
+        "end_addresses": {
+            "rets": [
+                68634
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 404, 
+        "rva": 228423, 
+        "name": "IsValidLanguageGroup", 
+        "alias": [], 
+        "range": 216, 
+        "end_addresses": {
+            "rets": [
+                228636
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 405, 
+        "rva": 68753, 
+        "name": "IsValidLocale", 
+        "alias": [], 
+        "range": 186, 
+        "end_addresses": {
+            "rets": [
+                68936
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 406, 
+        "rva": 156282, 
+        "name": "IsValidLocaleName", 
+        "alias": [], 
+        "range": 56, 
+        "end_addresses": {
+            "rets": [
+                156331
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 407, 
+        "rva": 117013, 
+        "name": "IsValidRelativeSecurityDescriptor", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                117045
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 408, 
+        "rva": 60786, 
+        "name": "IsValidSecurityDescriptor", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                60812
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 409, 
+        "rva": 39612, 
+        "name": "IsValidSid", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                39638
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 410, 
+        "rva": 130497, 
+        "name": "IsWellKnownSid", 
+        "alias": [], 
+        "range": 263, 
+        "end_addresses": {
+            "rets": [
+                130664
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 411, 
+        "rva": 35173, 
+        "name": "IsWow64Process", 
+        "alias": [], 
+        "range": 60, 
+        "end_addresses": {
+            "rets": [
+                35230
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 412, 
+        "rva": 26601, 
+        "name": "KernelBaseGetGlobalData", 
+        "alias": [], 
+        "range": 6, 
+        "end_addresses": {
+            "rets": [
+                26606
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 413, 
+        "rva": 70140, 
+        "name": "LCIDToLocaleName", 
+        "alias": [], 
+        "range": 108, 
+        "end_addresses": {
+            "rets": [
+                70238
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 414, 
+        "rva": 157607, 
+        "name": "LCMapStringA", 
+        "alias": [], 
+        "range": 338, 
+        "end_addresses": {
+            "rets": [
+                157921
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 415, 
+        "rva": 37690, 
+        "name": "LCMapStringEx", 
+        "alias": [], 
+        "range": 227, 
+        "end_addresses": {
+            "rets": [
+                37914
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 416, 
+        "rva": 37594, 
+        "name": "LCMapStringW", 
+        "alias": [], 
+        "range": 91, 
+        "end_addresses": {
+            "rets": [
+                37682
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 419, 
+        "rva": 36198, 
+        "name": "LoadLibraryExA", 
+        "alias": [], 
+        "range": 57, 
+        "end_addresses": {
+            "rets": [
+                36252
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 420, 
+        "rva": 47767, 
+        "name": "LoadLibraryExW", 
+        "alias": [], 
+        "range": 237, 
+        "end_addresses": {
+            "rets": [
+                48001
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 421, 
+        "rva": 54539, 
+        "name": "LoadResource", 
+        "alias": [], 
+        "range": 81, 
+        "end_addresses": {
+            "rets": [
+                54617, 
+                175857
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 422, 
+        "rva": 121214, 
+        "name": "LoadStringA", 
+        "alias": [], 
+        "range": 98, 
+        "end_addresses": {
+            "rets": [
+                121309
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 423, 
+        "rva": 48476, 
+        "name": "LoadStringBaseExW", 
+        "alias": [], 
+        "range": 211, 
+        "end_addresses": {
+            "rets": [
+                48684
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 424, 
+        "rva": 89420, 
+        "name": "LoadStringByReference", 
+        "alias": [], 
+        "range": 602, 
+        "end_addresses": {
+            "rets": [
+                90019, 
+                203540
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 425, 
+        "rva": 60577, 
+        "name": "LoadStringW", 
+        "alias": [], 
+        "range": 28, 
+        "end_addresses": {
+            "rets": [
+                60602
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 426, 
+        "rva": 30409, 
+        "name": "LocalAlloc", 
+        "alias": [], 
+        "range": 108, 
+        "end_addresses": {
+            "rets": [
+                30514
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 432, 
+        "rva": 60949, 
+        "name": "LocaleNameToLCID", 
+        "alias": [], 
+        "range": 81, 
+        "end_addresses": {
+            "rets": [
+                61027
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 427, 
+        "rva": 125818, 
+        "name": "LocalFileTimeToFileTime", 
+        "alias": [], 
+        "range": 64, 
+        "end_addresses": {
+            "rets": [
+                125879
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 429, 
+        "rva": 138154, 
+        "name": "LocalLock", 
+        "alias": [], 
+        "range": 139, 
+        "end_addresses": {
+            "rets": [
+                138290
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 430, 
+        "rva": 36763, 
+        "name": "LocalReAlloc", 
+        "alias": [], 
+        "range": 180, 
+        "end_addresses": {
+            "rets": [
+                36940
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 431, 
+        "rva": 138377, 
+        "name": "LocalUnlock", 
+        "alias": [], 
+        "range": 184, 
+        "end_addresses": {
+            "rets": [
+                138507
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 433, 
+        "rva": 148098, 
+        "name": "LockFile", 
+        "alias": [], 
+        "range": 108, 
+        "end_addresses": {
+            "rets": [
+                148203
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 434, 
+        "rva": 162882, 
+        "name": "LockFileEx", 
+        "alias": [], 
+        "range": 158, 
+        "end_addresses": {
+            "rets": [
+                163031
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 435, 
+        "rva": 35565, 
+        "name": "LockResource", 
+        "alias": [
+            {
+                "name": "SetHandleCount", 
+                "ordinal:": 530
+            }
+        ], 
+        "range": 12, 
+        "end_addresses": {
+            "rets": [
+                35574
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 617, 
+        "rva": 141083, 
+        "name": "lstrcmp", 
+        "alias": [
+            {
+                "name": "lstrcmpA", 
+                "ordinal:": 618
+            }
+        ], 
+        "range": 54, 
+        "end_addresses": {
+            "rets": [
+                141134
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 620, 
+        "rva": 140335, 
+        "name": "lstrcmpi", 
+        "alias": [
+            {
+                "name": "lstrcmpiA", 
+                "ordinal:": 621
+            }
+        ], 
+        "range": 51, 
+        "end_addresses": {
+            "rets": [
+                140383
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 622, 
+        "rva": 29153, 
+        "name": "lstrcmpiW", 
+        "alias": [], 
+        "range": 48, 
+        "end_addresses": {
+            "rets": [
+                29198
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 619, 
+        "rva": 29878, 
+        "name": "lstrcmpW", 
+        "alias": [], 
+        "range": 48, 
+        "end_addresses": {
+            "rets": [
+                29923
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 623, 
+        "rva": 149654, 
+        "name": "lstrcpyn", 
+        "alias": [
+            {
+                "name": "lstrcpynA", 
+                "ordinal:": 624
+            }
+        ], 
+        "range": 125, 
+        "end_addresses": {
+            "rets": [
+                149770, 
+                168623
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 625, 
+        "rva": 163045, 
+        "name": "lstrcpynW", 
+        "alias": [], 
+        "range": 130, 
+        "end_addresses": {
+            "rets": [
+                163165, 
+                168777
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 626, 
+        "rva": 29405, 
+        "name": "lstrlen", 
+        "alias": [
+            {
+                "name": "lstrlenA", 
+                "ordinal:": 627
+            }
+        ], 
+        "range": 54, 
+        "end_addresses": {
+            "rets": [
+                29452, 
+                168660
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 628, 
+        "rva": 29047, 
+        "name": "lstrlenW", 
+        "alias": [], 
+        "range": 70, 
+        "end_addresses": {
+            "rets": [
+                29114, 
+                168814
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 437, 
+        "rva": 69605, 
+        "name": "MakeAbsoluteSD", 
+        "alias": [], 
+        "range": 75, 
+        "end_addresses": {
+            "rets": [
+                69667
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 436, 
+        "rva": 221991, 
+        "name": "MakeAbsoluteSD2", 
+        "alias": [], 
+        "range": 38, 
+        "end_addresses": {
+            "rets": [
+                222026
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 438, 
+        "rva": 60690, 
+        "name": "MakeSelfRelativeSD", 
+        "alias": [], 
+        "range": 51, 
+        "end_addresses": {
+            "rets": [
+                60728
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 439, 
+        "rva": 40927, 
+        "name": "MapGenericMask", 
+        "alias": [], 
+        "range": 12, 
+        "end_addresses": {
+            "rets": [], 
+            "jmps_to_imps": [
+                {
+                    "import": "RtlMapGenericMask", 
+                    "imp_addr": 5288, 
+                    "jmp_addr": 40933, 
+                    "dll": "ntdll"
+                }
+            ]
+        }
+    }, 
+    {
+        "ordinal": 440, 
+        "rva": 56502, 
+        "name": "MapViewOfFile", 
+        "alias": [], 
+        "range": 127, 
+        "end_addresses": {
+            "rets": [
+                56626
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 441, 
+        "rva": 35882, 
+        "name": "MapViewOfFileEx", 
+        "alias": [], 
+        "range": 122, 
+        "end_addresses": {
+            "rets": [
+                36001
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 442, 
+        "rva": 209464, 
+        "name": "MapViewOfFileExNuma", 
+        "alias": [], 
+        "range": 188, 
+        "end_addresses": {
+            "rets": [
+                209649
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 443, 
+        "rva": 32944, 
+        "name": "MultiByteToWideChar", 
+        "alias": [], 
+        "range": 387, 
+        "end_addresses": {
+            "rets": [
+                33328
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 444, 
+        "rva": 210036, 
+        "name": "NeedCurrentDirectoryForExePathA", 
+        "alias": [], 
+        "range": 36, 
+        "end_addresses": {
+            "rets": [
+                210069
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 445, 
+        "rva": 80985, 
+        "name": "NeedCurrentDirectoryForExePathW", 
+        "alias": [], 
+        "range": 36, 
+        "end_addresses": {
+            "rets": [
+                81013
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 446, 
+        "rva": 228149, 
+        "name": "NlsCheckPolicy", 
+        "alias": [], 
+        "range": 92, 
+        "end_addresses": {
+            "rets": [
+                228238
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 447, 
+        "rva": 233562, 
+        "name": "NlsDispatchAnsiEnumProc", 
+        "alias": [], 
+        "range": 249, 
+        "end_addresses": {
+            "rets": [
+                233808
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 448, 
+        "rva": 256790, 
+        "name": "NlsEventDataDescCreate", 
+        "alias": [], 
+        "range": 328, 
+        "end_addresses": {
+            "rets": [
+                257115
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 449, 
+        "rva": 29320, 
+        "name": "NlsGetACPFromLocale", 
+        "alias": [], 
+        "range": 80, 
+        "end_addresses": {
+            "rets": [
+                29397
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 450, 
+        "rva": 35595, 
+        "name": "NlsGetCacheUpdateCount", 
+        "alias": [], 
+        "range": 12, 
+        "end_addresses": {
+            "rets": [
+                35606
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 451, 
+        "rva": 133211, 
+        "name": "NlsIsUserDefaultLocale", 
+        "alias": [], 
+        "range": 27, 
+        "end_addresses": {
+            "rets": [
+                133235
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 452, 
+        "rva": 232335, 
+        "name": "NlsUpdateLocale", 
+        "alias": [], 
+        "range": 578, 
+        "end_addresses": {
+            "rets": [
+                232910
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 453, 
+        "rva": 232156, 
+        "name": "NlsUpdateSystemLocale", 
+        "alias": [], 
+        "range": 174, 
+        "end_addresses": {
+            "rets": [
+                232327
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 454, 
+        "rva": 27937, 
+        "name": "NlsValidateLocale", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                27967
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 455, 
+        "rva": 257123, 
+        "name": "NlsWriteEtwEvent", 
+        "alias": [], 
+        "range": 96, 
+        "end_addresses": {
+            "rets": [
+                257216
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 456, 
+        "rva": 213849, 
+        "name": "NotifyMountMgr", 
+        "alias": [], 
+        "range": 343, 
+        "end_addresses": {
+            "rets": [
+                214189
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 457, 
+        "rva": 116333, 
+        "name": "NotifyRedirectedStringChange", 
+        "alias": [], 
+        "range": 107, 
+        "end_addresses": {
+            "rets": [
+                116429
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 458, 
+        "rva": 126290, 
+        "name": "ObjectCloseAuditAlarmW", 
+        "alias": [], 
+        "range": 51, 
+        "end_addresses": {
+            "rets": [
+                126338
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 459, 
+        "rva": 221135, 
+        "name": "ObjectDeleteAuditAlarmW", 
+        "alias": [], 
+        "range": 57, 
+        "end_addresses": {
+            "rets": [
+                221189
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 460, 
+        "rva": 126346, 
+        "name": "ObjectOpenAuditAlarmW", 
+        "alias": [], 
+        "range": 104, 
+        "end_addresses": {
+            "rets": [
+                126447
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 461, 
+        "rva": 221064, 
+        "name": "ObjectPrivilegeAuditAlarmW", 
+        "alias": [], 
+        "range": 66, 
+        "end_addresses": {
+            "rets": [
+                221127
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 462, 
+        "rva": 60276, 
+        "name": "OpenEventA", 
+        "alias": [], 
+        "range": 75, 
+        "end_addresses": {
+            "rets": [
+                60342
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 463, 
+        "rva": 44583, 
+        "name": "OpenEventW", 
+        "alias": [], 
+        "range": 138, 
+        "end_addresses": {
+            "rets": [
+                44718
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 464, 
+        "rva": 35765, 
+        "name": "OpenFileMappingW", 
+        "alias": [], 
+        "range": 112, 
+        "end_addresses": {
+            "rets": [
+                35874
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 465, 
+        "rva": 36009, 
+        "name": "OpenMutexW", 
+        "alias": [], 
+        "range": 138, 
+        "end_addresses": {
+            "rets": [
+                36144
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 466, 
+        "rva": 45913, 
+        "name": "OpenProcess", 
+        "alias": [], 
+        "range": 89, 
+        "end_addresses": {
+            "rets": [
+                45999
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 467, 
+        "rva": 29631, 
+        "name": "OpenProcessToken", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                29663
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 468, 
+        "rva": 53327, 
+        "name": "OpenRegKey", 
+        "alias": [], 
+        "range": 278, 
+        "end_addresses": {
+            "rets": [
+                53602
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 469, 
+        "rva": 132495, 
+        "name": "OpenSemaphoreW", 
+        "alias": [], 
+        "range": 138, 
+        "end_addresses": {
+            "rets": [
+                132630
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 470, 
+        "rva": 44726, 
+        "name": "OpenThread", 
+        "alias": [], 
+        "range": 89, 
+        "end_addresses": {
+            "rets": [
+                44812
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 471, 
+        "rva": 29726, 
+        "name": "OpenThreadToken", 
+        "alias": [], 
+        "range": 44, 
+        "end_addresses": {
+            "rets": [
+                29762
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 472, 
+        "rva": 210609, 
+        "name": "OpenWaitableTimerW", 
+        "alias": [], 
+        "range": 143, 
+        "end_addresses": {
+            "rets": [
+                210749
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 473, 
+        "rva": 122981, 
+        "name": "OutputDebugStringA", 
+        "alias": [], 
+        "range": 99, 
+        "end_addresses": {
+            "rets": [
+                123077
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 474, 
+        "rva": 140863, 
+        "name": "OutputDebugStringW", 
+        "alias": [], 
+        "range": 100, 
+        "end_addresses": {
+            "rets": [
+                140951
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 475, 
+        "rva": 158762, 
+        "name": "PeekNamedPipe", 
+        "alias": [], 
+        "range": 230, 
+        "end_addresses": {
+            "rets": [
+                158989
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 476, 
+        "rva": 132766, 
+        "name": "PostQueuedCompletionStatus", 
+        "alias": [], 
+        "range": 44, 
+        "end_addresses": {
+            "rets": [
+                132807
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 477, 
+        "rva": 146469, 
+        "name": "PrivilegeCheck", 
+        "alias": [], 
+        "range": 50, 
+        "end_addresses": {
+            "rets": [
+                146516
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 478, 
+        "rva": 159088, 
+        "name": "PrivilegedServiceAuditAlarmW", 
+        "alias": [], 
+        "range": 72, 
+        "end_addresses": {
+            "rets": [
+                159157
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 479, 
+        "rva": 27793, 
+        "name": "ProcessIdToSessionId", 
+        "alias": [], 
+        "range": 139, 
+        "end_addresses": {
+            "rets": [
+                27929
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 480, 
+        "rva": 147823, 
+        "name": "PulseEvent", 
+        "alias": [], 
+        "range": 31, 
+        "end_addresses": {
+            "rets": [
+                147851
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 482, 
+        "rva": 102360, 
+        "name": "QueryDosDeviceW", 
+        "alias": [], 
+        "range": 358, 
+        "end_addresses": {
+            "rets": [
+                102715
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 485, 
+        "rva": 209842, 
+        "name": "QueryProcessAffinityUpdateMode", 
+        "alias": [], 
+        "range": 63, 
+        "end_addresses": {
+            "rets": [
+                209902
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 486, 
+        "rva": 110743, 
+        "name": "QuerySecurityAccessMask", 
+        "alias": [], 
+        "range": 37, 
+        "end_addresses": {
+            "rets": [
+                110777
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 487, 
+        "rva": 263481, 
+        "name": "QueryThreadpoolStackInformation", 
+        "alias": [], 
+        "range": 39, 
+        "end_addresses": {
+            "rets": [
+                263517
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 488, 
+        "rva": 140979, 
+        "name": "QueueUserAPC", 
+        "alias": [], 
+        "range": 99, 
+        "end_addresses": {
+            "rets": [
+                141075
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 489, 
+        "rva": 46860, 
+        "name": "RaiseException", 
+        "alias": [], 
+        "range": 93, 
+        "end_addresses": {
+            "rets": [
+                46945
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 490, 
+        "rva": 57363, 
+        "name": "ReadFile", 
+        "alias": [], 
+        "range": 130, 
+        "end_addresses": {
+            "rets": [
+                57490, 
+                171354
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 491, 
+        "rva": 164468, 
+        "name": "ReadFileEx", 
+        "alias": [], 
+        "range": 132, 
+        "end_addresses": {
+            "rets": [
+                164597
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 492, 
+        "rva": 118059, 
+        "name": "ReadFileScatter", 
+        "alias": [], 
+        "range": 153, 
+        "end_addresses": {
+            "rets": [
+                118199
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 493, 
+        "rva": 39434, 
+        "name": "ReadProcessMemory", 
+        "alias": [], 
+        "range": 56, 
+        "end_addresses": {
+            "rets": [
+                39480
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 494, 
+        "rva": 126455, 
+        "name": "RegisterWaitForSingleObjectEx", 
+        "alias": [], 
+        "range": 78, 
+        "end_addresses": {
+            "rets": [
+                126530
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 495, 
+        "rva": 5729, 
+        "name": "ReleaseMutex", 
+        "alias": [], 
+        "range": 31, 
+        "end_addresses": {
+            "rets": [
+                5757
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 499, 
+        "rva": 29775, 
+        "name": "ReleaseSemaphore", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                29807
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 501, 
+        "rva": 217742, 
+        "name": "RemoveDirectoryA", 
+        "alias": [], 
+        "range": 51, 
+        "end_addresses": {
+            "rets": [
+                217790
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 502, 
+        "rva": 93332, 
+        "name": "RemoveDirectoryW", 
+        "alias": [], 
+        "range": 267, 
+        "end_addresses": {
+            "rets": [
+                93596
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 503, 
+        "rva": 26645, 
+        "name": "ResetEvent", 
+        "alias": [], 
+        "range": 29, 
+        "end_addresses": {
+            "rets": [
+                26671
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 504, 
+        "rva": 92241, 
+        "name": "ResolveLocaleName", 
+        "alias": [], 
+        "range": 204, 
+        "end_addresses": {
+            "rets": [
+                92442
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 505, 
+        "rva": 46687, 
+        "name": "ResumeThread", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                46717
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 506, 
+        "rva": 39278, 
+        "name": "RevertToSelf", 
+        "alias": [], 
+        "range": 39, 
+        "end_addresses": {
+            "rets": [
+                39316, 
+                185270
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 507, 
+        "rva": 72704, 
+        "name": "SearchPathW", 
+        "alias": [], 
+        "range": 307, 
+        "end_addresses": {
+            "rets": [
+                73008
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 508, 
+        "rva": 221226, 
+        "name": "SetAclInformation", 
+        "alias": [], 
+        "range": 44, 
+        "end_addresses": {
+            "rets": [
+                221267
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 509, 
+        "rva": 230351, 
+        "name": "SetCalendarInfoW", 
+        "alias": [], 
+        "range": 449, 
+        "end_addresses": {
+            "rets": [
+                230797
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 511, 
+        "rva": 125887, 
+        "name": "SetCurrentDirectoryA", 
+        "alias": [], 
+        "range": 83, 
+        "end_addresses": {
+            "rets": [
+                125967
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 512, 
+        "rva": 81304, 
+        "name": "SetCurrentDirectoryW", 
+        "alias": [], 
+        "range": 63, 
+        "end_addresses": {
+            "rets": [
+                81364
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 513, 
+        "rva": 63529, 
+        "name": "SetEndOfFile", 
+        "alias": [], 
+        "range": 141, 
+        "end_addresses": {
+            "rets": [
+                63667
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 514, 
+        "rva": 83597, 
+        "name": "SetEnvironmentStringsW", 
+        "alias": [], 
+        "range": 161, 
+        "end_addresses": {
+            "rets": [
+                83755
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 515, 
+        "rva": 144563, 
+        "name": "SetEnvironmentVariableA", 
+        "alias": [], 
+        "range": 161, 
+        "end_addresses": {
+            "rets": [
+                144721
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 516, 
+        "rva": 80890, 
+        "name": "SetEnvironmentVariableW", 
+        "alias": [], 
+        "range": 90, 
+        "end_addresses": {
+            "rets": [
+                80973
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 517, 
+        "rva": 31041, 
+        "name": "SetErrorMode", 
+        "alias": [], 
+        "range": 61, 
+        "end_addresses": {
+            "rets": [
+                31099
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 518, 
+        "rva": 26522, 
+        "name": "SetEvent", 
+        "alias": [], 
+        "range": 31, 
+        "end_addresses": {
+            "rets": [
+                26550
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 520, 
+        "rva": 208007, 
+        "name": "SetFileApisToANSI", 
+        "alias": [], 
+        "range": 53, 
+        "end_addresses": {
+            "rets": [
+                208059
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 521, 
+        "rva": 147554, 
+        "name": "SetFileApisToOEM", 
+        "alias": [], 
+        "range": 53, 
+        "end_addresses": {
+            "rets": [
+                147606
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 522, 
+        "rva": 147069, 
+        "name": "SetFileAttributesA", 
+        "alias": [], 
+        "range": 54, 
+        "end_addresses": {
+            "rets": [
+                147120
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 523, 
+        "rva": 132844, 
+        "name": "SetFileAttributesW", 
+        "alias": [], 
+        "range": 244, 
+        "end_addresses": {
+            "rets": [
+                133085
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 524, 
+        "rva": 124404, 
+        "name": "SetFileInformationByHandle", 
+        "alias": [], 
+        "range": 96, 
+        "end_addresses": {
+            "rets": [
+                124467
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 525, 
+        "rva": 57101, 
+        "name": "SetFilePointer", 
+        "alias": [], 
+        "range": 257, 
+        "end_addresses": {
+            "rets": [
+                57296
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 526, 
+        "rva": 56020, 
+        "name": "SetFilePointerEx", 
+        "alias": [], 
+        "range": 219, 
+        "end_addresses": {
+            "rets": [
+                56140
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 527, 
+        "rva": 115996, 
+        "name": "SetFileSecurityW", 
+        "alias": [], 
+        "range": 199, 
+        "end_addresses": {
+            "rets": [
+                116192
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 528, 
+        "rva": 133093, 
+        "name": "SetFileTime", 
+        "alias": [], 
+        "range": 113, 
+        "end_addresses": {
+            "rets": [
+                133203
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 529, 
+        "rva": 118217, 
+        "name": "SetFileValidData", 
+        "alias": [], 
+        "range": 72, 
+        "end_addresses": {
+            "rets": [
+                118286
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 531, 
+        "rva": 70253, 
+        "name": "SetHandleInformation", 
+        "alias": [], 
+        "range": 118, 
+        "end_addresses": {
+            "rets": [
+                70368
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 532, 
+        "rva": 51218, 
+        "name": "SetKernelObjectSecurity", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                51250
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 535, 
+        "rva": 230821, 
+        "name": "SetLocaleInfoW", 
+        "alias": [], 
+        "range": 530, 
+        "end_addresses": {
+            "rets": [
+                231348
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 534, 
+        "rva": 207505, 
+        "name": "SetLocalTime", 
+        "alias": [], 
+        "range": 231, 
+        "end_addresses": {
+            "rets": [
+                207733
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 536, 
+        "rva": 128009, 
+        "name": "SetNamedPipeHandleState", 
+        "alias": [], 
+        "range": 106, 
+        "end_addresses": {
+            "rets": [
+                128112
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 537, 
+        "rva": 129422, 
+        "name": "SetPriorityClass", 
+        "alias": [], 
+        "range": 211, 
+        "end_addresses": {
+            "rets": [
+                129551
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 538, 
+        "rva": 221832, 
+        "name": "SetPrivateObjectSecurity", 
+        "alias": [], 
+        "range": 47, 
+        "end_addresses": {
+            "rets": [
+                221876
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 539, 
+        "rva": 221884, 
+        "name": "SetPrivateObjectSecurityEx", 
+        "alias": [], 
+        "range": 50, 
+        "end_addresses": {
+            "rets": [
+                221931
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 540, 
+        "rva": 209764, 
+        "name": "SetProcessAffinityUpdateMode", 
+        "alias": [], 
+        "range": 73, 
+        "end_addresses": {
+            "rets": [
+                209834
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 541, 
+        "rva": 73405, 
+        "name": "SetProcessShutdownParameters", 
+        "alias": [], 
+        "range": 91, 
+        "end_addresses": {
+            "rets": [
+                73493
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 542, 
+        "rva": 116200, 
+        "name": "SetSecurityAccessMask", 
+        "alias": [], 
+        "range": 49, 
+        "end_addresses": {
+            "rets": [
+                116246
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 543, 
+        "rva": 94102, 
+        "name": "SetSecurityDescriptorControl", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                94134
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 544, 
+        "rva": 39235, 
+        "name": "SetSecurityDescriptorDacl", 
+        "alias": [], 
+        "range": 38, 
+        "end_addresses": {
+            "rets": [
+                39270
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 545, 
+        "rva": 60863, 
+        "name": "SetSecurityDescriptorGroup", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                60895
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 546, 
+        "rva": 39495, 
+        "name": "SetSecurityDescriptorOwner", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                39527
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 547, 
+        "rva": 222071, 
+        "name": "SetSecurityDescriptorRMControl", 
+        "alias": [], 
+        "range": 23, 
+        "end_addresses": {
+            "rets": [
+                222091
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 548, 
+        "rva": 51175, 
+        "name": "SetSecurityDescriptorSacl", 
+        "alias": [], 
+        "range": 38, 
+        "end_addresses": {
+            "rets": [
+                51210
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 549, 
+        "rva": 82105, 
+        "name": "SetStdHandle", 
+        "alias": [], 
+        "range": 66, 
+        "end_addresses": {
+            "rets": [
+                82148
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 550, 
+        "rva": 208065, 
+        "name": "SetStdHandleEx", 
+        "alias": [], 
+        "range": 129, 
+        "end_addresses": {
+            "rets": [
+                208191
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 551, 
+        "rva": 146841, 
+        "name": "SetThreadLocale", 
+        "alias": [], 
+        "range": 46, 
+        "end_addresses": {
+            "rets": [
+                146884
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 556, 
+        "rva": 263437, 
+        "name": "SetThreadpoolStackInformation", 
+        "alias": [], 
+        "range": 39, 
+        "end_addresses": {
+            "rets": [
+                263473
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 558, 
+        "rva": 125254, 
+        "name": "SetThreadpoolThreadMinimum", 
+        "alias": [], 
+        "range": 32, 
+        "end_addresses": {
+            "rets": [
+                125283
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 552, 
+        "rva": 46007, 
+        "name": "SetThreadPriority", 
+        "alias": [], 
+        "range": 180, 
+        "end_addresses": {
+            "rets": [
+                46184
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 553, 
+        "rva": 210978, 
+        "name": "SetThreadPriorityBoost", 
+        "alias": [], 
+        "range": 54, 
+        "end_addresses": {
+            "rets": [
+                211029
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 554, 
+        "rva": 83330, 
+        "name": "SetThreadStackGuarantee", 
+        "alias": [], 
+        "range": 251, 
+        "end_addresses": {
+            "rets": [
+                83578
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 555, 
+        "rva": 40873, 
+        "name": "SetThreadToken", 
+        "alias": [], 
+        "range": 49, 
+        "end_addresses": {
+            "rets": [
+                40919
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 561, 
+        "rva": 69825, 
+        "name": "SetTokenInformation", 
+        "alias": [], 
+        "range": 38, 
+        "end_addresses": {
+            "rets": [
+                69860
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 562, 
+        "rva": 40448, 
+        "name": "SetWaitableTimer", 
+        "alias": [], 
+        "range": 70, 
+        "end_addresses": {
+            "rets": [
+                40515
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 563, 
+        "rva": 40287, 
+        "name": "SetWaitableTimerEx", 
+        "alias": [], 
+        "range": 156, 
+        "end_addresses": {
+            "rets": [
+                40440
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 564, 
+        "rva": 54657, 
+        "name": "SizeofResource", 
+        "alias": [], 
+        "range": 81, 
+        "end_addresses": {
+            "rets": [
+                54735, 
+                175918
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 565, 
+        "rva": 6153, 
+        "name": "Sleep", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                6169
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 566, 
+        "rva": 6177, 
+        "name": "SleepEx", 
+        "alias": [], 
+        "range": 129, 
+        "end_addresses": {
+            "rets": [
+                6303
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 567, 
+        "rva": 33508, 
+        "name": "SpecialMBToWC", 
+        "alias": [], 
+        "range": 173, 
+        "end_addresses": {
+            "rets": [
+                33678
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 570, 
+        "rva": 149057, 
+        "name": "SuspendThread", 
+        "alias": [], 
+        "range": 33, 
+        "end_addresses": {
+            "rets": [
+                149087
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 571, 
+        "rva": 37205, 
+        "name": "SwitchToThread", 
+        "alias": [], 
+        "range": 19, 
+        "end_addresses": {
+            "rets": [
+                37223
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 572, 
+        "rva": 57994, 
+        "name": "SystemTimeToFileTime", 
+        "alias": [], 
+        "range": 109, 
+        "end_addresses": {
+            "rets": [
+                58100
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 573, 
+        "rva": 96339, 
+        "name": "SystemTimeToTzSpecificLocalTime", 
+        "alias": [], 
+        "range": 629, 
+        "end_addresses": {
+            "rets": [
+                96965
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 574, 
+        "rva": 73653, 
+        "name": "TerminateProcess", 
+        "alias": [], 
+        "range": 53, 
+        "end_addresses": {
+            "rets": [
+                73703
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 575, 
+        "rva": 49890, 
+        "name": "TerminateThread", 
+        "alias": [], 
+        "range": 109, 
+        "end_addresses": {
+            "rets": [
+                49996
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 576, 
+        "rva": 50128, 
+        "name": "TlsAlloc", 
+        "alias": [], 
+        "range": 78, 
+        "end_addresses": {
+            "rets": [
+                50205
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 577, 
+        "rva": 49733, 
+        "name": "TlsFree", 
+        "alias": [], 
+        "range": 104, 
+        "end_addresses": {
+            "rets": [
+                49834
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 578, 
+        "rva": 26558, 
+        "name": "TlsGetValue", 
+        "alias": [], 
+        "range": 38, 
+        "end_addresses": {
+            "rets": [
+                26593
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 579, 
+        "rva": 27508, 
+        "name": "TlsSetValue", 
+        "alias": [], 
+        "range": 45, 
+        "end_addresses": {
+            "rets": [
+                27550
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 580, 
+        "rva": 128134, 
+        "name": "TransactNamedPipe", 
+        "alias": [], 
+        "range": 130, 
+        "end_addresses": {
+            "rets": [
+                128261, 
+                166985, 
+                167054
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 584, 
+        "rva": 56351, 
+        "name": "TrySubmitThreadpoolCallback", 
+        "alias": [], 
+        "range": 35, 
+        "end_addresses": {
+            "rets": [
+                56383
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 585, 
+        "rva": 121412, 
+        "name": "TzSpecificLocalTimeToSystemTime", 
+        "alias": [], 
+        "range": 581, 
+        "end_addresses": {
+            "rets": [
+                121967
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 586, 
+        "rva": 148035, 
+        "name": "UnlockFile", 
+        "alias": [], 
+        "range": 58, 
+        "end_addresses": {
+            "rets": [
+                148090
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 587, 
+        "rva": 147933, 
+        "name": "UnlockFileEx", 
+        "alias": [], 
+        "range": 97, 
+        "end_addresses": {
+            "rets": [
+                148027
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 588, 
+        "rva": 27645, 
+        "name": "UnmapViewOfFile", 
+        "alias": [], 
+        "range": 39, 
+        "end_addresses": {
+            "rets": [
+                27681
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 589, 
+        "rva": 63803, 
+        "name": "UnregisterWaitEx", 
+        "alias": [], 
+        "range": 216, 
+        "end_addresses": {
+            "rets": [
+                63852, 
+                32363
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 590, 
+        "rva": 81852, 
+        "name": "UpdateProcThreadAttribute", 
+        "alias": [], 
+        "range": 248, 
+        "end_addresses": {
+            "rets": [
+                82097
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 591, 
+        "rva": 110049, 
+        "name": "VerLanguageNameA", 
+        "alias": [], 
+        "range": 158, 
+        "end_addresses": {
+            "rets": [
+                110200
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 592, 
+        "rva": 109868, 
+        "name": "VerLanguageNameW", 
+        "alias": [], 
+        "range": 139, 
+        "end_addresses": {
+            "rets": [
+                110000
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 593, 
+        "rva": 31231, 
+        "name": "VirtualAlloc", 
+        "alias": [], 
+        "range": 28, 
+        "end_addresses": {
+            "rets": [
+                31256
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 594, 
+        "rva": 31160, 
+        "name": "VirtualAllocEx", 
+        "alias": [], 
+        "range": 66, 
+        "end_addresses": {
+            "rets": [
+                31223
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 595, 
+        "rva": 209657, 
+        "name": "VirtualAllocExNuma", 
+        "alias": [], 
+        "range": 102, 
+        "end_addresses": {
+            "rets": [
+                209756
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 596, 
+        "rva": 31348, 
+        "name": "VirtualFree", 
+        "alias": [], 
+        "range": 25, 
+        "end_addresses": {
+            "rets": [
+                31370
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 597, 
+        "rva": 31276, 
+        "name": "VirtualFreeEx", 
+        "alias": [], 
+        "range": 67, 
+        "end_addresses": {
+            "rets": [
+                31340
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 598, 
+        "rva": 139965, 
+        "name": "VirtualProtect", 
+        "alias": [], 
+        "range": 28, 
+        "end_addresses": {
+            "rets": [
+                139990
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 599, 
+        "rva": 139998, 
+        "name": "VirtualProtectEx", 
+        "alias": [], 
+        "range": 51, 
+        "end_addresses": {
+            "rets": [
+                140046
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 600, 
+        "rva": 36559, 
+        "name": "VirtualQuery", 
+        "alias": [], 
+        "range": 25, 
+        "end_addresses": {
+            "rets": [
+                36581
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 601, 
+        "rva": 36510, 
+        "name": "VirtualQueryEx", 
+        "alias": [], 
+        "range": 44, 
+        "end_addresses": {
+            "rets": [
+                36551
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 602, 
+        "rva": 27184, 
+        "name": "WaitForMultipleObjectsEx", 
+        "alias": [], 
+        "range": 192, 
+        "end_addresses": {
+            "rets": [], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 603, 
+        "rva": 30719, 
+        "name": "WaitForSingleObject", 
+        "alias": [], 
+        "range": 22, 
+        "end_addresses": {
+            "rets": [
+                30738
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 604, 
+        "rva": 5936, 
+        "name": "WaitForSingleObjectEx", 
+        "alias": [], 
+        "range": 151, 
+        "end_addresses": {
+            "rets": [
+                6084
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 609, 
+        "rva": 163853, 
+        "name": "WaitNamedPipeW", 
+        "alias": [], 
+        "range": 424, 
+        "end_addresses": {
+            "rets": [
+                164274
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 610, 
+        "rva": 32407, 
+        "name": "WideCharToMultiByte", 
+        "alias": [], 
+        "range": 232, 
+        "end_addresses": {
+            "rets": [
+                32636
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 611, 
+        "rva": 140541, 
+        "name": "Wow64DisableWow64FsRedirection", 
+        "alias": [], 
+        "range": 37, 
+        "end_addresses": {
+            "rets": [
+                140570
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 612, 
+        "rva": 208393, 
+        "name": "Wow64RevertWow64FsRedirection", 
+        "alias": [], 
+        "range": 39, 
+        "end_addresses": {
+            "rets": [
+                208429
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 613, 
+        "rva": 29989, 
+        "name": "WriteFile", 
+        "alias": [], 
+        "range": 130, 
+        "end_addresses": {
+            "rets": [
+                30116, 
+                171485
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 614, 
+        "rva": 164739, 
+        "name": "WriteFileEx", 
+        "alias": [], 
+        "range": 132, 
+        "end_addresses": {
+            "rets": [
+                164868
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 615, 
+        "rva": 117905, 
+        "name": "WriteFileGather", 
+        "alias": [], 
+        "range": 149, 
+        "end_addresses": {
+            "rets": [
+                118041
+            ], 
+            "jmps_to_imps": []
+        }
+    }, 
+    {
+        "ordinal": 616, 
+        "rva": 148211, 
+        "name": "WriteProcessMemory", 
+        "alias": [], 
+        "range": 142, 
+        "end_addresses": {
+            "rets": [
+                148350
+            ], 
+            "jmps_to_imps": []
+        }
+    }
+]
+}

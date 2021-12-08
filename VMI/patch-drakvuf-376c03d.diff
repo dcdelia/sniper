@@ -1,0 +1,2819 @@
+diff --git a/README.md b/README.md
+index 02f83c6..77c48ce 100644
+--- a/README.md
++++ b/README.md
+@@ -1,4 +1,4 @@
+-DRAKVUF
++DRAKVUF (C) 2014-2019 Tamas K Lengyel.
+ =======
+ 
+ Introduction
+@@ -9,34 +9,10 @@ allows for in-depth execution tracing of arbitrary binaries (including operating
+ systems), all without having to install any special software within the virtual machine
+ used for analysis.
+ 
+-Hardware requirements
+-------
+-
+-DRAKVUF uses hardware virtualization extensions found in Intel CPUs. You will need an
+-Intel CPU with virtualization support (VT-x) and with Extended Page Tables (EPT). DRAKVUF
+- is not going to work on any other CPUs (such as AMD) or on Intel CPUs without the
+-required virtualization extensions.
+-
+-Supported guests
+-------
+-
+-DRAKVUF currently supports:
+- - Windows 7 - 8, both 32 and 64-bit
+- - Windows 10 64-bit
+- - Linux 2.6.x - 4.x, both 32-bit and 64-bit
+- 
+-Malware analysis
+-------
+-
+-DRAKVUF provides a perfect platform for stealthy malware analysis as its footprint is
+-nearly undectebable from the malware's perspective. While DRAKVUF has been mainly
+-developed with malware analysis in mind, it is certainly not limited to that task as it
+-can be used to monitor the execution of arbitrary binaries.
+-
+ More information can be found on the project website: https://drakvuf.com
++------
+ 
+-[![Build Status](https://travis-ci.org/tklengyel/drakvuf.svg?branch=master)](https://travis-ci.org/tklengyel/drakvuf)
+-<a href="https://scan.coverity.com/projects/tklengyel-drakvuf">
+-  <img alt="Coverity Scan Build Status"
+-       src="https://scan.coverity.com/projects/3238/badge.svg"/>
+-</a>
++This is a modified version of DRAKVUF that implements a new plugin: PersMon.
++PersMon is focused on API hooking and it is able to intercepts (i) all processes that
++call a trapped function or (i) a precise process (-z <target_name>) that calls a trapped
++function 
+diff --git a/configure.ac b/configure.ac
+index 824122c..4768266 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -326,6 +326,16 @@ if test x$plugin_wmimon = xyes; then
+   AC_DEFINE_UNQUOTED(ENABLE_PLUGIN_WMIMON, 1, "")
+ fi
+ 
++AC_ARG_ENABLE([plugin_persmon],
++  [AS_HELP_STRING([--disable-plugin-myplugin],
++    [Enable the MYPLUGIN example plugin @<:@yes@:>@])],
++  [plugin_persmon="$enableval"],
++  [plugin_persmon="yes"])   
++AM_CONDITIONAL([PLUGIN_PERSMON], [test x$plugin_persmon = xyes])
++if test x$plugin_persmon = xyes; then
++  AC_DEFINE_UNQUOTED(ENABLE_PLUGIN_PERSMON, 1, "")
++fi
++
+ #####################################################
+ 
+ AC_ARG_ENABLE([hardening],
+@@ -553,4 +563,5 @@ WindowMon:    $plugin_windowmon
+ LibraryMon:   $plugin_librarymon
+ DKOMmon:      $plugin_dkommon
+ WMIMon:       $plugin_wmimon
++PersMon:      $plugin_persmon
+ -------------------------------------------------------------------------------])
+diff --git a/src/drakvuf.cpp b/src/drakvuf.cpp
+index cb2b41d..4cfd747 100644
+--- a/src/drakvuf.cpp
++++ b/src/drakvuf.cpp
+@@ -146,6 +146,13 @@ static void cleanup_timer(drakvuf_c* drakvuf, GThread* timeout_thread)
+     }
+ }
+ 
++/**
++ * @brief this is called at plugin initialization, before starting the monitoring activity
++ * 
++ * @param plugin_list 
++ * @param options 
++ * @return int 
++ */
+ int drakvuf_c::start_plugins(const bool* plugin_list, const plugins_options* options)
+ {
+     for (int i = 0; i < __DRAKVUF_PLUGIN_LIST_MAX; i++)
+diff --git a/src/libdrakvuf/drakvuf.c b/src/libdrakvuf/drakvuf.c
+index 8d846e9..affed90 100644
+--- a/src/libdrakvuf/drakvuf.c
++++ b/src/libdrakvuf/drakvuf.c
+@@ -247,6 +247,14 @@ int drakvuf_is_interrupted(drakvuf_t drakvuf)
+     return drakvuf->interrupted;
+ }
+ 
++/**
++ * @brief it inserts a breakpoint of the entry point of the trapped function. This is already set in trap
++ *
++ * @param drakvuf
++ * @param trap
++ * @return true
++ * @return false
++ */
+ bool inject_trap_breakpoint(drakvuf_t drakvuf, drakvuf_trap_t* trap)
+ {
+ 
+@@ -255,8 +263,10 @@ bool inject_trap_breakpoint(drakvuf_t drakvuf, drakvuf_trap_t* trap)
+         return inject_trap_pa(drakvuf, trap, trap->breakpoint.addr);
+     }
+ 
++    // NOTE: case analyzed from breakpoint_in_dll_module_searcher struct use
+     if (trap->breakpoint.lookup_type == LOOKUP_PID || trap->breakpoint.lookup_type == LOOKUP_NAME)
+     {
++        //TODO: try to exploit this case for ret/retn bp injection
+         if (trap->breakpoint.addr_type == ADDR_RVA && trap->breakpoint.module)
+         {
+ 
+@@ -264,10 +274,13 @@ bool inject_trap_breakpoint(drakvuf_t drakvuf, drakvuf_trap_t* trap)
+             const char* name = NULL;
+             addr_t module_list = 0;
+ 
++            // NOTE: pid=4 is the System process
++            // the second case can be found only if we don't have breakpoint.pid (it's a union)
+             if (trap->breakpoint.pid == 4 || !strcmp(trap->breakpoint.proc, "System"))
+             {
+ 
+                 pid = 4;
++                // NOTE: PsLoadedModuleList is a kernel variable/symbol, it is the list of loaded kernel modules
+                 if (VMI_FAILURE == vmi_read_addr_ksym(drakvuf->vmi, "PsLoadedModuleList", &module_list))
+                     return 0;
+ 
+@@ -281,8 +294,9 @@ bool inject_trap_breakpoint(drakvuf_t drakvuf, drakvuf_trap_t* trap)
+                 if (trap->breakpoint.lookup_type == LOOKUP_PID)
+                     pid = trap->breakpoint.pid;
+                 if (trap->breakpoint.lookup_type == LOOKUP_NAME)
+-                    name = trap->breakpoint.proc;
++                    name = trap->breakpoint.proc; // null in my case
+ 
++                //PRINT_DEBUG("<!!!> searching for process with pid %d\n",pid);
+                 if ( !drakvuf_find_process(drakvuf, pid, name, &process_base) )
+                     return 0;
+ 
+@@ -299,6 +313,7 @@ bool inject_trap_breakpoint(drakvuf_t drakvuf, drakvuf_trap_t* trap)
+             return inject_traps_modules(drakvuf, trap, module_list, pid);
+         }
+ 
++        // NOTE: case analyzed from breakpoint_in_dll_module_searcher struct use
+         if (trap->breakpoint.addr_type == ADDR_VA)
+         {
+             addr_t dtb;
+@@ -309,11 +324,13 @@ bool inject_trap_breakpoint(drakvuf_t drakvuf, drakvuf_trap_t* trap)
+                 return 0;
+             }
+ 
++            // NOTE: it uses the dtb va and trapped function va to find the actual page table containing to target physical address
+             if ( VMI_FAILURE == vmi_pagetable_lookup(drakvuf->vmi, dtb, trap->breakpoint.addr, &trap_pa) )
+             {
+                 PRINT_DEBUG("Failed to find PA for breakpoint VA addr 0x%lx in DTB 0x%lx\n", trap->breakpoint.addr, dtb);
+                 return 0;
+             }
++            PRINT_DEBUG("<!!!> Virtual & Physical address of the trapped function: 0x%lx, 0x%lx\n", trap->breakpoint.addr,trap_pa);
+ 
+             return inject_trap_pa(drakvuf, trap, trap_pa);
+         }
+@@ -375,6 +392,14 @@ bool inject_trap_cpuid(drakvuf_t drakvuf, drakvuf_trap_t* trap)
+     return 1;
+ };
+ 
++/**
++ * @brief trap has the pid of the process that has the target module and the va of the trapped function
++ *
++ * @param drakvuf
++ * @param trap
++ * @return true
++ * @return false
++ */
+ bool drakvuf_add_trap(drakvuf_t drakvuf, drakvuf_trap_t* trap)
+ {
+ 
+@@ -383,14 +408,18 @@ bool drakvuf_add_trap(drakvuf_t drakvuf, drakvuf_trap_t* trap)
+     if (!trap || !trap->cb)
+         return 0;
+ 
++    // NOTE: it checks whether the current trap has already been put in place and it is waiting for
++    // a deletion
+     if (g_hash_table_lookup(drakvuf->remove_traps, &trap))
+     {
+         g_hash_table_remove(drakvuf->remove_traps, &trap);
+         return 1;
+     }
+ 
++    // NOTE: it pauses the guest using Xen APIs
+     drakvuf_pause(drakvuf);
+ 
++    // NOTE: for now, I've only see BREAKPOINT case
+     switch (trap->type)
+     {
+         case BREAKPOINT:
+@@ -504,6 +533,19 @@ bool rekall_get_struct_member_rva( json_object* rekall_profile_json,
+                rva,
+                NULL);
+ }
++
++/**
++ * @brief used for retrieving the offset (rva) of a symbol (i.e. Cid)
++ * from its structure (_ETHREAD). The calculation is done by using the
++ * kernel Rekall profile of the domU
++ * 
++ * @param drakvuf 
++ * @param struct_name 
++ * @param symbol 
++ * @param[out] rva 
++ * @return true 
++ * @return false 
++ */
+ bool drakvuf_get_struct_member_rva(drakvuf_t drakvuf,
+                                    const char* struct_name,
+                                    const char* symbol,
+@@ -572,6 +614,15 @@ int drakvuf_get_address_width(drakvuf_t drakvuf)
+     return drakvuf->address_width;
+ }
+ 
++/**
++ * @brief it retrieves information related to the current process on the vcpu_id and puts them inside proc_data
++ *
++ * @param drakvuf
++ * @param vcpu_id
++ * @param proc_data
++ * @return true
++ * @return false
++ */
+ bool drakvuf_get_current_process_data(drakvuf_t drakvuf, uint64_t vcpu_id, proc_data_priv_t* proc_data)
+ {
+     addr_t process_base = drakvuf_get_current_process(drakvuf, vcpu_id);
+@@ -601,7 +652,14 @@ char* drakvuf_read_ascii_str(drakvuf_t drakvuf, drakvuf_trap_info_t* info, addr_
+ 
+     return vmi_read_str(drakvuf->vmi, &ctx);
+ }
+-
++/**
++ * @brief it converts a portion of memory into one unicode string and then
++ * it converts it utf-8 encoding
++ *
++ * @param vmi
++ * @param ctx
++ * @return unicode_string_t*
++ */
+ unicode_string_t* drakvuf_read_unicode_common(vmi_instance_t vmi, const access_context_t* ctx)
+ {
+     unicode_string_t* us = vmi_read_unicode_str(vmi, ctx);
+@@ -883,6 +941,16 @@ int drakvuf_event_fd_remove(drakvuf_t drakvuf, int fd)
+     return 0;
+ }
+ 
++/**
++ * @brief it adds the callback to drakvuf_vmi_event_callback to the fd monitored once
++ *      initialization is properly done
++ *
++ * @param drakvuf
++ * @param fd
++ * @param event_cb  drakvuf_vmi_event_callback
++ * @param data , drakvuf_t* (!) instance. pointer of pointer
++ * @return int
++ */
+ int drakvuf_event_fd_add(drakvuf_t drakvuf, int fd, event_cb_t event_cb, void* data)
+ {
+     PRINT_DEBUG("drakvuf_event_fd_add fd=%d\n", fd);
+diff --git a/src/libdrakvuf/libdrakvuf.h b/src/libdrakvuf/libdrakvuf.h
+index 941f7f9..aafe368 100644
+--- a/src/libdrakvuf/libdrakvuf.h
++++ b/src/libdrakvuf/libdrakvuf.h
+@@ -163,7 +163,7 @@ typedef enum memaccess_type
+ 
+ typedef struct process_data
+ {
+-    const char* name;   /* Process name */
++    const char* name;   /* Process name, full path */
+     vmi_pid_t pid ;     /* Process pid */
+     vmi_pid_t ppid ;    /* Process parent pid */
+     addr_t base_addr ;  /* Process base address */
+@@ -174,10 +174,19 @@ typedef struct drakvuf* drakvuf_t;
+ struct drakvuf_trap;
+ typedef struct drakvuf_trap drakvuf_trap_t;
+ 
++/**
++ * @brief initialized with proc_data information inside int3_cb, just before registered trap
++ * will be called.
++ * Note that trap is the one crafted in the registration step, so it's connected to this structure
++ * before callback.
++ * proc_data can be accessed only when a 0xCC will be triggered - since it will store information of the
++ * process that is currently executed in some vcpu
++ * 
++ */
+ typedef struct drakvuf_trap_info
+ {
+-    GTimeVal timestamp;
+-    unsigned int vcpu;
++    GTimeVal timestamp; // time of the trap
++    unsigned int vcpu; // vcpu where the "source of the trap" process is running
+     uint16_t altp2m_idx;
+     proc_data_t proc_data ; /* Current executing process data */
+     addr_t trap_pa;
+@@ -193,18 +202,25 @@ typedef struct drakvuf_trap_info
+ struct drakvuf_trap
+ {
+     trap_type_t type;
+-    event_response_t (*cb)(drakvuf_t, drakvuf_trap_info_t*);
++    event_response_t (*cb)(drakvuf_t, drakvuf_trap_info_t*); // the function called upon trap
++    //NOTE: it used to pass data to the callback once the bp is triggered.
++    //  In the default case is the parameters of the plugins
+     void* data;
++    // NOTE: name of the trapped function
+     const char* name; // Only used for informational/debugging purposes
+ 
+     union
+     {
++        /**
++         * @brief used in initialization of init_breakpoint in, i.e. envmon
++         * 
++         */
+         struct
+         {
+             lookup_type_t lookup_type;
+             union
+             {
+-                vmi_pid_t pid;
++                vmi_pid_t pid; //pid of the process that contained the module with the trapped function
+                 const char* proc;
+                 addr_t dtb;
+             };
+@@ -212,16 +228,20 @@ struct drakvuf_trap
+             /* If specified and RVA is used
+                RVA will be calculated from the base
+                of this module */
+-            const char* module;
++            const char* module; // name of the dll in which the trapped function is defined
+ 
+-            addr_type_t addr_type;
++            addr_type_t addr_type; // ADDR_VA and so on
+             union
+             {
+                 addr_t rva;
+-                addr_t addr;
++                addr_t addr; //va address of the entry point of the trapped function
+             };
+         } breakpoint;
+ 
++        /**
++         * @brief this is used in inject_trap_pa function for the wrapper data structure
++         * generally are used 2 structs: one for the current_gfn and the other for remapped_gfn->r
++         */
+         struct
+         {
+             addr_t gfn;
+@@ -399,6 +419,26 @@ bool drakvuf_get_process_data(drakvuf_t drakvuf,
+                               addr_t process_base,
+                               proc_data_t* proc_data);
+ 
++///// ADDED 20/08/2019 FOR REPLICATION MEMDUMP PROCEDURE ////////////
++typedef struct _mmvad_info
++{
++    uint64_t starting_vpn;
++    uint64_t ending_vpn;
++    uint64_t flags1;
++
++    /* Pointer to the file name, if this MMVAD is backed by some file on disk.
++     * If not null, read with: drakvuf_read_unicode_va(drakvuf->vmi, mmvad->file_name_ptr, 0) */
++    addr_t file_name_ptr;
++} mmvad_info_t;
++
++bool drakvuf_find_mmvad(drakvuf_t drakvuf, addr_t eprocess, addr_t vaddr, mmvad_info_t* out_mmvad);
++
++// addr_t drakvuf_get_wow_peb(drakvuf_t drakvuf, access_context_t* ctx, addr_t eprocess);
++bool drakvuf_get_wow_context(drakvuf_t drakvuf, addr_t ethread, addr_t* wow_ctx);
++bool drakvuf_get_user_stack32(drakvuf_t drakvuf, drakvuf_trap_info_t* info, addr_t* stack_ptr, addr_t* frame_ptr);
++bool drakvuf_get_user_stack64(drakvuf_t drakvuf, drakvuf_trap_info_t* info, addr_t* stack_ptr);
++/////////////////////////////////////////////////////////////////////
++
+ bool drakvuf_get_current_thread_id(drakvuf_t drakvuf,
+                                    uint64_t vcpu_id,
+                                    uint32_t* thread_id);
+diff --git a/src/libdrakvuf/os.c b/src/libdrakvuf/os.c
+index e7a3eb7..f498a54 100644
+--- a/src/libdrakvuf/os.c
++++ b/src/libdrakvuf/os.c
+@@ -144,14 +144,32 @@ status_t drakvuf_get_last_error(drakvuf_t drakvuf, uint64_t vcpu_id, uint32_t* e
+     return VMI_FAILURE;
+ }
+ 
++/**
++ * @brief it retrieves the _EPROCESS base address of the process running
++ * in the specified vcpu
++ *
++ * @param drakvuf
++ * @param vcpu_id
++ * @return addr_t
++ */
+ addr_t drakvuf_get_current_process(drakvuf_t drakvuf, uint64_t vcpu_id)
+ {
++    // NOTE: osi.get_current_process function is defined in win.c
+     if ( drakvuf->osi.get_current_process )
+         return drakvuf->osi.get_current_process(drakvuf, vcpu_id);
+ 
+     return 0;
+ }
+ 
++/**
++ * @brief it retrieves the name (foolpath or not) of the process associated to
++ * that _EPROCESS address base.
++ *
++ * @param drakvuf
++ * @param process_base, _EPROCESS base address
++ * @param fullpath, 0 to obtain just the name.exe
++ * @return char*
++ */
+ char* drakvuf_get_process_name(drakvuf_t drakvuf, addr_t process_base, bool fullpath)
+ {
+     if ( drakvuf->osi.get_process_name )
+@@ -200,6 +218,15 @@ int64_t drakvuf_get_current_process_userid(drakvuf_t drakvuf, uint64_t vcpu_id)
+     return ~0l;
+ }
+ 
++/**
++ * @brief it retrieves the TID of the thread running inside the specified vcpu
++ *
++ * @param drakvuf
++ * @param vcpu_id
++ * @param[out] thread_id
++ * @return true
++ * @return false
++ */
+ bool drakvuf_get_current_thread_id( drakvuf_t drakvuf, uint64_t vcpu_id, uint32_t* thread_id )
+ {
+     if ( drakvuf->osi.get_current_thread_id )
+@@ -251,6 +278,18 @@ bool drakvuf_get_module_list(drakvuf_t drakvuf, addr_t process_base, addr_t* mod
+     return 0;
+ }
+ 
++/**
++ * @brief it returns (i) either the PID of some process given its "name.exe"
++ * or (ii) its name given its PID. In both cases, it also returns the _EPROCESS
++ * base address of the target process
++ *
++ * @param drakvuf
++ * @param find_pid, ~0 or the PID of the target
++ * @param find_procname, NULL/nullptr or the "name.exe" of the target
++ * @param[out] process_addr
++ * @return true
++ * @return false
++ */
+ bool drakvuf_find_process(drakvuf_t drakvuf, vmi_pid_t find_pid, const char* find_procname, addr_t* process_addr)
+ {
+     if ( drakvuf->osi.find_process )
+@@ -349,11 +388,26 @@ bool drakvuf_enumerate_processes(drakvuf_t drakvuf, void (*visitor_func)(drakvuf
+     return false;
+ }
+ 
++/**
++ * @brief it searches in memory for all the processes that has the module loaded inside them (?)
++ * It wraps a lot of calls to LibVMI
++ *
++ * @param drakvuf
++ * @param module_name, that is the string of the dll/sys
++ * @param visitor_func, initialized here and it's a method of breakpoint_in_dll_modile_searcher
++ * @param visitor_ctx
++ * @return true
++ * @return false
++ */
+ bool drakvuf_enumerate_processes_with_module(drakvuf_t drakvuf, const char* module_name, bool (*visitor_func)(drakvuf_t drakvuf, const module_info_t* module_info, void* visitor_ctx), void* visitor_ctx)
+ {
++    //NOTE: checks whether osi.enumerate... field has something inside. In particular it holds a pointer to a function call
++    // the remap has been done in some initialization steps, in particular at the end of set_os_windows in win.c
+     if ( drakvuf->osi.enumerate_processes_with_module )
++    {
++        //NOTE: it calls the actual function that does the job: win_enumerate_processes_with_module
+         return drakvuf->osi.enumerate_processes_with_module( drakvuf, module_name, visitor_func, visitor_ctx );
+-
++    }
+     return false;
+ }
+ 
+@@ -366,3 +420,37 @@ bool drakvuf_is_crashreporter(drakvuf_t drakvuf, drakvuf_trap_info_t* info, vmi_
+ 
+     return false;
+ }
++
++///// ADDED 20/08/2019 FOR REPLICATION MEMDUMP PROCEDURE ////////////
++bool drakvuf_find_mmvad(drakvuf_t drakvuf, addr_t eprocess, addr_t vaddr, mmvad_info_t* out_mmvad)
++{
++    if ( drakvuf->osi.find_mmvad )
++        return drakvuf->osi.find_mmvad(drakvuf, eprocess, vaddr, out_mmvad);
++
++    return false;
++}
++
++bool drakvuf_get_user_stack32(drakvuf_t drakvuf, drakvuf_trap_info_t* info, addr_t* stack_ptr, addr_t* frame_ptr)
++{
++    if ( drakvuf->osi.get_user_stack32 )
++        return drakvuf->osi.get_user_stack32(drakvuf, info, stack_ptr, frame_ptr);
++
++    return 0;
++}
++
++bool drakvuf_get_user_stack64(drakvuf_t drakvuf, drakvuf_trap_info_t* info, addr_t* stack_ptr)
++{
++    if ( drakvuf->osi.get_user_stack64 )
++        return drakvuf->osi.get_user_stack64(drakvuf, info, stack_ptr);
++
++    return 0;
++}
++
++bool drakvuf_get_wow_context(drakvuf_t drakvuf, addr_t ethread, addr_t* wow_ctx)
++{
++    if ( drakvuf->osi.get_wow_context )
++        return drakvuf->osi.get_wow_context(drakvuf, ethread, wow_ctx);
++
++    return 0;
++}
++//////////////////////////////////////////////////////////////////////
+\ No newline at end of file
+diff --git a/src/libdrakvuf/os.h b/src/libdrakvuf/os.h
+index 763fd05..8077b92 100644
+--- a/src/libdrakvuf/os.h
++++ b/src/libdrakvuf/os.h
+@@ -107,6 +107,10 @@
+ 
+ typedef struct process_data_priv proc_data_priv_t;
+ 
++/**
++ * @brief it has the goal to remap some functions to the actual functions of win.c
++ *
++ */
+ typedef struct os_interface
+ {
+     addr_t (*get_current_thread)
+@@ -196,6 +200,19 @@ typedef struct os_interface
+     bool (*is_crashreporter)
+     (drakvuf_t drakvuf, drakvuf_trap_info_t* info, vmi_pid_t* pid);
+ 
++    ///// ADDED 20/08/2019 FOR REPLICATION MEMDUMP PROCEDURE ////////////
++    bool (*find_mmvad)
++    (drakvuf_t drakvuf, addr_t eprocess, addr_t vaddr, mmvad_info_t* out_mmvad);
++
++    bool (*get_user_stack32)
++    (drakvuf_t drakvuf, drakvuf_trap_info_t* info, addr_t* stack_ptr, addr_t* frame_ptr);
++
++    bool (*get_user_stack64)
++    (drakvuf_t drakvuf, drakvuf_trap_info_t* info, addr_t* stack_ptr);
++
++    bool (*get_wow_context)
++    (drakvuf_t drakvuf, addr_t ethread, addr_t* wow_ctx);
++    ////////////////////////////////////////////////////////////////////
+ } os_interface_t;
+ 
+ bool set_os_windows(drakvuf_t drakvuf);
+diff --git a/src/libdrakvuf/private.h b/src/libdrakvuf/private.h
+index 0a2d914..b76149b 100644
+--- a/src/libdrakvuf/private.h
++++ b/src/libdrakvuf/private.h
+@@ -156,13 +156,19 @@ struct drakvuf
+     char* dom_name;
+     domid_t domID;
+     char* rekall_profile;
+-    json_object* rekall_profile_json;
++    json_object* rekall_profile_json; // Rekall kernel profile
+     os_t os;
+     char* rekall_wow_profile;
+     json_object* rekall_wow_profile_json;
+ 
+     xen_interface_t* xen;
+     os_interface_t osi;
++    /* NOTE:
++     * The idx view is used primarily during DRAKVUF execution. In this view all breakpointed
++     * pages will have their shadow copies activated. We will use the idr view to map all shadow pages 
++     * to the zero (empty) page in case something is trying to check the contents of these pages.
++     * There is a vulnerability in vmi.c file
++     */
+     uint16_t altp2m_idx, altp2m_idr;
+ 
+     xen_pfn_t zero_page_gfn;
+@@ -172,6 +178,7 @@ struct drakvuf
+     vmi_instance_t vmi;
+ 
+     vmi_event_t cr3_event;
++    // NOTE: this is used to register a callback for 0xCC breakpoints
+     vmi_event_t interrupt_event;
+     vmi_event_t mem_event;
+     vmi_event_t debug_event;
+@@ -179,6 +186,10 @@ struct drakvuf
+     vmi_event_t* step_event[16];
+     drakvuf_trap_t guard0;
+ 
++    /*
++     * NOTE: offsets is a pointer to an array of size_t. Each value is defined in win-offsets.h
++     * each of these is also remapped in win-offset-map.h file 
++     */
+     size_t* offsets;
+     size_t* sizes;
+ 
+@@ -189,26 +200,31 @@ struct drakvuf
+     // in a list to be processed after all callbacks
+     // are finished.
+     bool in_callback;
+-    GHashTable* remove_traps;
++    GHashTable* remove_traps; // list of traps/wrappers to remove
+ 
+     int interrupted;
+     page_mode_t pm;
+     unsigned int vcpus;
+     uint64_t init_memsize;
+-    xen_pfn_t max_gpfn;
+-    addr_t kernbase;
++    // NOTE: https://wiki.xenproject.org/wiki/XenTerminology
++    xen_pfn_t max_gpfn; // GPFN (guest pseudo-physical frame number): Guests run in an illusory contiguous physical address space, which is probably not contiguous in the machine address space.
++    addr_t kernbase; // in our case is the address of ntoskrnl
+     addr_t kdtb;
+ 
+     int address_width;
+ 
+     x86_registers_t* regs[16]; // vCPU specific registers recorded during the last event
++    // NOTE: it contains the address of the KPCR struct per vcpu. This is collected at init time through fs register (x86 case)
+     addr_t kpcr[16]; // vCPU specific kpcr recorded on mov-to-cr3
+ 
++    // NOTE: this is used for keeping track of the shadow copies of the page tables (gfn <--> remapped gnf)
+     GHashTable* remapped_gfns; // Key: gfn
+     // val: remapped gfn
+ 
++    // NOTE: this is used for keeping track of the inserted breakpoints per pa
+     GHashTable* breakpoint_lookup_pa;   // key: PA of trap
+     // val: struct breakpoint
++    // NOTE: this is used for keeping track of the traps per page/gfn
+     GHashTable* breakpoint_lookup_gfn;  // key: gfn (size uint64_t)
+     // val: GSList of addr_t* for trap locations
+     GHashTable* breakpoint_lookup_trap; // key: trap pointer
+@@ -227,11 +243,16 @@ struct drakvuf
+     fd_info_t fd_info_lookup;  // auto-generated for fast drakvuf_loop lookups
+ };
+ 
++/**
++ * @brief saved in a struct wrapper with the physical address of the entry point of the
++ * function to be trapped
++ * 
++ */
+ struct breakpoint
+ {
+     addr_t pa;
+     drakvuf_trap_t guard, guard2;
+-    bool doubletrap;
++    bool doubletrap; // this is set if there is a 2nd attempt to set a trap on that pa
+ };
+ struct memaccess
+ {
+@@ -248,6 +269,12 @@ struct wrapper
+     union
+     {
+         struct memaccess memaccess;
++        /**
++         * @brief this is used for:
++         * - storing the physical address of the actual trap
++         * - store some mem_guard access mechanism
++         * - NOT the name of the actual trap, that is reserved for drakvuf_trap trap data structure
++         */
+         struct breakpoint breakpoint;
+     };
+ };
+@@ -259,16 +286,21 @@ struct free_trap_wrapper
+     drakvuf_trap_free_t free_routine;
+ };
+ 
++/**
++ * @brief it represents the shadow copy fo the guest frame number.
++ * The value of the remapped_gfns hastable of drakvuf_t
++ * 
++ */
+ struct remapped_gfn
+ {
+-    xen_pfn_t o;
++    xen_pfn_t o; //address of current_gfn (the first one retrived by the guest)
+     xen_pfn_t r;
+     bool active;
+ };
+ 
+ typedef struct process_data_priv
+ {
+-    char* name;   /* Process name */
++    char* name;   /* Process name, full path */
+     vmi_pid_t pid ;     /* Process pid */
+     vmi_pid_t ppid ;    /* Process parent pid */
+     addr_t base_addr ;  /* Process base address */
+diff --git a/src/libdrakvuf/rekall-profile.c b/src/libdrakvuf/rekall-profile.c
+index 1234a9a..00fce2b 100644
+--- a/src/libdrakvuf/rekall-profile.c
++++ b/src/libdrakvuf/rekall-profile.c
+@@ -409,7 +409,16 @@ int drakvuf_get_os_build_date(drakvuf_t drakvuf)
+ err_exit:
+     return ret;
+ }
+-
++/**
++ * @brief it stores the rva of target function of rekall_profile_json into rva. 
++ * Generally, that rva is a pointer to context struct member (context->rva)
++ * 
++ * @param rekall_profile_json 
++ * @param function 
++ * @param rva 
++ * @return true 
++ * @return false 
++ */
+ bool rekall_get_function_rva(json_object* rekall_profile_json, const char* function, addr_t* rva)
+ {
+     if (!rekall_profile_json)
+@@ -420,19 +429,23 @@ bool rekall_get_function_rva(json_object* rekall_profile_json, const char* funct
+ 
+     json_object* functions = NULL;
+     json_object* jsymbol = NULL;
++    // NOTE: FUNCTIONS is a section that can be found in the parsed json Rekall profiles
+     if (!json_object_object_get_ex(rekall_profile_json, "$FUNCTIONS", &functions))
+     {
+         PRINT_DEBUG("Rekall profile: no $FUNCTIONS section found\n");
+         goto err_exit;
+     }
+ 
++    // NOTE: it searches for the precise function to hook in the FUNCTIONS section
+     if (!json_object_object_get_ex(functions, function, &jsymbol))
+     {
+         PRINT_DEBUG("Rekall profile: no '%s' found\n", function);
+         goto err_exit;
+     }
+ 
++    //NOTE: it retrieves the rva of the function inside the dll
+     *rva = json_object_get_int64(jsymbol);
++    //PRINT_DEBUG("<!!!> name of the function %s and rva 0x%lx\n",function, *rva);
+     return true;
+ 
+ err_exit:
+diff --git a/src/libdrakvuf/vmi.c b/src/libdrakvuf/vmi.c
+index b47e461..63268c4 100644
+--- a/src/libdrakvuf/vmi.c
++++ b/src/libdrakvuf/vmi.c
+@@ -465,13 +465,27 @@ event_response_t pre_mem_cb(vmi_instance_t vmi, vmi_event_t* event)
+     return rsp;
+ }
+ 
++/**
++ * @brief This is the callback when encountering 0xCC breakpoint.
++ * Indeed in init_vmi function, there is the actual registration
++ *
++ * @param vmi
++ * @param event , it has drakvuf instance passed in void* data member
++ * @return event_response_t
++ */
+ event_response_t int3_cb(vmi_instance_t vmi, vmi_event_t* event)
+ {
++    // FIXME: 4
++
+     UNUSED(vmi);
+     event_response_t rsp = 0;
++    // NOTE: this one was set with drakvuf->interrupt_event.data = drakvuf, inside vmi_init
++    // and it's a method to pass some parameters to the actual callback int3_cb
+     drakvuf_t drakvuf = (drakvuf_t)event->data;
+     drakvuf->regs[event->vcpu_id] = event->x86_regs;
+ 
++    // NOTE: interrupt_event.gnf is the 'physical' page where trap occurred
++    // here we calculate again the physical address of the trapped function by adding the gfn to the offset
+     addr_t pa = (event->interrupt_event.gfn << 12)
+                 + event->interrupt_event.offset + event->interrupt_event.insn_length - 1;
+ 
+@@ -498,6 +512,7 @@ event_response_t int3_cb(vmi_instance_t vmi, vmi_event_t* event)
+             return 0;
+         }
+ 
++        // NOTE: if test = 0xCC
+         if (test == bp)
+         {
+             // There is a breakpoint instruction in memory here
+@@ -514,19 +529,27 @@ event_response_t int3_cb(vmi_instance_t vmi, vmi_event_t* event)
+         return 0;
+     }
+ 
++    // NOTE: the flag is set to check wether there was a 2nd attempt to set a trap on the same pa
+     if ( s->breakpoint.doubletrap )
+         event->interrupt_event.reinject = 1;
+     else
+         event->interrupt_event.reinject = 0;
+ 
++    // NOTE: reset to 0. This struct is used to store info related to the current process
+     proc_data_priv_t proc_data = {0};
+ 
++    // TODO: start from here!
+     drakvuf_get_current_process_data(drakvuf, event->vcpu_id, &proc_data);
++    PRINT_DEBUG("<!!!> proc_data: addr 0x%lx, name %s, pid %d \n",proc_data.base_addr, proc_data.name, proc_data.pid);
+ 
+     GTimeVal timestamp;
+     g_get_current_time(&timestamp);
+ 
++    // NOTE: the author says that "it is problematic to remove trap in callbacks so they are put in a list
++    // such that they are processed once drakvuf->in_callback=0"
+     drakvuf->in_callback = 1;
++    // NOTE: wrapper->traps is a GList* in which the data (loop->data) is a drakvuf_trap_t. 
++    // Note that the node has been registerd inside inject_trap_pa in vmi.c
+     GSList* loop = s->traps;
+     while (loop)
+     {
+@@ -545,13 +568,21 @@ event_response_t int3_cb(vmi_instance_t vmi, vmi_event_t* event)
+             .vcpu = event->vcpu_id,
+         };
+ 
++        // NOTE: in my experiments I've always one single node
+         loop = loop->next;
++
++        // NOTE: this is the actual call on the callback function when the function trapped is triggered
++        // i.e. trap_Sleep_cb(drakvuf,*info) in persmon
+         rsp |= trap->cb(drakvuf, &trap_info);
++
+     }
++    // NOTE: since we're not inside a callback we can safely remove the pending traps that we saved
+     drakvuf->in_callback = 0;
+ 
+     g_free( (gpointer)proc_data.name );
+ 
++    // NOTE: it process all the traps to be removed inside remove_traps GHashTable.
++    // Hashtable instance will be removed and re-initialized
+     process_free_requests(drakvuf);
+ 
+     // Check if we have traps still active on this breakpoint
+@@ -887,6 +918,16 @@ void remove_trap(drakvuf_t drakvuf,
+     }
+ }
+ 
++/**
++ * @brief note that this trap variable is of MEMACCESS type, created inside a wrapper
++ * check calling function inject_trap_pa, where it's called twice for gfn/remapped_gfn
++ *
++ * @param drakvuf
++ * @param trap
++ * @param guard2
++ * @return true
++ * @return false
++ */
+ bool inject_trap_mem(drakvuf_t drakvuf, drakvuf_trap_t* trap, bool guard2)
+ {
+     struct wrapper* s = (struct wrapper*)g_hash_table_lookup(drakvuf->memaccess_lookup_gfn, &trap->memaccess.gfn);
+@@ -931,6 +972,7 @@ bool inject_trap_mem(drakvuf_t drakvuf, drakvuf_trap_t* trap, bool guard2)
+     {
+ 
+         status_t ret;
++        // NOTE: y u do this, my boy? T_T
+         xen_unshare_gfn(drakvuf->xen, drakvuf->domID, trap->memaccess.gfn);
+ 
+         s = (struct wrapper*)g_malloc0(sizeof(struct wrapper));
+@@ -945,6 +987,8 @@ bool inject_trap_mem(drakvuf_t drakvuf, drakvuf_trap_t* trap, bool guard2)
+          */
+         s->memaccess.guard2 = guard2;
+ 
++        // NOTE: it puts a mem event of the page specified by the current_gfn/remapped_gnf->r on idx view
++        // if accessed with RW/RWX rights
+         ret = vmi_set_mem_event(drakvuf->vmi, trap->memaccess.gfn, trap->memaccess.access, drakvuf->altp2m_idx);
+         if ( ret == VMI_FAILURE )
+         {
+@@ -962,20 +1006,46 @@ bool inject_trap_mem(drakvuf_t drakvuf, drakvuf_trap_t* trap, bool guard2)
+     return 1;
+ }
+ 
++/**
++ * @brief obtained the physical address of the entry point of the trapped function, it
++ * finally puts the breakpoint the page table
++ *
++ * @param drakvuf
++ * @param trap
++ * @param pa
++ * @return true
++ * @return false
++ */
+ bool inject_trap_pa(drakvuf_t drakvuf,
+                     drakvuf_trap_t* trap,
+                     addr_t pa)
+ {
+     // check if already marked
+     vmi_instance_t vmi = drakvuf->vmi;
+-    xen_pfn_t current_gfn = pa >> 12;
++    // NOTE: it retrives the Guest Frame Number of the physical address that represents the Guest's idea of what hardware addresses are
++    // these are used in guest page tables. http://ccrc.web.nthu.edu.tw/ezfiles/16/1016/img/598/v14n_xen.pdf
++    xen_pfn_t current_gfn = pa >> 12; // it cuts-off the last 3 bytes
++    PRINT_DEBUG("<!!!> physical address of trapped function, gfn: 0x%lx, 0x%lx\n", pa, current_gfn);
++
++    // NOTE: I can't access anything, maybe look for initialization steps
++    // the only thing that I've understood is that the wrapper is used to collect the values from all the
++    // the hastables used by drakvuf instance: it's like a dynamic collector
++    // NOTE: it checks if there is already a trap for that pa
+     struct wrapper* container = (struct wrapper*)g_hash_table_lookup(drakvuf->breakpoint_lookup_pa, &pa);
+ 
+-    if (container)
++    // DEBUG:
++    unsigned int size = g_hash_table_size(drakvuf->breakpoint_lookup_pa);
++    PRINT_DEBUG("<!!!> size of the hashtable breakpoint_lookup_pa: %d\n",size);
++
++    // NOTE: if the trap to that pa was already inserted then...
++    if (container) // it seems that I'm NOT entering here...
+     {
++        // NOTE: it adds a new (key,value) pair to lookup_trap hashtable: the key is the pointer to trdrakvuf_trap_t data structure, the value is the container retrieved before
++        // g_memdup allocates 8 bytes of memory and copies 8bytes starting from &trap (that is exactly 8 bytes, since a pointer is an address of 64bits)
+         g_hash_table_insert(drakvuf->breakpoint_lookup_trap,
+                             g_memdup(&trap, sizeof(void*)),
+                             container);
++        // NOTE: adds the new drakvuf_trap_t* to the single-linked list container->traps
+         container->traps = g_slist_prepend(container->traps, trap);
+ 
+         GSList* traps = (GSList*)g_hash_table_lookup(drakvuf->breakpoint_lookup_gfn, &current_gfn);
+@@ -986,7 +1056,6 @@ bool inject_trap_pa(drakvuf_t drakvuf,
+             g_hash_table_insert(drakvuf->breakpoint_lookup_gfn,
+                                 g_memdup(&current_gfn, sizeof(xen_pfn_t)),
+                                 traps);
+-
+         return 1;
+     }
+ 
+@@ -997,24 +1066,27 @@ bool inject_trap_pa(drakvuf_t drakvuf,
+     if (s)
+         old_access = s->memaccess.access;
+ 
++    // NOTE: since it wasn't retrieved by the brekpoint_lookup_pa hashtable, we create allocate a wrapper
+     container = (struct wrapper*)g_malloc0(sizeof(struct wrapper));
+     if ( !container )
+         return 0;
+ 
++    // NOTE: wrapper prepared with pa
+     container->drakvuf = drakvuf;
+-    container->traps = g_slist_prepend(container->traps, trap);
++    container->traps = g_slist_prepend(container->traps, trap); // container->traps was empty, and the new element is the current trap
+     container->breakpoint.pa = pa;
+ 
+     /* Let's see if we have already created the shadow copy of this page */
+     struct remapped_gfn* remapped_gfn = (struct remapped_gfn*)g_hash_table_lookup(drakvuf->remapped_gfns, &current_gfn);
+ 
+-    if ( !remapped_gfn )
++    if ( !remapped_gfn ) // I'm not lucky, I don't have the shadow page
+     {
+         remapped_gfn = (struct remapped_gfn*)g_malloc0(sizeof(struct remapped_gfn));
+         if ( !remapped_gfn )
+             goto err_exit;
+ 
+         remapped_gfn->o = current_gfn;
++        PRINT_DEBUG("<!!!> remapped_gfn->o: 0x%lx\n",remapped_gfn->o);
+ 
+         int rc;
+         /* = xc_domain_increase_reservation_exact(drakvuf->xen->xc, drakvuf->domID, 1, 0, 0, &remapped_gfn->r);
+@@ -1022,8 +1094,13 @@ bool inject_trap_pa(drakvuf_t drakvuf,
+         if (rc < 0 || !remapped_gfn->r)
+             return 0;*/
+ 
+-        remapped_gfn->r = ++(drakvuf->max_gpfn);
++        PRINT_DEBUG("<!!!> before drakvuf->max_gpfn: 0x%lx\n", drakvuf->max_gpfn);
++        remapped_gfn->r = ++(drakvuf->max_gpfn); //increment first, then assign
++        PRINT_DEBUG("<!!!> remapped_gfn->r: 0x%lx, drakvuf->max_gpfn: 0x%lx\n",remapped_gfn->r, drakvuf->max_gpfn);
+ 
++        // NOTE: this call is undocumented but it should manage the guest memory map
++        // https://xenbits.xen.org/people/ianc/libxenctrl-split/v8.html
++        // https://xen-devel.narkive.com/bXCN36nV/how-to-set-up-a-ve , note that #VE stands for Virtualization Exception
+         rc = xc_domain_populate_physmap_exact(drakvuf->xen->xc, drakvuf->domID, 1, 0, 0, &remapped_gfn->r);
+         PRINT_DEBUG("Physmap populated? %i\n", rc);
+         if (rc < 0)
+@@ -1032,23 +1109,29 @@ bool inject_trap_pa(drakvuf_t drakvuf,
+             goto err_exit;
+         }
+ 
++        // NOTE: insert the shadow copy of the page table with that gfn inside remapped_gfns
+         g_hash_table_insert(drakvuf->remapped_gfns,
+                             &remapped_gfn->o,
+                             remapped_gfn);
+     }
+ 
++    // NOTE: at least one time per pa, I'm entering this condition.
++    // it copies a 4KB page-size memory starting from the gfn into the memory are starting from remapped_gfn
+     /*
+      * The page may have been remapped previously but if it has no active traps
+      * then the contents may be stale, so we copy it in that case just to make sure
+      */
+     if (!g_hash_table_lookup(drakvuf->breakpoint_lookup_gfn, &remapped_gfn->o) )
+     {
++        // NOTE: (re)set an array of 4096 uint8 cells to 0. 4KB is the size of a page
+         uint8_t backup[VMI_PS_4KB] = {0};
++        // NOTE: it writes in the backup 4KB of data starting from the address of the gfn
+         if ( VMI_FAILURE == vmi_read_pa(drakvuf->vmi, current_gfn<<12, VMI_PS_4KB, &backup, NULL) )
+         {
+             fprintf(stderr, "Copying trapped page to new location FAILED\n");
+             goto err_exit;
+         }
++        PRINT_DEBUG("<!!!> current_gfn<<12: 0x%lx\n",current_gfn<<12);
+ 
+         if ( VMI_SUCCESS == vmi_write_pa(drakvuf->vmi, remapped_gfn->r << 12, VMI_PS_4KB, &backup, NULL) )
+             PRINT_DEBUG("Copied trapped page to new location\n");
+@@ -1060,13 +1143,22 @@ bool inject_trap_pa(drakvuf_t drakvuf,
+         }
+     }
+ 
++    // NOTE: if the remapped_gfn it's not active, I'll activate it (altp2m comes in action)
+     if ( !remapped_gfn->active )
+     {
++        // NOTE: altp2m explained https://xenproject.org/2016/04/13/stealthy-monitoring-with-xen-altp2m/
+         PRINT_DEBUG("Activating remapped gfns in the altp2m views!\n");
+         remapped_gfn->active = 1;
+ 
++        // NOTE: In Xen’s terminology, p2m stands for the memory management layer that handles the translation from guest physical memory to machine physical.
++
++        // NOTE: this function is undocumented but it should do something like the following:
++        // it switches the specified domain to the specified alp2m X view "for" the remapped_gfn->r (from the current gfn)
++        // Basically, it actives the shadow page for the current breakpoint, in the idx view
+         xc_altp2m_change_gfn(drakvuf->xen->xc, drakvuf->domID,
+                              drakvuf->altp2m_idx, current_gfn, remapped_gfn->r);
++        // it switches the specified domain to the specified alp2m R view "for" the zero_page_gfn (from the remapped_gfn->r)
++        // Basically, it maps the shadow page of the current trap to an empty page in order that read operations don't spot the breakpoint
+         xc_altp2m_change_gfn(drakvuf->xen->xc, drakvuf->domID,
+                              drakvuf->altp2m_idr, remapped_gfn->r, drakvuf->zero_page_gfn);
+     }
+@@ -1085,6 +1177,7 @@ bool inject_trap_pa(drakvuf_t drakvuf,
+     container->breakpoint.guard2.memaccess.type = PRE;
+     container->breakpoint.guard2.memaccess.gfn = remapped_gfn->r;
+ 
++    // NOTE: it sets a mem trap on both gfn (current_gfn and remapped_gfn->r) on idx view
+     if ( !inject_trap_mem(drakvuf, &container->breakpoint.guard, 0) )
+     {
+         PRINT_DEBUG("Failed to create guard trap for the breakpoint!\n");
+@@ -1097,15 +1190,27 @@ bool inject_trap_pa(drakvuf_t drakvuf,
+         goto err_exit;
+     }
+ 
++    // NOTE: rpa = remapped_gfn->r + (physical address of the trapped function && 4095)
++    // the second part of the operation basically takes only the last 3 bytes of the pa
++    // because 4095=0xFFF
+     addr_t rpa = (remapped_gfn->r<<12) + (container->breakpoint.pa & VMI_BIT_MASK(0,11));
++    PRINT_DEBUG("<!!!> remapped_gfn->r<<12: 0x%lx, container->breakpoint.pa: 0x%lx,\n \t\t & 4095: 0x%llx, rpa: 0x%lx\n",
++            remapped_gfn->r<<12,
++            container->breakpoint.pa,
++            (container->breakpoint.pa & VMI_BIT_MASK(0,11)),
++            rpa);
++
+     uint8_t test;
+ 
++    // NOTE: it reads 8 bytes in memory starting from the target physical address
++    // this is done in order to see if there is a breakpoint in there (that is 204 or 0xCC)
+     if (VMI_FAILURE == vmi_read_8_pa(vmi, pa, &test))
+     {
+         PRINT_DEBUG("FAILED TO READ @ 0x%lx !\n", container->breakpoint.pa);
+         goto err_exit;
+     }
+ 
++    // NOTE: bp is 0xCC or 204
+     if (test == bp)
+     {
+         PRINT_DEBUG("Double-trap location @ 0x%lx !\n", container->breakpoint.pa);
+@@ -1115,6 +1220,7 @@ bool inject_trap_pa(drakvuf_t drakvuf,
+     {
+         container->breakpoint.doubletrap = 0;
+ 
++        // NOTE: it writes the breakpoint value (0xCC) to the rpa
+         if (VMI_FAILURE == vmi_write_8_pa(vmi, rpa, &bp))
+         {
+             PRINT_DEBUG("FAILED TO INJECT TRAP @ 0x%lx !\n", container->breakpoint.pa);
+@@ -1164,7 +1270,10 @@ bool inject_trap(drakvuf_t drakvuf,
+     if ( trap->breakpoint.addr_type == ADDR_VA )
+         status = vmi_pagetable_lookup(vmi, dtb, trap->breakpoint.addr, &pa);
+     else
++    {
+         status = vmi_pagetable_lookup(vmi, dtb, vaddr + trap->breakpoint.rva, &pa);
++        PRINT_DEBUG("<!!!> setting breakpoint on 0x%lx virtual address\n", vaddr + trap->breakpoint.rva);
++    }
+ 
+     if ( VMI_FAILURE == status )
+         return 0;
+@@ -1226,11 +1335,24 @@ bool control_cpuid_trap(drakvuf_t drakvuf, bool toggle)
+     return 1;
+ }
+ 
++/**
++ * @brief this is the callcab registered in the fd that is monitored.
++ * This callback is in charge of listen some events from the vmi instance
++ * of the drakvuf_t instance of the retrieved fd.
++ * These events are the one generated by encountering the placed 0xCC in the page tables
++ *
++ * @param fd
++ * @param data
++ */
+ void drakvuf_vmi_event_callback (int fd, void* data)
+ {
++    // FIXME: 3
+     UNUSED(fd);
+     drakvuf_t drakvuf = *(drakvuf_t*) data;
++
++    // NOTE: since 0 is passed, it processes all the pending events in the ring-buffer
+     status_t status = vmi_events_listen(drakvuf->vmi, 0);
++
+     if (VMI_SUCCESS != status)
+     {
+         PRINT_DEBUG("Error waiting for events or timeout, quitting...\n");
+@@ -1238,13 +1360,29 @@ void drakvuf_vmi_event_callback (int fd, void* data)
+     }
+ }
+ 
++/**
++ * @brief it checks for some events for the target file descriptor
++ *
++ * @param drakvuf
++ * @param timeout
++ */
+ static void drakvuf_poll(drakvuf_t drakvuf, unsigned int timeout)
+ {
++    // FIXME: 2
++
++    // NOTE: standard behaviour is that drakvuf->event_fd_cnt = 1 --> it seems that there is always one only file descriptor to consider
++
++    // NOTE: http://man7.org/linux/man-pages/man2/poll.2.html
++    // poll is a function that waits for timeout millisec an event on the set of file descriptors passed as parameters
++    // note that the poll triggers everytime that an event occurs: it's up to the code below to filter-out
++    // the wanted event through an and operation with the bitmask
+     int rc = poll(drakvuf->event_fds, drakvuf->event_fd_cnt, timeout);
+ 
++    // no events occurred
+     if (rc == 0)
+         return;
+ 
++    // errors
+     else if (rc < 0)
+     {
+         PRINT_DEBUG("DRAKVUF loop broke unexpectedly: [Errno: %d] %s\n", errno, strerror(errno));
+@@ -1256,24 +1394,39 @@ static void drakvuf_poll(drakvuf_t drakvuf, unsigned int timeout)
+     }
+ 
+     /* check and process each fd if it was raised */
++    // NOTE: it seems that there is always one only file descriptor (maybe for future updates?)
+     for (int poll_ix=0; poll_ix<drakvuf->event_fd_cnt; poll_ix++)
+     {
++        // NOTE:
++        // & is done to understand which event condition was triggered where revents is the returned bitmask
++        // and the others (POLLIN | POLLERR) is the check on the wanted condition.
++        // POLLIN means that there is data to read. POLLERR means that error condition occurs (this bit is also
++        // set for a file descriptor referring to the write end of a pipe when the read end has been closed)
+         if ( !(drakvuf->event_fds[poll_ix].revents & (POLLIN | POLLERR)) )
+             continue;
+ 
+         fd_info_t fd_info = &drakvuf->fd_info_lookup[poll_ix];
++
++        // NOTE: data is drakvuf_t* (!), a pointer of pointer
+         fd_info->event_cb(fd_info->fd, fd_info->data);
+     }
+ }
+ 
++/**
++ * @brief it starts the monitoring activities after the startup phase
++ *
++ * @param drakvuf
++ */
+ void drakvuf_loop(drakvuf_t drakvuf)
+ {
++    //FIXME: 1
+ 
+     PRINT_DEBUG("Started DRAKVUF loop\n");
+ 
+     drakvuf->interrupted = 0;
+     drakvuf_force_resume(drakvuf);
+ 
++    // NOTE: the loop is broken due to an interrupt like Ctrl+C
+     while (!drakvuf->interrupted)
+         drakvuf_poll(drakvuf, 1000);
+ 
+@@ -1453,7 +1606,15 @@ bool init_vmi(drakvuf_t drakvuf, bool libvmi_conf)
+     if (rc < 0)
+         return 0;
+ 
++    // NOTE: *I guess* that here is where it's registered the int3_cb function to call upon
++    // encountering an INT3 (0xCC) instruction. In int3_cb procedure there is the actual call
++    // to the real callback function to handle a precise trapped function
+     SETUP_INTERRUPT_EVENT(&drakvuf->interrupt_event, int3_cb);
++
++    /*NOTE: " Metadata assigned to this pointer at any time (prior to
++     *  or following registration) is delivered to the callback,
++     *  for each matching event." - events.h
++     */
+     drakvuf->interrupt_event.data = drakvuf;
+ 
+     if (VMI_FAILURE == vmi_register_event(drakvuf->vmi, &drakvuf->interrupt_event))
+diff --git a/src/libdrakvuf/win-handles.c b/src/libdrakvuf/win-handles.c
+index 2003306..1e32580 100644
+--- a/src/libdrakvuf/win-handles.c
++++ b/src/libdrakvuf/win-handles.c
+@@ -207,6 +207,14 @@ static addr_t drakvuf_get_obj_by_handle_impl(drakvuf_t drakvuf, addr_t process,
+     }
+ }
+ 
++/**
++ * @brief it retrieves the _OBJECT_HEADER base address from the handle of a process
++ * 
++ * @param drakvuf 
++ * @param process 
++ * @param handle 
++ * @return addr_t 
++ */
+ addr_t drakvuf_get_obj_by_handle(drakvuf_t drakvuf, addr_t process, uint64_t handle)
+ {
+     if (VMI_GET_BIT(handle, 31))
+diff --git a/src/libdrakvuf/win-offsets-map.h b/src/libdrakvuf/win-offsets-map.h
+index eea5e24..717e562 100644
+--- a/src/libdrakvuf/win-offsets-map.h
++++ b/src/libdrakvuf/win-offsets-map.h
+@@ -107,6 +107,7 @@
+ 
+ /*
+  * Map offset enums to actual structure+member or global variable/function names.
++ * NOTE: https://www.nirsoft.net/kernel_struct/vista/EPROCESS.html
+  */
+ static const char* win_offset_names[__WIN_OFFSETS_MAX][2] =
+ {
+@@ -122,7 +123,18 @@ static const char* win_offset_names[__WIN_OFFSETS_MAX][2] =
+     [EPROCESS_INHERITEDPID] = { "_EPROCESS", "InheritedFromUniqueProcessId" },
+     [EPROCESS_WOW64PROCESS] = { "_EPROCESS", "Wow64Process" },
+     [EPROCESS_WOW64PROCESS_WIN10] = { "_EPROCESS", "WoW64Process" },
+-
++    ///// ADDED 20/08/2019 FOR REPLICATION MEMDUMP PROCEDURE ////////////
++    [EPROCESS_VADROOT] = { "_EPROCESS", "VadRoot" },
++    [VADROOT_BALANCED_ROOT] = { "VadRoot", "BalancedRoot" },
++    [MMVAD_LEFT_CHILD] = { "_MMVAD", "LeftChild" },
++    [MMVAD_RIGHT_CHILD] = { "_MMVAD", "RightChild" },
++    [MMVAD_STARTING_VPN] = { "_MMVAD", "StartingVpn" },
++    [MMVAD_ENDING_VPN] = { "_MMVAD", "EndingVpn" },
++    [MMVAD_FLAGS1] = { "_MMVAD", "u" },
++    [MMVAD_SUBSECTION] = { "_MMVAD", "Subsection" },
++    [SUBSECTION_CONTROL_AREA] = { "_SUBSECTION", "ControlArea" },
++    [CONTROL_AREA_FILEPOINTER] = { "_CONTROL_AREA", "FilePointer" },
++    /////////////////////////////////////////////////////////////////////
+     [KPROCESS_HEADER] = { "_KPROCESS", "Header" },
+     [PEB_IMAGEBASADDRESS] = { "_PEB", "ImageBaseAddress" },
+     [PEB_LDR] = { "_PEB", "Ldr" },
+@@ -141,6 +153,12 @@ static const char* win_offset_names[__WIN_OFFSETS_MAX][2] =
+     [KTHREAD_PREVIOUSMODE] = { "_KTHREAD", "PreviousMode" },
+     [KTHREAD_HEADER] = { "_KTHREAD", "Header" },
+     [KTHREAD_TEB] = { "_KTHREAD", "Teb" },
++    ///// ADDED 20/08/2019 FOR REPLICATION MEMDUMP PROCEDURE ////////////
++    [KTHREAD_TRAPFRAME] = { "_KTHREAD", "TrapFrame" },
++    [KTRAP_FRAME_RBP] = { "_KTRAP_FRAME", "Rbp" },
++    [KTRAP_FRAME_RSP] = { "_KTRAP_FRAME", "Rsp" },
++    [TEB_TLS_SLOTS] = { "_TEB", "TlsSlots" },
++    ////////////////////////////////////////////////////////////////////
+     [TEB_LASTERRORVALUE] = { "_TEB", "LastErrorValue" },
+     [ETHREAD_CID] = {"_ETHREAD", "Cid" },
+     [ETHREAD_TCB] = { "_ETHREAD", "Tcb" },
+diff --git a/src/libdrakvuf/win-offsets.h b/src/libdrakvuf/win-offsets.h
+index 1a9106a..c62cb00 100644
+--- a/src/libdrakvuf/win-offsets.h
++++ b/src/libdrakvuf/win-offsets.h
+@@ -108,6 +108,7 @@
+ /*
+  * Easy-to-use structure offsets to be loaded from the Rekall profile.
+  * Define actual mapping in win-offsets-map.h
++ * NOTE: https://www.nirsoft.net/kernel_struct/vista/EPROCESS.html
+  */
+ enum win_offsets
+ {
+@@ -125,6 +126,21 @@ enum win_offsets
+     EPROCESS_WOW64PROCESS,
+     EPROCESS_WOW64PROCESS_WIN10,
+ 
++    ///// ADDED 20/08/2019 FOR REPLICATION MEMDUMP PROCEDURE ////////////
++    EPROCESS_VADROOT,
++
++    VADROOT_BALANCED_ROOT,
++
++    MMVAD_LEFT_CHILD,
++    MMVAD_RIGHT_CHILD,
++    MMVAD_STARTING_VPN,
++    MMVAD_ENDING_VPN,
++    MMVAD_FLAGS1,
++    MMVAD_SUBSECTION,
++    SUBSECTION_CONTROL_AREA,
++    CONTROL_AREA_FILEPOINTER,
++    /////////////////////////////////////////////////////////////////////
++
+     KPROCESS_HEADER,
+ 
+     PEB_IMAGEBASADDRESS,
+@@ -149,7 +165,13 @@ enum win_offsets
+     KTHREAD_PREVIOUSMODE,
+     KTHREAD_HEADER,
+     KTHREAD_TEB,
++    ///// ADDED 20/08/2019 FOR REPLICATION MEMDUMP PROCEDURE ////////////
++    KTHREAD_TRAPFRAME,
++    KTRAP_FRAME_RBP,
++    KTRAP_FRAME_RSP,
+ 
++    TEB_TLS_SLOTS,
++    ////////////////////////////////////////////////////////////////////
+     TEB_LASTERRORVALUE,
+ 
+     ETHREAD_CID,
+diff --git a/src/libdrakvuf/win-processes.c b/src/libdrakvuf/win-processes.c
+index 21b7103..bd7bdce 100644
+--- a/src/libdrakvuf/win-processes.c
++++ b/src/libdrakvuf/win-processes.c
+@@ -117,6 +117,14 @@
+ #include "win-error-codes.h"
+ #include "win.h"
+ 
++///// ADDED 20/08/2019 FOR REPLICATION MEMDUMP PROCEDURE ////////////
++#define MMVAD_MAX_DEPTH (100)
++
++#define POOL_TAG_VAD    (0x20646156) // daV
++#define POOL_TAG_VADL   (0x6c646156) // ldaV
++#define POOL_TAG_VADM   (0x6d646156) // mdaV
++/////////////////////////////////////////////////////////////////////
++
+ typedef enum dispatcher_object
+ {
+     __DISPATCHER_INVALID_OBJECT = 0,
+@@ -129,6 +137,13 @@ bool win_search_modules( drakvuf_t drakvuf, const char* module_name, bool (*visi
+ bool win_search_modules_wow( drakvuf_t drakvuf, const char* module_name, bool (*visitor_func)(drakvuf_t drakvuf, const module_info_t* module_info, void* visitor_ctx), void* visitor_ctx, addr_t eprocess_addr, addr_t wow_peb, vmi_pid_t pid, access_context_t* ctx );
+ addr_t win_get_wow_peb( drakvuf_t drakvuf, access_context_t* ctx, addr_t wow_process );
+ 
++/**
++ * @brief it retrieves the address of the current KTHREAD in the vcpu by navigating KPCR and PRCB 
++ * 
++ * @param drakvuf 
++ * @param vcpu_id 
++ * @return addr_t 
++ */
+ addr_t win_get_current_thread(drakvuf_t drakvuf, uint64_t vcpu_id)
+ {
+     vmi_instance_t vmi = drakvuf->vmi;
+@@ -148,6 +163,13 @@ addr_t win_get_current_thread(drakvuf_t drakvuf, uint64_t vcpu_id)
+     return thread;
+ }
+ 
++/**
++ * @brief it retrieves the base address of the process (KPROCESS) inside that vcpu_id, by scanning KTHREAD structure for that vcpu
++ * 
++ * @param drakvuf 
++ * @param vcpu_id 
++ * @return addr_t 
++ */
+ addr_t win_get_current_process(drakvuf_t drakvuf, uint64_t vcpu_id)
+ {
+     addr_t thread;
+@@ -275,6 +297,16 @@ char* win_get_process_commandline(drakvuf_t drakvuf, drakvuf_trap_info_t* info,
+     return cmdline;
+ }
+ 
++/**
++ * @brief returns pid of the current process. Since PVOID unique_processId of eprocess_base
++ * should be de-referenced in order to obtain the actual pid value, this operation is - as always -
++ * wrapped by a call to libvmi
++ * 
++ * @param drakvuf 
++ * @param eprocess_base 
++ * @param pid 
++ * @return status_t 
++ */
+ status_t win_get_process_pid(drakvuf_t drakvuf, addr_t eprocess_base, vmi_pid_t* pid)
+ {
+ 
+@@ -424,6 +456,15 @@ bool win_is_eprocess( drakvuf_t drakvuf, addr_t dtb, addr_t eprocess_addr )
+     return false ;
+ }
+ 
++/**
++ * @brief it retrives the address of the _LIST_ENTRY InLoadOrderModuleList the passed process
++ * 
++ * @param drakvuf 
++ * @param eprocess_base 
++ * @param module_list 
++ * @return true 
++ * @return false 
++ */
+ bool win_get_module_list(drakvuf_t drakvuf, addr_t eprocess_base, addr_t* module_list)
+ {
+     vmi_instance_t vmi = drakvuf->vmi;
+@@ -436,16 +477,19 @@ bool win_get_module_list(drakvuf_t drakvuf, addr_t eprocess_base, addr_t* module
+     if (!eprocess_base)
+         return false;
+ 
++    // NOTE: it retrieves the address of the directory table base from _EPROCESS (and _KPROCESS), that is ULONG DirectoryTaleBase
+     if (VMI_FAILURE == vmi_read_addr_va(vmi, eprocess_base + drakvuf->offsets[EPROCESS_PDBASE], 0, &ctx.dtb))
+         return false;
+-
++    // NOTE: it retrives the value of the PEB of the current _EPROCESS
+     if (VMI_FAILURE == vmi_read_addr_va(vmi, eprocess_base + drakvuf->offsets[EPROCESS_PEB], 0, &peb))
+         return false;
+ 
++    // NOTE: it retrieves the value of the PPEB_LDR_DATA from the PEB
+     ctx.addr = peb + drakvuf->offsets[PEB_LDR];
+     if (VMI_FAILURE == vmi_read_addr(vmi, &ctx, &ldr))
+         return false;
+ 
++    // NOTE: it retrieves the address of _LIST_ENTRY InLoadOrderModuleList, that is the list of loaded DLLs 
+     ctx.addr = ldr + drakvuf->offsets[PEB_LDR_DATA_INLOADORDERMODULELIST];
+     if (VMI_FAILURE == vmi_read_addr(vmi, &ctx, &modlist))
+         return false;
+@@ -492,22 +536,56 @@ static bool win_find_process_list(drakvuf_t drakvuf, addr_t* list_head)
+ {
+     vmi_instance_t vmi = drakvuf->vmi;
+ 
++    // NOTE: it will store the address to _EPROCESS PsInitialSystemProcess data structure
+     addr_t current_process;
++
++    // NOTE: http://www.nirsoft.net/kernel_struct/vista/EPROCESS.html
++    // https://docs.microsoft.com/en-us/windows-hardware/drivers/kernel/mm64bitphysicaladdress
+     status_t status = vmi_read_addr_ksym(vmi, "PsInitialSystemProcess", &current_process);
+     if ( VMI_FAILURE == status )
+         return false;
+ 
++    //PRINT_DEBUG("<!!!> address PsInitialSystemProcess: 0x%lx \n", current_process);
++    //PRINT_DEBUG("<!!!> address drakvuf->offsets[EPROCESS_TASKS]: 0x%lx \n", drakvuf->offsets[EPROCESS_TASKS]);
++
++    // NOTE: EPROCESS_TASKS maps to ActiveProcessLinks field of _EPROCESS structure. drakvuf->offsets[EPROCESS_TASKS] is 184
++    // that is the offset where ActiveProcessLinks is present inside PsInitialSystemProcess
+     *list_head = current_process + drakvuf->offsets[EPROCESS_TASKS];
+     return true;
+ }
+-
++/**
++ * @brief it retrieves the virtual address of the _LIST_ENTRY of the next process.
++ * Basically, it does something like _LIST_ENTRY next_node = *(current_node.Flink)
++ *
++ * @param drakvuf
++ * @param current_list_entry
++ * @param next_list_entry
++ * @return true
++ * @return false
++ */
+ static bool win_find_next_process_list_entry(drakvuf_t drakvuf, addr_t current_list_entry, addr_t* next_list_entry)
+ {
+     vmi_instance_t vmi = drakvuf->vmi;
++    // NOTE: vmi_read_addr_va comes in help when we have to de-reference a pointer to
++    // something (generally a struct) for which we don't know the type. In case of
++    // _LIST_ENTRY, we cannot directly do *Flink to obtain the next _LIST_ENTRY object for
++    // the next process but we have to call this function to read the content in memory
++    // pointed by current_list_entry
+     status_t status = vmi_read_addr_va(vmi, current_list_entry, 0, next_list_entry);
++    // DEBUG:
++    //addr_t previous_node;
++    //status = vmi_read_addr_va(vmi, (*next_list_entry)+4, 0 ,&previous_node);
++    //PRINT_DEBUG("<!!!> address new; 0x%lx\n", previous_node);
+     return VMI_FAILURE != status;
+ }
+-
++/**
++ * @brief retrieve the address to _EPROCESS starting from _LIST_ENTRY field of the same struct
++ * it's the counterpart of the win_find_process_list function
++ * 
++ * @param drakvuf 
++ * @param list_entry 
++ * @return addr_t 
++ */
+ static addr_t win_process_list_entry_to_process(drakvuf_t drakvuf, addr_t list_entry)
+ {
+     return list_entry - drakvuf->offsets[EPROCESS_TASKS];
+@@ -564,6 +642,20 @@ bool win_find_eprocess(drakvuf_t drakvuf, vmi_pid_t find_pid, const char* find_p
+     return false;
+ }
+ 
++/**
++ * @brief given a target process, it searches for the target dll
++ * 
++ * @param drakvuf 
++ * @param module_name 
++ * @param visitor_func 
++ * @param visitor_ctx 
++ * @param eprocess_addr 
++ * @param wow_process 
++ * @param pid 
++ * @param ctx 
++ * @return true 
++ * @return false 
++ */
+ bool win_search_modules( drakvuf_t drakvuf,
+                          const char* module_name,
+                          bool (*visitor_func)(drakvuf_t drakvuf, const module_info_t* module_info, void* visitor_ctx),
+@@ -583,12 +675,13 @@ bool win_search_modules( drakvuf_t drakvuf,
+ 
+         if ( module_info )
+         {
+-            module_info->eprocess_addr  = eprocess_addr ;
+-            module_info->dtb            = ctx->dtb ;
++            module_info->eprocess_addr  = eprocess_addr ; // eprocess address of the process containing the searched module
++            module_info->dtb            = ctx->dtb ; // directory table base of the process containing the searched module
+             module_info->pid            = pid ;
+-            module_info->is_wow_process = wow_process ? true : false ;
++            module_info->is_wow_process = wow_process ? true : false ; //false, since it's 0x0
+             module_info->is_wow         = false ;
+ 
++            //NOTE: real call to module_visitor(...) of breakpoint_in_dll_module_searcher
+             ret = visitor_func( drakvuf, module_info, visitor_ctx );
+ 
+             vmi_free_unicode_str( module_info->full_name );
+@@ -639,7 +732,7 @@ addr_t win_get_wow_peb( drakvuf_t drakvuf, access_context_t* ctx, addr_t eproces
+ {
+     // 'Wow64Process' could not be the first member of '_EPROCESS' so this is cheap check
+     if (!drakvuf->offsets[EPROCESS_WOW64PROCESS])
+-        return 0;
++        return 0; // NOTE: in my checks, it ends here because it can't find the WoW64member (we're in 32bits OS)
+ 
+     addr_t ret_peb_addr = 0 ;
+     addr_t wow_process = 0 ;
+@@ -653,7 +746,6 @@ addr_t win_get_wow_peb( drakvuf_t drakvuf, access_context_t* ctx, addr_t eproces
+         if ( vmi_get_winver( drakvuf->vmi ) == VMI_OS_WINDOWS_10 )
+         {
+             ctx->addr = wow_process + drakvuf->offsets[EWOW64PROCESS_PEB] ;
+-
+             if ( vmi_read_addr( drakvuf->vmi, ctx, &ret_peb_addr ) == VMI_FAILURE )
+                 ret_peb_addr = 0;
+         }
+@@ -700,19 +792,27 @@ bool win_enumerate_processes( drakvuf_t drakvuf, void (*visitor_func)(drakvuf_t
+ bool win_enumerate_processes_with_module( drakvuf_t drakvuf, const char* module_name, bool (*visitor_func)(drakvuf_t drakvuf, const module_info_t* module_info, void* visitor_ctx), void* visitor_ctx )
+ {
+     addr_t list_head;
++
++    // NOTE: retrieves the address to ActiveProcessLinks _LIST_ENTRY in order to scan the active processes
+     if (!win_find_process_list(drakvuf, &list_head))
+         return false;
+-    addr_t current_list_entry = list_head;
++    addr_t current_list_entry = list_head; //0xB4, in win7-sp1 32bit
+     addr_t next_list_entry;
+ 
++    //PRINT_DEBUG("<!!!> address list_head: 0x%lx \n", list_head);
++
++    // NOTE: retrieve the address of of the _LIST_ENTRY node of the next process
+     if (!win_find_next_process_list_entry(drakvuf, current_list_entry, &next_list_entry))
+     {
+         PRINT_DEBUG("Failed to read next pointer at 0x%"PRIx64" before entering loop\n", current_list_entry);
+         return false;
+     }
++    //PRINT_DEBUG("<!!!> address next_list_entry: 0x%lx \n", next_list_entry);
+ 
++    // NOTE: each iteration of the loop considers an active process
+     do
+     {
++        // NOTE: from the ActiveProcessLinks node, go back to the actual process _EPROCESS
+         addr_t current_process = win_process_list_entry_to_process(drakvuf, current_list_entry);
+ 
+         vmi_pid_t pid ;
+@@ -721,14 +821,18 @@ bool win_enumerate_processes_with_module( drakvuf_t drakvuf, const char* module_
+         {
+             access_context_t ctx = { .translate_mechanism = VMI_TM_PROCESS_DTB };
+ 
++            // NOTE: it retrieves the address of the directory table base, that is the value that will be put in CR3 if the process is scheduled
+             if ( vmi_pid_to_dtb( drakvuf->vmi, pid, &ctx.dtb ) == VMI_SUCCESS )
+             {
++                // NOTE: wow_peb is 0x0, because in win7-sp1 32bits it's not present --> it is in 64 bits
+                 addr_t wow_peb = win_get_wow_peb( drakvuf, &ctx, current_process ) ;
+ 
++                // NOTE: visitor_ctx is that context that had a reference to drakvuf_trap_t!
+                 if ( win_search_modules( drakvuf, module_name, visitor_func, visitor_ctx, current_process,
+                                          wow_peb, pid, &ctx ) )
+                     return true ;
+ 
++                // NOTE: not considered in win7 32bits
+                 // List WoW64 modules...
+                 if ( wow_peb )
+                 {
+@@ -738,7 +842,6 @@ bool win_enumerate_processes_with_module( drakvuf_t drakvuf, const char* module_
+                 }
+             }
+         }
+-
+         current_list_entry = next_list_entry;
+ 
+         if (!win_find_next_process_list_entry(drakvuf, current_list_entry, &next_list_entry))
+@@ -785,6 +888,253 @@ bool win_is_crashreporter(drakvuf_t drakvuf, drakvuf_trap_info_t* info, vmi_pid_
+     return true;
+ }
+ 
++///// ADDED 20/08/2019 FOR REPLICATION MEMDUMP PROCEDURE ////////////
++bool win_find_mmvad(drakvuf_t drakvuf, addr_t eprocess, addr_t vaddr, mmvad_info_t* out_mmvad)
++{
++    int depth = 0;
++    addr_t node_addr = eprocess + drakvuf->offsets[EPROCESS_VADROOT] + drakvuf->offsets[VADROOT_BALANCED_ROOT];
++
++    while (node_addr)
++    {
++        addr_t left_child;
++        addr_t right_child;
++
++        uint64_t starting_vpn;
++        uint64_t ending_vpn;
++        uint64_t flags1;
++
++        if (depth > MMVAD_MAX_DEPTH)
++        {
++            PRINT_DEBUG("Error. Max depth exceeded when walking MMVAD tree.\n");
++            return false;
++        }
++
++        ++depth;
++
++        access_context_t ctx;
++        ctx.translate_mechanism = VMI_TM_PROCESS_PID;
++        ctx.pid = 4;
++        ctx.addr = node_addr + drakvuf->offsets[MMVAD_LEFT_CHILD];
++
++        if (vmi_read_addr(drakvuf->vmi, &ctx, &left_child) != VMI_SUCCESS)
++        {
++            return false;
++        }
++
++        ctx.addr = node_addr + drakvuf->offsets[MMVAD_RIGHT_CHILD];
++
++        if (vmi_read_addr(drakvuf->vmi, &ctx, &right_child) != VMI_SUCCESS)
++        {
++            return false;
++        }
++
++        ctx.addr = node_addr + drakvuf->offsets[MMVAD_STARTING_VPN];
++
++        if (vmi_read_64(drakvuf->vmi, &ctx, &starting_vpn) != VMI_SUCCESS)
++        {
++            return false;
++        }
++
++        ctx.addr = node_addr + drakvuf->offsets[MMVAD_ENDING_VPN];
++
++        if (vmi_read_64(drakvuf->vmi, &ctx, &ending_vpn) != VMI_SUCCESS)
++        {
++            return false;
++        }
++
++        if (starting_vpn == 0 && ending_vpn == 0)
++        {
++            // the root node seems to be empty with only right child pointer filled in
++            node_addr = right_child;
++        }// ==> current node is the one of interest
++        else if (starting_vpn * VMI_PS_4KB <= vaddr && (ending_vpn + 1) * VMI_PS_4KB > vaddr)
++        {
++            uint32_t pool_tag;
++            addr_t subsection;
++            addr_t control_area;
++            addr_t file_object;
++
++            out_mmvad->file_name_ptr = 0;
++
++            ctx.addr = node_addr + drakvuf->offsets[MMVAD_FLAGS1];
++
++            if (vmi_read_64(drakvuf->vmi, &ctx, &flags1) != VMI_SUCCESS)
++            {
++                return false;
++            }
++
++            // read Windows' PoolTag which is 12 bytes before the actual object
++            ctx.addr = node_addr - 0xC;
++            if (vmi_read_32(drakvuf->vmi, &ctx, &pool_tag) != VMI_SUCCESS)
++            {
++                return false;
++            }
++
++            // Windows MMVAD can have multiple types, can be differentiated with pool tags
++            // some types are shorter and don't even contain "Subsection" field
++            if (pool_tag == POOL_TAG_VADL || pool_tag == POOL_TAG_VAD || pool_tag == POOL_TAG_VADM)
++            {
++                ctx.addr = node_addr + drakvuf->offsets[MMVAD_SUBSECTION];
++
++                if (vmi_read_addr(drakvuf->vmi, &ctx, &subsection) == VMI_SUCCESS)
++                {
++                    ctx.addr = subsection + drakvuf->offsets[SUBSECTION_CONTROL_AREA];
++
++                    if (vmi_read_addr(drakvuf->vmi, &ctx, &control_area) == VMI_SUCCESS)
++                    {
++                        ctx.addr = control_area + drakvuf->offsets[CONTROL_AREA_FILEPOINTER];
++
++                        if (vmi_read_addr(drakvuf->vmi, &ctx, &file_object) == VMI_SUCCESS)
++                        {
++                            // file_object is a special _EX_FAST_REF pointer, we need to explicitly clear low bits
++                            file_object &= (~0xFULL);
++
++                            if ((void*)file_object != NULL)
++                            {
++                                out_mmvad->file_name_ptr = (file_object + drakvuf->offsets[FILEOBJECT_NAME]);
++                            }
++                        }
++                    }
++                }
++            }
++
++            out_mmvad->starting_vpn = starting_vpn;
++            out_mmvad->ending_vpn = ending_vpn;
++            out_mmvad->flags1 = flags1;
++
++            return true;
++        }// ==> current node is too higher
++        else if (starting_vpn * VMI_PS_4KB > vaddr)
++        {
++            node_addr = left_child;
++        }// ==> current node is too lower
++        else
++        {
++            node_addr = right_child;
++        }
++    }
++
++    return false;
++}
++
++bool win_get_user_stack32(drakvuf_t drakvuf, drakvuf_trap_info_t* info, addr_t* stack_ptr, addr_t* frame_ptr)
++{
++    uint32_t esp;
++    uint32_t ebp;
++
++    addr_t wow_ctx;
++
++    if (!win_get_wow_context(drakvuf, win_get_current_thread(drakvuf, info->vcpu), &wow_ctx))
++        return false;
++
++    access_context_t ctx;
++    ctx.translate_mechanism = VMI_TM_PROCESS_DTB;
++    ctx.dtb = info->regs->cr3;
++    ctx.addr = wow_ctx + drakvuf->wow_offsets[WOW_CONTEXT_ESP];
++
++    if (vmi_read_32(drakvuf->vmi, &ctx, &esp) != VMI_SUCCESS)
++        return false;
++
++    ctx.addr = wow_ctx + drakvuf->wow_offsets[WOW_CONTEXT_EBP];
++
++    if (vmi_read_32(drakvuf->vmi, &ctx, &ebp) != VMI_SUCCESS)
++        return false;
++
++    *stack_ptr = esp;
++    *frame_ptr = ebp;
++    return true;
++}
++
++bool win_get_user_stack64(drakvuf_t drakvuf, drakvuf_trap_info_t* info, addr_t* stack_ptr)
++{
++    addr_t ptrap_frame;
++    uint64_t rsp;
++
++    access_context_t ctx =
++    {
++        .translate_mechanism = VMI_TM_PROCESS_PID,
++        .pid = 0,
++        .addr = win_get_current_thread(drakvuf, info->vcpu) + drakvuf->offsets[KTHREAD_TRAPFRAME]
++    };
++
++    if (vmi_read_addr(drakvuf->vmi, &ctx, &ptrap_frame) != VMI_SUCCESS)
++        return false;
++
++    ctx.addr = ptrap_frame + drakvuf->offsets[KTRAP_FRAME_RSP];
++
++    if (vmi_read_64(drakvuf->vmi, &ctx, &rsp) != VMI_SUCCESS)
++        return false;
++
++    *stack_ptr = rsp;
++    return true;
++}
++
++// see https://github.com/mic101/windows/blob/master/WRK-v1.2/public/internal/base/inc/wow64tls.h#L23
++#define WOW64_TLS_CPURESERVED 1
++
++// magic offset in undocumented structure
++#define WOW64_CONTEXT_PAD 4
++
++bool win_get_wow_context(drakvuf_t drakvuf, addr_t ethread, addr_t* wow_ctx)
++{
++    addr_t teb_ptr;
++
++    access_context_t ctx =
++    {
++        .translate_mechanism = VMI_TM_PROCESS_PID,
++        .pid = 0,
++        .addr = ethread + drakvuf->offsets[KTHREAD_TEB]
++    };
++
++    if (vmi_read_addr(drakvuf->vmi, &ctx, &teb_ptr) != VMI_SUCCESS)
++        return false;
++
++    addr_t eprocess;
++    ctx.addr = ethread + drakvuf->offsets[KTHREAD_PROCESS];
++
++    if (vmi_read_addr(drakvuf->vmi, &ctx, &eprocess) != VMI_SUCCESS)
++        return false;
++
++    addr_t wow64process;
++    ctx.addr = eprocess + drakvuf->offsets[EPROCESS_WOW64PROCESS];
++
++    if ( vmi_get_winver( drakvuf->vmi ) == VMI_OS_WINDOWS_10 )
++        ctx.addr = eprocess + drakvuf->offsets[EPROCESS_WOW64PROCESS_WIN10];
++
++    if (vmi_read_addr(drakvuf->vmi, &ctx, &wow64process) != VMI_SUCCESS)
++        return false;
++
++    // seems like process is not a WOW64 process, so the data in TLS may be fake
++    if (!wow64process)
++        return false;
++
++    pid_t pid;
++
++    if (!win_get_process_pid(drakvuf, eprocess, &pid))
++        return false;
++
++    ctx.translate_mechanism = VMI_TM_PROCESS_DTB;
++
++    if (vmi_pid_to_dtb(drakvuf->vmi, pid, &ctx.dtb) != VMI_SUCCESS)
++        return false;
++
++    addr_t self_teb_ptr;
++    if (vmi_read_addr(drakvuf->vmi, &ctx, &self_teb_ptr) != VMI_SUCCESS)
++        return false;
++
++    addr_t tls_slot;
++    // like: NtCurrentTeb()->TlsSlots[WOW64_TLS_CPURESERVED]
++    tls_slot = teb_ptr + drakvuf->offsets[TEB_TLS_SLOTS] + (WOW64_TLS_CPURESERVED * sizeof(uint64_t));
++
++    addr_t tls_slot_val;
++    ctx.addr = tls_slot;
++
++    if (vmi_read_addr(drakvuf->vmi, &ctx, &tls_slot_val) != VMI_SUCCESS)
++        return false;
++
++    *wow_ctx = tls_slot_val + WOW64_CONTEXT_PAD;
++    return true;
++}
+ ////////////////////////////////////////////////////////////////
+ 
+ status_t win_get_process_ppid( drakvuf_t drakvuf, addr_t process_base, vmi_pid_t* ppid )
+@@ -792,6 +1142,15 @@ status_t win_get_process_ppid( drakvuf_t drakvuf, addr_t process_base, vmi_pid_t
+     return vmi_read_32_va( drakvuf->vmi, process_base + drakvuf->offsets[EPROCESS_INHERITEDPID], 0, (uint32_t*)ppid );
+ }
+ 
++/**
++ * @brief given the address of KPROCESS data structure for a particular vcpu, it fills proc_data with the data
++ * 
++ * @param drakvuf 
++ * @param base_addr, address of the KPROCESS data structure
++ * @param proc_data 
++ * @return true 
++ * @return false 
++ */
+ bool win_get_process_data( drakvuf_t drakvuf, addr_t base_addr, proc_data_priv_t* proc_data )
+ {
+     proc_data->base_addr = base_addr;
+diff --git a/src/libdrakvuf/win-wow-offsets-map.h b/src/libdrakvuf/win-wow-offsets-map.h
+index 48ba3e2..245330e 100644
+--- a/src/libdrakvuf/win-wow-offsets-map.h
++++ b/src/libdrakvuf/win-wow-offsets-map.h
+@@ -118,6 +118,12 @@ static const char* win_wow_offset_names[__WIN_WOW_OFFSETS_MAX][2] =
+     [WOW_LDR_DATA_TABLE_ENTRY_SIZEOFIMAGE] = { "_LDR_DATA_TABLE_ENTRY", "SizeOfImage" },
+     [WOW_LDR_DATA_TABLE_ENTRY_BASEDLLNAME] = { "_LDR_DATA_TABLE_ENTRY", "BaseDllName" },
+     [WOW_LDR_DATA_TABLE_ENTRY_FULLDLLNAME] = { "_LDR_DATA_TABLE_ENTRY", "FullDllName" },
++    
++    ///// ADDED 20/08/2019 FOR REPLICATION MEMDUMP PROCEDURE ////////////
++    [WOW_CONTEXT_EBP]       = { "_CONTEXT", "Ebp" },
++    [WOW_CONTEXT_EIP]       = { "_CONTEXT", "Eip" },
++    [WOW_CONTEXT_ESP]       = { "_CONTEXT", "Esp" },
++    ////////////////////////////////////////////////////////////////////
+ };
+ 
+ #endif
+diff --git a/src/libdrakvuf/win-wow-offsets.h b/src/libdrakvuf/win-wow-offsets.h
+index 311851c..9e431e2 100644
+--- a/src/libdrakvuf/win-wow-offsets.h
++++ b/src/libdrakvuf/win-wow-offsets.h
+@@ -119,6 +119,12 @@ enum win_wow_offsets
+     WOW_LDR_DATA_TABLE_ENTRY_BASEDLLNAME,
+     WOW_LDR_DATA_TABLE_ENTRY_FULLDLLNAME,
+ 
++    ///// ADDED 20/08/2019 FOR REPLICATION MEMDUMP PROCEDURE
++    WOW_CONTEXT_EBP,
++    WOW_CONTEXT_EIP,
++    WOW_CONTEXT_ESP,
++    //////////////////////////////////////////////
++
+     __WIN_WOW_OFFSETS_MAX
+ };
+ 
+diff --git a/src/libdrakvuf/win.c b/src/libdrakvuf/win.c
+index 68d790a..a7dfa3b 100644
+--- a/src/libdrakvuf/win.c
++++ b/src/libdrakvuf/win.c
+@@ -236,12 +236,24 @@ bool win_get_module_base_addr(drakvuf_t drakvuf, addr_t module_list_head, const
+     return win_get_module_base_addr_ctx(drakvuf, module_list_head, &ctx, module_name, base_addr_out);
+ }
+ 
+-
++/**
++ * @brief NOTE: it tries to retrieve the module_info_t of the searched module from the selected process,
++ * starting from the _LIST_ENTRY of InLoadOrderModuleList node
++ *
++ * @param drakvuf
++ * @param module_list_head
++ * @param ctx
++ * @param module_name
++ * @return module_info_t*
++ */
+ module_info_t* win_get_module_info_ctx( drakvuf_t drakvuf, addr_t module_list_head, access_context_t* ctx, const char* module_name )
+ {
+     vmi_instance_t vmi = drakvuf->vmi;
+     addr_t next_module = module_list_head;
+ 
++    //FIXME: DEBUG: introduced this to debug scozzer.exe
++    // uint8_t scozzer_found = 0;
++
+     /* walk the module list */
+     while (1)
+     {
+@@ -261,9 +273,12 @@ module_info_t* win_get_module_info_ctx( drakvuf_t drakvuf, addr_t module_list_he
+ 
+         if ( ret_module_info )
+         {
++            // NOTE: retrieves the PVOID DllBase field (+ 0x18)
++            // http://terminus.rewolf.pl/terminus/structures/ntdll/_LDR_DATA_TABLE_ENTRY_x86.html
+             ctx->addr = next_module + drakvuf->offsets[LDR_DATA_TABLE_ENTRY_DLLBASE];
+             if ( vmi_read_addr( vmi, ctx, &ret_module_info->base_addr ) == VMI_SUCCESS )
+             {
++                // NOTE: it "stores" the struct unicode_string_t* inside the module_info_t
+                 ctx->addr                  = next_module + drakvuf->offsets[LDR_DATA_TABLE_ENTRY_BASEDLLNAME];
+                 ret_module_info->base_name = drakvuf_read_unicode_common( vmi, ctx );
+ 
+@@ -271,11 +286,17 @@ module_info_t* win_get_module_info_ctx( drakvuf_t drakvuf, addr_t module_list_he
+                 {
+                     PRINT_DEBUG("Found module %s at 0x%lx\n", ret_module_info->base_name->contents, ret_module_info->base_addr );
+ 
+-                    if ( !strcasecmp( (char*)ret_module_info->base_name->contents, module_name ) )
++                    ///////////////////////////////////////////////////
++                    //FIXME: DEBUG: introduced this to debug scozzer.exe
++                    // if(!strcmp("scozzer.exe", (char*) ret_module_info->base_name->contents))
++                    //     scozzer_found = 1;
++                    /////////////////////////////////////////////////// REMOVE "SCOZZER_FOUND" CHECK BELOW
++
++                    if ( !strcasecmp( (char*)ret_module_info->base_name->contents, module_name )) //&& scozzer_found) // 0 if equal
+                     {
++                        // NOTE: it "stores" also the fullname of the dll, that is the absolute path to that dll
+                         ctx->addr                  = next_module + drakvuf->offsets[LDR_DATA_TABLE_ENTRY_FULLDLLNAME];
+                         ret_module_info->full_name = drakvuf_read_unicode_common( vmi, ctx );
+-
+                         return ret_module_info ;
+                     }
+ 
+@@ -442,6 +463,7 @@ bool set_os_windows(drakvuf_t drakvuf)
+     if ( !drakvuf_get_struct_size(drakvuf, "_HANDLE_TABLE_ENTRY", &drakvuf->sizes[HANDLE_TABLE_ENTRY]) )
+         return 0;
+ 
++    //NOTE: remap of os_interface_t fields of drakvuf with actual function calls to win.c file
+     drakvuf->osi.get_current_thread = win_get_current_thread;
+     drakvuf->osi.get_current_process = win_get_current_process;
+     drakvuf->osi.get_last_error = win_get_last_error;
+@@ -471,6 +493,11 @@ bool set_os_windows(drakvuf_t drakvuf)
+     drakvuf->osi.enumerate_processes = win_enumerate_processes;
+     drakvuf->osi.enumerate_processes_with_module = win_enumerate_processes_with_module;
+     drakvuf->osi.is_crashreporter = win_is_crashreporter;
+-
++    ///// ADDED 20/08/2019 FOR REPLICATION MEMDUMP PROCEDURE ////////////
++    drakvuf->osi.find_mmvad = win_find_mmvad;
++    drakvuf->osi.get_user_stack32 = win_get_user_stack32;
++    drakvuf->osi.get_user_stack64 = win_get_user_stack64;
++    drakvuf->osi.get_wow_context = win_get_wow_context;
++    ////////////////////////////////////////////////////////////////////
+     return true;
+ }
+diff --git a/src/libdrakvuf/win.h b/src/libdrakvuf/win.h
+index 9ce696e..4b8b4cb 100644
+--- a/src/libdrakvuf/win.h
++++ b/src/libdrakvuf/win.h
+@@ -166,4 +166,10 @@ addr_t win_get_function_argument(drakvuf_t drakvuf, drakvuf_trap_info_t* info, i
+ 
+ bool win_inject_traps_modules(drakvuf_t drakvuf, drakvuf_trap_t* trap, addr_t list_head, vmi_pid_t pid);
+ 
++///// ADDED 20/08/2019 FOR REPLICATION MEMDUMP PROCEDURE ////////////
++bool win_find_mmvad(drakvuf_t drakvuf, addr_t eprocess, addr_t vaddr, mmvad_info_t* out_mmvad);
++bool win_get_user_stack32(drakvuf_t drakvuf, drakvuf_trap_info_t* info, addr_t* stack_ptr, addr_t* frame_ptr);
++bool win_get_user_stack64(drakvuf_t drakvuf, drakvuf_trap_info_t* info, addr_t* stack_ptr);
++bool win_get_wow_context(drakvuf_t drakvuf, addr_t ethread, addr_t* wow_ctx);
++////////////////////////////////////////////////////////////////////
+ #endif
+diff --git a/src/main.cpp b/src/main.cpp
+index baa3c9f..5e3b86b 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -205,6 +205,10 @@ int main(int argc, char** argv)
+                 "\t -x <plugin>               Don't activate the specified plugin\n"
+                 "\t -a <plugin>               Activate the specified plugin\n"
+                 "\t -p                        Leave domain paused after DRAKVUF exits\n"
++                "\t -R                        [PERSonal MONitor] Tnable ret instrumentation for on exit callbacks\n"
++                "\t --target-process          [PERSonal MONitor] Target process (.exe) to monitor exclusively\n"
++                "\t --support-process         [PERSonal MONitor] Support process (.exe) to use to find supported DLLs at runtime (explorer.exe by default)\n"
++                "\t --verbose-log             [PERSonal MONitor] Enable verbose log\n"
+ #ifdef ENABLE_DOPPELGANGING
+                 "\t -B <path>                 The host path of the windows binary to inject (requires -m doppelganging)\n"
+                 "\t -P <target>               The guest path of the clean guest process to use as a cover (requires -m doppelganging)\n"
+@@ -272,6 +276,9 @@ int main(int argc, char** argv)
+         opt_rekall_mpr,
+         opt_rekall_ole32,
+         opt_rekall_wow_ole32,
++        opt_target_process,
++        opt_support_process,
++        opt_verbose_log,
+     };
+     const option long_opts[] =
+     {
+@@ -290,9 +297,12 @@ int main(int argc, char** argv)
+         {"verbose", no_argument, NULL, 'v'},
+         {"rekall-ole32", required_argument, NULL, opt_rekall_ole32},
+         {"rekall-wow-ole32", required_argument, NULL, opt_rekall_wow_ole32},
++        {"target-process", required_argument, NULL, opt_target_process},
++        {"support-process", required_argument, NULL, opt_support_process},
++        {"verbose-log", no_argument, NULL, opt_verbose_log},
+         {NULL, 0, NULL, 0}
+     };
+-    const char* opts = "r:d:i:I:e:m:t:D:o:vx:a:spT:S:Mc:nblgj:w:W:";
++    const char* opts = "r:d:i:I:e:m:t:D:o:vx:a:spT:S:Mc:nblgj:w:W:R"; //@necroxys: z, u added for new option
+ 
+     while ((c = getopt_long (argc, argv, opts, long_opts, &long_index)) != -1)
+         switch (c)
+@@ -422,6 +432,18 @@ int main(int argc, char** argv)
+             case opt_rekall_mpr:
+                 options.mpr_profile = optarg;
+                 break;
++            case opt_target_process:
++                options.target_process = optarg;
++                break;
++            case 'R':
++                options.ret_instrumentation = true;
++                break;
++            case opt_support_process:
++                options.support_process = optarg;
++                break;
++            case opt_verbose_log:
++                options.verbose_logging = true;
++                break;
+ #ifdef ENABLE_PLUGIN_WMIMON
+             case opt_rekall_ole32:
+                 options.ole32_profile = optarg;
+diff --git a/src/plugins/Makefile.am b/src/plugins/Makefile.am
+index 6832df8..54d8998 100644
+--- a/src/plugins/Makefile.am
++++ b/src/plugins/Makefile.am
+@@ -190,6 +190,10 @@ if PLUGIN_WMIMON
+ sources += wmimon/wmimon.cpp
+ endif
+ 
++if PLUGIN_PERSMON
++sources += persmon/persmon.cpp persmon/persmon_util.cpp persmon/dll_proto/kernel32.cpp persmon/dll_proto/kernelbase.cpp persmon/dll_proto/iphlpapi.cpp persmon/syscalls_persmon.cpp
++endif
++
+ ###############################################################################
+ sources += plugins.cpp plugins.h plugins_ex.cpp plugins_ex.h plugin_utils.cpp plugin_utils.h
+ 
+diff --git a/src/plugins/envmon/envmon.cpp b/src/plugins/envmon/envmon.cpp
+index 254f06a..fa6f0c4 100644
+--- a/src/plugins/envmon/envmon.cpp
++++ b/src/plugins/envmon/envmon.cpp
+@@ -109,6 +109,9 @@
+ 
+ #include "plugins/private.h"
+ 
++#include <stdio.h>
++#include <string.h>
++
+ #include "envmon.h"
+ #include "private.h"
+ 
+@@ -226,6 +229,7 @@ static event_response_t trap_SspipGetUserName_cb(drakvuf_t drakvuf, drakvuf_trap
+         }
+         default:
+         case OUTPUT_DEFAULT:
++            return VMI_EVENT_RESPONSE_NONE;
+             printf("[ENVMON] TIME:" FORMAT_TIMEVAL " VCPU:%" PRIu32 " CR3:0x%" PRIx64 ",\"%s\":%s",
+                    UNPACK_TIMEVAL(info->timestamp), info->vcpu, info->regs->cr3, info->proc_data.name,
+                    info->trap->name);
+@@ -241,6 +245,8 @@ static event_response_t trap_GetComputerNameW_cb(drakvuf_t drakvuf, drakvuf_trap
+     if (!p)
+         return VMI_EVENT_RESPONSE_NONE;
+ 
++    printf("<!!!> kernel 32...%d\n",1);
++
+     switch (p->m_output_format)
+     {
+         case OUTPUT_CSV:
+@@ -319,6 +325,7 @@ static event_response_t trap_IsNativeVhdBoot_cb(drakvuf_t drakvuf, drakvuf_trap_
+         }
+         default:
+         case OUTPUT_DEFAULT:
++            return VMI_EVENT_RESPONSE_NONE;
+             printf("[ENVMON] TIME:" FORMAT_TIMEVAL " VCPU:%" PRIu32 " CR3:0x%" PRIx64 ",\"%s\":%s\n",
+                    UNPACK_TIMEVAL(info->timestamp), info->vcpu, info->regs->cr3, info->proc_data.name,
+                    info->trap->name);
+@@ -329,6 +336,8 @@ static event_response_t trap_IsNativeVhdBoot_cb(drakvuf_t drakvuf, drakvuf_trap_
+ 
+ static event_response_t trap_GetComputerNameExW_cb(drakvuf_t drakvuf, drakvuf_trap_info_t* info)
+ {
++
++    printf("<!!!!> HERE %d\n",1);
+     auto p = get_trap_plugin<envmon>(info);
+     if (!p)
+         return VMI_EVENT_RESPONSE_NONE;
+@@ -377,6 +386,7 @@ static event_response_t trap_GetComputerNameExW_cb(drakvuf_t drakvuf, drakvuf_tr
+         }
+         default:
+         case OUTPUT_DEFAULT:
++            return VMI_EVENT_RESPONSE_NONE;
+             printf("[ENVMON] TIME:" FORMAT_TIMEVAL " VCPU:%" PRIu32 " CR3:0x%" PRIx64 ",\"%s\":%s",
+                    UNPACK_TIMEVAL(info->timestamp), info->vcpu, info->regs->cr3, info->proc_data.name,
+                    info->trap->name);
+@@ -432,6 +442,7 @@ static event_response_t trap_GetAdaptersAddresses_cb(drakvuf_t drakvuf, drakvuf_
+         }
+         default:
+         case OUTPUT_DEFAULT:
++            return VMI_EVENT_RESPONSE_NONE;
+             printf("[ENVMON] TIME:" FORMAT_TIMEVAL " VCPU:%" PRIu32 " CR3:0x%" PRIx64 ",\"%s\":%s",
+                    UNPACK_TIMEVAL(info->timestamp), info->vcpu, info->regs->cr3, info->proc_data.name,
+                    info->trap->name);
+@@ -484,6 +495,7 @@ static event_response_t trap_WNetGetProviderNameW_cb(drakvuf_t drakvuf, drakvuf_
+         }
+         default:
+         case OUTPUT_DEFAULT:
++            return VMI_EVENT_RESPONSE_NONE;
+             printf("[ENVMON] TIME:" FORMAT_TIMEVAL " VCPU:%" PRIu32 " CR3:0x%" PRIx64 ",\"%s\":%s",
+                    UNPACK_TIMEVAL(info->timestamp), info->vcpu, info->regs->cr3, info->proc_data.name,
+                    info->trap->name);
+@@ -493,6 +505,13 @@ static event_response_t trap_WNetGetProviderNameW_cb(drakvuf_t drakvuf, drakvuf_
+     return VMI_EVENT_RESPONSE_NONE;
+ }
+ 
++/**
++ * @brief Get the win ver object
++ * NOTE: analyzed
++ * 
++ * @param drakvuf 
++ * @return win_ver_t 
++ */
+ static win_ver_t get_win_ver(drakvuf_t drakvuf)
+ {
+     vmi_lock_guard vmi(drakvuf);
+diff --git a/src/plugins/plugins.cpp b/src/plugins/plugins.cpp
+index 61d5000..9fd6601 100644
+--- a/src/plugins/plugins.cpp
++++ b/src/plugins/plugins.cpp
+@@ -102,6 +102,7 @@
+  *                                                                         *
+  ***************************************************************************/
+ 
++#include <glib-2.0/glib.h>
+ #include <stdarg.h>
+ #include "plugins.h"
+ #include "syscalls/syscalls.h"
+@@ -125,6 +126,7 @@
+ #include "librarymon/librarymon.h"
+ #include "dkommon/dkommon.h"
+ #include "wmimon/wmimon.h"
++#include "persmon/persmon.h"
+ 
+ drakvuf_plugins::drakvuf_plugins(const drakvuf_t drakvuf, output_format_t output, os_t os)
+     : drakvuf{ drakvuf }, output{ output }, os{ os }
+@@ -137,6 +139,13 @@ drakvuf_plugins::~drakvuf_plugins()
+         delete plugins[i];
+ }
+ 
++/**
++ * @brief this is called for each plugin that has to be launched
++ * 
++ * @param plugin_id 
++ * @param options 
++ * @return int 
++ */
+ int drakvuf_plugins::start(const drakvuf_plugin_t plugin_id,
+                            const plugins_options* options)
+ {
+@@ -312,6 +321,23 @@ int drakvuf_plugins::start(const drakvuf_plugin_t plugin_id,
+                     this->plugins[plugin_id] = new wmimon(this->drakvuf, &config, this->output);
+                     break;
+                 }
++#endif
++#ifdef ENABLE_PLUGIN_PERSMON
++                case PLUGIN_PERSMON:
++                {
++                    persmon_config config =
++                    {
++                        .kernel32_profile = options->kernel32_profile,
++                        .kernelbase_profile = options->kernelbase_profile,
++                        .iphlpapi_profile = options->iphlpapi_profile,
++                        .ret_instrumentation = options->ret_instrumentation,
++                        .target_process = options->target_process,
++                        .support_process = options->support_process,
++                        .verbose_logging = options->verbose_logging,
++                    };
++                    this->plugins[plugin_id] = new persmon(this->drakvuf, &config, this->output);
++                    break;
++                }
+ #endif
+                 default:
+                     break;
+diff --git a/src/plugins/plugins.h b/src/plugins/plugins.h
+index afbcd80..0c932de 100644
+--- a/src/plugins/plugins.h
++++ b/src/plugins/plugins.h
+@@ -120,8 +120,8 @@ struct plugins_options
+     const char* tcpip_profile;          // PLUGIN_SOCKETMON
+     const char* win32k_profile;         // PLUGIN_CLIPBOARDMON, PLUGIN_WINDOWMON
+     const char* sspicli_profile;        // PLUGIN_ENVMON
+-    const char* kernel32_profile;       // PLUGIN_ENVMON
+-    const char* kernelbase_profile;     // PLUGIN_ENVMON
++    const char* kernel32_profile;       // PLUGIN_ENVMON, PLUGIN_PERSMON
++    const char* kernelbase_profile;     // PLUGIN_ENVMON, PLUGIN_PERSMON
+     const char* wow_kernel32_profile;   // PLUGIN_ENVMON
+     const char* iphlpapi_profile;       // PLUGIN_ENVMON
+     const char* mpr_profile;            // PLUGIN_ENVMON
+@@ -130,6 +130,10 @@ struct plugins_options
+     const char* ntdll_profile;          // PLUGIN_LIBRARYMON
+     const char* ole32_profile;          // PLUGIN_WMIMON
+     const char* wow_ole32_profile;      // PLUGIN_WMIMON
++    const char* target_process;         // PLUGIN_PERSMON
++    bool ret_instrumentation;           // PLUGIN_PERSMON
++    const char* support_process;        // PLUGIN_PERSMON
++    bool verbose_logging;               // PLUGIN_PERSMON
+ };
+ 
+ typedef enum drakvuf_plugin
+@@ -155,6 +159,7 @@ typedef enum drakvuf_plugin
+     PLUGIN_LIBRARYMON,
+     PLUGIN_DKOMMON,
+     PLUGIN_WMIMON,
++    PLUGIN_PERSMON,
+     __DRAKVUF_PLUGIN_LIST_MAX
+ } drakvuf_plugin_t;
+ 
+@@ -181,6 +186,7 @@ static const char* drakvuf_plugin_names[] =
+     [PLUGIN_LIBRARYMON] = "librarymon",
+     [PLUGIN_DKOMMON] = "dkommon",
+     [PLUGIN_WMIMON] = "wmimon",
++    [PLUGIN_PERSMON] = "persmon",
+ };
+ 
+ static const bool drakvuf_plugin_os_support[__DRAKVUF_PLUGIN_LIST_MAX][VMI_OS_WINDOWS+1] =
+@@ -206,6 +212,7 @@ static const bool drakvuf_plugin_os_support[__DRAKVUF_PLUGIN_LIST_MAX][VMI_OS_WI
+     [PLUGIN_LIBRARYMON]   = { [VMI_OS_WINDOWS] = 1, [VMI_OS_LINUX] = 0 },
+     [PLUGIN_DKOMMON]      = { [VMI_OS_WINDOWS] = 1, [VMI_OS_LINUX] = 0 },
+     [PLUGIN_WMIMON]       = { [VMI_OS_WINDOWS] = 1, [VMI_OS_LINUX] = 0 },
++    [PLUGIN_PERSMON]      = { [VMI_OS_WINDOWS] = 1, [VMI_OS_LINUX] = 0 },
+ };
+ 
+ class plugin
+diff --git a/src/plugins/plugins_ex.h b/src/plugins/plugins_ex.h
+index 97fcabe..05d38b6 100644
+--- a/src/plugins/plugins_ex.h
++++ b/src/plugins/plugins_ex.h
+@@ -234,24 +234,52 @@ struct breakpoint_in_system_process_searcher
+ 
+ struct breakpoint_in_dll_module_searcher
+ {
++    /**
++     * @brief Construct a new breakpoint in dll module searcher object
++     * NOTE: Analyzed
++     *
++     * @param rekall_profile
++     * @param module
++     * @param wow
++     */
+     breakpoint_in_dll_module_searcher(json_object* rekall_profile,
+                                       const char* module,
+                                       bool wow = false)
+         : m_is_wow(wow), m_rekall_profile(rekall_profile), m_module_name(module), m_syscall_name()
+     {}
+ 
++    /**
++     * @brief this function is called when the searched module is found in any process in the system. 
++     *  It determines the breakpoint address va by adding the module base address to the rva of the trapped function 
++     * 
++     * @param drakvuf
++     * @param module_info
++     * @param ctx, it has the rva of the function to be trapped
++     * @return true
++     * @return false
++     */
+     static bool module_visitor(drakvuf_t drakvuf, const module_info_t* module_info, void* ctx)
+     {
+         auto data = reinterpret_cast<context*>(ctx);
+-        if (!data || module_info->is_wow != data->m_is_wow)
++
++        if (!data || module_info->is_wow != data->m_is_wow) // some inconsistency has been found
+             return false;
+ 
++        // NOTE: finally, we find the address of the wanted trapped function
+         data->m_trap->breakpoint.pid = module_info->pid;
+         data->m_trap->breakpoint.addr = module_info->base_addr + data->m_function_rva;
+ 
++        PRINT_DEBUG("<!!!> pid, module base address, function address: %d, 0x%lx, 0x%lx\n", data->m_trap->breakpoint.pid = module_info->pid, module_info->base_addr, data->m_function_rva);
++
+         return drakvuf_add_trap(drakvuf, data->m_trap);
+     }
+ 
++    /**
++     * @brief NOTE: it gets a copy as reference of breakpoint_in_dll_module_searcher
++     *
++     * @param syscall_name
++     * @return breakpoint_in_dll_module_searcher&
++     */
+     breakpoint_in_dll_module_searcher& for_syscall_name(const char* syscall_name)
+     {
+         if (syscall_name)
+@@ -260,10 +288,12 @@ struct breakpoint_in_dll_module_searcher
+         return *this;
+     }
+ 
++    //init_breakpoint of plugins_ex.h reverts to this call
+     drakvuf_trap_t* operator()(drakvuf_t drakvuf, drakvuf_trap_info_t* info, drakvuf_trap_t* trap) const
+     {
+         if (trap)
+         {
++            //NOTE: ctx now will be created with a reference to drakvuf_trap_t trap
+             context ctx(&*trap, m_is_wow);
+             if (!rekall_get_function_rva(m_rekall_profile, m_syscall_name, &ctx.m_function_rva))
+             {
+@@ -271,17 +301,17 @@ struct breakpoint_in_dll_module_searcher
+                 return nullptr;
+             }
+ 
+-            trap->breakpoint.lookup_type = LOOKUP_PID;
+-            trap->breakpoint.addr_type = ADDR_VA;
+-            trap->breakpoint.module = m_module_name;
+-
+-            trap->name = m_syscall_name;
++            trap->breakpoint.lookup_type = LOOKUP_PID; //check inject_trap_breakpoint(...) in drakvuf.c how this is used
++            trap->breakpoint.addr_type = ADDR_VA; // it specifies that the address value in breakpoint.addr will be a virtual address
++            trap->breakpoint.module = m_module_name; //name of the dll from which is taken the function rva
++            trap->name = m_syscall_name; //redundant (?) it's already done in init_memory
+ 
+             if (!drakvuf_enumerate_processes_with_module(drakvuf, m_module_name, module_visitor, &ctx))
+             {
+                 PRINT_DEBUG("Failed to set a trap for function %s::%s in PID: %u\n", m_module_name, m_syscall_name, trap->breakpoint.pid);
+                 return nullptr;
+             }
++
+         }
+         return trap;
+     }
+@@ -376,6 +406,8 @@ struct breakpoint_by_pid_searcher
+ class pluginex : public plugin
+ {
+ public:
++    // NOTE: this is the definition of each callback in the code. Each of them has to
++    // satisfy this signature where hoock_cb_t is the actual name of the called function
+     typedef event_response_t(*hook_cb_t)(drakvuf_t drakvuf, drakvuf_trap_info_t* info);
+ 
+ public:
+@@ -389,17 +421,20 @@ public:
+                                   drakvuf_trap_info_t* info,
+                                   P* plugin,
+                                   hook_cb_t hook_cb,
+-                                  IB init_breakpoint,
++                                  IB init_breakpoint, //reference to breakpoint_in_dll_module_searcher, i.e.
+                                   const char* trap_name = nullptr,
+                                   AP ap = allocator<Params>(),
+                                   AT at = allocator<drakvuf_trap_t>())
+     {
+         std::unique_ptr<Params> params;
+-        std::unique_ptr<drakvuf_trap_t> trap;
++        std::unique_ptr<drakvuf_trap_t> trap; //they are empty
++
+         if (!init_memory(plugin, trap, params, hook_cb, trap_name, ap, at))
+             return nullptr;
++        // some fields of drakvuf_trap_t are initialized
+ 
+-        if (!init_breakpoint(drakvuf, info, &*trap))
++        // &*trap is a pointer
++        if (!init_breakpoint(drakvuf, info, &*trap)) //call to operator inside breakpoint struct instance
+         {
+             PRINT_DEBUG("%s for %s\n", ERROR_MSG_ADDING_TRAP, trap_name ? trap_name : trap->name);
+             return nullptr;
+@@ -420,7 +455,7 @@ protected:
+     template<typename Plugin, typename Params, typename AP = allocator<Params>, typename AT = allocator<drakvuf_trap_t>>
+     bool init_memory(Plugin* plugin,
+                      std::unique_ptr<drakvuf_trap_t>& trap,
+-                     std::unique_ptr<Params>& params,
++                     std::unique_ptr<Params>& params,//only way to lend the contents of a unique_ptr, trough reference
+                      hook_cb_t hook_cb,
+                      const char* trap_name = nullptr,
+                      AP ap = allocator<Params>(),
+@@ -441,8 +476,9 @@ protected:
+             return false;
+         }
+ 
+-        trap->cb = hook_cb;
+-        trap->data = &*params;
++        trap->cb = hook_cb; //function to call upon trap
++        //NOTE: some plugins has some fields. this is used to retrieve them when needed (i.e. in cpuidmon)
++        trap->data = &*params; // it contains a pointer to the instance of the calling class pluginex (i.e. persmon instance)
+         trap->name = trap_name;
+         trap->type = BREAKPOINT;
+         return true;
+diff --git a/src/plugins/procmon/procmon.cpp b/src/plugins/procmon/procmon.cpp
+index d15bc9b..1bdb21a 100644
+--- a/src/plugins/procmon/procmon.cpp
++++ b/src/plugins/procmon/procmon.cpp
+@@ -295,6 +295,7 @@ static void print_process_creation_result(
+         vmi_free_unicode_str(dllpath_us);
+ }
+ 
++//TODO: do the same for persmon
+ static vmi_pid_t get_pid_from_handle(procmon* f, drakvuf_t drakvuf, drakvuf_trap_info_t* info, addr_t handle)
+ {
+     if (handle == 0 || handle == UINT64_MAX)
+@@ -332,6 +333,7 @@ static event_response_t process_creation_return_hook(drakvuf_t drakvuf, drakvuf_
+     addr_t user_process_parameters_addr = data->user_process_parameters_addr;
+     addr_t new_process_handle_addr = data->new_process_handle_addr;
+     reg_t status = info->regs->rax;
++    printf("DEBUG 2 -> new_process_handle_addr: 0x%lx, rip: 0x%lx\n", new_process_handle_addr, info->regs->rip);
+ 
+     plugin->destroy_trap(drakvuf, info->trap);
+     access_context_t ctx =
+@@ -346,6 +348,8 @@ static event_response_t process_creation_return_hook(drakvuf_t drakvuf, drakvuf_
+     if (VMI_FAILURE == vmi_read_addr(vmi, &ctx, &new_process_handle))
+         new_process_handle = 0;
+ 
++    printf("DEBUG 3 -> new_process_handle: 0x%lx\n", new_process_handle);
++
+     drakvuf_release_vmi(drakvuf);
+ 
+     vmi_pid_t new_pid = get_pid_from_handle(plugin, drakvuf, info, new_process_handle);
+@@ -354,6 +358,52 @@ static event_response_t process_creation_return_hook(drakvuf_t drakvuf, drakvuf_
+     return VMI_EVENT_RESPONSE_NONE;
+ }
+ 
++//DEBUG:
++static event_response_t create_thread_return_hook(drakvuf_t drakvuf, drakvuf_trap_info_t* info)
++{
++    auto data = get_trap_params<procmon, process_creation_result_t<procmon>>(info);
++    if (!data)
++    {
++        PRINT_DEBUG("procmon process_creation_return_hook invalid trap params!\n");
++        drakvuf_remove_trap(drakvuf, info->trap, nullptr);
++        return VMI_EVENT_RESPONSE_NONE;
++    }
++
++    if (!data->verify_result_call_params(info, drakvuf_get_current_thread(drakvuf, info->vcpu)))
++        return VMI_EVENT_RESPONSE_NONE;
++
++    auto* plugin = data->plugin();
++    //addr_t user_process_parameters_addr = data->user_process_parameters_addr;
++    addr_t new_thread_handle_addr = data->new_process_handle_addr;
++
++    uint32_t tid = 0;
++    drakvuf_get_current_thread_id(drakvuf, info->vcpu, &tid);
++    //reg_t status = info->regs->rax;
++    printf("[PROCMON DEBUG #2]\n--> new_thread_handle_addr: 0x%lx (%lu), rip: 0x%lx, cr3: 0x%lx, pid: %d, tid %d\n", new_thread_handle_addr, new_thread_handle_addr, info->regs->rip, info->regs->cr3, info->proc_data.pid, tid);
++
++    plugin->destroy_trap(drakvuf, info->trap);
++    access_context_t ctx =
++    {
++        .translate_mechanism = VMI_TM_PROCESS_DTB,
++        .dtb = info->regs->cr3,
++        .addr = new_thread_handle_addr,
++    };
++
++    addr_t new_thread_handle;
++    vmi_instance_t vmi = drakvuf_lock_and_get_vmi(drakvuf);
++    if (VMI_FAILURE == vmi_read_addr(vmi, &ctx, &new_thread_handle))
++        new_thread_handle = 0;
++
++    printf("[PROCMON DEBUG #3]\n--> new_thread_handle: 0x%lx, rip: 0x%lx, cr3: 0x%lx, pid: %d, tid %d\n", new_thread_handle, info->regs->rip, info->regs->cr3, info->proc_data.pid, tid);
++
++    drakvuf_release_vmi(drakvuf);
++
++    //vmi_pid_t new_pid = get_pid_from_handle(plugin, drakvuf, info, new_thread_handle);
++
++    //print_process_creation_result(plugin, drakvuf, info, status, new_pid, user_process_parameters_addr);
++    return VMI_EVENT_RESPONSE_NONE;
++}
++
+ static event_response_t create_user_process_hook(
+     drakvuf_t drakvuf, drakvuf_trap_info_t* info,
+     addr_t process_handle_addr,
+@@ -451,11 +501,54 @@ static event_response_t create_user_process_hook_cb(drakvuf_t drakvuf, drakvuf_t
+ {
+     // PHANDLE ProcessHandle
+     addr_t process_handle_addr = drakvuf_get_function_argument(drakvuf, info, 1);
++    printf("DEBUG 1 -> process_handle_addr: 0x%lx, rip: 0x%lx\n", process_handle_addr, info->regs->rip);
+     // PRTL_USER_PROCESS_PARAMETERS RtlUserProcessParameters
+     addr_t user_process_parameters_addr = drakvuf_get_function_argument(drakvuf, info, 9);
+     return create_user_process_hook(drakvuf, info, process_handle_addr, user_process_parameters_addr);
+ }
+ 
++//DEBUG:
++static event_response_t create_thread_hook(
++    drakvuf_t drakvuf, drakvuf_trap_info_t* info,
++    addr_t thread_handle)
++{
++    auto plugin = get_trap_plugin<procmon>(info);
++    if (!plugin)
++        return VMI_EVENT_RESPONSE_NONE;
++
++    auto trap = plugin->register_trap<procmon, process_creation_result_t<procmon>>(
++                    drakvuf,
++                    info,
++                    plugin,
++                    create_thread_return_hook,
++                    breakpoint_by_pid_searcher());
++    if (!trap)
++        return VMI_EVENT_RESPONSE_NONE;
++
++    auto data = get_trap_params<procmon, process_creation_result_t<procmon>>(trap);
++    if (!data)
++    {
++        plugin->destroy_plugin_params(plugin->detach_plugin_params(trap));
++        return VMI_EVENT_RESPONSE_NONE;
++    }
++
++    data->set_result_call_params(info, drakvuf_get_current_thread(drakvuf, info->vcpu));
++    data->new_process_handle_addr = thread_handle;
++    data->user_process_parameters_addr = 0;
++    return VMI_EVENT_RESPONSE_NONE;
++}
++
++//DEBUG:
++static event_response_t chreate_thread_hook_cb(drakvuf_t drakvuf, drakvuf_trap_info_t* info)
++{
++    uint32_t tid = 0;
++    drakvuf_get_current_thread_id(drakvuf, info->vcpu, &tid);
++    addr_t thread_handle_addr = drakvuf_get_function_argument(drakvuf, info, 1);
++    printf("[PROCMON DEBUG #1]\n--> thread_handle_addr: 0x%lx, rip: 0x%lx, cr3: 0x%lx, pid: %d, tid %d\n", thread_handle_addr, info->regs->rip, info->regs->cr3, info->proc_data.pid, tid);
++    return create_thread_hook(drakvuf, info, thread_handle_addr);
++
++}
++
+ static event_response_t terminate_process_hook_cb(drakvuf_t drakvuf, drakvuf_trap_info_t* info)
+ {
+     // HANDLE ProcessHandle
+@@ -734,7 +827,8 @@ procmon::procmon(drakvuf_t drakvuf, output_format_t output)
+     if (!register_trap<procmon>(drakvuf, nullptr, this, create_user_process_hook_cb, bp.for_syscall_name("NtCreateUserProcess")) ||
+             !register_trap<procmon>(drakvuf, nullptr, this, terminate_process_hook_cb, bp.for_syscall_name("NtTerminateProcess")) ||
+             !register_trap<procmon>(drakvuf, nullptr, this, open_process_hook_cb, bp.for_syscall_name("NtOpenProcess")) ||
+-            !register_trap<procmon>(drakvuf, nullptr, this, protect_virtual_memory_hook_cb, bp.for_syscall_name("NtProtectVirtualMemory")))
++            !register_trap<procmon>(drakvuf, nullptr, this, protect_virtual_memory_hook_cb, bp.for_syscall_name("NtProtectVirtualMemory")) ||
++            !register_trap<procmon>(drakvuf, nullptr, this, chreate_thread_hook_cb, bp.for_syscall_name("NtCreateThreadEx")))
+     {
+         throw -1;
+     }
+diff --git a/src/plugins/syscalls/commonscproto.h b/src/plugins/syscalls/commonscproto.h
+index 4aa0c93..c52fc4e 100644
+--- a/src/plugins/syscalls/commonscproto.h
++++ b/src/plugins/syscalls/commonscproto.h
+@@ -442,10 +442,10 @@ typedef struct
+ 
+ typedef struct
+ {
+-    syscalls* sc;
++    syscalls* sc; //pointer to syscalls class
+     int       syscall_index;
+     uint32_t  flags;
+-} syscall_wrapper_t;
++} syscall_wrapper_t; //data to be carried across callbacks (the void* payload)
+ 
+ 
+ #endif // commoncsproto_h
+diff --git a/src/plugins/syscalls/syscalls.cpp b/src/plugins/syscalls/syscalls.cpp
+index b6df72b..c857bfa 100644
+--- a/src/plugins/syscalls/syscalls.cpp
++++ b/src/plugins/syscalls/syscalls.cpp
+@@ -148,6 +148,9 @@ static void print_header(output_format_t format, drakvuf_t drakvuf, const drakvu
+ {
+     gchar* escaped_pname = NULL;
+ 
++    uint32_t tid = 0;
++    drakvuf_get_current_thread_id(drakvuf, info->vcpu, &tid);
++
+     switch (format)
+     {
+         case OUTPUT_CSV:
+@@ -186,8 +189,8 @@ static void print_header(output_format_t format, drakvuf_t drakvuf, const drakvu
+ 
+         case OUTPUT_DEFAULT:
+         default:
+-            printf("[SYSCALL] TIME:" FORMAT_TIMEVAL " VCPU:%" PRIu32 " CR3:0x%" PRIx64 ",\"%s\" %s:%" PRIi64" %s!%s",
+-                   UNPACK_TIMEVAL(info->timestamp), info->vcpu, info->regs->cr3, info->proc_data.name,
++            printf("[SYSCALL] PID: %d, TID: %d, TIME:" FORMAT_TIMEVAL " VCPU:%" PRIu32 " CR3:0x%" PRIx64 ",\"%s\" %s:%" PRIi64" %s!%s",
++                   info->proc_data.pid, tid, UNPACK_TIMEVAL(info->timestamp), info->vcpu, info->regs->cr3, info->proc_data.name,
+                    USERIDSTR(drakvuf), info->proc_data.userid,
+                    info->trap->breakpoint.module, info->trap->name);
+             break;
+@@ -546,6 +549,14 @@ exit:
+     return 0;
+ }
+ 
++/**
++ * @brief creates a GList of traps for each syscall
++ * 
++ * @param drakvuf 
++ * @param s, pointer to syscalls class
++ * @param symbols, array of symbols_t for each $FUNCTION inside kernel Rekall profile
++ * @return GSList* 
++ */
+ static GSList* create_trap_config(drakvuf_t drakvuf, syscalls* s, symbols_t* symbols)
+ {
+ 
+@@ -566,11 +577,27 @@ static GSList* create_trap_config(drakvuf_t drakvuf, syscalls* s, symbols_t* sym
+         {
+             const struct symbol* symbol = &symbols->symbols[i];
+ 
++            // it filters out unwanted symbols (the ones that start without Nt)
+             if (strncmp(symbol->name, "Nt", 2))
+                 continue;
+ 
++            // ===> @necroxys DEBUG: this is used for activate a subset of syscalls
++            {
++                for (j=0; j<NUM_SYSCALLS_WIN; j++)
++                {
++                    if(!strcmp(symbol->name, win_syscalls[j].name))
++                        goto next_phase;
++                }
++                continue;
++            }
++            next_phase:
++            // <====
++
+             PRINT_DEBUG("[SYSCALLS] Adding trap to %s\n", symbol->name);
+ 
++            /**
++             * NOTE: wrapper is the data to be carried out across callbacks
++             */
+             syscall_wrapper_t* wrapper = (syscall_wrapper_t*)g_malloc(sizeof(syscall_wrapper_t));
+ 
+             wrapper->syscall_index = -1;
+@@ -753,6 +780,12 @@ static symbols_t* filter_symbols(const symbols_t* symbols, const char* filter_fi
+ 
+ syscalls::syscalls(drakvuf_t drakvuf, const syscalls_config* c, output_format_t output)
+ {
++    /**
++     * NOTE: symbols stores all the symbols from kernel Rekall profile with their name,
++     * rva and required inputs. Note that there *all* the symbols under $FUNCTIONS tag
++     * inside windows7-sp1.rekall.json so there should some filtering mechanism to get
++     * only the Nt* symbols
++     */
+     symbols_t* symbols = drakvuf_get_symbols_from_rekall(drakvuf);
+     if (!symbols)
+     {
+@@ -760,6 +793,12 @@ syscalls::syscalls(drakvuf_t drakvuf, const syscalls_config* c, output_format_t
+         throw -1;
+     }
+ 
++    printf("symbols count (%lu) name (%s)\n", symbols->count, symbols->name);
++    printf("symbol 0 -> name (%s), rva (%lu), type (%d), inputs (%d)\n", symbols->symbols->name, symbols->symbols->rva, symbols->symbols->type, symbols->symbols->inputs);
++    /**
++     * NOTE: this is used for filtering syscalls from a file (this can be useful)
++     * --> investigate how to do that
++     */
+     if (c->syscalls_filter_file)
+     {
+         symbols_t* filtered_symbols = filter_symbols(symbols, c->syscalls_filter_file);
+@@ -788,6 +827,7 @@ syscalls::syscalls(drakvuf_t drakvuf, const syscalls_config* c, output_format_t
+ 
+     drakvuf_free_symbols(symbols);
+ 
++    //NOTE: injecting bp on each syscall's va
+     bool error = 0;
+     GSList* loop = this->traps;
+     while (loop)
+diff --git a/src/plugins/syscalls/syscalls.h b/src/plugins/syscalls/syscalls.h
+index 5dacd7e..cdcbb56 100644
+--- a/src/plugins/syscalls/syscalls.h
++++ b/src/plugins/syscalls/syscalls.h
+@@ -118,7 +118,7 @@ class syscalls: public plugin
+ {
+ 
+ private:
+-    GSList* traps;
++    GSList* traps; //list of drakvuf_trap_t*
+ 
+ public:
+     uint8_t reg_size;
+diff --git a/src/plugins/syscalls/winscproto.h b/src/plugins/syscalls/winscproto.h
+index e4a598a..9084050 100644
+--- a/src/plugins/syscalls/winscproto.h
++++ b/src/plugins/syscalls/winscproto.h
+@@ -107,12 +107,15 @@
+  *
+  */
+ 
+-#define NUM_SYSCALLS_WIN 406
++//#define NUM_SYSCALLS_WIN 406
++/* DEBUG: filter for: NtCreateThread, NtCreateThreadEx, NtTerminateThread,
++NtResumeThread, NtAllocateVirtualMemory */
++#define NUM_SYSCALLS_WIN 13
+ 
+ #include "commonscproto.h"
+ 
+ static const syscall_t win_syscalls[] =
+-{
++{/**
+     { .name = "NtFlushProcessWriteBuffers", .ret = VOID, .num_args = 0  },
+     { .name = "NtGetCurrentProcessorNumber", .ret = ULONG, .num_args = 0  },
+     {
+@@ -356,7 +359,7 @@ static const syscall_t win_syscalls[] =
+             {.name = "Sequence", .dir = DIR_OUT, .dir_opt = "", .type = PULONG},
+             {.name = "Seed", .dir = DIR_OUT, .dir_opt = "", .type = PCHAR}
+         }
+-    },
++    },*/
+     {
+         .name = "NtAllocateVirtualMemory", .ret = NTSTATUS, .num_args = 6, .args =
+         {
+@@ -367,7 +370,7 @@ static const syscall_t win_syscalls[] =
+             {.name = "AllocationType", .dir = DIR_IN, .dir_opt = "", .type = ULONG},
+             {.name = "Protect", .dir = DIR_IN, .dir_opt = "", .type = ULONG}
+         }
+-    },
++    },/*
+     {
+         .name = "NtAlpcAcceptConnectPort", .ret = NTSTATUS, .num_args = 9, .args =
+         {
+@@ -1007,7 +1010,7 @@ static const syscall_t win_syscalls[] =
+             {.name = "ObjectAttributes", .dir = DIR_IN, .dir_opt = "", .type = POBJECT_ATTRIBUTES},
+             {.name = "LinkTarget", .dir = DIR_IN, .dir_opt = "", .type = PUNICODE_STRING}
+         }
+-    },
++    },*/
+     {
+         .name = "NtCreateThreadEx", .ret = NTSTATUS, .num_args = 11, .args =
+         {
+@@ -1036,7 +1039,7 @@ static const syscall_t win_syscalls[] =
+             {.name = "InitialTeb", .dir = DIR_IN, .dir_opt = "", .type = PINITIAL_TEB},
+             {.name = "CreateSuspended", .dir = DIR_IN, .dir_opt = "", .type = BOOLEAN}
+         }
+-    },
++    },/**
+     {
+         .name = "NtCreateTimer", .ret = NTSTATUS, .num_args = 4, .args =
+         {
+@@ -1827,7 +1830,7 @@ static const syscall_t win_syscalls[] =
+             {.name = "DesiredAccess", .dir = DIR_IN, .dir_opt = "", .type = ACCESS_MASK},
+             {.name = "ObjectAttributes", .dir = DIR_IN, .dir_opt = "", .type = POBJECT_ATTRIBUTES}
+         }
+-    },
++    },*/
+     {
+         .name = "NtOpenKeyEx", .ret = NTSTATUS, .num_args = 4, .args =
+         {
+@@ -1863,7 +1866,7 @@ static const syscall_t win_syscalls[] =
+             {.name = "ObjectAttributes", .dir = DIR_IN, .dir_opt = "", .type = POBJECT_ATTRIBUTES},
+             {.name = "TransactionHandle", .dir = DIR_IN, .dir_opt = "", .type = HANDLE}
+         }
+-    },
++    },/*
+     {
+         .name = "NtOpenMutant", .ret = NTSTATUS, .num_args = 3, .args =
+         {
+@@ -2381,7 +2384,7 @@ static const syscall_t win_syscalls[] =
+             {.name = "IoCompletionInformationLength", .dir = DIR_IN, .dir_opt = "", .type = ULONG},
+             {.name = "ReturnLength", .dir = DIR_OUT, .dir_opt = "opt", .type = PULONG}
+         }
+-    },
++    },*/
+     {
+         .name = "NtQueryKey", .ret = NTSTATUS, .num_args = 5, .args =
+         {
+@@ -2412,7 +2415,7 @@ static const syscall_t win_syscalls[] =
+             {.name = "BufferLength", .dir = DIR_INOUT, .dir_opt = "", .type = PULONG},
+             {.name = "RequiredBufferLength", .dir = DIR_OUT, .dir_opt = "opt", .type = PULONG}
+         }
+-    },
++    },/*
+     {
+         .name = "NtQueryMutant", .ret = NTSTATUS, .num_args = 5, .args =
+         {
+@@ -2582,7 +2585,7 @@ static const syscall_t win_syscalls[] =
+             {.name = "MinimumTime", .dir = DIR_OUT, .dir_opt = "", .type = PULONG},
+             {.name = "CurrentTime", .dir = DIR_OUT, .dir_opt = "", .type = PULONG}
+         }
+-    },
++    },*/
+     {
+         .name = "NtQueryValueKey", .ret = NTSTATUS, .num_args = 6, .args =
+         {
+@@ -2593,7 +2596,7 @@ static const syscall_t win_syscalls[] =
+             {.name = "Length", .dir = DIR_IN, .dir_opt = "", .type = ULONG},
+             {.name = "ResultLength", .dir = DIR_OUT, .dir_opt = "", .type = PULONG}
+         }
+-    },
++    },/*
+     {
+         .name = "NtQueryVirtualMemory", .ret = NTSTATUS, .num_args = 6, .args =
+         {
+@@ -2910,14 +2913,14 @@ static const syscall_t win_syscalls[] =
+         {
+             {.name = "ProcessHandle", .dir = DIR_IN, .dir_opt = "", .type = HANDLE}
+         }
+-    },
++    },*/
+     {
+         .name = "NtResumeThread", .ret = NTSTATUS, .num_args = 2, .args =
+         {
+             {.name = "ThreadHandle", .dir = DIR_IN, .dir_opt = "", .type = HANDLE},
+             {.name = "PreviousSuspendCount", .dir = DIR_OUT, .dir_opt = "opt", .type = PULONG}
+         }
+-    },
++    },/**
+     {
+         .name = "NtRollbackComplete", .ret = NTSTATUS, .num_args = 2, .args =
+         {
+@@ -3441,14 +3444,14 @@ static const syscall_t win_syscalls[] =
+             {.name = "ProcessHandle", .dir = DIR_IN, .dir_opt = "opt", .type = HANDLE},
+             {.name = "ExitStatus", .dir = DIR_IN, .dir_opt = "", .type = NTSTATUS}
+         }
+-    },
++    },*/
+     {
+         .name = "NtTerminateThread", .ret = NTSTATUS, .num_args = 2, .args =
+         {
+             {.name = "ThreadHandle", .dir = DIR_IN, .dir_opt = "opt", .type = HANDLE},
+             {.name = "ExitStatus", .dir = DIR_IN, .dir_opt = "", .type = NTSTATUS}
+         }
+-    },
++    }};/**
+     { .name = "NtTestAlert", .ret = NTSTATUS, .num_args = 0  },
+     { .name = "NtThawRegistry", .ret = NTSTATUS, .num_args = 0  },
+     { .name = "NtThawTransactions", .ret = NTSTATUS, .num_args = 0  },
+@@ -3664,3 +3667,4 @@ static const syscall_t win_syscalls[] =
+     { .name = "NtYieldExecution", .ret = NTSTATUS, .num_args = 0 }
+ };
+ 
++*/

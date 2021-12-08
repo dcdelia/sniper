@@ -1,0 +1,8 @@
+For license reasons we cannot upload Windows DLLs here. The ones we used were:
+MD5 (KernelBase.dll) = aa7e805af3f7db2da9ea350423e87dfd
+MD5 (kernel32.dll) = 5553784d774ca845380650e010bbda2c
+MD5 (mpr.dll) = b9a8cbcfcd3ec9d2ea4740af347bf108
+MD5 (ntdll.dll) = 262c76d0e7022038bd73e6b92e5b4f02
+MD5 (ole32.dll) = 928cf7268086631f54c3d8e17238c6dd
+MD5 (sspicli.dll) = b7a5201770babf3dccfe2659e8cf6607
+MD5 (user32.dll) = f1dd3acaee5e6b4bbc69bc6df75cef66
